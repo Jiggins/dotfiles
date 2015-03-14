@@ -1,0 +1,36 @@
+source vundle
+source vim-keymap
+
+colorscheme Monokai
+
+" Text editing
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+
+" Show matching bracket
+set showmatch
+
+" Show what mode vim is in
+set showmode
+
+set smarttab
+set incsearch
+
+set autoread
+
+" Bottom bar
+set laststatus=2
+set ruler
+set showcmd
+set wildmenu
+
+" File handling
+set nobackup
+set nowritebackup
+set noswapfile
+set fileformats=unix,dos,mac
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1

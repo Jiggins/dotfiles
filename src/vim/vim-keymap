@@ -1,0 +1,5 @@
+" Tabs
+vnoremap <Tab> >
+vnoremap <S-Tab> <
+
+vmap <C-/> gc
