@@ -13,6 +13,13 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'flazz/vim-colorschemes'
+Bundle 'terryma/vim-multiple-cursors'
 
 call vundl#end()
 filetype plugin indent on
+
+" Plugin options
+let g:multi_cursor_next_key='<C-d>'
+let g:multi_cursor_prev_key='<C-e>'
+let g:multi_cursor_skip_key='<C-D>'
+let g:multi_cursor_quit_key='<Esc>'
