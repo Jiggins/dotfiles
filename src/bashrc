@@ -2,6 +2,6 @@
 [ -z "$PS1" ] && return
 
 ## Sourcing files
-source ./aliases
-source ./bashOptions
-source ./prompt
+source ${HOME}/.bash/aliases
+source ${HOME}/.bash/bashOptions
+source ${HOME}/.bash/prompt
