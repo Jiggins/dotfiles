@@ -29,7 +29,7 @@ VIM_DIR='test/vim'
 VIMRC='test/vimrc'
 
 # Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
-if $LOCAL; then
+if [[ ${LOCAL} -eq 1 ]]; then
   BASH_DIR='test/.bash'
   BASHRC="test/.bashrc"
 else
@@ -52,7 +52,10 @@ if [ ! -e ${BASHRC} ]; then
   touch ${BASHRC}
 fi
 
-cat src/bashrc <(cat ${BASHRC}) > ${BASHRC}
+cat ${BASHRC} > ./tmp
+cat src/bashrc >> ./tmp
+mv ./tmp ${BASHRC}
+
 source ${BASHRC}
 
 # Install vundle
