@@ -3,3 +3,9 @@ vnoremap <Tab> >
 vnoremap <S-Tab> <
 
 vmap <C-/> gc
+nnoremap <C-b>  :tabprevious<CR>
+inoremap <C-b>  <Esc>:tabprevious<CR>i
+nnoremap <C-n>  :tabnext<CR>
+inoremap <C-n>  <Esc>:tabnext<CR>i
+nnoremap <C-t>  :tabnew<CR>
+inoremap <C-t>  <Esc>:tabnew<CR>i

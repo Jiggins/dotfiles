@@ -1,21 +1,45 @@
 #! /bin/bash
 
-BASHRC='~/.basrc'
-BASH_DIR='test/.bash'
+
+#LOCAL=false
+
+#while getopts :l-: i; do
+#  case "$i" in
+#    l)
+#      LOCAL=true
+#      ;;
+#    --)
+#      shift
+#      break
+#      ;;
+#    *)
+#      echo "Not implemented: $1" >&2
+#      exit 1
+#      ;;
+#  esac
+#done
+
+if [ "$1" == "--local" ]; then
+  LOCAl=true
+else
+  LOCAl=false
+fi
+
 VIM_DIR='test/vim'
 VIMRC='test/vimrc'
-LOCAL=true
 
 # Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
-if $LOCAL then
-  $BASHRC='./bashrc'
+if $LOCAL; then
+  BASH_DIR='test/.bash'
+  BASHRC="test/.bashrc"
 else
+  BASH_DIR="${HOME}/.bash"
   case `uname` in
     'Darwin')
-      $BASHRC='~/.bash_profile'
+      BASHRC="${HOME}/.bash_profile"
       ;;
     *)
-      $BASHRC='~/.bashrc'
+      BASHRC="${HOME}/.bashrc"
   esac
 fi
 
@@ -24,14 +48,16 @@ mkdir -p ${BASH_DIR}
 cp src/bash/* ${BASH_DIR}
 
 # Append src/bashrc to the existing .bashrc or .bash_profile
-if [ -w ${BASHRC} ]
-then
-  cat src/bashrc <(cat ${BASHRC}) > ${BASHRC}
-  source ${BASHRC}
+if [ ! -e ${BASHRC} ]; then
+  touch ${BASHRC}
 fi
+
+cat src/bashrc <(cat ${BASHRC}) > ${BASHRC}
+source ${BASHRC}
 
 # Install vundle
 mkdir -p ${VIM_DIR}/bundle
-git clone https://github.com/gmarik/vundle.git ${VIM_DIR}/bundle/vundle
-
+if [ ! -e  ${VIM_DIR}/bundle/vundle ]; then
+  git clone https://github.com/gmarik/vundle.git ${VIM_DIR}/bundle/vundle
+fi
 
