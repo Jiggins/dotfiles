@@ -1,5 +1,9 @@
-source vundle
-source vim-keymap
+" `<sfile>` gives the location of the current file being sourced
+" `:p` gives full path rather than relative
+" `:h` knocks off the last item in the path
+let $VIMHOME=expand('<sfile>:p:h')
+source $VIMHOME/.vim/vundle
+source $VIMHOME/.vim/vim-keymap
 
 colorscheme Monokai
 
