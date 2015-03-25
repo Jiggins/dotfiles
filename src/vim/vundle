@@ -1,4 +1,4 @@
-set nocomptible
+set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -6,16 +6,16 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Bundle 'tpope/vim-surround'
-Bundle 'kien/ctrlp.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'bling/vim-airline'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/ctrlp.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'terryma/vim-multiple-cursors'
 
-call vundl#end()
+call vundle#end()
 filetype plugin indent on
 
 " Plugin options
