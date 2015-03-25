@@ -2,6 +2,13 @@
 " `:p` gives full path rather than relative
 " `:h` knocks off the last item in the path
 let $VIMHOME=expand('<sfile>:p:h')
+
+if !isdirectory(expand('<sfile>:p:h/.vim/bundle/Vundle.vim/.git'))
+  !git clone https://github.com/gmarik/vundle.vim.git
+endif
+
+set runtimepath+=~/.vim/bundle/vundle.vim
+
 source $VIMHOME/.vim/vundle
 source $VIMHOME/.vim/vim-keymap
 

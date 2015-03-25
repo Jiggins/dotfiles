@@ -93,11 +93,5 @@ fi
 
 # Install vundle
 cp src/vim/* ${VIM_DIR}
-
-mkdir -p ${VIM_DIR}/bundle
-if [ ! -e  ${VIM_DIR}/bundle/vundle ]; then
-  git clone https://github.com/gmarik/vundle.git ${VIM_DIR}/bundle/vundle
-  vi +PluginInstall +qall
-fi
-
+vi +PluginInstall +qall
 
