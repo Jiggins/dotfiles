@@ -8,15 +8,17 @@ while getopts "l:" opt; do
     esac
 done
 
-VIM_DIR='test/vim'
-VIMRC='test/vimrc'
-
 # Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
 if [[ ${LOCAL} -eq 1 ]]; then
   BASH_DIR='test/.bash'
   BASHRC="test/.bashrc"
+  VIM_DIR='test/vim'
+  VIMRC='test/vimrc'
 else
   BASH_DIR="${HOME}/.bash"
+  VIM_DIR="${HOME}/.vim"
+  VIMRC="${HOME}/.vimrc"
+
   case `uname` in
     'Darwin')
       BASHRC="${HOME}/.bash_profile"
@@ -66,14 +68,36 @@ if [ ! $INPUTRC ]; then
       *)
         ;;
     esac
+  else
+    copyInputrc
   fi
 fi
 
 # Vim stuff
+mkdir -p ${VIM_DIR}
+
+# Prepend src/virc to the existing .vimrc
+if [ -e ${VIMRC} ]; then
+  # Backup vimrc incase something goes wrong
+  cp ${VIMRC} ${VIMRC}.bak
+else
+  touch ${VIMRC}
+fi
+
+grep -q 'source vundle' ${VIMRC} && vpatched=true
+if [[ ! $vpatched ]]; then
+  cat ${VIMRC} > ./tmp
+  cat src/vimrc >> ./tmp
+  mv ./tmp ${VIMRC}
+fi
 
 # Install vundle
+cp src/vim/* ${VIM_DIR}
+
 mkdir -p ${VIM_DIR}/bundle
 if [ ! -e  ${VIM_DIR}/bundle/vundle ]; then
   git clone https://github.com/gmarik/vundle.git ${VIM_DIR}/bundle/vundle
+  vi +PluginInstall +qall
 fi
+
 
