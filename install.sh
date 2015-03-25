@@ -1,29 +1,12 @@
 #! /bin/bash
 
-
-#LOCAL=false
-
-#while getopts :l-: i; do
-#  case "$i" in
-#    l)
-#      LOCAL=true
-#      ;;
-#    --)
-#      shift
-#      break
-#      ;;
-#    *)
-#      echo "Not implemented: $1" >&2
-#      exit 1
-#      ;;
-#  esac
-#done
-
-if [ "$1" == "--local" ]; then
-  LOCAl=true
-else
-  LOCAl=false
-fi
+#set -x
+while getopts "l:" opt; do
+    case "$opt" in
+    l)  LOCAL=1
+        ;;
+    esac
+done
 
 VIM_DIR='test/vim'
 VIMRC='test/vimrc'
@@ -47,16 +30,46 @@ fi
 mkdir -p ${BASH_DIR}
 cp src/bash/* ${BASH_DIR}
 
-# Append src/bashrc to the existing .bashrc or .bash_profile
-if [ ! -e ${BASHRC} ]; then
+# Prepend src/bashrc to the existing .bashrc or .bash_profile
+if [ -e ${BASHRC} ]; then
+  # Backup bashrc incase something goes wrong
+  cp ${BASHRC} ${BASHRC}.bak
+else
   touch ${BASHRC}
 fi
 
-cat ${BASHRC} > ./tmp
-cat src/bashrc >> ./tmp
-mv ./tmp ${BASHRC}
+grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
+if [[ ! $patched ]]; then
+  cat ${BASHRC} > ./tmp
+  cat src/bashrc >> ./tmp
+  mv ./tmp ${BASHRC}
+fi
 
 source ${BASHRC}
+
+# inputrc - I like Vim mode input
+
+function copyInputrc {
+  echo 'copying inputrc'
+  cp src/inputrc ${HOME}/.inputrc
+}
+
+if [ ! $INPUTRC ]; then
+  if [ -e ${HOME}/.inputrc ] && diff src/inputrc ${HOME}/.inputrc > /dev/null; then
+    echo 'inputrc already exists, do you want to overwite?'
+    read input
+    case ${input} in
+      y | Y | yes)
+        copyInputrc
+        shift
+        ;; 
+      *)
+        ;;
+    esac
+  fi
+fi
+
+# Vim stuff
 
 # Install vundle
 mkdir -p ${VIM_DIR}/bundle
