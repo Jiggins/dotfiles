@@ -1,6 +1,11 @@
 # Bash-Config
 My bash config,  using this to pull to remote servers
 
+## Insatllation
+```bash
+git clone https://github.com/Jiggins/Bash-Config.git
+cd Bash-Config && ./install
+```
 
 ## To-do
 - [x] install bashrc
@@ -11,3 +16,4 @@ My bash config,  using this to pull to remote servers
   - [x] fix vim-airline theme
 
 - [ ] git config
+- [ ] Documentation
