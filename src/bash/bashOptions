@@ -2,6 +2,10 @@
 ## History Options
 ## ==============
 
+# Colours
+export TERM=xterm-256color
+
+
 # svn settings #
 export SVN_EDITOR=vi
 
