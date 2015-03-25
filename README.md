@@ -8,6 +8,6 @@ My bash config,  using this to pull to remote servers
   - [ ] copy preferences
   - [x] copy keymap
   - [x] auto install plugins
-  - [ ] fix vim-airline theme
+  - [x] fix vim-airline theme
 
 - [ ] git config
