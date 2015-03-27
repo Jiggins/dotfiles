@@ -38,6 +38,7 @@ set showmode
 
 set smarttab
 set incsearch
+set ic " case insensitive search
 
 set autoread
 

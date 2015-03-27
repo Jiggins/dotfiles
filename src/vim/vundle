@@ -14,6 +14,7 @@ Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
