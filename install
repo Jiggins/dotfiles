@@ -1,6 +1,5 @@
-#! /bin/bash
+#! /bin/sh
 
-#set -x
 while getopts "l:" opt; do
     case "$opt" in
     l)  LOCAL=1
@@ -11,11 +10,13 @@ done
 # Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
 if [[ ${LOCAL} -eq 1 ]]; then
   BASH_DIR='test/.bash'
-  BASHRC="test/.bashrc"
+  BASHRC='test/.bashrc'
+  GITCONFIG='test/.gitconfig'
   VIM_DIR='test/vim'
   VIMRC='test/vimrc'
 else
   BASH_DIR="${HOME}/.bash"
+  GITCONFIG="${HOME}/.gitconfig"
   VIM_DIR="${HOME}/.vim"
   VIMRC="${HOME}/.vimrc"
 
@@ -64,7 +65,7 @@ if [ ! $INPUTRC ]; then
       y | Y | yes)
         copyInputrc
         shift
-        ;; 
+        ;;
       *)
         ;;
     esac
@@ -72,6 +73,29 @@ if [ ! $INPUTRC ]; then
     copyInputrc
   fi
 fi
+
+function copyGitconfig {
+  echo 'copying gitconfig'
+  cp src/gitconfig ${HOME}/.gitconfig
+}
+
+if [ ! $INPUTRC ]; then
+  if [ -e ${HOME}/.gitconfig ] && diff src/gitconfig ${HOME}/.gitconfig > /dev/null; then
+    echo 'gitconfig already exists, do you want to overwite?'
+    read input
+    case ${input} in
+      y | Y | yes)
+        copyGitconfig
+        shift
+        ;;
+      *)
+        ;;
+    esac
+  else
+    copyGitconfig
+  fi
+fi
+
 
 # Vim stuff
 mkdir -p ${VIM_DIR}
