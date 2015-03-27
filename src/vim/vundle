@@ -19,10 +19,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
-filetype plugin indent on
 
-" Plugin options
-let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_prev_key='<C-e>'
-let g:multi_cursor_skip_key='<C-D>'
-let g:multi_cursor_quit_key='<Esc>'
+if has('autocmd')
+  filetype plugin indent on
+endif
