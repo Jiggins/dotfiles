@@ -20,12 +20,23 @@ else
   !echo 'Warning this version of Vim does not support plugins'
 endif
 
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
 source $VIMHOME/.vim/vim-keymap
 
 " Text editing
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
+set listchars=tab:▒░,trail:▓
+set list
+
+" Tabs
+set tabstop=2 shiftwidth=2 expandtab
+set smarttab
+set shiftround
 
 " Line numbers
 set number
@@ -36,9 +47,11 @@ set showmatch
 " Show what mode vim is in
 set showmode
 
+" Searching
 set smarttab
 set incsearch
 set ic " case insensitive search
+set hlsearch
 
 set autoread
 
@@ -47,6 +60,11 @@ set laststatus=2
 set ruler
 set showcmd
 set wildmenu
+
+" Numbers
+" Allows for Ctrl+a to inrement letters and hex
+" Ctrl+x decrements
+set nrformats-=alpha,hex
 
 " File handling
 set nobackup
