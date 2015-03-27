@@ -1,6 +1,5 @@
 #! /bin/sh
 
-#set -x
 while getopts "l:" opt; do
     case "$opt" in
     l)  LOCAL=1

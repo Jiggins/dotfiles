@@ -2,20 +2,25 @@
 " `:p` gives full path rather than relative
 " `:h` knocks off the last item in the path
 "let $VIMHOME=expand('<sfile>:p:h')
-let $VIMHOME=expand('~')
+if exists(':PluginInstall')
+  let $VIMHOME=expand('~')
 
-if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
-  !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+    !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  endif
+
+  if !isdirectory(expand("~/.vim/bundle/Vundle.vim/vim-sublime"))
+    !git clone https://github.com/grigio/vim-sublime.git ~/.vim/bundle/Vundle.vim/vim-sublime
+  endif
+
+  source $VIMHOME/.vim/vundle
+
+  colorscheme Monokai
+else
+  !echo 'Warning this version of Vim does not support plugins'
 endif
 
-if !isdirectory(expand("~/.vim/bundle/Vundle.vim/vim-sublime"))
-  !git clone https://github.com/grigio/vim-sublime.git ~/.vim/bundle/Vundle.vim/vim-sublime
-endif
-
-source $VIMHOME/.vim/vundle
 source $VIMHOME/.vim/vim-keymap
-
-colorscheme Monokai
 
 " Text editing
 set autoindent
