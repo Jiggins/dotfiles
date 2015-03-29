@@ -14,9 +14,10 @@ Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+" Removing You Complete Me,  to many dependancies
+"Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
