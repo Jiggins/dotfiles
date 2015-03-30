@@ -74,6 +74,13 @@ if [ ! $INPUTRC ]; then
   fi
 fi
 
+# Tab completions for Mac
+if [ "$(uname)" == "Darwin" ]; then
+  echo 'set completion-ignore-case on' >> ${HOME}/.inputrc
+  echo 'show-all-if-ambiguous on' >> ${HOME}/.inputrc
+  echo 'TAB: menu-complete' >> ${HOME}/.inputrc
+fi
+
 function copyGitconfig {
   echo 'copying gitconfig'
   cp src/gitconfig ${HOME}/.gitconfig
@@ -108,7 +115,7 @@ else
   touch ${VIMRC}
 fi
 
-grep -q 'source vundle' ${VIMRC} && vpatched=true
+grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC} && vpatched=true
 if [[ ! $vpatched ]]; then
   cat ${VIMRC} > ./tmp
   cat src/vimrc >> ./tmp
@@ -118,4 +125,3 @@ fi
 # Install vundle
 cp src/vim/* ${VIM_DIR}
 vi +PluginInstall +qall
-

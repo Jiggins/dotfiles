@@ -38,3 +38,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# Git completions
+if [ command -v brew ]; then
+  if ! brew ls --version bash-completions; then
+    brew install git bash-completion
+  fi
+
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+  fi
+fi
