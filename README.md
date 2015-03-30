@@ -1,6 +1,8 @@
 # Bash-Config
 My bash config,  using this to pull to remote servers
 
+![Screenshot](https://github.com/Jiggins/Bash-Config/images/Terminology.png)
+
 ## Insatllation
 ```bash
 git clone https://github.com/Jiggins/Bash-Config.git
