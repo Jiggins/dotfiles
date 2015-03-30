@@ -1,4 +1,4 @@
 " Vim configurations added by github.com/Jiggins/Bash-Config
-source ~/.vim/vundle
-source ~/.vim/vim-preferences
-source ~/.vim/vim-keymap
+source ~/.vim/vundle.vim
+source ~/.vim/vim-preferences.vim
+source ~/.vim/vim-keymap.vim
