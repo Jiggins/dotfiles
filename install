@@ -43,8 +43,8 @@ fi
 
 grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
 if [[ ! $patched ]]; then
-  cat ${BASHRC} > ./tmp
-  cat src/bashrc >> ./tmp
+  cat src/bashrc > ./tmp
+  cat ${BASHRC} >> ./tmp
   mv ./tmp ${BASHRC}
 fi
 
@@ -64,6 +64,24 @@ if [ ! $INPUTRC ]; then
     case ${input} in
       y | Y | yes)
         copyInputrc
+
+        # Tab completions for Mac
+        if [ "$(uname)" == "Darwin" ]; then
+          echo 'set completion-ignore-case on' >> ${HOME}/.inputrc
+          echo 'show-all-if-ambiguous on' >> ${HOME}/.inputrc
+          echo 'TAB: menu-complete' >> ${HOME}/.inputrc
+
+          # Git completions for Mac
+          if command -v brew > /dev/null; then
+            if ! brew ls --version bash-completion > /dev/null; then
+              brew install git bash-completion
+            fi
+
+            if [ -f `brew --prefix`/etc/bash_completion ]; then
+              . `brew --prefix`/etc/bash_completion
+            fi
+          fi
+        fi
         shift
         ;;
       *)
@@ -72,13 +90,6 @@ if [ ! $INPUTRC ]; then
   else
     copyInputrc
   fi
-fi
-
-# Tab completions for Mac
-if [ "$(uname)" == "Darwin" ]; then
-  echo 'set completion-ignore-case on' >> ${HOME}/.inputrc
-  echo 'show-all-if-ambiguous on' >> ${HOME}/.inputrc
-  echo 'TAB: menu-complete' >> ${HOME}/.inputrc
 fi
 
 function copyGitconfig {
@@ -117,8 +128,8 @@ fi
 
 grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC} && vpatched=true
 if [[ ! $vpatched ]]; then
-  cat ${VIMRC} > ./tmp
-  cat src/vimrc >> ./tmp
+  cat src/vimrc > ./tmp
+  cat ${VIMRC} >> ./tmp
   mv ./tmp ${VIMRC}
 fi
 
