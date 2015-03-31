@@ -43,9 +43,7 @@ fi
 
 grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
 if [[ ! $patched ]]; then
-  cat src/bashrc > ./tmp
-  cat ${BASHRC} >> ./tmp
-  mv ./tmp ${BASHRC}
+  cat src/bashrc ${BASHRC} > ${BASHRC}
 fi
 
 source ${BASHRC}
@@ -128,9 +126,7 @@ fi
 
 grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC} && vpatched=true
 if [[ ! $vpatched ]]; then
-  cat src/vimrc > ./tmp
-  cat ${VIMRC} >> ./tmp
-  mv ./tmp ${VIMRC}
+  cat src/vimrc ${VIMRC} > ${VIMRC}
 fi
 
 # Copy Vim directory
