@@ -45,6 +45,33 @@ cd Bash-Config && ./install
 | `, Left`  | Open File explorer on left   |
 | `, Right` | Open File explorer on left   |
 
+## Plugins included
+| Name                              | Description                                                                              |
+| :-------------------------------- | :----------                                                                              |
+| [gmarik/Vundle.vim][1]            | Vundle, the plug-in manager for Vim                                                      |
+| [airblade/vim-gitgutter][2]       | A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks |
+| [bling/vim-airline][3]            | lean & mean status/tabline for vim that's light as air                                   |
+| [flazz/vim-colorschemes][4]       | One colorscheme pack to rule them all!                                                   |
+| [godlygeek/tabular][5]            | Vim script for text filtering and alignment                                              |
+| [kien/ctrlp.vim][6]               | Fuzzy file, buffer, mru, tag, etc finder                                                 |
+| [plasticboy/vim-markdown][7]      | Markdown Vim Mode                                                                        |
+| [SirVer/ultisnips][8]             | UltiSnips - The ultimate snippet solution for Vim                                        |
+| [terryma/vim-multiple-cursors][9] | True Sublime Text style multiple selections for Vim                                      |
+| [tomtom/tcomment_vim][10]         | An extensible & universal comment vim-plugin that also handles embedded filetypes        |
+| [tpope/vim-surround][11]          | Surround.vim: quoting/parenthesizing made simple                                         |
+
+[1]: https://github.com/gmarik/Vundle.vim
+[2]: https://github.com/airblade/vim-gitgutter
+[3]: https://github.com/bling/vim-airline
+[4]: https://github.com/flazz/vim-colorschemes
+[5]: https://github.com/godlygeek/tabular
+[6]: https://github.com/kien/ctrlp.vim
+[7]: https://github.com/plasticboy/vim-markdown
+[8]: https://github.com/SirVer/ultisnips
+[9]: https://github.com/terryma/vim-multiple-cursors
+[10]: https://github.com/tomtom/tcomment_vim
+[11]: https://github.com/tpope/vim-surround
+
 ## To-do
 - [x] install bashrc
 - [x] install vimrc
