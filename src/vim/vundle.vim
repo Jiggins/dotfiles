@@ -18,16 +18,17 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'godlygeek/tabular'
+Plugin 'kien/ctrlp.vim'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'SirVer/ultisnips'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround'
+
 " Removing You Complete Me,  to many dependancies
 "Plugin 'Valloric/YouCompleteMe'
 
