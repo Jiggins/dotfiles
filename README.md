@@ -58,7 +58,8 @@ cd Bash-Config && ./install
 | [SirVer/ultisnips][8]             | UltiSnips - The ultimate snippet solution for Vim                                        |
 | [terryma/vim-multiple-cursors][9] | True Sublime Text style multiple selections for Vim                                      |
 | [tomtom/tcomment_vim][10]         | An extensible & universal comment vim-plugin that also handles embedded filetypes        |
-| [tpope/vim-surround][11]          | Surround.vim: quoting/parenthesizing made simple                                         |
+| [tpope/vim-repeat][11]            | repeat.vim: enable repeating supported plugin maps with "."                              |
+| [tpope/vim-surround][12]          | Surround.vim: quoting/parenthesizing made simple                                         |
 
 [1]: https://github.com/gmarik/Vundle.vim
 [2]: https://github.com/airblade/vim-gitgutter
@@ -70,7 +71,8 @@ cd Bash-Config && ./install
 [8]: https://github.com/SirVer/ultisnips
 [9]: https://github.com/terryma/vim-multiple-cursors
 [10]: https://github.com/tomtom/tcomment_vim
-[11]: https://github.com/tpope/vim-surround
+[11]: https://github.com/tpope/vim-repeat
+[12]: https://github.com/tpope/vim-surround
 
 ## To-do
 - [x] install bashrc
