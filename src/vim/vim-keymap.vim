@@ -32,15 +32,17 @@ endfunction
 nnoremap <leader>t :call ToggleTransparency()<CR>
 
 " Splitting Windows
-nnoremap <Leader><Left> :vsplit<CR>:E<CR>
-nnoremap <Leader><Right> :vsplit<CR><C-w><Right>:E<CR>
-nnoremap <Leader><Up> :split<CR><C-w><Up>:E<CR>
-nnoremap <Leader><Down> :split<CR>:E<CR>
+nnoremap <Leader><Left>  :Vexplore  <CR>
+nnoremap <Leader><Right> :Vexplore! <CR>
+nnoremap <Leader><Up>    :Sexplore  <CR>
+nnoremap <Leader><Down>  :Hexplore  <CR>
 
 nnoremap <S-Tab> <C-w><C-w>
 
 " Plugin options
-let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_prev_key='<C-e>'
-let g:multi_cursor_skip_key='<C-D>'
-let g:multi_cursor_quit_key='<Esc>'
+if exists(':MultipleCursorFind')
+  let g:multi_cursor_next_key='<C-d>'
+  let g:multi_cursor_prev_key='<C-e>'
+  let g:multi_cursor_skip_key='<C-D>'
+  let g:multi_cursor_quit_key='<Esc>'
+endif
