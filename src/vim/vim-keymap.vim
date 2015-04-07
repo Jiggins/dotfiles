@@ -30,6 +30,7 @@ nnoremap <Leader>n :set invnumber<CR>:set number?<CR>
 endfunction
 
 nnoremap <leader>t :call ToggleTransparency()<CR>
+nnoremap <leader>; q:
 
 " Splitting Windows
 nnoremap <Leader><Left>  :Vexplore  <CR>
