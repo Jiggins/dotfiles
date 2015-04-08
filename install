@@ -19,6 +19,7 @@ else
   GITCONFIG="${HOME}/.gitconfig"
   VIM_DIR="${HOME}/.vim"
   VIMRC="${HOME}/.vimrc"
+  GHCI="${HOME}/.ghci"
 
   case `uname` in
     'Darwin')
@@ -51,6 +52,18 @@ wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubuserco
 chmod +x ${BASH_DIR}/scripts/git-forest
 
 source ${BASHRC}
+
+# GHCi Config
+if [ -e ${GHCI} ]; then
+  if [ "$(grep -q 'prompt' ${GHCI})" ]; then
+    cat src/ghci ${GHCI} > ${GHCI}
+  fi
+else
+  cp src/ghci ${GHCI}
+fi
+
+# Vi mode in ghci!
+echo "editMode: Vi" >> ~/.haskeline
 
 # inputrc - I like Vim mode input
 
