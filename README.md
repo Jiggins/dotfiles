@@ -13,6 +13,11 @@ cd Bash-Config && ./install
 ### Vim
 - Toggle background transparency
 
+## Bash Scripts
+| Script                                                                         | Author         | Function                       |
+| :----------------------------------------------------------------------------: | :------------- | :----------------------------- |
+| [`git-forest`](https://github.com/jwiegley/git-scripts/blob/master/git-forest) | Jan Engelhardt | Alternative `git log` function |
+
 ## Vim Key Binds
 ### General
 | Shortcut | Function                      |
