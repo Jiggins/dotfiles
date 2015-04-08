@@ -31,7 +31,7 @@ fi
 
 # Copy bash stuff
 mkdir -p ${BASH_DIR}
-cp src/bash/* ${BASH_DIR}
+cp -r src/bash/* ${BASH_DIR}
 
 # Prepend src/bashrc to the existing .bashrc or .bash_profile
 if [ -e ${BASHRC} ]; then
@@ -45,6 +45,10 @@ grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
 if [[ ! $patched ]]; then
   cat src/bashrc ${BASHRC} > ${BASHRC}
 fi
+
+# git-forest - Pretty git log alternative
+wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
+chmod +x ${BASH_DIR}/scripts/git-forest
 
 source ${BASHRC}
 
