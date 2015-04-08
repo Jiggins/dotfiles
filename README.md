@@ -21,7 +21,7 @@ cd Bash-Config && ./install
 | `Ctrl a` | Increment number under cursor |
 | `Ctrl x` | Decrement number under cursor |
 | `Ctrl p` | Open fuzzy file finder        |
-| `,;p`    | Show recent commands          |
+| `, ;`    | Show recent commands          |
 
 ### Tabs
 | Shortcut | Function         |
