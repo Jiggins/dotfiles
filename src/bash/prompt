@@ -38,6 +38,6 @@ fi
 # PS1 is the string that appears at the command prompt
 # \u - User
 # \W - Current folder
-export PS1="\[$Green\]\u: \[$Blue\]\W \[$Green\]$ \[$Colour_Off\]"
+export PS1="\[$Green\]\u: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
 
 unset color_prompt force_color_prompt
