@@ -38,6 +38,12 @@ fi
 # PS1 is the string that appears at the command prompt
 # \u - User
 # \W - Current folder
-export PS1="\[$Green\]\u: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
+
+# If we are running ssh them show the hostname
+if [ "$SSH_CONNECTION" ]; then
+  export PS1="\[$Green\]\u\[$White\]@\[$Colour_Off\]\h: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
+else
+  export PS1="\[$Green\]\u: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
+fi
 
 unset color_prompt force_color_prompt
