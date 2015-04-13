@@ -1,5 +1,23 @@
 #! /bin/bash
 
+# $1: File to prepend (Will appear at the top of $2)
+# $2: File to prepend to (output file)
+function prependFile {
+  if [ ! $# -eq 2 ]; then
+    echo 'prependFile expects two arguments:'
+    echo '  $1: File to prepend (Will appear at the top of $2)'
+    echo '  $2: File to prepend to (output file)'
+    exit 1
+  else
+    cp $1 tmp
+    echo -e '/n' >> tmp
+    cat $2 >> tmp
+    mv tmp $2
+  fi
+}
+
+
+
 while getopts "l:" opt; do
     case "$opt" in
     l)  LOCAL=1
@@ -44,7 +62,7 @@ fi
 
 grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
 if [[ ! $patched ]]; then
-  cat src/bashrc ${BASHRC} > ${BASHRC}
+  prependFile src/bashrc ${BASHRC}
 fi
 
 # git-forest - Pretty git log alternative
@@ -56,7 +74,7 @@ source ${BASHRC}
 # GHCi Config
 if [ -e ${GHCI} ]; then
   if [ "$(grep -q 'prompt' ${GHCI})" ]; then
-    cat src/ghci ${GHCI} > ${GHCI}
+    prependFile src/ghci ${GHCI}
   fi
 else
   cp src/ghci ${GHCI}
@@ -143,7 +161,7 @@ fi
 
 grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC} && vpatched=true
 if [[ ! $vpatched ]]; then
-  cat src/vimrc ${VIMRC} > ${VIMRC}
+  prependFile src/vimrc ${VIMRC}
 fi
 
 # Copy Vim directory
