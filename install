@@ -10,7 +10,6 @@ function prependFile {
     exit 1
   else
     cp $1 tmp
-    echo -e '/n' >> tmp
     cat $2 >> tmp
     mv tmp $2
   fi
