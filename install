@@ -60,6 +60,7 @@ if [ ! -e ${BASHRC} ] || ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; the
 fi
 
 # git-forest - Pretty git log alternative
+mkdir -p ${BASH_DIR}/scripts
 wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
 chmod +x ${BASH_DIR}/scripts/git-forest
 
