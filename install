@@ -1,5 +1,20 @@
 #! /bin/bash
 
+# $1: File to prepend (Will appear at the top of $2)
+# $2: File to prepend to (output file)
+function prependFile {
+  if [ ! $# -eq 2 ]; then
+    echo 'prependFile expects two arguments:'
+    echo '  $1: File to prepend (Will appear at the top of $2)'
+    echo '  $2: File to prepend to (output file)'
+    exit 1
+  else
+    cp $1 tmp
+    cat $2 >> tmp
+    mv tmp $2
+  fi
+}
+
 while getopts "l:" opt; do
     case "$opt" in
     l)  LOCAL=1
@@ -38,16 +53,14 @@ cp -r src/bash/* ${BASH_DIR}
 if [ -e ${BASHRC} ]; then
   # Backup bashrc incase something goes wrong
   cp ${BASHRC} ${BASHRC}.bak
-else
-  touch ${BASHRC}
 fi
 
-grep -q 'source ${HOME}/.bash/aliases'  ${BASHRC} && patched=true
-if [[ ! $patched ]]; then
-  cat src/bashrc ${BASHRC} > ${BASHRC}
+if [ ! -e ${BASHRC} ] || ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
+  prependFile src/bashrc ${BASHRC}
 fi
 
 # git-forest - Pretty git log alternative
+mkdir -p ${BASH_DIR}/scripts
 wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
 chmod +x ${BASH_DIR}/scripts/git-forest
 
@@ -55,8 +68,8 @@ source ${BASHRC}
 
 # GHCi Config
 if [ -e ${GHCI} ]; then
-  if [ "$(grep -q 'prompt' ${GHCI})" ]; then
-    cat src/ghci ${GHCI} > ${GHCI}
+  if grep -q 'prompt' ${GHCI}; then
+    prependFile src/ghci ${GHCI}
   fi
 else
   cp src/ghci ${GHCI}
@@ -137,13 +150,10 @@ mkdir -p ${VIM_DIR}
 if [ -e ${VIMRC} ]; then
   # Backup vimrc incase something goes wrong
   cp ${VIMRC} ${VIMRC}.bak
-else
-  touch ${VIMRC}
 fi
 
-grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC} && vpatched=true
-if [[ ! $vpatched ]]; then
-  cat src/vimrc ${VIMRC} > ${VIMRC}
+if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+  prependFile src/vimrc ${VIMRC}
 fi
 
 # Copy Vim directory
@@ -153,5 +163,4 @@ vi +PluginInstall +qall
 
 # Transparent Monokai colorscheme
 cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
-
 

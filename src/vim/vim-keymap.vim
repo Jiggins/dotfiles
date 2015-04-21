@@ -13,7 +13,7 @@ nnoremap <C-w>  :q<CR>
 inoremap <C-w>  <Esc>:q<CR>
 
 " Toggles
-let mapleader = ','
+let mapleader = ';'
 nnoremap <Leader>p :set invpaste<CR>:set paste?<CR>
 nnoremap <Leader>l :set invlist<CR>:set list?<CR>
 nnoremap <Leader>n :set invnumber<CR>:set number?<CR>
