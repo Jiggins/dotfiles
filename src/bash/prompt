@@ -38,7 +38,7 @@ fi
 # PS1 is the string that appears at the command prompt
 # \u - User
 # \W - Current folder
-
+# \h - Host name
 # If we are running ssh them show the hostname
 if [ "$SSH_CONNECTION" ]; then
   export PS1="\[$Green\]\u\[$White\]@\[$Colour_Off\]\h: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
