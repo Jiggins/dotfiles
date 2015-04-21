@@ -26,7 +26,7 @@ cd Bash-Config && ./install
 | `Ctrl a` | Increment number under cursor |
 | `Ctrl x` | Decrement number under cursor |
 | `Ctrl p` | Open fuzzy file finder        |
-| `, ;`    | Show recent commands          |
+| `;;`     | Show recent commands          |
 
 ### Tabs
 | Shortcut | Function         |
@@ -40,18 +40,18 @@ cd Bash-Config && ./install
 ### Toggle Options
 | Shortcut | Function                              |
 | :------: | :------------------------------------ |
-| `, t`    | Toggle Background transparency        |
-| `, p`    | Toggle Paste Mode                     |
-| `, l`    | Toggle show hidden characters (:list) |
-| `, n`    | Toggle line numbers                   |
+| `;t`     | Toggle Background transparency        |
+| `;p`     | Toggle Paste Mode                     |
+| `;l`     | Toggle show hidden characters (:list) |
+| `;n`     | Toggle line numbers                   |
 
 ### Splitting Windows
-| Shortcut  | Function                     |
-| :------:  | :--------------------------- |
-| `, Up`    | Open File explorer on top    |
-| `, Down`  | Open File explorer on bottom |
-| `, Left`  | Open File explorer on left   |
-| `, Right` | Open File explorer on left   |
+| Shortcut | Function                     |
+| :------: | :--------------------------- |
+| `;Up`    | Open File explorer on top    |
+| `;Down`  | Open File explorer on bottom |
+| `;Left`  | Open File explorer on left   |
+| `;Right` | Open File explorer on left   |
 
 ## Plugins included
 | Name                              | Description                                                                              |
