@@ -10,7 +10,6 @@ function prependFile {
     exit 1
   else
     cp $1 tmp
-    echo -e '/n' >> tmp
     cat $2 >> tmp
     mv tmp $2
   fi
@@ -56,7 +55,7 @@ if [ -e ${BASHRC} ]; then
   cp ${BASHRC} ${BASHRC}.bak
 fi
 
-if grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
+if ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
   prependFile src/bashrc ${BASHRC}
 fi
 
@@ -152,11 +151,11 @@ if [ -e ${VIMRC} ]; then
   cp ${VIMRC} ${VIMRC}.bak
 fi
 
-if grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+if ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
   prependFile src/vimrc ${VIMRC}
 fi
 
-# Copy Vim directory
+
 cp src/vim/* ${VIM_DIR}
 
 vi +PluginInstall +qall
