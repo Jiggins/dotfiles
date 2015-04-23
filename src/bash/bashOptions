@@ -2,9 +2,11 @@
 ## History Options
 ## ==============
 
+# Add the script folder to the path
+export PATH="${PATH}:${BASH_DIR}/scripts"
+
 # Colours
 export TERM=xterm-256color
-
 
 # svn settings #
 export SVN_EDITOR=vi

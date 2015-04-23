@@ -10,7 +10,7 @@ Blue='\e[0;34m'         # Blue
 Purple='\e[0;35m'       # Purple
 Cyan='\e[0;36m'         # Cyan
 White='\e[0;37m'        # White
-Colour_Off='\e[0m'       # Text Reset
+Colour_Off='\e[0m'      # Text Reset
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -38,7 +38,7 @@ fi
 # PS1 is the string that appears at the command prompt
 # \u - User
 # \W - Current folder
-
+# \h - Host name
 # If we are running ssh them show the hostname
 if [ "$SSH_CONNECTION" ]; then
   export PS1="\[$Green\]\u\[$White\]@\[$Colour_Off\]\h: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
