@@ -55,11 +55,12 @@ if [ -e ${BASHRC} ]; then
   cp ${BASHRC} ${BASHRC}.bak
 fi
 
-if ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
+if [ ! -e ${BASHRC} ] || ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
   prependFile src/bashrc ${BASHRC}
 fi
 
 # git-forest - Pretty git log alternative
+mkdir -p ${BASH_DIR}/scripts
 wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
 chmod +x ${BASH_DIR}/scripts/git-forest
 
@@ -151,10 +152,9 @@ if [ -e ${VIMRC} ]; then
   cp ${VIMRC} ${VIMRC}.bak
 fi
 
-if ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
   prependFile src/vimrc ${VIMRC}
 fi
-
 
 cp src/vim/* ${VIM_DIR}
 
