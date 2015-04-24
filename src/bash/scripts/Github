@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function search {
+  for i in {1..10}; do
+    if [ -f $1/.git/config ]; then
+      url=`grep -o https://github.com/.* .git/config`
+      open -a Safari $url
+      return 0
+    else
+      cd $1/..
+    fi
+  done
+  echo "Not a git repository"
+}
+
+if [ $1 ]; then
+  search $1
+else
+  search .
+fi
+
