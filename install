@@ -156,7 +156,6 @@ if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggin
   prependFile src/vimrc ${VIMRC}
 fi
 
-# Copy Vim directory
 cp src/vim/* ${VIM_DIR}
 
 vi +PluginInstall +qall
