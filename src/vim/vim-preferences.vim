@@ -28,6 +28,9 @@ set showmatch
 " Show what mode vim is in
 set showmode
 
+" Mouse works in insert and visual mode
+set mouse=iv
+
 " Searching
 set smarttab
 set incsearch
@@ -62,3 +65,12 @@ endif
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'badwolf'
+
+" vim-hakell
+let g:haskell_indent_if = 3
+let g:haskell_indent_case = 2
+let g:haskell_indent_let = 4
+let g:haskell_indent_where = 6
+let g:haskell_indent_do = 2
+let g:haskell_indent_in = 2
+let g:cabal_indent_section = 2

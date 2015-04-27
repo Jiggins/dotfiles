@@ -164,3 +164,6 @@ vi +PluginInstall +qall
 # Transparent Monokai colorscheme
 cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
 
+# Quick fix for invalid format option error caused by haskell-vim
+sed -i '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
+
