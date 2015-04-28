@@ -38,12 +38,13 @@ cd Bash-Config && ./install
 | `Ctrl w` | Close tab (quit) |
 
 ### Toggle Options
-| Shortcut | Function                              |
-| :------: | :------------------------------------ |
-| `;t`     | Toggle Background transparency        |
-| `;p`     | Toggle Paste Mode                     |
-| `;l`     | Toggle show hidden characters (:list) |
-| `;n`     | Toggle line numbers                   |
+| Shortcut | Function                                                          |
+| :------: | :---------------------------------------------------------------- |
+| `;t`     | Toggle Background transparency                                    |
+| `;p`     | Toggle Paste Mode                                                 |
+| `;l`     | Toggle show hidden characters (:list)                             |
+| `;L`     | Remove trailing whitespace - leaves one blank line at end of file |
+| `;n`     | Toggle line numbers and gitGutter                                 |
 
 ### Splitting Windows
 | Shortcut | Function                     |

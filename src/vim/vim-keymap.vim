@@ -16,10 +16,15 @@ inoremap <C-w>  <Esc>:q<CR>
 let mapleader = ';'
 nnoremap <Leader>p :set invpaste<CR>:set paste?<CR>
 nnoremap <Leader>l :set invlist<CR>:set list?<CR>
+nnoremap <Leader>L :FixWhitespace<CR>
 nnoremap <Leader>n :set invnumber<CR>:set number?<CR>
 
+if exists(':GitGutterToggle')
+  nnoremap <Leader>n :set invnumber<CR>:GitGutterToggle<CR>:GitGutter<CR>:set number?<CR>
+endif
+
 " Toggle background transparency
-:function ToggleTransparency()
+:function! ToggleTransparency()
   if g:colors_name == 'monokai'
     colorscheme Monokai-Transparent
     echo g:colors_name
@@ -47,3 +52,4 @@ if exists(':MultipleCursorFind')
   let g:multi_cursor_skip_key='<C-D>'
   let g:multi_cursor_quit_key='<Esc>'
 endif
+
