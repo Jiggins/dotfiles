@@ -15,8 +15,8 @@ inoremap <C-w>  <Esc>:q<CR>
 " Toggles
 let mapleader = ';'
 nnoremap <Leader>p :set invpaste<CR>:set paste?<CR>
-nnoremap <Leader>l :set invlist<CR>:set list?<CR>
-nnoremap <Leader>L :FixWhitespace<CR>
+nnoremap <Leader>w :set invlist<CR>:set list?<CR>
+nnoremap <Leader>W :FixWhitespace<CR>
 nnoremap <Leader>n :set invnumber<CR>:set number?<CR>
 
 if exists(':GitGutterToggle')
@@ -42,6 +42,11 @@ nnoremap <Leader><Left>  :Vexplore  <CR>
 nnoremap <Leader><Right> :Vexplore! <CR>
 nnoremap <Leader><Up>    :Sexplore  <CR>
 nnoremap <Leader><Down>  :Hexplore  <CR>
+
+nnoremap <Leader>h       :Vexplore  <CR>
+nnoremap <Leader>l       :Vexplore! <CR>
+nnoremap <Leader>k       :Sexplore  <CR>
+nnoremap <Leader>j       :Hexplore  <CR>
 
 nnoremap <S-Tab> <C-w><C-w>
 
