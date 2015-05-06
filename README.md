@@ -42,17 +42,17 @@ cd Bash-Config && ./install
 | :------: | :---------------------------------------------------------------- |
 | `;t`     | Toggle Background transparency                                    |
 | `;p`     | Toggle Paste Mode                                                 |
-| `;l`     | Toggle show hidden characters (:list)                             |
-| `;L`     | Remove trailing whitespace - leaves one blank line at end of file |
+| `;w`     | Toggle show hidden characters (:list)                             |
+| `;W`     | Remove trailing whitespace - leaves one blank line at end of file |
 | `;n`     | Toggle line numbers and gitGutter                                 |
 
 ### Splitting Windows
-| Shortcut | Function                     |
-| :------: | :--------------------------- |
-| `;Up`    | Open File explorer on top    |
-| `;Down`  | Open File explorer on bottom |
-| `;Left`  | Open File explorer on left   |
-| `;Right` | Open File explorer on left   |
+| Shortcut         | Function                     |
+| :--------------: | :--------------------------- |
+| `;k` or `;Up`    | Open File explorer on top    |
+| `:j` or `;Down`  | Open File explorer on bottom |
+| `:h` or `;Left`  | Open File explorer on left   |
+| `:l` or `;Right` | Open File explorer on left   |
 
 ## Plugins included
 | Name                              | Description                                                                              |
