@@ -63,7 +63,9 @@ fi
 
 # git-forest - Pretty git log alternative
 mkdir -p ${BASH_DIR}/scripts
-wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
+if [ -e ${BASH_DIR}/scripts/git-forest ]; then
+  wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
+fi
 
 chmod +x ${BASH_DIR}/scripts/*
 
@@ -84,7 +86,6 @@ echo "editMode: Vi" >> ~/.haskeline
 # inputrc - I like Vim mode input
 
 function copyInputrc {
-  echo 'copying inputrc'
   cp src/inputrc ${HOME}/.inputrc
 }
 
@@ -123,28 +124,9 @@ if [ ! $INPUTRC ]; then
   fi
 fi
 
-function copyGitconfig {
-  echo 'copying gitconfig'
-  cp src/gitconfig ${HOME}/.gitconfig
-}
-
-if [ ! $INPUTRC ]; then
-  if [ -e ${HOME}/.gitconfig ] && ! diff src/gitconfig ${HOME}/.gitconfig > /dev/null; then
-    echo 'gitconfig already exists, do you want to overwite? y/n'
-    read input
-    case ${input} in
-      y | Y | yes)
-        copyGitconfig
-        shift
-        ;;
-      *)
-        ;;
-    esac
-  else
-    copyGitconfig
-  fi
+if command -v git > /dev/null; then
+  ./src/gitconfig
 fi
-
 
 # Vim stuff
 mkdir -p ${VIM_DIR}
@@ -169,3 +151,4 @@ cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
 # Quick fix for invalid format option error caused by haskell-vim
 sed -i '' '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
 
+exit 0
