@@ -1,12 +1,14 @@
-[user]
-  name = Jiggins
-  email = jackhiggins07@gmail.com
-[credential]
-  helper = cache --timeout=3600
-[color]
-  ui = true
-  status = always
-[core]
-  editor = vi
-[diff]
-  tool = vimdiff
+#! /bin/sh
+git config --global core.editor vim
+
+git config --global color.diff always
+git config --global color.grep always
+git config --global color.status always
+git config --global color.ui always
+
+if command -v vimdiff > /dev/null; then
+  git config --global diff.editor vimdiff
+fi
+git config --global diff.prompt never
+
+exit 0
