@@ -8,6 +8,7 @@ git config --global color.ui always
 
 if command -v vimdiff > /dev/null; then
   git config --global diff.editor vimdiff
+  git confif --global merge.tool vimdiff
 fi
 git config --global diff.prompt never
 
