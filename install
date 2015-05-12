@@ -84,7 +84,6 @@ echo "editMode: Vi" >> ~/.haskeline
 # inputrc - I like Vim mode input
 
 function copyInputrc {
-  echo 'copying inputrc'
   cp src/inputrc ${HOME}/.inputrc
 }
 
@@ -145,6 +144,15 @@ if [ ! $INPUTRC ]; then
   fi
 fi
 
+# Powerline Fonts
+if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ]; then
+  mkdir -p ${HOME}/.fonts/ubuntu-mono-power
+  mkdir -p ${HOME}/.config/fontconfig/conf.d/
+  wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf &
+  wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf &
+  git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power > /dev/null
+  fc-cache -vf | grep 'fc-cache:'
+fi
 
 # Vim stuff
 mkdir -p ${VIM_DIR}
