@@ -167,5 +167,11 @@ vi +PluginInstall +qall
 cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
 
 # Quick fix for invalid format option error caused by haskell-vim
-sed -i '' '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
-
+# Odly Mac/FreeBSD takes an extra argument to sed, Ubuntu does not
+case `uname` in
+  'Darwin')
+    sed -i '' '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
+    ;;
+  *)
+    sed -i '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
+esac
