@@ -2,15 +2,13 @@
 vnoremap <Tab> >
 vnoremap <S-Tab> <
 
-vmap <C-/> gc
+vmap <C-/> gc<CR>
 nnoremap <C-b>  :tabprevious<CR>
 inoremap <C-b>  <Esc>:tabprevious<CR>i
 nnoremap <C-n>  :tabnext<CR>
 inoremap <C-n>  <Esc>:tabnext<CR>i
 nnoremap <C-t>  :tabnew<CR>
 inoremap <C-t>  <Esc>:tabnew<CR>i
-nnoremap <C-w>  :q<CR>
-inoremap <C-w>  <Esc>:q<CR>
 
 " Toggles
 let mapleader = ';'
