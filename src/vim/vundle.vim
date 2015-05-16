@@ -19,6 +19,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'derekwyatt/vim-scala'
@@ -32,7 +33,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-
 " Removing You Complete Me,  to many dependancies
 "Plugin 'Valloric/YouCompleteMe'
 

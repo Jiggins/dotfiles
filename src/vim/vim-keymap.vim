@@ -58,3 +58,19 @@ if exists(':MultipleCursorFind')
   let g:multi_cursor_quit_key='<Esc>'
 endif
 
+let tmux=$TMUX
+if tmux != ''
+  let g:tmux_navigator_no_mappings = 1
+
+  nnoremap <silent> <C-Left>  :TmuxNavigateLeft<cr>
+  nnoremap <silent> <C-Down>  :TmuxNavigateDown<cr>
+  nnoremap <silent> <C-Up>    :TmuxNavigateUp<cr>
+  nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
+  nnoremap <silent> <C-Tab>   :TmuxNavigatePrevious<cr>
+else
+  nmap <silent> <C-Left>  <C-h><cr>
+  nmap <silent> <C-Down>  <C-j><cr>
+  nmap <silent> <C-Up>    <C-k><cr>
+  nmap <silent> <C-Right> <C-l><cr>
+  nmap <silent> <C-Tab>   <C-w><C-w><cr>
+endif
