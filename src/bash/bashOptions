@@ -6,7 +6,11 @@
 export PATH="${PATH}:${BASH_DIR}/scripts"
 
 # Colours
-export TERM=xterm-256color
+if [[ -z $TMUX ]]; then
+  export TERM=screen-256color
+else
+  export TERM=xterm-256color
+fi
 
 # svn settings #
 export SVN_EDITOR=vi

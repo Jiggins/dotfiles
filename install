@@ -138,6 +138,15 @@ if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ]; then
   fc-cache -vf | grep 'fc-cache:'
 fi
 
+# Tmux Stuff
+if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+  prependFile src/tmux.conf ${HOME}/.tmux.conf
+fi
+
+cp -r src/tmux ${HOME}/.tmux
+
+tmux source ${HOME}/.tmux.conf
+
 # Vim stuff
 mkdir -p ${VIM_DIR}
 
@@ -147,7 +156,7 @@ if [ -e ${VIMRC} ]; then
   cp ${VIMRC} ${VIMRC}.bak
 fi
 
-if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+if [ ! -e ${VIMRC} ] || ! grep -q 'Tmux configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
   prependFile src/vimrc ${VIMRC}
 fi
 
