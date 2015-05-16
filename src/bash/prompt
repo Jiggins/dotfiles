@@ -2,15 +2,15 @@
 ## prompt Customisation
 
 # Colours
-Black='\e[0;30m'        # Black
-Red='\e[0;31m'          # Red
-Green='\e[0;32m'        # Green
-Yellow='\e[0;33m'       # Yellow
-Blue='\e[0;34m'         # Blue
-Purple='\e[0;35m'       # Purple
-Cyan='\e[0;36m'         # Cyan
-White='\e[0;37m'        # White
-Colour_Off='\e[0m'      # Text Reset
+Black='\[\e[0;30m'        # Black
+Red='\[\e[0;31m'          # Red
+Green='\[\e[0;32m'        # Green
+Yellow='\[\e[0;33m'       # Yellow
+Blue='\[\e[0;34m'         # Blue
+Purple='\[\e[0;35m'       # Purple
+Cyan='\[\e[0;36m'         # Cyan
+White='\[\e[0;37m'        # White
+Colour_Off='\[\e[0m'      # Text Reset
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -26,12 +26,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+  # We have color support; assume it's compliant with Ecma-48
+  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+  # a case would tend to support setf rather than setaf.)
+  color_prompt=yes
     else
-	color_prompt=
+  color_prompt=
     fi
 fi
 
@@ -40,10 +40,23 @@ fi
 # \W - Current folder
 # \h - Host name
 # If we are running ssh them show the hostname
-if [ "$SSH_CONNECTION" ]; then
-  export PS1="\[$Green\]\u\[$White\]@\[$Colour_Off\]\h: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
-else
-  export PS1="\[$Green\]\u: \[$Blue\]\W \[$Green\]\$ \[$Colour_Off\]"
-fi
+function __prompt_function {
+  local EXIT="$?"
+
+  if [ ${EXIT} == 0 ]; then
+    local STATC=${Green}
+  else
+    local STATC=${Red}
+    local STAT=" ${Red}${EXIT}"
+  fi
+
+  if [ "$SSH_CONNECTION" ]; then
+    local HOST="${White}@${Colour_Off}\h"
+  fi
+
+  export PS1="${STATC}\u${HOST}: ${Blue}\W${STAT} ${Green}\$ ${Colour_Off}"
+}
+
+export PROMPT_COMMAND=__prompt_function
 
 unset color_prompt force_color_prompt
