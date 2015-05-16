@@ -61,15 +61,21 @@ fi
 
 ## Scripts
 
-# git-forest - Pretty git log alternative
+scripts=(
+  https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest 
+  https://raw.githubusercontent.com/whiteinge/dotfiles/master/bin/diffconflicts
+)
+
 mkdir -p ${BASH_DIR}/scripts
-if [ -e ${BASH_DIR}/scripts/git-forest ]; then
-  wget -nv -o /dev/null -O ${BASH_DIR}/scripts/git-forest https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
-fi
+
+for i in ${scripts[*]}; do
+  # --no-clobber - Don't download if script already exists
+  # --directory-prefix - Download scripts to ~/.bash/scripts
+  wget --no-clobber --quiet --directory-prefix=${BASH_DIR}/scripts $i
+done
 
 chmod +x ${BASH_DIR}/scripts/*
-
-source ${BASHRC}
+export PATH="${PATH}:${BASH_DIR}/scripts"
 
 # GHCi Config
 if [ -e ${GHCI} ]; then
@@ -176,5 +182,7 @@ case `uname` in
   *)
     sed -i '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
 esac
+
+source ${BASHRC}
 
 exit 0

@@ -8,8 +8,12 @@ git config --global color.ui always
 
 if command -v vimdiff > /dev/null; then
   git config --global diff.editor vimdiff
-  git confif --global merge.tool vimdiff
+  git config --global merge.tool diffconflicts
+  git config --global mergetool.diffconflicts.cmd 'diffconflicts vim $BASE $LOCAL $REMOTE $MERGED'
+  git config --global mergetool.diffconflicts.trustExitCode true
+  git config --global mergetool.diffconflicts.keepBackup false
 fi
+
 git config --global diff.prompt never
 
 exit 0

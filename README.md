@@ -14,9 +14,10 @@ cd Bash-Config && ./install
 - Toggle background transparency
 
 ## Bash Scripts
-| Script                                                                         | Author         | Function                       |
-| :----------------------------------------------------------------------------: | :------------- | :----------------------------- |
-| [`git-forest`](https://github.com/jwiegley/git-scripts/blob/master/git-forest) | Jan Engelhardt | Alternative `git log` function |
+| Script                                                                                 | Author                                     | Function                           |
+| :------------------------------------------------------------------------------------: | :----------------------------------------- | :--------------------------------- |
+| [`diffconflicts`](https://github.com/whiteinge/dotfiles/blob/master/bin/diffconflicts) | [Seth House](https://github.com/whiteinge) | A better vimdiff mergetool for Git |
+| [`git-forest`](https://github.com/jwiegley/git-scripts/blob/master/git-forest)         | Jan Engelhardt                             | Alternative `git log` function     |
 
 ## Vim Key Binds
 ### General
@@ -91,5 +92,5 @@ cd Bash-Config && ./install
   - [x] auto install plugins
   - [x] fix vim-airline theme
 
-- [ ] git config
+- [x] git config
 - [ ] Documentation
