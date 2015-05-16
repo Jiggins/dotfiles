@@ -58,17 +58,22 @@ endif
 
 let tmux=$TMUX
 if tmux != ''
-  let g:tmux_navigator_no_mappings = 1
-
   nnoremap <silent> <C-Left>  :TmuxNavigateLeft<cr>
   nnoremap <silent> <C-Down>  :TmuxNavigateDown<cr>
   nnoremap <silent> <C-Up>    :TmuxNavigateUp<cr>
   nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
   nnoremap <silent> <C-Tab>   :TmuxNavigatePrevious<cr>
+
+  nnoremap <silent> <M-Left>  :TmuxNavigateLeft<cr>
+  nnoremap <silent> <M-Down>  :TmuxNavigateDown<cr>
+  nnoremap <silent> <M-Up>    :TmuxNavigateUp<cr>
+  nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+  nnoremap <silent> <M-Tab>   :TmuxNavigatePrevious<cr>
 else
-  nmap <silent> <C-Left>  <C-h><cr>
-  nmap <silent> <C-Down>  <C-j><cr>
-  nmap <silent> <C-Up>    <C-k><cr>
-  nmap <silent> <C-Right> <C-l><cr>
-  nmap <silent> <C-Tab>   <C-w><C-w><cr>
+  map <silent> <C-Left>  <C-h>
+  map <silent> <C-Down>  <C-j>
+  map <silent> <C-Up>    <C-k>
+  map <silent> <C-Right> <C-l>
+  map <silent> <C-Tab>   <C-w><C-w><cr>
 endif
+
