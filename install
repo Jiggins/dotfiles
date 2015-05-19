@@ -24,17 +24,21 @@ done
 
 # Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
 if [[ ${LOCAL} -eq 1 ]]; then
+  mkdir -p test
   BASH_DIR='test/.bash'
   BASHRC='test/.bashrc'
+  GHCI="test/.ghci"
   GITCONFIG='test/.gitconfig'
+  TMUX="test/.tmux.conf"
   VIM_DIR='test/vim'
   VIMRC='test/vimrc'
 else
   BASH_DIR="${HOME}/.bash"
+  GHCI="${HOME}/.ghci"
   GITCONFIG="${HOME}/.gitconfig"
+  TMUX="${HOME}/.tmux.conf"
   VIM_DIR="${HOME}/.vim"
   VIMRC="${HOME}/.vimrc"
-  GHCI="${HOME}/.ghci"
 
   case `uname` in
     'Darwin')
@@ -62,7 +66,7 @@ fi
 ## Scripts
 
 scripts=(
-  https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest 
+  https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
   https://raw.githubusercontent.com/whiteinge/dotfiles/master/bin/diffconflicts
 )
 
@@ -145,7 +149,7 @@ if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ]; then
 fi
 
 # Tmux Stuff
-if [ ! -e ${VIMRC} ] || ! grep -q 'Vim configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
+if [ ! -e ${TMUX} ] || ! grep -q 'Tmux configurations added by github.com/Jiggins/Bash-Config' ${TMUX}; then
   prependFile src/tmux.conf ${HOME}/.tmux.conf
 fi
 
