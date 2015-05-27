@@ -157,7 +157,9 @@ fi
 
 cp -r src/tmux ${HOME}/.tmux
 
-tmux source ${HOME}/.tmux.conf
+if [ ! ${TMUX+x} ]; then
+  tmux source ${HOME}/.tmux.conf
+fi
 
 # Vim stuff
 mkdir -p ${VIM_DIR}
