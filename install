@@ -8,6 +8,8 @@ function prependFile {
     echo '  $1: File to prepend (Will appear at the top of $2)'
     echo '  $2: File to prepend to (output file)'
     exit 1
+  elif [ ! -e $2 ]; then
+    cp $1 $2
   else
     cp $1 tmp
     cat $2 >> tmp
