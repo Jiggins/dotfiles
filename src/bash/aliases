@@ -1,5 +1,5 @@
 #! /bin/bash
-alias gitlog='git og --graph --decorate --all'
+alias gitlog='git log --graph --decorate --all'
 alias path='echo -e ${PATH//:/\\n}'
 
 # enable color support of ls and also add handy aliases
