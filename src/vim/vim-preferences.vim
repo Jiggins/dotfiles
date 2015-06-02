@@ -20,7 +20,7 @@ set shiftround
 set number
 
 " Word wrap
-set wrap!
+set nowrap
 
 " Show matching bracket
 set showmatch
