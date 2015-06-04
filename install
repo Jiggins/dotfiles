@@ -155,7 +155,8 @@ if [ ! -e ${TMUX} ] || ! grep -q 'Tmux configurations added by github.com/Jiggin
   prependFile src/tmux.conf ${HOME}/.tmux.conf
 fi
 
-cp -r src/tmux ${HOME}/.tmux
+mkdir -p ${HOME}/.tmux
+cp src/tmux/* ${HOME}/.tmux/
 
 if [ ! ${TMUX+x} ]; then
   tmux source ${HOME}/.tmux.conf
