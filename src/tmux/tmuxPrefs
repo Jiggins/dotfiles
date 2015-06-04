@@ -1,4 +1,6 @@
-set -g default-terminal "screen-256color"
+# Set C-a as Prefix key
+set -g prefix C-a
+bind C-a send-prefix
 
 # Start Window Numbering at 1
 set -g base-index 1
@@ -8,6 +10,9 @@ setw -g aggressive-resize on
 
 # Zero delay after pressing Escape
 set -s escape-time 0
+
+# Solves rendering issues with Vim inside tmux
+set -g default-terminal "screen-256color"
 
 # Vi mode in tmux
 # http://blog.sanctum.geek.nz/vi-mode-in-tmux/
