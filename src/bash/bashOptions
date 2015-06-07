@@ -1,11 +1,9 @@
 #! /bin/bash
-## History Options
-## ==============
 
 # Add the script folder to the path
 export PATH="${PATH}:${BASH_DIR}/scripts"
 
-# Colours
+# TERM settings
 if [ -z ${TMUX+x} ]; then
   export TERM=xterm-256color
 else
@@ -14,6 +12,9 @@ fi
 
 # svn settings #
 export SVN_EDITOR=vi
+
+## History Options
+## ==============
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
