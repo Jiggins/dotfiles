@@ -1,0 +1,30 @@
+{
+  "segments": {
+    "documentation": "http://powerline.readthedocs.org/en/latest/configuration/segments/common.html",
+    "left": [
+      {
+        "function": "powerline.segments.common.vcs.branch",
+        "name": "Git Branch",
+        "args": {
+          "status_colors": true
+        }
+      }
+    ],
+    "right": [
+      {
+        "function": "powerline.segments.common.env.cwd"
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%I:%M",
+          "istime": true
+        }
+      },
+      {
+        "function": "powerline.segments.common.time.date"
+      }
+    ]
+  }
+}
