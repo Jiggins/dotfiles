@@ -1,4 +1,29 @@
-#! /bin/bash
+#!/bin/bash
+
+# Checks if a command is installed and tells the user to install it if not.
+function commandExists {
+  if command -v $1 > /dev/null; then
+    return 0
+  else
+    echo "${1}: command not found"
+    case `uname` in
+      'Darwin')
+        echo -e "${1} can be installed using\n\tbrew install ${1}"
+
+        if command -v brew > /dev/null; then
+          echo 'brew is not instaled on this system, consider installing brew and running this script again'
+          echo 'http://brew.sh'
+        fi
+
+        ;;
+      *)
+        echo -e "${1} can be installed using\n\tsudo apt-get  install ${1}"
+        ;;
+    esac
+
+    return 1
+  fi
+}
 
 # $1: File to prepend (Will appear at the top of $2)
 # $2: File to prepend to (output file)
@@ -9,174 +34,118 @@ function prependFile {
     echo '  $2: File to prepend to (output file)'
     exit 1
   elif [ ! -e $2 ]; then
+    verbose "Copying $1 to $2"
     cp $1 $2
   else
+    verbose "Prepending $1 to $2"
     cp $1 tmp
     cat $2 >> tmp
     mv tmp $2
   fi
+
+  return 0
 }
 
-while getopts "l:" opt; do
-    case "$opt" in
-    l)  LOCAL=1
-        ;;
-    esac
+function prependFileWithCheck {
+  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/Bash-Config' $2; then
+    prependFile $1 $2
+  fi
+
+  return 0
+}
+
+function verbose () {
+  if [ ${VERBOSE+x} ]; then
+    echo -e "$1"
+  fi
+
+  return 0
+}
+
+# Variables
+BASHRC="${HOME}/.bashrc"
+BASH_DIR="${HOME}/.config/bash"
+GHCI="${HOME}/.ghci"
+TMUX="${HOME}/.tmux.conf"
+VIM_DIR="${HOME}/.config/vim"
+VIMRC="${HOME}/.vimrc"
+# VERBOSE='-v'
+
+# Install config directory
+mkdir ${VERBOSE} -p ${HOME}/.config
+cp ${VERBOSE} -r src/config/ ${HOME}/.config
+
+# Install rcfiles
+for f in src/rcfiles/*; do
+  file=$(basename $f)
+  prependFileWithCheck ${f} ${HOME}/.${file}
 done
 
-# Mac OSX (Darwin) uses `.bash_profile`, everything else uses `.bashrc`
-if [[ ${LOCAL} -eq 1 ]]; then
-  mkdir -p test
-  BASH_DIR='test/.bash'
-  BASHRC='test/.bashrc'
-  GHCI="test/.ghci"
-  GITCONFIG='test/.gitconfig'
-  TMUX="test/.tmux.conf"
-  VIM_DIR='test/vim'
-  VIMRC='test/vimrc'
-else
-  BASH_DIR="${HOME}/.bash"
-  GHCI="${HOME}/.ghci"
-  GITCONFIG="${HOME}/.gitconfig"
-  TMUX="${HOME}/.tmux.conf"
-  VIM_DIR="${HOME}/.vim"
-  VIMRC="${HOME}/.vimrc"
-
-  case `uname` in
-    'Darwin')
-      BASHRC="${HOME}/.bash_profile"
-      ;;
-    *)
-      BASHRC="${HOME}/.bashrc"
-  esac
-fi
-
-# Copy bash stuff
-mkdir -p ${BASH_DIR}
-cp -r src/bash/* ${BASH_DIR}
-
-# Prepend src/bashrc to the existing .bashrc or .bash_profile
-if [ -e ${BASHRC} ]; then
-  # Backup bashrc incase something goes wrong
-  cp ${BASHRC} ${BASHRC}.bak
-fi
-
-if [ ! -e ${BASHRC} ] || ! grep -q 'source ${HOME}/.bash/aliases' ${BASHRC}; then
-  prependFile src/bashrc ${BASHRC}
-fi
-
-## Scripts
-
+# Download Scripts
 scripts=(
   https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
   https://raw.githubusercontent.com/whiteinge/dotfiles/master/bin/diffconflicts
 )
 
-mkdir -p ${BASH_DIR}/scripts
+if commandExists wget; then
+  mkdir -p ${BASH_DIR}/scripts
+  for i in ${scripts[*]}; do
+    # --no-clobber - Don't download if script already exists
+    # --directory-prefix - Download scripts to ~/.bash/scripts
+    if [ ${VERBOSE+x} ]; then
+      wget --no-clobber --directory-prefix=${BASH_DIR}/scripts $i
+    else
+      wget --no-clobber --quiet --directory-prefix=${BASH_DIR}/scripts $i
+    fi
+  done
 
-for i in ${scripts[*]}; do
-  # --no-clobber - Don't download if script already exists
-  # --directory-prefix - Download scripts to ~/.bash/scripts
-  wget --no-clobber --quiet --directory-prefix=${BASH_DIR}/scripts $i
-done
+  chmod +x ${BASH_DIR}/scripts/*
 
-chmod +x ${BASH_DIR}/scripts/*
-export PATH="${PATH}:${BASH_DIR}/scripts"
-
-# GHCi Config
-if [ -e ${GHCI} ]; then
-  if grep -q 'prompt' ${GHCI}; then
-    prependFile src/ghci ${GHCI}
-  fi
-else
-  cp src/ghci ${GHCI}
-fi
-
-# Vi mode in ghci!
-echo "editMode: Vi" >> ~/.haskeline
-
-# inputrc - I like Vim mode input
-
-function copyInputrc {
-  cp src/inputrc ${HOME}/.inputrc
-}
-
-if [ ! $INPUTRC ]; then
-  if [ -e ${HOME}/.inputrc ] && ! diff src/inputrc ${HOME}/.inputrc > /dev/null; then
-    echo 'inputrc already exists, do you want to overwite? y/n'
-    read input
-    case ${input} in
-      y | Y | yes)
-        copyInputrc
-
-        # Tab completions for Mac
-        if [ "$(uname)" == "Darwin" ]; then
-          echo 'set completion-ignore-case on' >> ${HOME}/.inputrc
-          echo 'set show-all-if-ambiguous on' >> ${HOME}/.inputrc
-          echo 'TAB: menu-complete' >> ${HOME}/.inputrc
-
-          # Git completions for Mac
-          if command -v brew > /dev/null; then
-            if ! brew ls --version bash-completion > /dev/null; then
-              brew install git bash-completion
-            fi
-
-            if [ -f `brew --prefix`/etc/bash_completion ]; then
-              . `brew --prefix`/etc/bash_completion
-            fi
-          fi
-        fi
-        shift
-        ;;
-      *)
-        ;;
-    esac
-  else
-    copyInputrc
+  # Powerline Fonts
+  if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ] && [ ! -e ${HOME}/.config/fontconfig/conf.d ]; then
+    mkdir -p ${HOME}/.fonts/ubuntu-mono-power
+    mkdir -p ${HOME}/.config/fontconfig/conf.d/
+    wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf
+    wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power > /dev/null
+    fc-cache -vf | grep 'fc-cache:'
   fi
 fi
 
+# Bash completion for mac
+if [ "$(uname)" == "Darwin" ]; then
+  if commandExists brew; then
+    if ! brew ls --version bash-completion > /dev/null; then
+      brew install git bash-completion
+    fi
+  fi
+fi
+
+# Git configuration
 if command -v git > /dev/null; then
   ./src/gitconfig
 fi
 
-# Powerline Fonts
-if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ]; then
-  mkdir -p ${HOME}/.fonts/ubuntu-mono-power
-  mkdir -p ${HOME}/.config/fontconfig/conf.d/
-  wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf &
-  wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf &
-  git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power > /dev/null
-  fc-cache -vf | grep 'fc-cache:'
+# Powerline installation
+if commandExists pip; then
+  if [ ${VERBOSE+x} ]; then
+    pip install --user --editable=${HOME}/.config/vim/bundle/powerline
+  else
+    pip install -q --user --editable=${HOME}/.config/vim/bundle/powerline
+  fi
+
+  ln -fs ${HOME}/.config/vim/bundle/powerline/powerline/scripts/powerline ${HOME}/.config/bash/scripts
 fi
 
-# Tmux Stuff
-if [ ! -e ${TMUX} ] || ! grep -q 'Tmux configurations added by github.com/Jiggins/Bash-Config' ${TMUX}; then
-  prependFile src/tmux.conf ${HOME}/.tmux.conf
+# Vi mode in ghci!
+if ! grep -q "editMode vi" ${HOME}/.haskeline; then
+  echo "editMode: Vi" >> ${HOME}/.haskeline
 fi
 
-mkdir -p ${HOME}/.tmux
-cp src/tmux/* ${HOME}/.tmux/
+# Transparent Monokai colorscheme
+cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
 
-if [ ! ${TMUX+x} ]; then
-  tmux source ${HOME}/.tmux.conf
-fi
-
-# Vim stuff
-mkdir -p ${VIM_DIR}
-
-# Prepend src/virc to the existing .vimrc
-if [ -e ${VIMRC} ]; then
-  # Backup vimrc incase something goes wrong
-  cp ${VIMRC} ${VIMRC}.bak
-fi
-
-if [ ! -e ${VIMRC} ] || ! grep -q 'Tmux configurations added by github.com/Jiggins/Bash-Config' ${VIMRC}; then
-  prependFile src/vimrc ${VIMRC}
-fi
-
-cp src/vim/* ${VIM_DIR}
-
+# Installing Vim plugins
 vi +PluginInstall +qall
 
 # Transparent Monokai colorscheme
@@ -184,6 +153,8 @@ cp src/Monokai-Transparent.vim ${VIM_DIR}/bundle/vim-colorschemes/colors/
 
 # Quick fix for invalid format option error caused by haskell-vim
 # Odly Mac/FreeBSD takes an extra argument to sed, Ubuntu does not
+
+verbose "Applying patch to ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim"
 case `uname` in
   'Darwin')
     sed -i '' '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
