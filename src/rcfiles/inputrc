@@ -1,3 +1,5 @@
+# inputrc configurations added by github.com/Jiggins/Bash-Config
+
 set editing-mode vi
 $if mode=vi
 
