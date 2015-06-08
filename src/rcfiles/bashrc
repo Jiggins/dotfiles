@@ -1,8 +1,10 @@
+# bash configurations added by github.com/Jiggins/Bash-Config
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
 ## Sourcing files
-source ${HOME}/.bash/aliases
-source ${HOME}/.bash/bashOptions
-source ${HOME}/.bash/prompt
+source ${HOME}/.config/bash/aliases
+source ${HOME}/.config/bash/bashOptions
+source ${HOME}/.config/bash/prompt
 

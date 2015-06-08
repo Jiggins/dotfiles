@@ -16,7 +16,8 @@ set -g default-terminal "screen-256color"
 
 # Tmux Powerline
 run-shell "powerline-daemon -q"
-source "${HOME}/.vim/bundle/powerline/powerline/bindings/tmux/powerline.conf"
+run-shell ". ${HOME}/.config/vim/bundle/powerline/powerline/bindings/bash/powerline.sh"
+source "${HOME}/.config/vim/bundle/powerline/powerline/bindings/tmux/powerline.conf"
 
 # Vi mode in tmux
 # http://blog.sanctum.geek.nz/vi-mode-in-tmux/

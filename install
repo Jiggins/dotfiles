@@ -112,7 +112,7 @@ if [ ! $INPUTRC ]; then
         # Tab completions for Mac
         if [ "$(uname)" == "Darwin" ]; then
           echo 'set completion-ignore-case on' >> ${HOME}/.inputrc
-          echo 'show-all-if-ambiguous on' >> ${HOME}/.inputrc
+          echo 'set show-all-if-ambiguous on' >> ${HOME}/.inputrc
           echo 'TAB: menu-complete' >> ${HOME}/.inputrc
 
           # Git completions for Mac

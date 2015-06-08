@@ -1,1 +1,2 @@
+# configurations added by github.com/Jiggins/Bash-Config
 :set prompt "\ESC[0;32mghci \955: \ESC[m"
