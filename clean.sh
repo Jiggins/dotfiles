@@ -7,9 +7,9 @@ rcs=(
 
 dirsToDelete=(
   ${HOME}/.config/bash
-  ${HOME}/.config/vim
-  ${HOME}/.config/tmux
   ${HOME}/.config/powerline
+  ${HOME}/.config/tmux
+  ${HOME}/.vim
 )
 
 for i in ${rcs[*]}; do

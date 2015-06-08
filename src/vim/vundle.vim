@@ -5,16 +5,16 @@
 if !exists(':PluginInstall')
   let $VIMHOME=expand('~')
 
-  if !isdirectory(expand("~/.config/vim/bundle/Vundle.vim/.git"))
-    !git clone https://github.com/gmarik/Vundle.vim.git ~/.config/vim/bundle/Vundle.vim
+  if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+    !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   endif
 endif
 
 set nocompatible
 filetype off
 
-set rtp+=~/.config/vim/bundle/Vundle.vim
-call vundle#begin("~/.config/vim/bundle")
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin("~/.vim/bundle")
 
 Plugin 'gmarik/Vundle.vim'
 
