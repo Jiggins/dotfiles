@@ -57,8 +57,3 @@ fi
 
 # Activate Powerline bindings
 export POWERLINE_CONFIG_COMMAND="${HOME}/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh"
-if ! ps -e | grep 'powerline-daemon -q' | grep -v 'grep' > /dev/null; then
-  echo 'powerline daemon'
-  powerline-daemon -q
-  . POWERLINE_CONFIG_COMMAND
-fi
