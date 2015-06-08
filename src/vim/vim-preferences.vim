@@ -57,7 +57,7 @@ set noswapfile
 set fileformats=unix,dos,mac
 
 " Colour Scheme
-if filereadable(expand('~/.config/vim/bundle/vim-colorschemes/colors/Monokai.vim'))
+if filereadable(expand('~/.vim/bundle/vim-colorschemes/colors/Monokai.vim'))
   colorscheme Monokai
 endif
 
