@@ -24,6 +24,16 @@
       },
       {
         "function": "powerline.segments.common.time.date"
+      },
+      {
+        "function": "powerline.segments.common.bat.battery",
+        "name": "Battery",
+        "args": {
+          "full_heart": "♥︎",
+          "empty_heart": "♡",
+          "gamify": true,
+          "steps": 10
+        }
       }
     ]
   }
