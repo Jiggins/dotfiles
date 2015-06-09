@@ -7,9 +7,9 @@ rcs=(
 
 dirsToDelete=(
   ${HOME}/.config/bash
-  ${HOME}/.config/vim
-  ${HOME}/.config/tmux
   ${HOME}/.config/powerline
+  ${HOME}/.config/tmux
+  ${HOME}/.vim
 )
 
 for i in ${rcs[*]}; do
@@ -17,5 +17,6 @@ for i in ${rcs[*]}; do
 done
 
 for i in ${dirsToDelete[*]}; do
-  rm -vrf $i
+  echo "removing $i"
+  rm -rf $i
 done
