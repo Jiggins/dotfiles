@@ -115,6 +115,17 @@ if commandExists wget; then
   fi
 fi
 
+# Powerline installation
+if commandExists pip; then
+  export PATH="${PATH}:${HOME}/.config/bash/scripts"
+
+  if [ ${VERBOSE+x} ]; then
+    pip install powerline-status
+  else
+    pip install -q powerline-status
+  fi
+fi
+
 # Bash completion for mac
 if [ "$(uname)" == "Darwin" ]; then
   if commandExists brew; then
@@ -150,19 +161,6 @@ case `uname` in
   *)
     sed -i '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
 esac
-
-# Powerline installation
-if commandExists pip; then
-  ln -fs ${HOME}/.vim/bundle/powerline/setup.py ${HOME}/.config/bash/scripts
-  export PATH="${PATH}:${HOME}/.config/bash/scripts"
-
-  if [ ${VERBOSE+x} ]; then
-    pip install --user --editable=${HOME}/.vim/bundle/powerline
-  else
-    pip install -q --user --editable=${HOME}/.vim/bundle/powerline
-  fi
-
-fi
 
 source ${BASHRC}
 
