@@ -17,5 +17,6 @@ for i in ${rcs[*]}; do
 done
 
 for i in ${dirsToDelete[*]}; do
-  rm -vrf $i
+  echo "removing $i"
+  rm -rf $i
 done
