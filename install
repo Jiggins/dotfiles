@@ -102,6 +102,7 @@ if commandExists wget; then
     fi
   done
 
+  chmod +x ${BASH_DIR}/scripts/*
 
   # Powerline Fonts
   if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ] && [ ! -e ${HOME}/.config/fontconfig/conf.d ]; then
