@@ -107,7 +107,8 @@ if commandExists wget; then
     wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf
     wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf
     git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power > /dev/null
-    fc-cache -vf | grep 'fc-cache:'
+    fc-cache -vf ${HOME}/.config/fonts | grep 'fc-cache:'
+    fc-cache -vf ${HOME}/.fonts | grep 'fc-cache:'
   fi
 fi
 
