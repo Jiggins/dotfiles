@@ -10,6 +10,7 @@ set backspace=indent,eol,start
 set complete-=i
 set listchars=tab:▒░,trail:▓
 set list!
+set spelllang=en_gb
 
 " Tabs
 set tabstop=2 shiftwidth=2 expandtab
