@@ -3,13 +3,14 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Text editing
-set encoding=utf-8
-set fileencoding=utf-8
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
-set listchars=tab:▒░,trail:▓
-set list!
+set encoding=utf-8
+set fileencoding=utf-8
+set iskeyword-=_               " Sets '_' as a word boundary - useful for Ruby
+set listchars=tab:▒░,trail:▓   " Highlights tabs and trailing whitespace when list is set
+set nolist
 set spelllang=en_gb
 
 " Tabs
@@ -47,7 +48,7 @@ set showcmd
 set wildmenu
 
 " Numbers
-" Allows for Ctrl+a to inrement letters and hex
+" Allows for Ctrl+a to increment letters and hex
 " Ctrl+x decrements
 set nrformats-=alpha,hex
 
@@ -67,7 +68,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'badwolf'
 
-" vim-hakell
+" vim-Haskell
 let g:haskell_indent_if = 3
 let g:haskell_indent_case = 2
 let g:haskell_indent_let = 4
