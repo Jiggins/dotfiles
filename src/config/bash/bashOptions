@@ -5,6 +5,9 @@ export BASH_DIR="${HOME}/.config/bash"
 export PATH="${PATH}:${BASH_DIR}/scripts"
 export POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
 
+export LANG='LANG=en_UK.utf8'
+export LC_ALL='LANG=en_UK.utf8'
+
 # TERM settings
 if [ -z ${TMUX+x} ]; then
   export TERM=xterm-256color
