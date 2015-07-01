@@ -66,9 +66,10 @@ function verbose () {
 BASHRC="${HOME}/.bashrc"
 BASH_DIR="${HOME}/.config/bash"
 GHCI="${HOME}/.ghci"
+POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
 TMUX="${HOME}/.tmux.conf"
-VIM_DIR="${HOME}/.vim"
 VIMRC="${HOME}/.vimrc"
+VIM_DIR="${HOME}/.vim"
 # VERBOSE='-v'
 
 # Install config directory
@@ -116,17 +117,6 @@ if commandExists wget; then
   fi
 fi
 
-# Powerline installation
-if commandExists pip; then
-  export PATH="${PATH}:${HOME}/.config/bash/scripts"
-
-  if [ ${VERBOSE+x} ]; then
-    pip install powerline-status
-  else
-    pip install -q powerline-status
-  fi
-fi
-
 # Bash completion for mac
 if [ "$(uname)" == "Darwin" ]; then
   if commandExists brew; then
@@ -162,6 +152,22 @@ case `uname` in
   *)
     sed -i '2s/ formatoptions+=j//' ${VIM_DIR}/bundle/haskell-vim/after/ftplugin/haskell.vim
 esac
+
+# Powerline installation
+if commandExists pip; then
+  export PATH="${PATH}:${HOME}/.config/bash/scripts"
+
+  if [ ${VERBOSE+x} ]; then
+    pip install --user --editable=${POWERLINE_DIR}
+  else
+    pip install -q --user --editable=${POWERLINE_DIR}
+  fi
+
+  # Symlink the powerline shell command to the bash scripts directore
+  if [ ! -L ${BASH_DIR}/scripts/powerline ]; then
+    ln -s ${POWERLINE_DIR}/scripts/powerline ${BASH_DIR}/scripts/powerline
+  fi
+fi
 
 source ${BASHRC}
 

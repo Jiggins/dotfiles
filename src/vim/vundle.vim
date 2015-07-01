@@ -29,7 +29,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'raichoo/haskell-vim'
-Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-repeat'
