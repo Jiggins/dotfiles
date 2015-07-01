@@ -165,7 +165,7 @@ if commandExists pip; then
 
   # Symlink the powerline shell command to the bash scripts directore
   if [ ! -L ${BASH_DIR}/scripts/powerline ]; then
-    ln -s ${POWERLINE_DIR}/scripts/powerline ${BASH_DIR}/scripts/powerline
+    ln -s ${POWERLINE_DIR}/scripts/* ${BASH_DIR}/scripts/
   fi
 fi
 

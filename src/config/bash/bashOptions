@@ -5,9 +5,6 @@ export BASH_DIR="${HOME}/.config/bash"
 export PATH="${PATH}:${BASH_DIR}/scripts"
 export POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
 
-export LANG='LANG=en_UK.utf8'
-export LC_ALL='LANG=en_UK.utf8'
-
 # TERM settings
 if [ -z ${TMUX+x} ]; then
   export TERM=xterm-256color
@@ -61,6 +58,6 @@ fi
 
 # Activate Powerline bindings
 export POWERLINE_NO_BASH_PROMPT=1
-export POWERLINE_COMMAND="${POWERLINE_CONFIG_COMMAND}/scripts/powerline-config"
-export POWERLINE_CONFIG_COMMAND="${POWERLINE_CONFIG_COMMAND}/scripts/powerline-config"
+export POWERLINE_COMMAND="${BASH_DIR}/scripts/powerline-config"
+export POWERLINE_CONFIG_COMMAND="${BASH_DIR}/scripts/powerline-config"
 

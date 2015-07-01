@@ -15,8 +15,8 @@ set -s escape-time 0
 set -g default-terminal "screen-256color"
 
 # Tmux Powerline
-run-shell "powerline-daemon -q"
-# run-shell ". ${HOME}/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh"
+run-shell "if powerline-daemon -q; then powerline-daemon; fi"
+run-shell ". ${HOME}/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh"
 source "${HOME}/.vim/bundle/powerline/powerline/bindings/tmux/powerline.conf"
 
 # Vi mode in tmux
