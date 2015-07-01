@@ -76,3 +76,8 @@ let g:haskell_indent_where = 6
 let g:haskell_indent_do = 2
 let g:haskell_indent_in = 2
 let g:cabal_indent_section = 2
+
+" vim-slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": ":1.1"}
+
