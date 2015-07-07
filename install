@@ -1,27 +1,54 @@
 #!/bin/bash
 
-# Checks if a command is installed and tells the user to install it if not.
+# Checks if a command is installed
 function commandExists {
   if command -v $1 > /dev/null; then
     return 0
   else
-    echo "${1}: command not found"
+    return 1
+  fi
+}
+
+function checkDependencies {
+  dependencies=(
+    git
+    vim
+    wget
+  )
+
+  for i in ${dependencies[*]}; do
+    if ! commandExists $i; then
+      dependenciesNotFound="${dependenciesNotFound}$i "
+    fi
+  done
+
+  if [ ${dependenciesNotFound+x} ]; then
+    echo 'The following dependencies are not installed on this system'
+    echo -e "\n\t${dependenciesNotFound}\n"
+
     case `uname` in
       'Darwin')
-        echo -e "${1} can be installed using\n\tbrew install ${1}"
+        echo 'These can be installed using brew'
 
         if command -v brew > /dev/null; then
-          echo 'brew is not instaled on this system, consider installing brew and running this script again'
+          echo 'brew is not installed on this system, consider installing brew and running this script again'
           echo 'http://brew.sh'
+        else
+          echo "brew install ${dependenciesNotFound}"
         fi
-
         ;;
+
       *)
-        echo -e "${1} can be installed using\n\tsudo apt-get  install ${1}"
+        if commandExists apt-get; then
+          echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
+        elif commandExists yum; then
+          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
+        else
+          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
+        fi
         ;;
     esac
-
-    return 1
+    exit 1
   fi
 }
 
@@ -71,6 +98,8 @@ TMUX="${HOME}/.tmux.conf"
 VIMRC="${HOME}/.vimrc"
 VIM_DIR="${HOME}/.vim"
 # VERBOSE='-v'
+
+checkDependencies
 
 # Install config directory
 mkdir ${VERBOSE} -p ${HOME}/.config
