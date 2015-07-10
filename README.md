@@ -67,6 +67,7 @@ cd Bash-Config && ./install
 | [flazz/vim-colorschemes][7]         | One colorscheme pack to rule them all!                                                   |
 | [godlygeek/tabular][8]              | Vim script for text filtering and alignment                                              |
 | [kien/ctrlp.vim][9]                 | Fuzzy file, buffer, mru, tag, etc finder                                                 |
+| [mbbill/undotree][10]               | The ultimate undo history visualizer for VIM                                             |
 | [plasticboy/vim-markdown][10]       | Markdown Vim Mode                                                                        |
 | [raichoo/haskell-vim][11]           | Hskell plugin for Vim                                                                    |
 | [SirVer/ultisnips][12]              | UltiSnips - The ultimate snippet solution for Vim                                        |
@@ -84,13 +85,14 @@ cd Bash-Config && ./install
 [7]: https://github.com/flazz/vim-colorschemes
 [8]: https://github.com/godlygeek/tabular
 [9]: https://github.com/kien/ctrlp.vim
-[10]: https://github.com/plasticboy/vim-markdown
-[11]: https://github.com/raichoo/haskell-vim
-[12]: https://github.com/SirVer/ultisnips
-[13]: https://github.com/terryma/vim-multiple-cursors
-[14]: https://github.com/tomtom/tcomment_vim
-[15]: https://github.com/tpope/vim-repeat
-[16]: https://github.com/tpope/vim-surround
+[10]: https://github.com/mbbill/undotree
+[11]: https://github.com/plasticboy/vim-markdown
+[12]: https://github.com/raichoo/haskell-vim
+[13]: https://github.com/SirVer/ultisnips
+[14]: https://github.com/terryma/vim-multiple-cursors
+[15]: https://github.com/tomtom/tcomment_vim
+[16]: https://github.com/tpope/vim-repeat
+[17]: https://github.com/tpope/vim-surround
 
 ## Tmux Key Bindings
 | Key          | Function           |
