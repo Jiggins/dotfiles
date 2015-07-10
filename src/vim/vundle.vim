@@ -26,6 +26,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'jpalardy/vim-slime'
 Plugin 'kien/ctrlp.vim'
+Plugin 'mbbill/undotree'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'raichoo/haskell-vim'
