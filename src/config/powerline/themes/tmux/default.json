@@ -1,5 +1,5 @@
 {
-	"segments": {
+  "segments": {
     "left": [
       {
         "function": "powerline.segments.common.vcs.branch",
@@ -9,10 +9,10 @@
         }
       }
     ],
-		"right": [
-			{
-				"function": "powerline.segments.common.time.date"
-			},
+    "right": [
+      {
+        "function": "powerline.segments.common.time.date"
+      },
       {
         "function": "powerline.segments.common.time.date",
         "name": "time",
@@ -34,6 +34,6 @@
           "steps": 10
         }
       }
-		]
-	}
+    ]
+  }
 }
