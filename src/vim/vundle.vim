@@ -34,6 +34,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'wesQ3/vim-windowswap'
 
 call vundle#end()
 
