@@ -58,6 +58,11 @@ set nowritebackup
 set noswapfile
 set fileformats=unix,dos,mac
 
+" Shell
+if $SHELL =~ 'bin/fish'
+  set shell=/bin/sh
+endif
+
 " Colour Scheme
 if filereadable(expand('~/.vim/bundle/vim-colorschemes/colors/Monokai.vim'))
   colorscheme Monokai
