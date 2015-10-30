@@ -86,3 +86,6 @@ let g:cabal_indent_section = 2
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": ":1.1"}
 
+" Syntastic
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
