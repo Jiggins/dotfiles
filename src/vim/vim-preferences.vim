@@ -89,3 +89,4 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":1.1"}
 " Syntastic
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
