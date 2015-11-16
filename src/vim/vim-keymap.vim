@@ -50,10 +50,8 @@ nnoremap <Leader>j       :Hexplore  <CR>
 nnoremap <S-Tab> <C-w><C-w>
 
 " Plugin options
-if exists(':SyntasticCheck')
-  nnoremap <Leader>s :SyntasticCheck<CR>
-  nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticToggleMode<CR>"
-endif
+nnoremap <Leader>s :SyntasticCheck<CR>
+nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
 
 if exists(':MultipleCursorFind')
   let g:multi_cursor_next_key='<C-d>'
