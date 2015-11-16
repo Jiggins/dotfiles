@@ -1,4 +1,4 @@
-" Vim configurations added by github.config/com/Jiggins/Bash-Config
+" Vim configurations added by github.com/Jiggins/Bash-Config
 source ~/.vim/vundle.vim
 source ~/.vim/vim-commands.vim
 source ~/.vim/vim-keymap.vim
