@@ -1,2 +1,4 @@
-# configurations added by github.com/Jiggins/Bash-Config
+-- configurations added by github.com/Jiggins/Bash-Config
 :set prompt "\ESC[0;32mghci \955: \ESC[m"
+:set prompt "\ESC[1;32m%s\n\ESC[0;32mghci λ> \ESC[m"
+:set editor vi
