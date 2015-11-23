@@ -20,9 +20,9 @@ call vundle#begin("~/.vim/bundle")
 Plugin 'gmarik/Vundle.vim'
 
 " Aesthetics
-Plugin 'airblade/vim-gitgutter'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'airblade/vim-gitgutter'                                  " Show git diff in gutter
+Plugin 'flazz/vim-colorschemes'                                  " Colour schemes!
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'} " Powerline - The triangular characters in Vim and tmux
 
 " Languages
 Plugin 'chrisbra/unicode.vim'
@@ -35,27 +35,27 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-rails'
 
 " Navigation
-Plugin 'kien/ctrlp.vim'
-Plugin 'mbbill/undotree'
-Plugin 'vim-utils/vim-vertical-move'
-Plugin 'wesQ3/vim-windowswap'
+Plugin 'kien/ctrlp.vim'                                          " Search for files in Vim
+Plugin 'mbbill/undotree'                                         " Visualise undo tree
+Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
+Plugin 'wesQ3/vim-windowswap'                                    " Swap two panes in Vim
 
 " Text Editing
-Plugin 'ervandew/supertab'
-Plugin 'godlygeek/tabular'
-Plugin 'junegunn/vim-emoji'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-characterize'
+Plugin 'ervandew/supertab'                                       " Tab completion with Tab
+Plugin 'godlygeek/tabular'                                       " Align text; like these comments
+Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
+Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
+Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
+Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-utils/vim-space'
+Plugin 'tpope/vim-surround'                                      " Surround text with a character or brackets
+Plugin 'vim-utils/vim-space'                                     " Select in and around whitespace
 
 " tmux Integration
-Plugin 'benmills/vimux'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'jpalardy/vim-slime'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'benmills/vimux'                                          " Open a tmux session from Vim
+Plugin 'christoomey/vim-tmux-navigator'                          " Move between Vim and tmux panes with one short cut
+Plugin 'jpalardy/vim-slime'                                      " Copy text to repl in tmux
+Plugin 'tmux-plugins/vim-tmux-focus-events'                      " Fix for FocusGained and FocusLost autocommand events in tmux.
 
 call vundle#end()
 
