@@ -69,6 +69,9 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-urlview'
 
+# Do not boot tmux on startup
+set -g @continuum-boot 'off'
+
 # install tpm if not already installed
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
