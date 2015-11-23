@@ -16,35 +16,46 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin("~/.vim/bundle")
 
+" Package Manager
 Plugin 'gmarik/Vundle.vim'
 
+" Aesthetics
 Plugin 'airblade/vim-gitgutter'
-Plugin 'benmills/vimux'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" Languages
 Plugin 'chrisbra/unicode.vim'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'dermusikman/sonicpi.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'godlygeek/tabular'
-Plugin 'jpalardy/vim-slime'
-Plugin 'junegunn/vim-emoji'
-Plugin 'kien/ctrlp.vim'
 Plugin 'lukerandall/haskellmode-vim'
-Plugin 'mbbill/undotree'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'raichoo/haskell-vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-rails'
+
+" Navigation
+Plugin 'kien/ctrlp.vim'
+Plugin 'mbbill/undotree'
+Plugin 'vim-utils/vim-vertical-move'
+Plugin 'wesQ3/vim-windowswap'
+
+" Text Editing
+Plugin 'ervandew/supertab'
+Plugin 'godlygeek/tabular'
+Plugin 'junegunn/vim-emoji'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-characterize'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-utils/vim-space'
-Plugin 'vim-utils/vim-vertical-move'
-Plugin 'wesQ3/vim-windowswap'
+
+" tmux Integration
+Plugin 'benmills/vimux'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'jpalardy/vim-slime'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 call vundle#end()
 
