@@ -21,7 +21,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'                                  " Show git diff in gutter
-Plugin 'flazz/vim-colorschemes'                                  " Colour schemes!
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'} " Powerline - The triangular characters in Vim and tmux
 
 " Languages
