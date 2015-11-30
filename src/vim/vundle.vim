@@ -21,17 +21,21 @@ Plugin 'gmarik/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'                                  " Show git diff in gutter
+Plugin 'altercation/vim-colors-solarized'                        " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'} " Powerline - The triangular characters in Vim and tmux
 
 " Languages
 Plugin 'chrisbra/unicode.vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'dermusikman/sonicpi.vim'
-Plugin 'lukerandall/haskellmode-vim'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'raichoo/haskell-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-rails'
+
+"" Languages - Haskell
+Plugin 'eagletmt/neco-ghc'                                       " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
+Plugin 'lukerandall/haskellmode-vim'
+Plugin 'raichoo/haskell-vim'
 
 " Navigation
 Plugin 'kien/ctrlp.vim'                                          " Search for files in Vim
@@ -43,6 +47,7 @@ Plugin 'wesQ3/vim-windowswap'                                    " Swap two pane
 Plugin 'ervandew/supertab'                                       " Tab completion with Tab
 Plugin 'godlygeek/tabular'                                       " Align text; like these comments
 Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
+Plugin 'Shougo/neocomplete.vim'                                  " Next generation completion framework after neocomplcache
 Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
 Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
