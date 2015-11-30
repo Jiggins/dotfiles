@@ -1,8 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-rcs=(
-  ${HOME}/.vimrc
-  ${HOME}/.tmux.conf
+files=(
+  vimrc
+  tmux
+)
+
+declare -A rcs=(
+  ["vimrc"]="${HOME}/.vimrc"
+  ["tmux"]="${HOME}/.tmux.conf"
+)
+
+declare -A src=(
+  ["vimrc"]="src/rcfiles/vimrc"
+  ["tmux"]="src/rcfiles/tmux.conf"
 )
 
 dirsToDelete=(
@@ -12,8 +22,12 @@ dirsToDelete=(
   ${HOME}/.vim
 )
 
-for i in ${rcs[*]}; do
-  rm -v $i
+for file in ${files[*]}; do
+  # rm -v $i
+  while read line; do
+    comm -2 -3 "${rcs["$file"]}" "${src["$file"]}" > "/tmp/$file"
+    mv "/tmp/$file" "${rcs["$file"]}"
+  done < "${src["$file"]}"
 done
 
 for i in ${dirsToDelete[*]}; do
