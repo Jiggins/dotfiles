@@ -68,6 +68,9 @@ if filereadable(expand('~/.vim/colors/Monokai.vim'))
   colorscheme Monokai
 endif
 
+" neco-ghc
+let g:necoghc_enable_detailed_browse = 1                       " https://github.com/eagletmt/neco-ghc#options
+
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
