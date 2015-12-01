@@ -68,6 +68,11 @@ if filereadable(expand('~/.vim/colors/Monokai.vim'))
   colorscheme Monokai
 endif
 
+" Pandoc
+let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
+let g:pandoc#syntax#conceal#blacklist = ["atx", "list"]
+let g:pandoc#syntax#conceal#urls = 1
+
 " neco-ghc
 let g:necoghc_enable_detailed_browse = 1                       " https://github.com/eagletmt/neco-ghc#options
 
@@ -93,3 +98,4 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": ":1.1"}
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+

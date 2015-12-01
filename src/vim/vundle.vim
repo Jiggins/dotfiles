@@ -36,6 +36,8 @@ Plugin 'dermusikman/sonicpi.vim'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-rails'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 "" Languages - Haskell
 Plugin 'eagletmt/neco-ghc'                                       " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
