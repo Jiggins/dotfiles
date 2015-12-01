@@ -53,6 +53,9 @@ nnoremap <S-Tab> <C-w><C-w>
 nnoremap <Leader>s :SyntasticCheck<CR>
 nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
 
+nnoremap <Leader>i :Limelight<CR>
+xnoremap <Leader>i :Limelight<CR>
+
 if exists(':MultipleCursorFind')
   let g:multi_cursor_next_key='<C-d>'
   let g:multi_cursor_prev_key='<C-e>'
