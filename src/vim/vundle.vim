@@ -21,8 +21,13 @@ Plugin 'gmarik/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'                                  " Show git diff in gutter
-Plugin 'altercation/vim-colors-solarized'                        " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plugin 'junegunn/limelight.vim'                                  " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'} " Powerline - The triangular characters in Vim and tmux
+
+" Colourschemes
+Plugin 'altercation/vim-colors-solarized'                        " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plugin 'widatama/vim-phoenix'                                    " Monochrome color schemes for Vim
+Plugin 'romainl/flattened'                                       " Solarized, without the bullshit.
 
 " Languages
 Plugin 'chrisbra/unicode.vim'
