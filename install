@@ -104,10 +104,11 @@ checkDependencies
 # Install config directory
 mkdir ${VERBOSE} -p ${HOME}/.config
 mkdir ${VERBOSE} -p ${HOME}/.vim
+# mkdir ${VERBOSE} -p ${HOME}/.tmux
 
 cp ${VERBOSE} -r src/config/* ${HOME}/.config
 cp ${VERBOSE} -r src/vim/* ${HOME}/.vim
-cp ${VERBOSE} -r src/tmux/* ${HOME}/.tmux
+# cp ${VERBOSE} -r src/tmux/* ${HOME}/.tmux
 
 # Install rcfiles
 for f in src/rcfiles/*; do
