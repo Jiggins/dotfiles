@@ -70,7 +70,7 @@ endif
 
 " Pandoc
 let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
-let g:pandoc#syntax#conceal#blacklist = ["atx", "list"]
+let g:pandoc#syntax#conceal#blacklist = ["atx", "list", "quotes"]
 let g:pandoc#syntax#conceal#urls = 1
 
 " neco-ghc
