@@ -43,6 +43,8 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'eagletmt/neco-ghc'                                       " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'raichoo/haskell-vim'
+Plugin 'Twinside/vim-hoogle'                                     " Vim plugin used to query hoogle, the haskell search engine
+Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
 
 " Navigation
 Plugin 'kien/ctrlp.vim'                                          " Search for files in Vim
