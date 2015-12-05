@@ -68,10 +68,20 @@ if filereadable(expand('~/.vim/colors/Monokai.vim'))
   colorscheme Monokai
 endif
 
+" LimeLight
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
 " Pandoc
 let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
 let g:pandoc#syntax#conceal#blacklist = ["atx", "list", "quotes"]
 let g:pandoc#syntax#conceal#urls = 1
+
+" Neocomplete options
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " neco-ghc
 let g:necoghc_enable_detailed_browse = 1                       " https://github.com/eagletmt/neco-ghc#options

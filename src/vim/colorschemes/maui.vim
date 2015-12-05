@@ -109,4 +109,5 @@ hi SyntasticErrorSign ctermfg=red guibg=#121212 ctermbg=233
 
 set bg=dark "bg switches to light for some reason
 
+" hi Conceal guifg=#c0c0c0 ctermfg=7 guibg=#666666 ctermbg=242
 " vim:set fdm=marker
