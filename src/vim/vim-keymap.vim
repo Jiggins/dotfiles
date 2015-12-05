@@ -36,6 +36,13 @@ endfunction
 nnoremap <leader>t :call ToggleTransparency()<CR>
 nnoremap <leader>; q:
 
+" Commands
+" Remapping due to constant mistakes
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
 " Splitting Windows
 nnoremap <Leader><Left>  :Vexplore  <CR>
 nnoremap <Leader><Right> :Vexplore! <CR>
