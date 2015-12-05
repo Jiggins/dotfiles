@@ -1,4 +1,12 @@
 -- configurations added by github.com/Jiggins/Bash-Config
+
+-- set prompt to a green 'ghci λ: '
 :set prompt "\ESC[0;32mghci \955: \ESC[m"
-:set prompt "\ESC[1;32m%s\n\ESC[0;32mghci λ> \ESC[m"
+
+-- Alternate Prompt showing imported module on line above.
+-- :set prompt "\ESC[1;32m%s\n\ESC[0;32mghci λ> \ESC[m"
+
 :set editor vi
+
+:def hlint const . return $ ":! hlint . --report"
+:def pl \s -> return $ ":! pointfree \"" ++ s ++ "\""
