@@ -36,6 +36,10 @@ endfunction
 nnoremap <leader>t :call ToggleTransparency()<CR>
 nnoremap <leader>; q:
 
+" Copy and paste
+" Copy to 'clipboard registry'
+nnoremap <Leader>c "*y
+
 " Commands
 " Remapping due to constant mistakes
 :command WQ wq
