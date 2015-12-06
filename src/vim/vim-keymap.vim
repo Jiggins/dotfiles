@@ -95,3 +95,19 @@ else
   map <silent> <C-Tab>   <C-w><C-w><cr>
 endif
 
+" Vimux
+" Default to open shell
+" Overwritten in ftplugins
+nnoremap <Leader>vc :VimuxRunCommand("")<CR>
+nnoremap <Leader>vz :call VimuxZoomRunner()<CR>
+
+function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vv "vy :call VimuxSlime()<CR>
+
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vv vip<LocalLeader>vs<CR>
