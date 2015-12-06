@@ -57,12 +57,11 @@ nnoremap <Leader>j       :Hexplore  <CR>
 nnoremap <S-Tab> <C-w><C-w>
 
 " Plugin options
-nnoremap <Leader>s :SyntasticCheck<CR>
-nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
-
+" LimeLight
 nnoremap <Leader>i :Limelight<CR>
 xnoremap <Leader>i :Limelight<CR>
 
+" MultipleCursorFind
 if exists(':MultipleCursorFind')
   let g:multi_cursor_next_key='<C-d>'
   let g:multi_cursor_prev_key='<C-e>'
@@ -70,6 +69,11 @@ if exists(':MultipleCursorFind')
   let g:multi_cursor_quit_key='<Esc>'
 endif
 
+" Syntastic
+nnoremap <Leader>s :SyntasticCheck<CR>
+nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
+
+" TMUX
 let tmux=$TMUX
 if tmux != ''
   nnoremap <silent> <C-Left>  :TmuxNavigateLeft<cr>
