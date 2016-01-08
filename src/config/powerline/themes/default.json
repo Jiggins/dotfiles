@@ -1,0 +1,37 @@
+{
+  "segments": {
+    "left": [
+      {
+        "function": "powerline.segments.common.vcs.branch",
+        "name": "Git_Branch",
+        "args": {
+          "status_colors": true
+        }
+      }
+    ],
+    "right": [
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%I:%M",
+          "istime": true
+        }
+      },
+      {
+        "function": "powerline.segments.common.time.date"
+      },
+      {
+        "function": "powerline.segments.common.bat.battery",
+        "name": "Battery",
+        "args": {
+          "gamify": true,
+          "full_heart": "♥︎",
+          "empty_heart": "♡",
+          "online": "⚡️ ",
+          "steps": 10
+        }
+      }
+    ]
+  }
+}
