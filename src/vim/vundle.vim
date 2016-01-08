@@ -29,8 +29,13 @@ Plugin 'altercation/vim-colors-solarized'                        " precision col
 Plugin 'widatama/vim-phoenix'                                    " Monochrome color schemes for Vim
 Plugin 'romainl/flattened'                                       " Solarized, without the bullshit.
 
+" General
+Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
+
 " Languages
+Plugin 'adimit/prolog.vim'
 Plugin 'chrisbra/unicode.vim'
+Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'dermusikman/sonicpi.vim'
 Plugin 'plasticboy/vim-markdown'
