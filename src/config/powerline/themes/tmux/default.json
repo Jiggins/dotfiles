@@ -28,6 +28,7 @@
           "gamify": true,
           "full_heart": "♥︎",
           "empty_heart": "♡",
+          "online": "⚡️ ",
           "steps": 10
         }
       }
