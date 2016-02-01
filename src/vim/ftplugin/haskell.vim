@@ -22,3 +22,6 @@ nnoremap gz :.! pointfree --stdin<CR>
 nnoremap <F1> :HdevtoolsType<CR>
 nnoremap <silent> <F2> :HdevtoolsClear<CR>
 nnoremap <silent> <F3> :HdevtoolsInfo<CR>
+
+nnoremap <buffer> ]] :call CustomJump('/::')<cr>^
+nnoremap <buffer> [[ :call CustomJump('?::')<cr>^

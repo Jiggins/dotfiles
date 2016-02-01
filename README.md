@@ -20,6 +20,7 @@ cd Bash-Config && ./install
 | [`git-forest`](https://github.com/jwiegley/git-scripts/blob/master/git-forest)         | Jan Engelhardt                             | Alternative `git log` function     |
 
 ## Vim Key Binds
+
 ### General
 | Shortcut | Function                      |
 | :------: | :---------------------------- |
