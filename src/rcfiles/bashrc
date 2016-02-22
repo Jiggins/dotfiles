@@ -8,3 +8,4 @@ source ${HOME}/.config/bash/aliases
 source ${HOME}/.config/bash/bashOptions
 source ${HOME}/.config/bash/prompt
 
+complete -C aws_completer aws
