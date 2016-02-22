@@ -30,7 +30,7 @@ Plugin 'widatama/vim-phoenix'                                    " Monochrome co
 Plugin 'romainl/flattened'                                       " Solarized, without the bullshit.
 
 " General
-Plugin 'hougo/vimproc.vim'                                       " Interactive command execution in Vim.
+Plugin 'Shougo/vimproc.vim'                                       " Interactive command execution in Vim.
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
 
 " Languages
