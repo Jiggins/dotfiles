@@ -97,18 +97,20 @@ POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
 TMUX="${HOME}/.tmux.conf"
 VIMRC="${HOME}/.vimrc"
 VIM_DIR="${HOME}/.vim"
-# VERBOSE='-v'
+
+if [[ $1 == "-v" ]]; then
+  VERBOSE='-v';
+fi
 
 checkDependencies
 
 # Install config directory
 mkdir ${VERBOSE} -p ${HOME}/.config
 mkdir ${VERBOSE} -p ${HOME}/.vim
-# mkdir ${VERBOSE} -p ${HOME}/.tmux
+mkdir ${VERBOSE} -p ${HOME}/bin
 
 cp ${VERBOSE} -r src/config/* ${HOME}/.config
 cp ${VERBOSE} -r src/vim/* ${HOME}/.vim
-# cp ${VERBOSE} -r src/tmux/* ${HOME}/.tmux
 
 # Install rcfiles
 for f in src/rcfiles/*; do
@@ -123,18 +125,18 @@ scripts=(
 )
 
 if commandExists wget; then
-  mkdir -p ${BASH_DIR}/scripts
+  mkdir -p ${HOME}/bin
   for i in ${scripts[*]}; do
     # --no-clobber - Don't download if script already exists
     # --directory-prefix - Download scripts to ~/.bash/scripts
     if [ ${VERBOSE+x} ]; then
-      wget --no-clobber --directory-prefix=${BASH_DIR}/scripts $i
+      wget --no-clobber --directory-prefix=${HOME}/bin $i
     else
-      wget --no-clobber --quiet --directory-prefix=${BASH_DIR}/scripts $i
+      wget --no-clobber --quiet --directory-prefix=${HOME}/bin $i
     fi
   done
 
-  chmod +x ${BASH_DIR}/scripts/*
+  chmod +x ${HOME}/bin/*
 
   # Powerline Fonts
   if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ] && [ ! -e ${HOME}/.config/fontconfig/conf.d ]; then
@@ -147,6 +149,11 @@ if commandExists wget; then
     fc-cache -vf ${HOME}/.fonts | grep 'fc-cache:'
   fi
 fi
+
+for script in src/scripts/*; do
+  chmod +x $script
+  cp ${VERBOSE} $script ${HOME}/bin
+done
 
 # Bash completion for mac
 if [ "$(uname)" == "Darwin" ]; then
@@ -192,8 +199,8 @@ if commandExists pip; then
   fi
 
   # Symlink the powerline shell command to the bash scripts directore
-  if [ ! -L ${BASH_DIR}/scripts/powerline ]; then
-    ln -s ${POWERLINE_DIR}/scripts/* ${BASH_DIR}/scripts/
+  if [ ! -L ${HOME}/bin/powerline ]; then
+    ln -fs ${POWERLINE_DIR}/scripts/* ${HOME}/bin/
   fi
 fi
 
