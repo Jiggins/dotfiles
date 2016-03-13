@@ -66,7 +66,6 @@ Plugin 'wesQ3/vim-windowswap'                                    " Swap two pane
 Plugin 'ervandew/supertab'                                       " Tab completion with Tab
 Plugin 'godlygeek/tabular'                                       " Align text; like these comments
 Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
-Plugin 'Shougo/neocomplete.vim'                                  " Next generation completion framework after neocomplcache
 Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
 Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
@@ -79,6 +78,10 @@ Plugin 'benmills/vimux'                                          " Open a tmux s
 Plugin 'christoomey/vim-tmux-navigator'                          " Move between Vim and tmux panes with one short cut
 Plugin 'jpalardy/vim-slime'                                      " Copy text to repl in tmux
 Plugin 'tmux-plugins/vim-tmux-focus-events'                      " Fix for FocusGained and FocusLost autocommand events in tmux.
+
+if has('lua')
+  Plugin 'Shougo/neocomplete.vim'                                " Next generation completion framework after neocomplcache
+endif
 
 call vundle#end()
 
