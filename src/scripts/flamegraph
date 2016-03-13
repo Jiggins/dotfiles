@@ -1,4 +1,4 @@
-#! bin/sh
+#! /bin/sh
 if command -v cabal > /dev/null; then
   if ! command -v ghc-prof-flamegraph > /dev/null; then
     echo -e 'ghc-prof-flamegraph was not found on your PATH, installing now\n'

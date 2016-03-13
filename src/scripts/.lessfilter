@@ -1,0 +1,18 @@
+#!/bin/sh
+case "$1" in
+  *.asm|*.awk|*.axp|*.cabal|*.cc|*.diff|*.ebuild|*.eclass|*.erb|*.groff|*.hh|\
+  *.hs|*.inc|*.java|*.js|*.l|*.lhs|*.lsp|*.m4|*.p|*.pas|*.patch|*.php|*.pl|\
+  *.pm|*.pod|*.pov|*.ppd|*.py|*.rb|*.sh|*.sql|*.xml|*.xps|*.xsl)
+      pygmentize -f 256 "$1";;
+  .bashrc|.bash_aliases|.bash_environment)
+      pygmentize -f 256 -l sh "$1";;
+  *)
+    grep "#\!/bin/bash" "$1" > /dev/null
+    if [ "$?" -eq "0" ]; then
+      pygmentize -f 256 -l sh "$1"
+    else
+      exit 1
+    fi
+esac
+
+exit 0
