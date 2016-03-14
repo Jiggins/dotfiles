@@ -20,9 +20,10 @@ call vundle#begin("~/.vim/bundle")
 Plugin 'gmarik/Vundle.vim'
 
 " Aesthetics
-Plugin 'airblade/vim-gitgutter'                                  " Show git diff in gutter
-Plugin 'junegunn/limelight.vim'                                  " :flashlight: All the world's indeed a stage and we are merely players
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'} " Powerline - The triangular characters in Vim and tmux
+Plugin 'airblade/vim-gitgutter'                                   " Show git diff in gutter
+Plugin 'junegunn/limelight.vim'                                   " :flashlight: All the world's indeed a stage and we are merely players
+Plugin 'kien/rainbow_parentheses.vim'                             " Better Rainbow Parentheses
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
 
 " Colourschemes
 Plugin 'altercation/vim-colors-solarized'                        " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
@@ -57,15 +58,18 @@ Plugin 'Twinside/vim-hoogle'                                     " Vim plugin us
 Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
 
 " Navigation
-Plugin 'kien/ctrlp.vim'                                          " Search for files in Vim
+Plugin 'ctrlpvim/ctrlp.vim'                                      " Search for files in Vim
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
+Plugin 'scrooloose/nerdtree'
 Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
 Plugin 'wesQ3/vim-windowswap'                                    " Swap two panes in Vim
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Text Editing
 Plugin 'ervandew/supertab'                                       " Tab completion with Tab
 Plugin 'godlygeek/tabular'                                       " Align text; like these comments
 Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
+Plugin 'kana/vim-textobj-function'                               " Text objects for functions http://www.vim.org/scripts/script.php?script_id=2619
 Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
 Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
@@ -82,6 +86,11 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'                      " Fix for Focus
 if has('lua')
   Plugin 'Shougo/neocomplete.vim'                                " Next generation completion framework after neocomplcache
 endif
+
+" After
+Plugin 'ryanoasis/vim-devicons'                                   " Adds font icons (glyphs ★♨☢) to programming languages, libraries,
+                                                                  " and web developer filetypes for: NERDTree, powerline, vim-airline,
+                                                                  " ctrlp, unite, lightline.vim, vim-startify, vimfiler, and flagship
 
 call vundle#end()
 

@@ -26,6 +26,12 @@
         "priority": 30
       },
       {
+        "function": "vim_devicons.powerline.segments.webdevicons",
+        "priority": 10,
+        "draw_soft_divider": false,
+        "after": "  "
+      },
+      {
         "function": "readonly_indicator",
         "draw_soft_divider": false,
         "after": " "
@@ -78,6 +84,12 @@
       }
     ],
     "right": [
+      {
+        "function": "vim_devicons.powerline.segments.webdevicons_file_format",
+        "draw_soft_divider": false,
+        "exclude_modes": ["nc"],
+        "priority": 90
+      },
       {
         "function": "file_format",
         "draw_soft_divider": false,
