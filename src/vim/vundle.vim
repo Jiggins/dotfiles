@@ -17,7 +17,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin("~/.vim/bundle")
 
 " Package Manager
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'                                   " Show git diff in gutter
@@ -69,7 +69,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ervandew/supertab'                                       " Tab completion with Tab
 Plugin 'godlygeek/tabular'                                       " Align text; like these comments
 Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
-Plugin 'kana/vim-textobj-function'                               " Text objects for functions http://www.vim.org/scripts/script.php?script_id=2619
 Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
 Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
