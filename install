@@ -182,12 +182,6 @@ if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
   ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) 1>/dev/null
 fi
 
-# Colourschemes
-mkdir -p ${VIM_DIR}/colors
-for i in src/vim/colorschemes/*; do
-  cp $i ${VIM_DIR}/colors
-done
-
 # Powerline installation
 if commandExists pip; then
   export PATH="${PATH}:${HOME}/.config/bash/scripts"
