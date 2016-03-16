@@ -58,7 +58,6 @@ Plugin 'Twinside/vim-hoogle'                                     " Vim plugin us
 Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
 
 " Navigation
-Plugin 'ctrlpvim/ctrlp.vim'                                      " Search for files in Vim
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
