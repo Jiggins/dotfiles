@@ -36,7 +36,6 @@ set mouse=iv
 " Searching
 set smarttab
 set incsearch
-set ic " case insensitive search
 set hlsearch
 
 set autoread
