@@ -64,6 +64,12 @@ nnoremap <S-Tab> <C-w><C-w>
 noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " Plugin options
+
+" GhcMod
+" Remap Haskell-mode bindings to the better GhcMod commands.
+nnoremap _t :GhcModType
+nnoremap _T :GhcModTypeInsert
+
 " LimeLight
 nnoremap <Leader>i :Limelight<CR>
 xnoremap <Leader>i :Limelight<CR>
