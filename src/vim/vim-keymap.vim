@@ -67,8 +67,8 @@ noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljz
 
 " GhcMod
 " Remap Haskell-mode bindings to the better GhcMod commands.
-nnoremap _t :GhcModType
-nnoremap _T :GhcModTypeInsert
+nnoremap _t :GhcModType<CR>
+nnoremap _T :GhcModTypeInsert<CR>
 
 " LimeLight
 nnoremap <Leader>i :Limelight<CR>
