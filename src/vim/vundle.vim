@@ -56,7 +56,7 @@ Plugin 'lukerandall/haskellmode-vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'Twinside/vim-hoogle'                                     " Vim plugin used to query hoogle, the haskell search engine
 Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
-
+Plugin 'vim-scripts/hlint'                                       " Compiler definition for the hlint (haskell checker) tool
 " Navigation
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
 Plugin 'scrooloose/nerdtree'
