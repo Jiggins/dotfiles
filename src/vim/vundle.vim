@@ -32,6 +32,8 @@ Plugin 'romainl/flattened'                                       " Solarized, wi
 
 " General
 Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
+Plugin 'tpope/vim-fugitive'                                      " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
+Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
 
 " Languages
@@ -52,11 +54,13 @@ Plugin 'vim-ruby/vim-ruby'
 "" Languages - Haskell
 Plugin 'eagletmt/ghcmod-vim'                                     " Happy Haskell programming on Vim, powered by ghc-mod
 Plugin 'eagletmt/neco-ghc'                                       " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
+Plugin 'hspec/hspec.vim'                                         " Vim syntax file for Hspec
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'Twinside/vim-hoogle'                                     " Vim plugin used to query hoogle, the haskell search engine
 Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
 Plugin 'vim-scripts/hlint'                                       " Compiler definition for the hlint (haskell checker) tool
+
 " Navigation
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
 Plugin 'scrooloose/nerdtree'
@@ -72,6 +76,7 @@ Plugin 'terryma/vim-multiple-cursors'                            " Create multip
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc
 Plugin 'tpope/vim-characterize'                                  " Print the unicode value of the character under the cursor - ga
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-speeddating'                                   " use CTRL-A/CTRL-X to increment dates, times, and more http://www.vim.org/scripts/script.php?script_id=2120
 Plugin 'tpope/vim-surround'                                      " Surround text with a character or brackets
 Plugin 'vim-utils/vim-space'                                     " Select in and around whitespace
 
@@ -80,6 +85,7 @@ Plugin 'benmills/vimux'                                          " Open a tmux s
 Plugin 'christoomey/vim-tmux-navigator'                          " Move between Vim and tmux panes with one short cut
 Plugin 'jpalardy/vim-slime'                                      " Copy text to repl in tmux
 Plugin 'tmux-plugins/vim-tmux-focus-events'                      " Fix for FocusGained and FocusLost autocommand events in tmux.
+Plugin 'tpope/vim-tbone'                                         " tmux basics http://www.vim.org/scripts/script.php?script_id=4488
 
 if has('lua')
   Plugin 'Shougo/neocomplete.vim'                                " Next generation completion framework after neocomplcache
