@@ -62,6 +62,7 @@ Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file f
 Plugin 'vim-scripts/hlint'                                       " Compiler definition for the hlint (haskell checker) tool
 
 " Navigation
+Plugin 'majutsushi/tagbar'                                       " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
