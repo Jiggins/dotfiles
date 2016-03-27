@@ -33,8 +33,8 @@ endif
   endif
 endfunction
 
-nnoremap <leader>t :call ToggleTransparency()<CR>
-nnoremap <leader>; q:
+nnoremap <leader>: q:
+nnoremap <leader>; ;
 
 " Copy and paste
 " Copy to 'clipboard registry'
@@ -89,6 +89,10 @@ endif
 " Syntastic
 nnoremap <Leader>s :SyntasticCheck<CR>
 nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
+
+" Tagbar
+nmap <F6> :TagbarToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
 
 " TMUX
 let tmux=$TMUX
