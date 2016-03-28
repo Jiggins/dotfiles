@@ -80,6 +80,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-speeddating'                                   " use CTRL-A/CTRL-X to increment dates, times, and more http://www.vim.org/scripts/script.php?script_id=2120
 Plugin 'tpope/vim-surround'                                      " Surround text with a character or brackets
 Plugin 'vim-utils/vim-space'                                     " Select in and around whitespace
+Plugin 'wellle/targets.vim'                                      " Vim plugin that provides additional text objects
 
 " tmux Integration
 Plugin 'benmills/vimux'                                          " Open a tmux session from Vim
