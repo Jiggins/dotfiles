@@ -13,5 +13,4 @@ let g:neocomplete#release_cache_time=30
 nnoremap <buffer> ]] :call CustomJump('/^#')<cr>
 nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
 
-set keywordprg=thesaurus-lookup.sh
 map K :OnlineThesaurusCurrentWord<CR>
