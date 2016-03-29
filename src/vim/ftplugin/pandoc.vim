@@ -1,7 +1,8 @@
 set tabstop=4
 set shiftwidth=4
 
-" set equalprg="pandoc -t markdown --reference-links --atx-headers --coloumns=80"
+set nowrap
+set conceallevel=0
 
 let g:pandoc#formatting#textwidth = 80
 let g:pandoc#formatting#equalprg = "pandoc -t markdown"
@@ -11,3 +12,5 @@ let g:neocomplete#release_cache_time=30
 
 nnoremap <buffer> ]] :call CustomJump('/^#')<cr>
 nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
+
+set keywordprg=thesaurus-lookup.sh

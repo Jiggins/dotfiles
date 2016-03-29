@@ -198,6 +198,10 @@ if commandExists pip; then
   fi
 fi
 
+if [ ! -L ${HOME}/bin/thesaurus-lookup.sh ]; then
+  ln -fs ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/
+fi
+
 source ${BASHRC}
 
 exit 0
