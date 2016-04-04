@@ -1,5 +1,6 @@
 " Vim configurations added by github.com/Jiggins/Bash-Config
-source ~/.vim/vundle.vim
-source ~/.vim/vim-commands.vim
-source ~/.vim/vim-keymap.vim
-source ~/.vim/vim-preferences.vim
+let $VIMHOME=expand('<sfile>:p:h').'/.vim'
+source $VIMHOME/vundle.vim
+source $VIMHOME/vim-commands.vim
+source $VIMHOME/vim-keymap.vim
+source $VIMHOME/vim-preferences.vim

@@ -1,20 +1,19 @@
 " `<sfile>` gives the location of the current file being sourced
 " `:p` gives full path rather than relative
 " `:h` knocks off the last item in the path
-"let $VIMHOME=expand('<sfile>:p:h')
-if !exists(':PluginInstall')
-  let $VIMHOME=expand('~')
+let $VIMHOME=expand('<sfile>:p:h')
 
-  if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
-    !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+if !exists(':PluginInstall')
+  if !isdirectory(expand("$VIMHOME/bundle/Vundle.vim/.git"))
+    !git clone https://github.com/VundleVim/Vundle.vim.git $VIMHOME/bundle/Vundle.vim
   endif
 endif
 
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin("~/.vim/bundle")
+set rtp+=$VIMHOME/bundle/Vundle.vim
+call vundle#begin("$VIMHOME/bundle")
 
 " Package Manager
 Plugin 'VundleVim/Vundle.vim'
