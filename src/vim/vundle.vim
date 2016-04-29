@@ -22,7 +22,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'                                   " Show git diff in gutter
 Plugin 'junegunn/limelight.vim'                                   " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'kien/rainbow_parentheses.vim'                             " Better Rainbow Parentheses
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
 
 " Colourschemes
 Plugin 'altercation/vim-colors-solarized'                        " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
@@ -91,6 +90,10 @@ Plugin 'tpope/vim-tbone'                                         " tmux basics h
 
 if has('lua')
   Plugin 'Shougo/neocomplete.vim'                                " Next generation completion framework after neocomplcache
+endif
+
+if has('python')
+  Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
 endif
 
 " After
