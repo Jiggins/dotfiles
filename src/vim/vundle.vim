@@ -37,10 +37,12 @@ Plugin 'tpope/vim-obsession'                                     " obsession.vim
 
 " Languages
 Plugin 'adimit/prolog.vim'
+Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'dermusikman/sonicpi.vim'
+Plugin 'pangloss/vim-javascript'                                 " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-bundler'
@@ -49,7 +51,6 @@ Plugin 'tpope/vim-rake'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
 
 "" Languages - Haskell
 Plugin 'eagletmt/ghcmod-vim'                                     " Happy Haskell programming on Vim, powered by ghc-mod
