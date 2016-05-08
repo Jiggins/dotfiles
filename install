@@ -180,7 +180,7 @@ fi
 
 echo "Configuring git:" | log
 # Git configuration
-if command -v git; then
+if command -v git > /dev/null; then
   ./src/gitconfig
 fi
 
