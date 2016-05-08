@@ -1,8 +1,24 @@
 #!/bin/bash
 
+if [[ $1 == "-v" ]]; then
+  VERBOSE='-v';
+fi
+
+LOGFILE=log/install.log
+
 # Logging
 mkdir $VERBOSE -p log
-touch log/install.log
+date > ${LOGFILE}
+
+function log {
+  while read line; do
+    if [ ${VERBOSE+x} ]; then
+      echo -e "$line" | tee -a $LOGFILE
+    else
+      echo -e "$line" >> $LOGFILE
+    fi
+  done
+}
 
 # Checks if a command is installed
 function commandExists {
@@ -27,14 +43,14 @@ function checkDependencies {
   done
 
   if [ ${dependenciesNotFound+x} ]; then
-    echo 'The following dependencies are not installed on this system'
-    echo -e "\n\t${dependenciesNotFound}\n"
+    echo 'The following dependencies are not installed on this system' | log
+    echo -e "\n\t${dependenciesNotFound}\n" | log
 
     case `uname` in
       'Darwin')
         echo 'These can be installed using brew'
 
-        if command -v brew > log/install.log; then
+        if command -v brew > /dev/null; then
           echo 'brew is not installed on this system, consider installing brew and running this script again'
           echo 'http://brew.sh'
         else
@@ -65,10 +81,10 @@ function prependFile {
     echo '  $2: File to prepend to (output file)'
     exit 1
   elif [ ! -e $2 ]; then
-    verbose "Copying $1 to $2"
+    echo -e "Copying $1 to $2" | log
     cp $1 $2
   else
-    verbose "Prepending $1 to $2"
+    echo -e "Prepending $1 to $2" | log
     cp $1 tmp
     cat $2 >> tmp
     mv tmp $2
@@ -85,14 +101,6 @@ function prependFileWithCheck {
   return 0
 }
 
-function verbose () {
-  if [ ${VERBOSE+x} ]; then
-    echo -e "$1"
-  fi
-
-  return 0
-}
-
 # Variables
 BASHRC="${HOME}/.bashrc"
 BASH_DIR="${HOME}/.config/bash"
@@ -102,25 +110,26 @@ TMUX="${HOME}/.tmux.conf"
 VIMRC="${HOME}/.vimrc"
 VIM_DIR="${HOME}/.vim"
 
-if [[ $1 == "-v" ]]; then
-  VERBOSE='-v';
-fi
-
+echo "Checking dependencies:" | log
 checkDependencies
 
+printf "Creating new directories\n in ${HOME}:" | log
 # Install config directory
-mkdir ${VERBOSE} -p ${HOME}/.config >> log/install.log
-mkdir ${VERBOSE} -p ${HOME}/.vim    >> log/install.log
-mkdir ${VERBOSE} -p ${HOME}/bin     >> log/install.log
+mkdir -p ${HOME}/.config | log
+mkdir -p ${HOME}/.vim    | log
+mkdir -p ${HOME}/bin     | log
 
-cp ${VERBOSE} -r src/config/* ${HOME}/.config >> log/install.log
-cp ${VERBOSE} -r src/vim/* ${HOME}/.vim       >> log/install.log
+cp -r src/config/* ${HOME}/.config | log
+cp -r src/vim/* ${HOME}/.vim       | log
+echo "" | log
 
 # Install rcfiles
+echo "Installing rcfiles:" | log
 for f in src/rcfiles/*; do
   file=$(basename $f)
   prependFileWithCheck ${f} ${HOME}/.${file}
 done
+echo "Installed rcfiles.\n" | log
 
 # Download Scripts
 scripts=(
@@ -128,52 +137,55 @@ scripts=(
   https://raw.githubusercontent.com/whiteinge/dotfiles/master/bin/diffconflicts
 )
 
+mkdir -pv ${HOME}/bin | log
 if commandExists wget; then
-  mkdir -p ${HOME}/bin
+  echo "Installing scripts from github:" | log
   for i in ${scripts[*]}; do
     # --no-clobber - Don't download if script already exists
     # --directory-prefix - Download scripts to ~/.bash/scripts
-    if [ ${VERBOSE+x} ]; then
-      wget --no-clobber --directory-prefix=${HOME}/bin $i >> log/install.log
-    else
-      wget --no-clobber --quiet --directory-prefix=${HOME}/bin $i
-    fi
+    wget --no-clobber --directory-prefix=${HOME}/bin $i 2>&1 | log
   done
 
-  chmod +x ${HOME}/bin/*
+  chmod -v +x ${HOME}/bin/* | log
+  echo "Done installing scripts\n" | log
 
   # Powerline Fonts
+  echo "Installing Powerline fonts:" | log
   if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ] && [ ! -e ${HOME}/.config/fontconfig/conf.d ]; then
-    mkdir -p ${HOME}/.fonts/ubuntu-mono-power
-    mkdir -p ${HOME}/.config/fontconfig/conf.d/
-    wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf
-    wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power >> log/install.log
+    mkdir -pv ${HOME}/.fonts/ubuntu-mono-power | log
+    mkdir -pv ${HOME}/.config/fontconfig/conf.d/ | log
+    wget --no-clobber https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf | log
+    wget --no-clobber https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf | log
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power | log
     fc-cache -vf ${HOME}/.config/fonts | grep 'fc-cache:'
     fc-cache -vf ${HOME}/.fonts | grep 'fc-cache:'
   fi
+  echo "" | log
 fi
 
 for script in src/scripts/*; do
-  chmod +x $script
-  cp ${VERBOSE} $script ${HOME}/bin >> log/install.log
+  chmod -v +x $script | log
+  cp -v $script ${HOME}/bin | log
 done
 
 # Bash completion for mac
 if [ "$(uname)" == "Darwin" ]; then
+  echo "Bash completion for mac" | log
   if commandExists brew; then
-    if ! brew ls --version bash-completion > log/install.log; then
+    if ! brew ls --version bash-completion > /dev/null; then
       brew install git bash-completion
     fi
   fi
 fi
 
+echo "Configuring git:" | log
 # Git configuration
-if command -v git > log/install.log; then
+if command -v git; then
   ./src/gitconfig
 fi
 
 #  Vi mode in ghci!
+echo "Enabling Vi-mode in ghci" | log
 if ! grep -q "editMode vi" ${HOME}/.haskeline; then
   echo "editMode: Vi" >> ${HOME}/.haskeline
 fi
@@ -182,28 +194,26 @@ fi
 vi +PluginInstall +qall
 
 # Install Vimproc
+echo "Installing Vimproc:" | log
 if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
-  ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) 1>log/install.log
+  ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
 fi
+echo -e "Done installing Vimproc\n" | log
 
 # Powerline installation
 if commandExists pip; then
+  echo "Installing powerline" | log
   export PATH="${PATH}:${HOME}/.config/bash/scripts"
-
-  if [ ${VERBOSE+x} ]; then
-    pip install --user --editable=${POWERLINE_DIR}
-  else
-    pip install -q --user --editable=${POWERLINE_DIR}
-  fi
+  pip install --user --editable=${POWERLINE_DIR} | log
 
   # Symlink the powerline shell command to the bash scripts directore
   if [ ! -L ${HOME}/bin/powerline ]; then
-    ln -fs ${POWERLINE_DIR}/scripts/* ${HOME}/bin/
+    ln -fsv ${POWERLINE_DIR}/scripts/* ${HOME}/bin/ | log
   fi
 fi
 
 if [ ! -L ${HOME}/bin/thesaurus-lookup.sh ]; then
-  ln -fs ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/
+  ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/ | log
 fi
 
 source ${BASHRC}
