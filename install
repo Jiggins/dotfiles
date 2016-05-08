@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Logging
+mkdir $VERBOSE -p log
+touch log/install.log
+
 # Checks if a command is installed
 function commandExists {
   if command -v $1 > /dev/null; then
@@ -30,7 +34,7 @@ function checkDependencies {
       'Darwin')
         echo 'These can be installed using brew'
 
-        if command -v brew > /dev/null; then
+        if command -v brew > log/install.log; then
           echo 'brew is not installed on this system, consider installing brew and running this script again'
           echo 'http://brew.sh'
         else
@@ -105,12 +109,12 @@ fi
 checkDependencies
 
 # Install config directory
-mkdir ${VERBOSE} -p ${HOME}/.config
-mkdir ${VERBOSE} -p ${HOME}/.vim
-mkdir ${VERBOSE} -p ${HOME}/bin
+mkdir ${VERBOSE} -p ${HOME}/.config >> log/install.log
+mkdir ${VERBOSE} -p ${HOME}/.vim    >> log/install.log
+mkdir ${VERBOSE} -p ${HOME}/bin     >> log/install.log
 
-cp ${VERBOSE} -r src/config/* ${HOME}/.config
-cp ${VERBOSE} -r src/vim/* ${HOME}/.vim
+cp ${VERBOSE} -r src/config/* ${HOME}/.config >> log/install.log
+cp ${VERBOSE} -r src/vim/* ${HOME}/.vim       >> log/install.log
 
 # Install rcfiles
 for f in src/rcfiles/*; do
@@ -130,7 +134,7 @@ if commandExists wget; then
     # --no-clobber - Don't download if script already exists
     # --directory-prefix - Download scripts to ~/.bash/scripts
     if [ ${VERBOSE+x} ]; then
-      wget --no-clobber --directory-prefix=${HOME}/bin $i
+      wget --no-clobber --directory-prefix=${HOME}/bin $i >> log/install.log
     else
       wget --no-clobber --quiet --directory-prefix=${HOME}/bin $i
     fi
@@ -144,7 +148,7 @@ if commandExists wget; then
     mkdir -p ${HOME}/.config/fontconfig/conf.d/
     wget --quiet https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf
     wget --quiet https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power > /dev/null
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power >> log/install.log
     fc-cache -vf ${HOME}/.config/fonts | grep 'fc-cache:'
     fc-cache -vf ${HOME}/.fonts | grep 'fc-cache:'
   fi
@@ -152,20 +156,20 @@ fi
 
 for script in src/scripts/*; do
   chmod +x $script
-  cp ${VERBOSE} $script ${HOME}/bin
+  cp ${VERBOSE} $script ${HOME}/bin >> log/install.log
 done
 
 # Bash completion for mac
 if [ "$(uname)" == "Darwin" ]; then
   if commandExists brew; then
-    if ! brew ls --version bash-completion > /dev/null; then
+    if ! brew ls --version bash-completion > log/install.log; then
       brew install git bash-completion
     fi
   fi
 fi
 
 # Git configuration
-if command -v git > /dev/null; then
+if command -v git > log/install.log; then
   ./src/gitconfig
 fi
 
@@ -179,7 +183,7 @@ vi +PluginInstall +qall
 
 # Install Vimproc
 if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
-  ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) 1>/dev/null
+  ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) 1>log/install.log
 fi
 
 # Powerline installation
