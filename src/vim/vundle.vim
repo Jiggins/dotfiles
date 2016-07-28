@@ -37,12 +37,9 @@ Plugin 'tpope/vim-obsession'                                     " obsession.vim
 " Languages
 Plugin 'adimit/prolog.vim'
 Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
-Plugin 'cakebaker/scss-syntax.vim'                               " Vim syntax file for scss (Sassy CSS)
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'mattn/emmet-vim'                                         " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
-Plugin 'pangloss/vim-javascript'                                 " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-endwise'                                       " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
@@ -65,6 +62,12 @@ Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-rake'
 Plugin 'vim-ruby/vim-ruby'
+
+"" Languages - Web Dev
+Plugin 'cakebaker/scss-syntax.vim'                               " Vim syntax file for scss (Sassy CSS)
+Plugin 'gregsexton/MatchTag'                                     " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
+Plugin 'mattn/emmet-vim'                                         " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
+Plugin 'pangloss/vim-javascript'                                 " Vastly improved Javascript indentation and syntax support in Vim.
 
 " Navigation
 Plugin 'majutsushi/tagbar'                                       " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
