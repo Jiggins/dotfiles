@@ -31,7 +31,9 @@ function commandExists {
 
 function checkDependencies {
   dependencies=(
+    cc
     git
+    make
     vim
     wget
   )
@@ -192,6 +194,15 @@ fi
 
 # Installing Vim plugins
 vi +PluginInstall +qall
+
+# Install CommandT
+echo "Installing CommandT:" | log
+if [ -e ${VIM_DIR}/bundle/command-t ]; then
+  if commandExists rake; then
+    ( cd ${VIM_DIR}/bundle/command-t; rake make ) 2>&1 | log
+  fi
+fi
+echo -e "Done installing Vimproc\n" | log
 
 # Install Vimproc
 echo "Installing Vimproc:" | log

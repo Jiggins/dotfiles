@@ -37,19 +37,17 @@ Plugin 'tpope/vim-obsession'                                     " obsession.vim
 " Languages
 Plugin 'adimit/prolog.vim'
 Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
+Plugin 'cakebaker/scss-syntax.vim'                               " Vim syntax file for scss (Sassy CSS)
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'dermusikman/sonicpi.vim'
+Plugin 'mattn/emmet-vim'                                         " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
 Plugin 'pangloss/vim-javascript'                                 " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-endwise'                                       " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'vim-ruby/vim-ruby'
 
 "" Languages - Haskell
 Plugin 'eagletmt/ghcmod-vim'                                     " Happy Haskell programming on Vim, powered by ghc-mod
@@ -61,12 +59,20 @@ Plugin 'Twinside/vim-hoogle'                                     " Vim plugin us
 Plugin 'Twinside/vim-syntax-haskell-cabal'                       " Syntax file for Haskell's cabal syntax file
 Plugin 'vim-scripts/hlint'                                       " Compiler definition for the hlint (haskell checker) tool
 
+"" Languages - Ruby
+Plugin 'dermusikman/sonicpi.vim'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rake'
+Plugin 'vim-ruby/vim-ruby'
+
 " Navigation
 Plugin 'majutsushi/tagbar'                                       " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
 Plugin 'wesQ3/vim-windowswap'                                    " Swap two panes in Vim
+Plugin 'wincent/command-t'                                       " Fast file navigation for VIM
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Text Editing
@@ -93,7 +99,7 @@ if has('lua')
   Plugin 'Shougo/neocomplete.vim'                                " Next generation completion framework after neocomplcache
 endif
 
-if has('python')
+if has('python') || has('python3')
   Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
 endif
 
