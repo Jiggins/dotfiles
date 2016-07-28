@@ -18,6 +18,11 @@
       },
       {
         "function": "powerline.segments.shell.cwd",
+        "name": "cwd",
+        "args": {
+          "dir_shorten_len": 1,
+          "use_path_separator": true
+        },
         "priority": 10
       },
       {
@@ -29,6 +34,15 @@
       {
         "function": "powerline.segments.shell.last_pipe_status",
         "priority": 10
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%I:%M",
+          "istime": true
+        },
+        "priority": 20
       },
       {
         "function": "powerline.segments.common.vcs.branch",
