@@ -46,6 +46,9 @@ Plugin 'tpope/vim-endwise'                                       " endwise.vim: 
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
+"" Languages - English
+Plugin 'amperser/proselint'                                      " Proselint plugin for Vim
+
 "" Languages - Haskell
 Plugin 'eagletmt/ghcmod-vim'                                     " Happy Haskell programming on Vim, powered by ghc-mod
 Plugin 'eagletmt/neco-ghc'                                       " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
@@ -81,6 +84,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Text Editing
 Plugin 'ervandew/supertab'                                       " Tab completion with Tab
 Plugin 'godlygeek/tabular'                                       " Align text; like these comments
+Plugin 'inkarkat/argtextobj.vim'                                 " Text-object like motion for arguments http://www.vim.org/scripts/script.php?script_id=2699
 Plugin 'junegunn/vim-emoji'                                      " Vim support for Emoji
 Plugin 'terryma/vim-multiple-cursors'                            " Create multiple cursors in Vim
 Plugin 'tomtom/tcomment_vim'                                     " Comment a line with gcc

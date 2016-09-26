@@ -85,6 +85,19 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
 let g:pandoc#syntax#conceal#blacklist = ["atx", "list", "quotes"]
 let g:pandoc#syntax#conceal#urls = 1
 
+" Proselint
+let g:syntastic_asciidoc_checkers = ['proselint']
+let g:syntastic_help_checkers     = ['proselint']
+let g:syntastic_html_checkers     = ['proselint']
+let g:syntastic_markdown_checkers = ['proselint']
+let g:syntastic_nroff_checkers    = ['proselint']
+let g:syntastic_pod_checkers      = ['proselint']
+let g:syntastic_rst_checkers      = ['proselint']
+let g:syntastic_tex_checkers      = ['proselint']
+let g:syntastic_texinfo_checkers  = ['proselint']
+let g:syntastic_text_checkers     = ['proselint']
+let g:syntastic_xhtml_checkers    = ['proselint']
+
 " Neocomplete options
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case = 1
