@@ -36,9 +36,29 @@ endfunction
 nnoremap <leader>: q:
 nnoremap <leader>; ;
 
-" Copy and paste
-" Copy to 'clipboard registry'
-nnoremap <Leader>c "*y
+" Alt key bindings
+execute "set <M-j>=\ej"
+execute "set <M-k>=\ek"
+execute "set <M-p>=\ep"
+
+" Use system clipboard
+nnoremap <Leader>c "*
+
+nnoremap <M-p> "*p
+nnoremap <M-P> "*P
+
+inoremap <M-p> <Esc>"*pa
+inoremap <M-P> <Esc>"*Pa
+
+" Move lines up and down - similar to Sublime Text
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+
+inoremap <M-j> <Esc>:m .+1<CR>==gi
+inoremap <M-k> <Esc>:m .-2<CR>==gi
+
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
 
 " Commands
 " Remapping due to constant mistakes
@@ -68,6 +88,10 @@ nnoremap <silent> _ :resize -1<CR>
 noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " Plugin options
+
+" Agrep
+nnoremap <F8> :Aprev<CR>
+nnoremap <F9> :Anext<CR>
 
 " GhcMod
 " Remap Haskell-mode bindings to the better GhcMod commands.
