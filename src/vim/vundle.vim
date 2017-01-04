@@ -30,24 +30,26 @@ Plugin 'romainl/flattened'                                       " Solarized, wi
 
 " General
 Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
+Plugin 'ramele/agrep'                                            " Asynchronous grep plugin for Vim
 Plugin 'tpope/vim-fugitive'                                      " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
-Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
+Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
 
 " Languages
 Plugin 'adimit/prolog.vim'
-Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'evanmiller/nginx-vim-syntax'                             " nginx vim syntax. Copied from http://www.vim.org/scripts/script.php?script_id=1886
+Plugin 'metakirby5/codi.vim'                                     " The interactive scratchpad for hackers.
 Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-endwise'                                       " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
+Plugin 'scrooloose/syntastic'                                    " Syntax checking hacks for vim
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 "" Languages - English
 Plugin 'amperser/proselint'                                      " Proselint plugin for Vim
+Plugin 'beloglazov/vim-online-thesaurus'                         " A Vim plugin for looking up words in an online thesaurus
 
 "" Languages - Haskell
 Plugin 'eagletmt/ghcmod-vim'                                     " Happy Haskell programming on Vim, powered by ghc-mod
@@ -62,6 +64,7 @@ Plugin 'vim-scripts/hlint'                                       " Compiler defi
 "" Languages - Ruby
 Plugin 'dermusikman/sonicpi.vim'
 Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-endwise'                                       " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-rake'
 Plugin 'vim-ruby/vim-ruby'
@@ -71,11 +74,12 @@ Plugin 'cakebaker/scss-syntax.vim'                               " Vim syntax fi
 Plugin 'gregsexton/MatchTag'                                     " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
 Plugin 'mattn/emmet-vim'                                         " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
 Plugin 'pangloss/vim-javascript'                                 " Vastly improved Javascript indentation and syntax support in Vim.
+Plugin 'ternjs/tern_for_vim'                                     " Tern plugin for Vim
 
 " Navigation
 Plugin 'majutsushi/tagbar'                                       " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
 Plugin 'mbbill/undotree'                                         " Visualise undo tree
-Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'                                     " A tree explorer plugin for vim.
 Plugin 'vim-utils/vim-vertical-move'                             " Move to bottom of text easily
 Plugin 'wesQ3/vim-windowswap'                                    " Swap two panes in Vim
 Plugin 'wincent/command-t'                                       " Fast file navigation for VIM

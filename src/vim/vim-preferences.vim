@@ -62,9 +62,12 @@ if $SHELL =~ 'bin/fish'
   set shell=/bin/sh
 endif
 
+" Agrep
+let agrep_win_sp_mod = 'botright vert'
+
 " Colour Scheme
-if filereadable(expand('~/.vim/colors/Monokai.vim'))
-  colorscheme Monokai
+if filereadable(expand('~/.vim/colors/maui.vim'))
+  colorscheme maui
 endif
 
 " Devicons
@@ -91,6 +94,7 @@ let g:syntastic_help_checkers     = ['proselint']
 let g:syntastic_html_checkers     = ['proselint']
 let g:syntastic_markdown_checkers = ['proselint']
 let g:syntastic_nroff_checkers    = ['proselint']
+let g:syntastic_pandoc_checkers   = ['proselint']
 let g:syntastic_pod_checkers      = ['proselint']
 let g:syntastic_rst_checkers      = ['proselint']
 let g:syntastic_tex_checkers      = ['proselint']
