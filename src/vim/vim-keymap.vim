@@ -37,12 +37,24 @@ nnoremap <leader>: q:
 nnoremap <leader>; ;
 
 " Alt key bindings
+execute "set <M-c>=\ec"
+execute "set <M-C>=\eC"
+execute "set <M-d>=\ed"
+execute "set <M-D>=\eD"
 execute "set <M-j>=\ej"
 execute "set <M-k>=\ek"
 execute "set <M-p>=\ep"
+execute "set <M-P>=\eP"
+execute "set <M-y>=\ey"
 
 " Use system clipboard
 nnoremap <Leader>c "*
+
+nnoremap <M-c> "*c
+nnoremap <M-C> "*C
+nnoremap <M-d> "*d
+nnoremap <M-D> "*D
+nnoremap <M-y> "*y
 
 nnoremap <M-p> "*p
 nnoremap <M-P> "*P
