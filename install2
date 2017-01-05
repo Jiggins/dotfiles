@@ -1,0 +1,242 @@
+#!/bin/bash
+
+LOGFILE=log/install.log
+
+# Logging
+mkdir $VERBOSE -p log
+date > ${LOGFILE}
+
+function log {
+  while read line; do
+    if [ ${VERBOSE+x} ]; then
+      echo -e "$line" | tee -a $LOGFILE
+    else
+      echo -e "$line" >> $LOGFILE
+    fi
+  done
+}
+
+# Checks if a command is installed
+function commandExists {
+  return $(command -v $1 > /dev/null)
+}
+
+# $1: File to prepend (Will appear at the top of $2)
+# $2: File to prepend to (output file)
+function prependFile {
+  if [ ! $# -eq 2 ]; then
+    echo 'prependFile expects two arguments:'
+    echo '  $1: File to prepend (Will appear at the top of $2)'
+    echo '  $2: File to prepend to (output file)'
+    exit 1
+  elif [ ! -e $2 ]; then
+    echo -e "Copying $1 to $2" | log
+    cp $1 $2
+  else
+    echo -e "Prepending $1 to $2" | log
+    cp $1 tmp
+    cat $2 >> tmp
+    mv tmp $2
+  fi
+
+  return 0
+}
+
+function prependFileWithCheck {
+  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/Bash-Config' $2; then
+    prependFile $1 $2
+  fi
+
+  return 0
+}
+
+# Options
+
+while [[ $# -gt 0 ]]
+do
+  key="$1"
+
+  case $key in
+    -v|--verbose)
+      VERBOSE='-v'
+      ;;
+    all)
+      INSTALL_BASH=1
+      INSTALL_GHCI=1
+      INSTALL_READLINE=1
+      INSTALL_TMUX=1
+      INSTALL_VIM=1
+      INSTALL_ZSH=1
+      ;;
+    bash)
+      INSTALL_BASH=1
+      ;;
+    -b|--bashrc)
+      BASHRC="$2"
+      shift
+      ;;
+    --bashdir)
+      BASHDIR="$2"
+      shift
+      ;;
+    ghci)
+      INSTALL_GHCI=1
+      ;;
+    readline)
+      INSTALL_READLINE=1
+      ;;
+    tmux)
+      INSTALL_TMUX=1
+      ;;
+    vim)
+      INSTALL_VIM=1
+      ;;
+    --vimrc)
+      VIMRC="$2"
+      shift
+      ;;
+    --vimdir)
+      VIM_DIR="$2"
+      ;;
+    zsh)
+      INSTALL_ZSH=1
+      ;;
+    *)
+      # unknown option
+      ;;
+  esac
+  shift # past argument or value
+done
+
+# Dependencies
+
+function checkDependencies {
+  dependencies=(
+    git
+  )
+
+  if [[ -n $INSTALL_TMUX ]]; then dependencies+=tmux; fi
+  if [[ -n $INSTALL_VIM ]]; then dependencies+=vim; dependencies+=cc; dependencies+=make; fi
+  if [[ -n $INSTALL_ZSH ]]; then dependencies+=zsh; fi
+
+  for i in ${dependencies[*]}; do
+    if ! commandExists $i; then
+      dependenciesNotFound="${dependenciesNotFound}$i "
+    fi
+  done
+
+  if [ ${dependenciesNotFound+x} ]; then
+    echo 'The following dependencies are not installed on this system' | log
+    echo -e "\n\t${dependenciesNotFound}\n" | log
+
+    case `uname` in
+      'Darwin')
+        echo 'These can be installed using brew'
+
+        if command -v brew > /dev/null; then
+          echo 'brew is not installed on this system, consider installing brew and running this script again'
+          echo 'http://brew.sh'
+        else
+          echo "brew install ${dependenciesNotFound}"
+        fi
+        ;;
+
+      *)
+        if commandExists apt-get; then
+          echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
+        elif commandExists yum; then
+          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
+        else
+          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
+        fi
+        ;;
+    esac
+    exit 1
+  fi
+}
+
+if [[ -n $INSTALL_BASH ]]; then
+  BASHRC="${BASHRC:-${HOME}/.bashrc}"
+  BASHDIR="${BASHDIR:-${HOME}/.config/bash}"
+
+  echo "Writing bashrc to ${BASHRC}" | log
+  prependFileWithCheck src/rcfiles/bashrc ${BASHRC}
+
+  # Bash completion for mac
+  if [ "$(uname)" == "Darwin" ]; then
+    if commandExists brew; then
+      if ! brew ls --version bash-completion > /dev/null; then
+        echo "Installing bash completion for mac" | log
+        brew install git bash-completion
+      fi
+    fi
+  fi
+
+  echo ""
+fi
+
+if [[ -n $INSTALL_VIM ]]; then
+  VIMRC="${VIMRC:-${HOME}/.vimrc}"
+  VIM_DIR="${VIM_DIR:-${HOME}/.vim}"
+
+  echo "Writing vimrc to ${VIMRC}" | log
+  prependFileWithCheck src/rcfiles/vimrc ${VIMRC}
+
+  echo "Copying vim scripts to ${VIM_DIR}"
+  mkdir ${VERBOSE} -p "${VIM_DIR}"        | log
+  cp -r src/vim/* "${VIM_DIR}" | log
+
+  # Installing Vim plugins
+  vi -u ${VIMRC} +PluginInstall +qall
+
+  # Install CommandT
+  echo "Installing CommandT:" | log
+  if [ -e ${VIM_DIR}/bundle/command-t ]; then
+    if commandExists rake; then
+      ( cd ${VIM_DIR}/bundle/command-t; rake make ) 2>&1 | log
+    fi
+  fi
+  echo -e "Done installing Vimproc\n" | log
+
+  # Install Vimproc
+  echo "Installing Vimproc:" | log
+  if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
+    ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
+  fi
+  echo -e "Done installing Vimproc\n" | log
+
+  if [ ! -L ${HOME}/bin/thesaurus-lookup.sh ]; then
+    ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/ | log
+  fi
+fi
+
+# TMUX
+
+if [[ -n $INSTALL_TMUX ]]; then
+  TMUX_CONF="${HOME}/.tmux.conf"
+  cp ${VERBOSE} src/rcfiles/tmux.conf "${TMUX_CONF}"
+
+  tmux source ${TMUX_CONF}
+fi
+
+# ZSH
+
+if [[ -n $INSTALL_ZSH ]]; then
+  ZSHRC="${ZSHRC:-${HOME}/.zshrc}"
+  ZSHDIR="${ZSHDIR:-${HOME}/.oh-my-zsh}"
+  ZSH_CUSTOM="${ZSHDIR}/custom"
+
+  if ! grep 'oh-my-zsh.sh' ${ZSHRC} > /dev/null; then
+    echo "Installing Oh-My-Zsh"
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
+  fi
+
+  echo "Writing zshrc to ${ZSHRC}" | log
+  prependFileWithCheck src/rcfiles/zshrc ${ZSHRC}
+
+  if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
+    echo "Installing zsh plugins to ${ZSH_CUSTOM}/plugins/" | log
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions | log
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting | log
+  fi
+fi
