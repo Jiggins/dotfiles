@@ -64,11 +64,12 @@ man() {
 }
 
 new-md() {
-    local file="$(isodate)-${*/ /-}.md"
+    local file="$(isodate)-${*// /-}.md"
     local length="${#$(echo $*)}"
     printf "${*}\n"               >> $file
     printf "=%.0s" {1..${length}} >> $file
     printf "\n\n"                 >> $file
+    ${EDITOR} file
 }
 
 function grep-after() {
@@ -76,9 +77,11 @@ function grep-after() {
 }
 
 function remove-spaces() {
-  for i in $1; do                                                                                                                                                                                                                              08:30 
+  for i in $1; do                                                                                                                                                                                                                             
     if echo $i | grep -E ' ' > /dev/null; then
       echo "$i" "${i// /-}"
     fi
   done
 }
+
+# . ${HOME}/.vim/bundle/powerline/scripts/powerline-config

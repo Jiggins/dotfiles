@@ -3,7 +3,7 @@
 LOGFILE=log/install.log
 
 # Logging
-mkdir $VERBOSE -p log
+mkdir ${VERBOSE} -p log
 date > ${LOGFILE}
 
 function log {
@@ -60,6 +60,7 @@ do
     -v|--verbose)
       VERBOSE='-v'
       ;;
+
     all)
       INSTALL_BASH=1
       INSTALL_GHCI=1
@@ -68,45 +69,66 @@ do
       INSTALL_VIM=1
       INSTALL_ZSH=1
       ;;
+
+    -d|--install-dir|--install-directory)
+      INSTALL_DIR="$2"
+      shift
+      ;;
+
     bash)
       INSTALL_BASH=1
       ;;
+
     -b|--bashrc)
       BASHRC="$2"
       shift
       ;;
+
     --bashdir)
       BASHDIR="$2"
       shift
       ;;
+
     ghci)
       INSTALL_GHCI=1
       ;;
+
     readline)
       INSTALL_READLINE=1
       ;;
+
     tmux)
       INSTALL_TMUX=1
       ;;
+
     vim)
       INSTALL_VIM=1
       ;;
+
     --vimrc)
       VIMRC="$2"
       shift
       ;;
+
     --vimdir)
       VIM_DIR="$2"
       ;;
+
     zsh)
       INSTALL_ZSH=1
       ;;
+
     *)
-      # unknown option
+      echo "Invalid argument $1"
+      exit 128
       ;;
   esac
   shift # past argument or value
 done
+
+# INSTALL_DIR defaults to home
+INSTALL_DIR="${INSTALL_DIR:-${HOME}}"
+mkdir ${VERBOSE} "${INSTALL_DIR}/bin"
 
 # Dependencies
 
@@ -155,9 +177,11 @@ function checkDependencies {
   fi
 }
 
+# Bash
+
 if [[ -n $INSTALL_BASH ]]; then
-  BASHRC="${BASHRC:-${HOME}/.bashrc}"
-  BASHDIR="${BASHDIR:-${HOME}/.config/bash}"
+  BASHRC="${BASHRC:-${INSTALL_DIR}/.bashrc}"
+  BASHDIR="${BASHDIR:-${INSTALL_DIR}/.config/bash}"
 
   echo "Writing bashrc to ${BASHRC}" | log
   prependFileWithCheck src/rcfiles/bashrc ${BASHRC}
@@ -175,15 +199,40 @@ if [[ -n $INSTALL_BASH ]]; then
   echo ""
 fi
 
+# Ghci
+
+#  Vi mode in ghci!
+if [[ -n $INSTALL_GHCI ]]; then
+  echo "Enabling Vi-mode in ghci" | log
+  if ! grep -q "editMode vi" ${INSTALL_DIR}/.haskeline; then
+    echo "editMode: Vi" >> ${INSTALL_DIR}/.haskeline
+  fi
+fi
+
+# Readline
+
+if [[ -n $INSTALL_READLINE ]]; then
+  INPUTRC="${INSTALL_DIR}/.inputrc"
+
+  if [[ -e ${INPUTRC} ]]; then
+    echo "Writing inputrc to ${INPUTRC}" | log
+    cp ${VERBOSE} src/rcfiles/inputrc ${INPUTRC} | log
+  else
+    echo "${INPUTRC} already exists, not writing" | log
+  fi
+fi
+
+# Vim
+
 if [[ -n $INSTALL_VIM ]]; then
-  VIMRC="${VIMRC:-${HOME}/.vimrc}"
-  VIM_DIR="${VIM_DIR:-${HOME}/.vim}"
+  VIMRC="${VIMRC:-${INSTALL_DIR}/.vimrc}"
+  VIM_DIR="${VIM_DIR:-${INSTALL_DIR}/.vim}"
 
   echo "Writing vimrc to ${VIMRC}" | log
   prependFileWithCheck src/rcfiles/vimrc ${VIMRC}
 
-  echo "Copying vim scripts to ${VIM_DIR}"
-  mkdir ${VERBOSE} -p "${VIM_DIR}"        | log
+  echo "Copying vim scripts to ${VIM_DIR}" | log
+  mkdir ${VERBOSE} -p "${VIM_DIR}" | log
   cp -r src/vim/* "${VIM_DIR}" | log
 
   # Installing Vim plugins
@@ -196,7 +245,7 @@ if [[ -n $INSTALL_VIM ]]; then
       ( cd ${VIM_DIR}/bundle/command-t; rake make ) 2>&1 | log
     fi
   fi
-  echo -e "Done installing Vimproc\n" | log
+  echo -e "Done installing Vimproc" | log
 
   # Install Vimproc
   echo "Installing Vimproc:" | log
@@ -205,29 +254,33 @@ if [[ -n $INSTALL_VIM ]]; then
   fi
   echo -e "Done installing Vimproc\n" | log
 
-  if [ ! -L ${HOME}/bin/thesaurus-lookup.sh ]; then
-    ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/ | log
+  if [ ! -L ${INSTALL_DIR}/bin/thesaurus-lookup.sh ]; then
+    ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${INSTALL_DIR}/bin/ | log
   fi
+
+  echo ""
 fi
 
-# TMUX
+# Tmux
 
 if [[ -n $INSTALL_TMUX ]]; then
-  TMUX_CONF="${HOME}/.tmux.conf"
+  TMUX_CONF="${INSTALL_DIR}/.tmux.conf"
   cp ${VERBOSE} src/rcfiles/tmux.conf "${TMUX_CONF}"
 
   tmux source ${TMUX_CONF}
+
+  echo ""
 fi
 
-# ZSH
+# Zsh
 
 if [[ -n $INSTALL_ZSH ]]; then
-  ZSHRC="${ZSHRC:-${HOME}/.zshrc}"
-  ZSHDIR="${ZSHDIR:-${HOME}/.oh-my-zsh}"
+  ZSHRC="${ZSHRC:-${INSTALL_DIR}/.zshrc}"
+  ZSHDIR="${ZSHDIR:-${INSTALL_DIR}/.oh-my-zsh}"
   ZSH_CUSTOM="${ZSHDIR}/custom"
 
-  if ! grep 'oh-my-zsh.sh' ${ZSHRC} > /dev/null; then
-    echo "Installing Oh-My-Zsh"
+  if [[ ! -e ${ZSHRC} ]] || ! grep 'oh-my-zsh.sh' ${ZSHRC} > /dev/null; then
+    echo "Installing Oh-My-Zsh" | log
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
   fi
 
@@ -239,4 +292,6 @@ if [[ -n $INSTALL_ZSH ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions | log
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting | log
   fi
+
+  echo ""
 fi
