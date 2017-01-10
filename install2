@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOGFILE=log/install.log
+LOGFILE="log/$(date +%Y-%m-%d)-install.log"
 
 # Logging
 mkdir ${VERBOSE} -p log
@@ -203,6 +203,8 @@ fi
 
 #  Vi mode in ghci!
 if [[ -n $INSTALL_GHCI ]]; then
+  cp ${VERBOSE} src/rcfiles/ghci ${INSTALL_DIR}/.ghci | log
+
   echo "Enabling Vi-mode in ghci" | log
   if ! grep -q "editMode vi" ${INSTALL_DIR}/.haskeline; then
     echo "editMode: Vi" >> ${INSTALL_DIR}/.haskeline

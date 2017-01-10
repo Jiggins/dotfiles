@@ -69,7 +69,7 @@ new-md() {
     printf "${*}\n"               >> $file
     printf "=%.0s" {1..${length}} >> $file
     printf "\n\n"                 >> $file
-    ${EDITOR} file
+    ${EDITOR} $file
 }
 
 function grep-after() {
@@ -84,4 +84,7 @@ function remove-spaces() {
   done
 }
 
-# . ${HOME}/.vim/bundle/powerline/scripts/powerline-config
+if [[ -e ${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh ]]; then
+  export PATH="${PATH}:${HOME}/.vim/bundle/powerline/scripts"
+  . ${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+fi
