@@ -11,6 +11,18 @@
     ],
     "right": [
       {
+        "function": "powerline.segments.common.sys.system_load",
+        "priority": 50
+      },
+      {
+        "function": "powerline.segments.common.sys.uptime",
+        "priority": 50
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "priority": 10
+      },
+      {
         "function": "powerline.segments.common.time.date",
         "name": "time",
         "args": {
@@ -19,14 +31,12 @@
         }
       },
       {
-        "function": "powerline.segments.common.time.date"
-      },
-      {
         "function": "powerline.segments.common.bat.battery",
         "name": "Battery",
+        "priority": 20,
         "args": {
           "gamify": true,
-          "full_heart": "♥︎",
+          "full_heart": "♥",
           "empty_heart": "♡",
           "online": "⚡️ ",
           "steps": 10
