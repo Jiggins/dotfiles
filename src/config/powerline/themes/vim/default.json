@@ -96,6 +96,11 @@
         "priority": 60
       },
       {
+        "function": "vim_devicons.powerline.segments.webdevicons",
+        "draw_soft_divider": false,
+        "priority": 60
+      },
+      {
         "function": "file_type",
         "exclude_modes": ["nc"],
         "priority": 60
