@@ -8,6 +8,10 @@ COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
+
+# 10ms for key sequences
+KEYTIMEOUT=1
+
 autoload predict-on
 
 plugins=(
