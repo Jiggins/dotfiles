@@ -12,6 +12,7 @@ set iskeyword-=_               " Sets '_' as a word boundary - useful for Ruby
 set listchars=tab:▒░,trail:▓   " Highlights tabs and trailing whitespace when list is set
 set nolist
 set spelllang=en_gb
+set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: too much)
 
 " Tabs
 set tabstop=2 shiftwidth=2 expandtab
