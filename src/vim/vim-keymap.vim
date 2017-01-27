@@ -1,3 +1,6 @@
+" Code folding
+nnoremap <space> za
+
 " Tabs
 vnoremap <Tab> >
 vnoremap <S-Tab> <
