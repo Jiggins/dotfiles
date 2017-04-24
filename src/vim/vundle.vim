@@ -36,6 +36,7 @@ Plugin 'tpope/vim-obsession'                                     " obsession.vim
 Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
 
 " Languages
+Plugin 'Absolight/vim-bind'                                      " DNS Bind zone & named plugin
 Plugin 'adimit/prolog.vim'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
