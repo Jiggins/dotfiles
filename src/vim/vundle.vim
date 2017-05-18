@@ -84,6 +84,7 @@ Plugin 'gregsexton/MatchTag'                 " Vim's MatchParen for HTML tags ht
 Plugin 'mattn/emmet-vim'                     " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
 Plugin 'pangloss/vim-javascript'             " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'ternjs/tern_for_vim'                 " Tern plugin for Vim
+Plugin 'tmhedberg/matchit'                   " extended % matching for HTML, LaTeX, and many other languages
 
 " Navigation
 Plugin 'majutsushi/tagbar'                   " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
