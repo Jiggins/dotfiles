@@ -29,8 +29,9 @@ Plugin 'widatama/vim-phoenix'                                    " Monochrome co
 Plugin 'romainl/flattened'                                       " Solarized, without the bullshit.
 
 " General
-Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
+Plugin 'farmergreg/vim-lastplace'                                " Intelligently reopen files at your last edit position in Vim.
 Plugin 'ramele/agrep'                                            " Asynchronous grep plugin for Vim
+Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
 Plugin 'tpope/vim-fugitive'                                      " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
 Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
@@ -38,10 +39,12 @@ Plugin 'tpope/vim-rhubarb'                                       " GitHub extens
 " Languages
 Plugin 'Absolight/vim-bind'                                      " DNS Bind zone & named plugin
 Plugin 'adimit/prolog.vim'
+Plugin 'chikamichi/mediawiki.vim'                                " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'evanmiller/nginx-vim-syntax'                             " nginx vim syntax. Copied from http://www.vim.org/scripts/script.php?script_id=1886
+Plugin 'm-kat/aws-vim'                                           " aws-vim
 Plugin 'metakirby5/codi.vim'                                     " The interactive scratchpad for hackers.
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'                                    " Syntax checking hacks for vim
@@ -113,6 +116,10 @@ endif
 
 if has('python') || has('python3')
   Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
+endif
+
+if has('mac')
+  Plugin 'vim-scripts/MailApp'                                    " This plugin allows Mac OS X users to send e-mails from Vim using Mail.app.
 endif
 
 " After
