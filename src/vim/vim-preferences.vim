@@ -2,6 +2,9 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
+" Reload session
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
 " Text editing
 set autoindent
 set backspace=indent,eol,start
