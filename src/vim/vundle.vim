@@ -42,6 +42,7 @@ Plugin 'adimit/prolog.vim'
 Plugin 'chikamichi/mediawiki.vim'                                " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
+Plugin 'danchoi/ri.vim'                                          " browse ri documentation from Vim http://github.com/danchoi/ri.vim
 Plugin 'derekwyatt/vim-scala'
 Plugin 'evanmiller/nginx-vim-syntax'                             " nginx vim syntax. Copied from http://www.vim.org/scripts/script.php?script_id=1886
 Plugin 'm-kat/aws-vim'                                           " aws-vim
