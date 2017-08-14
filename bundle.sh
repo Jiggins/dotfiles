@@ -8,6 +8,7 @@ set -x
 declare -a bundle=(
   .bashrc
   .config/bash
+  .config/powerline
   .oh-my-zsh
   .tmux.conf
   .vim
