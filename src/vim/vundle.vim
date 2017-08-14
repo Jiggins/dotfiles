@@ -29,6 +29,7 @@ Plugin 'widatama/vim-phoenix'                                    " Monochrome co
 Plugin 'romainl/flattened'                                       " Solarized, without the bullshit.
 
 " General
+Plugin 'AndrewRadev/splitjoin.vim'                               " A vim plugin that simplifies the transition between multiline and single-line code
 Plugin 'farmergreg/vim-lastplace'                                " Intelligently reopen files at your last edit position in Vim.
 Plugin 'ramele/agrep'                                            " Asynchronous grep plugin for Vim
 Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
