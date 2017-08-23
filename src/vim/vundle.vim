@@ -68,7 +68,6 @@ Plugin 'vim-scripts/hlint'                                       " Compiler defi
 
 "" Languages - Ruby
 Plugin 'danchoi/ri.vim'                                          " browse ri documentation from Vim http://github.com/danchoi/ri.vim
-Plugin 'dermusikman/sonicpi.vim'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-endwise'                                       " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plugin 'tpope/vim-rails'
