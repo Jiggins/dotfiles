@@ -204,6 +204,11 @@ if [ -e ${VIM_DIR}/bundle/command-t ]; then
 fi
 echo -e "Done installing Vimproc\n" | log
 
+# install Tern for JavaScript
+if commandExists npm; then
+  ( cd ${VIM_DIR}/bundle/tern_for_vim && npm install ) | log
+fi
+
 # Install Vimproc
 echo "Installing Vimproc:" | log
 if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
