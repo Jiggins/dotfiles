@@ -22,57 +22,59 @@ function log {
 
 # Checks if a command is installed
 function commandExists {
-  if command -v $1 > /dev/null; then
-    return 0
-  else
-    return 1
-  fi
+  command -v $1 > /dev/null
+  return $?
 }
 
-function checkDependencies {
-  dependencies=(
-    cc
-    git
-    make
-    vim
-    wget
-  )
+dependencies=(
+  cc
+  git
+  make
+  vim
+  wget
+)
 
-  for i in ${dependencies[*]}; do
-    if ! commandExists $i; then
-      dependenciesNotFound="${dependenciesNotFound}$i "
-    fi
-  done
+optionalDependencies=(
+  npm
+  pip
+)
 
-  if [ ${dependenciesNotFound+x} ]; then
-    echo 'The following dependencies are not installed on this system' | log
-    echo -e "\n\t${dependenciesNotFound}\n" | log
+echo "Checking dependencies:" | log
 
-    case `uname` in
-      'Darwin')
-        echo 'These can be installed using brew'
-
-        if command -v brew > /dev/null; then
-          echo 'brew is not installed on this system, consider installing brew and running this script again'
-          echo 'http://brew.sh'
-        else
-          echo "brew install ${dependenciesNotFound}"
-        fi
-        ;;
-
-      *)
-        if commandExists apt-get; then
-          echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
-        elif commandExists yum; then
-          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
-        else
-          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
-        fi
-        ;;
-    esac
-    exit 1
+for i in ${dependencies[*]}; do
+  if ! commandExists $i; then
+    dependenciesNotFound="${dependenciesNotFound}$i "
   fi
-}
+done
+
+if [ ${dependenciesNotFound+x} ]; then
+  echo 'The following dependencies are not installed on this system:'
+  echo "\t${dependenciesNotFound}" | sed 's/ /\n\t/g'
+
+  case `uname` in
+    'Darwin')
+      echo 'These can be installed using brew'
+
+      if commandExists brew; then
+        echo "\n\tbrew install ${dependenciesNotFound}\n"
+      else
+        echo 'brew is not installed on this system, consider installing brew and running this script again'
+        echo 'http://brew.sh'
+      fi
+      ;;
+
+    *)
+      if commandExists apt-get; then
+        echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
+      elif commandExists yum; then
+        echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
+      else
+        echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
+      fi
+      ;;
+  esac
+  exit 1
+fi
 
 # $1: File to prepend (Will appear at the top of $2)
 # $2: File to prepend to (output file)
@@ -111,9 +113,6 @@ POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
 TMUX="${HOME}/.tmux.conf"
 VIMRC="${HOME}/.vimrc"
 VIM_DIR="${HOME}/.vim"
-
-echo "Checking dependencies:" | log
-checkDependencies
 
 printf "Creating new directories\n in ${HOME}:" | log
 # Install config directory
