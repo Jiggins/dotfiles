@@ -72,6 +72,15 @@ function codi() {
     Codi $syntax" "$@"
 }
 
+function compress() {
+  if [[ -z "$1" ]]; then
+    echo "usage: compress [files]"
+    return 1
+  fi
+
+  tar -cf - "$@" | pigz | pv
+}
+
 function js() {
   jshon "$@" | pygmentize -l 'json'
 }
