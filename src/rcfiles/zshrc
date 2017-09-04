@@ -56,7 +56,7 @@ addpath "${HOME}/bin"
 addpath "${HOME}/.local/bin"
 addpath "${HOME}/.rvm/bin"
 addpath "${HOME}/.vim/bundle/powerline/scripts"
-addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin/"
+addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 
 # Codi
 # Usage: codi [filetype] [filename]
