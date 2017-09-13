@@ -99,6 +99,9 @@ nnoremap <S-Tab> <C-w><C-w>
 nnoremap <silent> + :resize +1<CR>
 nnoremap <silent> _ :resize -1<CR>
 
+" Add word under cursor to search pattern
+nnoremap <leader>* :let @/.='\\|\<'.expand("<cword>").'\>'<CR>
+
 " Continuous scroll accross two panes
 noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
