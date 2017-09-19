@@ -30,6 +30,7 @@ Plugin 'romainl/flattened'                                       " Solarized, wi
 
 " General
 Plugin 'AndrewRadev/splitjoin.vim'                               " A vim plugin that simplifies the transition between multiline and single-line code
+Plugin 'editorconfig/editorconfig-vim'                           " EditorConfig plugin for Vim http://editorconfig.org
 Plugin 'farmergreg/vim-lastplace'                                " Intelligently reopen files at your last edit position in Vim.
 Plugin 'ramele/agrep'                                            " Asynchronous grep plugin for Vim
 Plugin 'Shougo/vimproc.vim'                                      " Interactive command execution in Vim.
