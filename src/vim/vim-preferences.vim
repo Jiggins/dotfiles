@@ -74,6 +74,10 @@ if filereadable(expand('~/.vim/colors/maui.vim'))
   colorscheme maui
 endif
 
+" EditorConfig
+" Disable EditorConfig for tpope's fugitive.
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 " Devicons
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
