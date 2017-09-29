@@ -37,6 +37,7 @@ Plugin 'Shougo/vimproc.vim'                                      " Interactive c
 Plugin 'tpope/vim-fugitive'                                      " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
 Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
+Plugin 'tpope/vim-sleuth'                                        " sleuth.vim: Heuristically set buffer options
 
 " Languages
 Plugin 'Absolight/vim-bind'                                      " DNS Bind zone & named plugin
