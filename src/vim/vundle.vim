@@ -38,6 +38,7 @@ Plugin 'tpope/vim-fugitive'                                      " a Git wrapper
 Plugin 'tpope/vim-obsession'                                     " obsession.vim: continuously updated session files
 Plugin 'tpope/vim-rhubarb'                                       " GitHub extension for fugitive.vim
 Plugin 'tpope/vim-sleuth'                                        " sleuth.vim: Heuristically set buffer options
+Plugin 'vimwiki/vimwiki'                                         " Personal Wiki for Vim http://vimwiki.github.io/
 
 " Languages
 Plugin 'Absolight/vim-bind'                                      " DNS Bind zone & named plugin
