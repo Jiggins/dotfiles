@@ -1,30 +1,10 @@
 #!/bin/bash
 
+source utils.sh
+
 if [[ $1 == "-v" ]]; then
   VERBOSE='-v';
 fi
-
-LOGFILE=log/install.log
-
-# Logging
-mkdir $VERBOSE -p log
-date > ${LOGFILE}
-
-function log {
-  while read line; do
-    if [ ${VERBOSE+x} ]; then
-      echo -e "$line" | tee -a $LOGFILE
-    else
-      echo -e "$line" >> $LOGFILE
-    fi
-  done
-}
-
-# Checks if a command is installed
-function commandExists {
-  command -v $1 > /dev/null
-  return $?
-}
 
 dependencies=(
   cc
