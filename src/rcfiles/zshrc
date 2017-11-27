@@ -153,12 +153,15 @@ function tn() {
   tmux attach -t "$name" || tmux new -s "$name"
 }
 
-if [ -e "${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh" ]; then
-  export POWERLINE_ZSH="${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh"
-fi
+# Set USE_POWERLINE=1 in .zprofile to use powerline
+if [ ! -z ${USE_POWERLINE} ]; then
+  if [ -e "${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh" ]; then
+    export POWERLINE_ZSH="${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh"
+  fi
 
-if $(command -v powerline-config > /dev/null); then
-  . $POWERLINE_ZSH
+  if $(command -v powerline-config > /dev/null); then
+    . $POWERLINE_ZSH
+  fi
 fi
 
 printf "\e[?1004l"
