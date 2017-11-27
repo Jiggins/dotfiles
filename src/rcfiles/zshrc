@@ -7,6 +7,8 @@ ENABLE_CORRECTION="true"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="true"
 
+setopt INC_APPEND_HISTORY
+
 # 10ms for key sequences
 KEYTIMEOUT=1
 
@@ -25,6 +27,24 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+# adds a directory to the end of PATH if the directory exists
+function addpath() {
+  if [ -d "$1" ]; then
+    export PATH="$PATH:$1"
+    return 0
+  fi
+
+  return 1
+}
+
+addpath "${HOME}/bin"
+addpath "${HOME}/.local/bin"
+addpath "${HOME}/.rvm/bin"
+addpath "${HOME}/.vim/bundle/powerline/scripts"
+addpath "/usr/local/bin"
+addpath "/usr/local/sbin"
+addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+
 source "${ZSH}/oh-my-zsh.sh"
 [ -f "${HOME}/.fzf.zsh" ]      && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/bin/local.zsh" ] && source "${HOME}/bin/local.zsh"
@@ -40,23 +60,9 @@ alias n='task next'
 alias next='task next'
 alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
 
-# adds a directory to the end of PATH if the directory exists
-function addpath() {
-  if [ -d "$1" ]; then
-    export PATH="$PATH:$1"
-    return 0
-  fi
-
-  return 1
-}
-
-addpath "/usr/local/bin"
-addpath "/usr/local/sbin"
-addpath "${HOME}/bin"
-addpath "${HOME}/.local/bin"
-addpath "${HOME}/.rvm/bin"
-addpath "${HOME}/.vim/bundle/powerline/scripts"
-addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+if command -v pigz > /dev/null; then
+  alias tarz='tar --use-compress-program=pigz'
+fi
 
 # Codi
 # Usage: codi [filetype] [filename]
