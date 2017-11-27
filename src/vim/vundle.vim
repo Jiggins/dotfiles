@@ -20,6 +20,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'                                   " Show git diff in gutter
+Plugin 'drzel/vim-in-proportion'                                  " Resize vim's containing window and your splits resize proportionally
 Plugin 'junegunn/limelight.vim'                                   " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'kien/rainbow_parentheses.vim'                             " Better Rainbow Parentheses
 
