@@ -45,10 +45,10 @@ Plugin 'vimwiki/vimwiki'                     " Personal Wiki for Vim http://vimw
 Plugin 'Absolight/vim-bind'                  " DNS Bind zone & named plugin
 Plugin 'adimit/prolog.vim'
 Plugin 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
+Plugin 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'evanmiller/nginx-vim-syntax'         " nginx vim syntax. Copied from http://www.vim.org/scripts/script.php?script_id=1886
 Plugin 'm-kat/aws-vim'                       " aws-vim
 Plugin 'metakirby5/codi.vim'                 " The interactive scratchpad for hackers.
 Plugin 'plasticboy/vim-markdown'
