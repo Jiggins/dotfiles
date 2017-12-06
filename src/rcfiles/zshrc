@@ -27,9 +27,6 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-[ -e ~/.zsh/zsh-autosuggestions ]     || git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
-[ -e ~/.zsh/zsh-syntax-highlighting ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-
 # adds a directory to the end of PATH if the directory exists
 function addpath() {
   if [ -d "$1" ]; then
@@ -52,11 +49,15 @@ source "${ZSH}/oh-my-zsh.sh"
 [ -f "${HOME}/.fzf.zsh" ]      && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/bin/local.zsh" ] && source "${HOME}/bin/local.zsh"
 
+# Will not load plugins on first launch
+[ -e "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" ]     || git clone https://github.com/zsh-users/zsh-autosuggestions.git     "${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
+[ -e "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting"
+
 export EDITOR=$(which vim)
 export LESS="SR"
 
 alias ccat='pygmentize -f 256'
-alias cgrep='ggrep --color=always'
+alias cgrep='grep --color=always'
 alias gpg="gpg2"
 alias isodate='date +%Y-%m-%d'
 alias n='task next'
