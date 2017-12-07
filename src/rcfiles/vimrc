@@ -1,5 +1,12 @@
 " Vim configurations added by github.com/Jiggins/Bash-Config
 let $VIMHOME=expand('<sfile>:p:h').'/.vim'
+
+if has('mac')
+  source $VIMHOME/macos.vim
+elseif has('linux')
+  source $VIMHOME/linux.vim
+endif
+
 source $VIMHOME/vundle.vim
 source $VIMHOME/vim-commands.vim
 source $VIMHOME/vim-keymap.vim

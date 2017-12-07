@@ -4,11 +4,8 @@ setlocal suffixesadd=hs,lhs,hsc
 
 setlocal keywordprg=hoogle
 
-if has('mac')
-  let g:haddock_browser = "open"
-  let g:haddock_browser_callformat = "%s %s"
-  let g:haddock_docdir = $HOME . "/Library/Haskell/share/doc"
-endif
+let g:haddock_browser = g:netrw_browsex_viewer
+let g:haddock_browser_callformat = "%s %s"
 
 " Disable haskell-vim omnifunc
 let g:haskellmode_completion_ghc = 0
