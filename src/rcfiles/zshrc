@@ -63,6 +63,7 @@ alias isodate='date +%Y-%m-%d'
 alias n='task next'
 alias next='task next'
 alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
+alias tree='tree -C'
 
 if command -v pigz > /dev/null; then
   alias tarz='tar --use-compress-program=pigz'
