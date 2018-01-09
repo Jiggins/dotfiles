@@ -30,12 +30,15 @@ plugins=(
 # adds a directory to the end of PATH if the directory exists
 function addpath() {
   if [ -d "$1" ]; then
-    export PATH="$PATH:$1"
+    path+=("$1")
     return 0
   fi
 
   return 1
 }
+
+# Prevent duplicate entries in $PATH
+typeset -U path
 
 addpath "${HOME}/bin"
 addpath "${HOME}/.local/bin"
@@ -44,6 +47,9 @@ addpath "${HOME}/.vim/bundle/powerline/scripts"
 addpath "/usr/local/bin"
 addpath "/usr/local/sbin"
 addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+
+# Solidify PATH changes for the rest of the shell sessions
+export PATH
 
 source "${ZSH}/oh-my-zsh.sh"
 [ -f "${HOME}/.fzf.zsh" ]      && source "${HOME}/.fzf.zsh"
@@ -55,6 +61,7 @@ source "${ZSH}/oh-my-zsh.sh"
 
 export EDITOR=$(which vim)
 export LESS="SR"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
