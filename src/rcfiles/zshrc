@@ -52,8 +52,9 @@ addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 export PATH
 
 source "${ZSH}/oh-my-zsh.sh"
-[ -f "${HOME}/.fzf.zsh" ]      && source "${HOME}/.fzf.zsh"
-[ -f "${HOME}/bin/local.zsh" ] && source "${HOME}/bin/local.zsh"
+[ -f "${HOME}/.fzf.zsh" ]         && source "${HOME}/.fzf.zsh"
+[ -f "${HOME}/.rvm/scripts/rvm" ] && source "${HOME}/.rvm/scripts/rvm"
+[ -f "${HOME}/bin/local.zsh" ]    && source "${HOME}/bin/local.zsh"
 
 # Will not load plugins on first launch
 [ -e "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" ]     || git clone https://github.com/zsh-users/zsh-autosuggestions.git     "${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
