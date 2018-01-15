@@ -74,6 +74,7 @@ alias isodate='date +%Y-%m-%d'
 alias n='task next'
 alias next='task next'
 alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
+alias path='echo $PATH | sed "s/:/\n/g"'
 alias tree='tree -C'
 
 if command -v pigz > /dev/null; then
