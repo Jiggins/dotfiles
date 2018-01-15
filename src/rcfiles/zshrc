@@ -77,6 +77,15 @@ alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.htm
 alias path='echo $PATH | sed "s/:/\n/g"'
 alias tree='tree -C'
 
+# Colours and text formatting
+export BOLD=$(tput bold)
+export RED=$(tput setaf 1)
+export GREEN=$(tput setaf 2)
+export YELLOW=$(tput setaf 3)
+export BLUE=$(tput setaf 3)
+export RESET=$(tput sgr0)
+export CLEARLN="\r$(tput el)"
+
 if command -v pigz > /dev/null; then
   alias tarz='tar --use-compress-program=pigz'
 fi
