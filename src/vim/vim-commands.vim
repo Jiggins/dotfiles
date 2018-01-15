@@ -17,4 +17,4 @@ function! CustomJump(motion) range
     let @/ = save
 endfunction
 
-command Mail execute "w !pandoc -f markdown_github -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css -o /tmp/email.html && open /tmp/email.html"
+command Mail execute "w !pandoc -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css -o /tmp/email.html && open /tmp/email.html"
