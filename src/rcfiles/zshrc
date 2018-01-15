@@ -63,6 +63,10 @@ export EDITOR=$(which vim)
 export LESS="SR"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
+# Use GNU versions of common shell tools if the exist (useful on macOS)
+command -v 'gsed' >/dev/null && alias sed='gsed'
+command -v 'gtar' >/dev/null && alias tar='gtar'
+
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
 alias gpg="gpg2"
