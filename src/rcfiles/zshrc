@@ -46,6 +46,7 @@ addpath "${HOME}/.rvm/bin"
 addpath "${HOME}/.vim/bundle/powerline/scripts"
 addpath "/usr/local/bin"
 addpath "/usr/local/sbin"
+addpath "/usr/local/opt/python/libexec/bin"
 addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 
 # Solidify PATH changes for the rest of the shell sessions

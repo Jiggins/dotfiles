@@ -88,7 +88,7 @@ done
 
 # INSTALL_DIR defaults to home
 INSTALL_DIR="${INSTALL_DIR:-${HOME}}"
-mkdir ${VERBOSE} "${INSTALL_DIR}/bin"
+mkdir -p ${VERBOSE} "${INSTALL_DIR}/bin" | log
 
 # Dependencies
 
@@ -195,7 +195,7 @@ if [[ -n $INSTALL_VIM ]]; then
 
   echo "Copying vim scripts to ${VIM_DIR}" | log
   mkdir ${VERBOSE} -p "${VIM_DIR}" | log
-  cp -r src/vim/* "${VIM_DIR}" | log
+  cp -r src/vim/* "${VIM_DIR}" 2>&1 | log
 
   # Installing Vim plugins
   vi -u ${VIMRC} +PluginInstall +qall
@@ -204,7 +204,11 @@ if [[ -n $INSTALL_VIM ]]; then
   echo "Installing CommandT:" | log
   if [ -e ${VIM_DIR}/bundle/command-t ]; then
     if commandExists rake; then
-      ( cd ${VIM_DIR}/bundle/command-t; rake make ) 2>&1 | log
+      (
+        cd "${VIM_DIR}/bundle/command-t"
+        bundle install
+        rake make
+      ) 2>&1 | log
     fi
   fi
   echo -e "Done installing Vimproc" | log
@@ -227,11 +231,9 @@ fi
 
 if [[ -n $INSTALL_TMUX ]]; then
   TMUX_CONF="${INSTALL_DIR}/.tmux.conf"
-  cp ${VERBOSE} src/rcfiles/tmux.conf "${TMUX_CONF}"
+  cp ${VERBOSE} src/rcfiles/tmux.conf "${TMUX_CONF}" | log
 
-  tmux source ${TMUX_CONF}
-
-  echo ""
+  [ ! -z ${TMUX} ] && tmux source ${TMUX_CONF}
 fi
 
 # Zsh
