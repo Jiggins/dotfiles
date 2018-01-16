@@ -143,14 +143,14 @@ if [[ -n $INSTALL_BASH ]]; then
   BASHRC="${BASHRC:-${INSTALL_DIR}/.bashrc}"
   BASHDIR="${BASHDIR:-${INSTALL_DIR}/.config/bash}"
 
-  echo "Writing bashrc to ${BASHRC}" | log
+  info "Writing bashrc to ${BASHRC}" | log -s
   prependFileWithCheck src/rcfiles/bashrc ${BASHRC}
 
   # Bash completion for mac
   if [ "$(uname)" == "Darwin" ]; then
     if commandExists brew; then
       if ! brew ls --version bash-completion > /dev/null; then
-        echo "Installing bash completion for mac" | log
+        info "Installing bash completion for mac" | log -s
         brew install git bash-completion
       fi
     fi
@@ -165,7 +165,7 @@ fi
 if [[ -n $INSTALL_GHCI ]]; then
   cp ${VERBOSE} src/rcfiles/ghci ${INSTALL_DIR}/.ghci | log
 
-  echo "Enabling Vi-mode in ghci" | log
+  info "Enabling Vi-mode in ghci" | log -s
   if ! grep -q "editMode vi" ${INSTALL_DIR}/.haskeline; then
     echo "editMode: Vi" >> ${INSTALL_DIR}/.haskeline
   fi
@@ -177,10 +177,10 @@ if [[ -n $INSTALL_READLINE ]]; then
   INPUTRC="${INSTALL_DIR}/.inputrc"
 
   if [[ -e ${INPUTRC} ]]; then
-    echo "Writing inputrc to ${INPUTRC}" | log
+    info "Writing inputrc to ${INPUTRC}" | log -s
     cp ${VERBOSE} src/rcfiles/inputrc ${INPUTRC} | log
   else
-    echo "${INPUTRC} already exists, not writing" | log
+    info "${INPUTRC} already exists, not writing" | log -s
   fi
 fi
 
@@ -190,19 +190,27 @@ if [[ -n $INSTALL_VIM ]]; then
   VIMRC="${VIMRC:-${INSTALL_DIR}/.vimrc}"
   VIM_DIR="${VIM_DIR:-${INSTALL_DIR}/.vim}"
 
-  echo "Writing vimrc to ${VIMRC}" | log
+  info "Writing vimrc to ${VIMRC}" | log -s
   prependFileWithCheck src/rcfiles/vimrc ${VIMRC}
 
   echo "Copying vim scripts to ${VIM_DIR}" | log
   mkdir ${VERBOSE} -p "${VIM_DIR}" | log
   cp -r src/vim/* "${VIM_DIR}" 2>&1 | log
 
-  # Installing Vim plugins
-  vi -u ${VIMRC} +PluginInstall +qall
+  # Installing or updating Vim plugins
+  if [ ! -d "${VIM_DIR}/bundle" ]; then
+    info "Installing vim plugins"
+    vi -u ${VIMRC} +PluginInstall +qall
+    [ $? -ne 0 ] && error "Could not install vim plugins to ${VIM_DIR}/bundle" && exit 0 | log -s
+  else
+    info "Updating vim plugins"
+    vi -u ${VIMRC} +PluginUpdate  +qall
+    [ $? -ne 0 ] && error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
+  fi
 
   # Install CommandT
-  echo "Installing CommandT:" | log
-  if [ -e ${VIM_DIR}/bundle/command-t ]; then
+  info "Installing CommandT" | log -s
+  if [ -d "${VIM_DIR}/bundle/command-t" ]; then
     if commandExists rake; then
       (
         cd "${VIM_DIR}/bundle/command-t"
@@ -211,20 +219,44 @@ if [[ -n $INSTALL_VIM ]]; then
       ) 2>&1 | log
     fi
   fi
-  echo -e "Done installing Vimproc" | log
+
+  if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    success "Installed CommandT to ${WHITE}${VIM_DIR}/bundle/command-t" | log -s
+  else
+    error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
+  fi
+
+  # Install Powerline
+  info "Installing Powerline" | log -s
+  if [ -d ${VIM_DIR}/bundle/powerline ]; then
+    (
+      cd "${VIM_DIR}/bundle/powerline"
+      ./setup.py build   2>&1
+      ./setup.py install 2>&1
+    ) | log
+  fi
+
+  if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    success "Installed Powerline to${WHITE} ${VIM_DIR}/bundle/powerline" | log -s
+  else
+    error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
+  fi
 
   # Install Vimproc
-  echo "Installing Vimproc:" | log
+  info  "Installing Vimproc" | log -s
   if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
     ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
   fi
-  echo -e "Done installing Vimproc\n" | log
+
+  if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    success "Installed Vimproc to${WHITE} ${VIM_DIR}/bundle/vimproc.vim" | log -s
+  else
+    error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
+  fi
 
   if [ ! -L ${INSTALL_DIR}/bin/thesaurus-lookup.sh ]; then
     ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${INSTALL_DIR}/bin/ | log
   fi
-
-  echo ""
 fi
 
 # Tmux
@@ -244,11 +276,12 @@ if [[ -n $INSTALL_ZSH ]]; then
   ZSH_CUSTOM="${ZSHDIR}/custom"
 
   if [[ ! -e ${ZSHRC} ]] || ! grep 'oh-my-zsh.sh' ${ZSHRC} > /dev/null; then
-    echo "Installing Oh-My-Zsh" | log
+    info "Installing Oh-My-Zsh" | log -s
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
+    [ $? -ne 0 ] && error "Could not install Oh-My-Zsh; check ${LOGFILE} for details" | log -s
   fi
 
-  echo "Writing zshrc to ${ZSHRC}" | log
+  info "Writing zshrc to ${ZSHRC}" | log -s
   prependFileWithCheck src/rcfiles/zshrc ${ZSHRC}
 
   if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
@@ -256,6 +289,4 @@ if [[ -n $INSTALL_ZSH ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions | log
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting | log
   fi
-
-  echo ""
 fi
