@@ -6,7 +6,7 @@ date > ${LOGFILE}
 
 function log {
   while read line; do
-    if [ ${VERBOSE+x} ]; then
+    if [ ${VERBOSE+x} ] || [ ! -z ${1} ]; then
       echo -e "$line" | tee -a $LOGFILE
     else
       echo -e "$line" >> $LOGFILE
@@ -39,3 +39,25 @@ function prependFile {
 
   return 0
 }
+
+# Colours and text formatting
+export BOLD="$(tput bold)"
+export RED="$(tput setaf 1)"
+export GREEN="$(tput setaf 2)"
+export YELLOW="$(tput setaf 3)"
+export BLUE="$(tput setaf 4)"
+export PURPLE="$(tput setaf 5)"
+export LIGHTBLUE="$(tput setaf 6)"
+export WHITE="$(tput setaf 7)"
+export GREY="$(tput setaf 8)"
+export RESET="$(tput sgr0)"
+export CLEARLN="\r$(tput el)"
+
+function info() {
+  echo -en "${BOLD}${@}"
+  echo -e  "${RESET}"
+}
+
+function success() { info "${GREEN}${1}"; }
+function warn()    { info "${YELLOW}${1}"; }
+function error()   { info "${RED}${1}"; }
