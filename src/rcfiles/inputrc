@@ -1,4 +1,4 @@
-# inputrc configurations added by github.com/Jiggins/Bash-Config
+# inputrc configurations added by github.com/Jiggins/dotfiles
 
 set editing-mode vi
 $if mode=vi

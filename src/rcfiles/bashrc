@@ -1,4 +1,4 @@
-# bash configurations added by github.com/Jiggins/Bash-Config
+# configurations added by github.com/Jiggins/dotfiles
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
