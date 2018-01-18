@@ -1,4 +1,4 @@
-" Vim configurations added by github.com/Jiggins/Bash-Config
+" configurations added by github.com/Jiggins/dotfiles
 let $VIMHOME=expand('<sfile>:p:h').'/.vim'
 
 if has('mac')

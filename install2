@@ -3,7 +3,7 @@
 source utils.sh
 
 function prependFileWithCheck {
-  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/Bash-Config' $2; then
+  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/dotfiles' $2; then
     prependFile $1 $2
   fi
 
