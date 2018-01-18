@@ -20,7 +20,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'              " Show git diff in gutter
-Plugin 'drzel/vim-in-proportion'             " Resize vim's containing window and your splits resize proportionally
 Plugin 'junegunn/limelight.vim'              " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'kien/rainbow_parentheses.vim'        " Better Rainbow Parentheses
 
@@ -33,7 +32,6 @@ Plugin 'romainl/flattened'                   " Solarized, without the bullshit.
 Plugin 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the transition between multiline and single-line code
 Plugin 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
 Plugin 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
-Plugin 'ramele/agrep'                        " Asynchronous grep plugin for Vim
 Plugin 'Shougo/vimproc.vim'                  " Interactive command execution in Vim.
 Plugin 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plugin 'tpope/vim-obsession'                 " obsession.vim: continuously updated session files
@@ -50,11 +48,8 @@ Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'm-kat/aws-vim'                       " aws-vim
-Plugin 'metakirby5/codi.vim'                 " The interactive scratchpad for hackers.
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'                " Syntax checking hacks for vim
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 "" Languages - English
 Plugin 'amperser/proselint'                  " Proselint plugin for Vim
@@ -115,6 +110,15 @@ Plugin 'christoomey/vim-tmux-navigator'      " Move between Vim and tmux panes w
 Plugin 'jpalardy/vim-slime'                  " Copy text to repl in tmux
 Plugin 'tmux-plugins/vim-tmux-focus-events'  " Fix for FocusGained and FocusLost autocommand events in tmux.
 Plugin 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/scripts/script.php?script_id=4488
+
+" Plugins requiring async support
+if has('async')
+  Plugin 'drzel/vim-in-proportion'           " Resize vim's containing window and your splits resize proportionally
+  Plugin 'metakirby5/codi.vim'               " The interactive scratchpad for hackers.
+  Plugin 'ramele/agrep'                      " Asynchronous grep plugin for Vim
+  Plugin 'vim-pandoc/vim-pandoc'
+  Plugin 'vim-pandoc/vim-pandoc-syntax'
+endif
 
 if has('lua')
   Plugin 'Shougo/neocomplete.vim'            " Next generation completion framework after neocomplcache
