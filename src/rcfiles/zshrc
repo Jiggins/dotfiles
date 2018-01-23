@@ -59,10 +59,6 @@ source "${ZSH}/oh-my-zsh.sh"
 [ -f "${HOME}/.rvm/scripts/rvm" ] && source "${HOME}/.rvm/scripts/rvm"
 [ -f "${HOME}/bin/local.zsh" ]    && source "${HOME}/bin/local.zsh"
 
-# Will not load plugins on first launch
-[ -e "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" ]     || git clone https://github.com/zsh-users/zsh-autosuggestions.git     "${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
-[ -e "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting"
-
 export EDITOR=$(which vim)
 export LESS="SR"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
