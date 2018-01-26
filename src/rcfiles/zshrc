@@ -1,8 +1,5 @@
 # Vim configurations added by github.com/Jiggins/dotfiles
 
-# Path to oh-my-zsh installation.
-export ZSH=${HOME}/.oh-my-zsh
-
 # ZSH Options
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
@@ -24,23 +21,30 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
+autoload predict-on
+
 # 10ms for key sequences
 KEYTIMEOUT=1
 
-export ZSH_THEME=fishy
+if [[ -d "${HOME}/.oh-my-zsh" ]]; then
+  # Path to oh-my-zsh installation.
+  export ZSH=${HOME}/.oh-my-zsh
+  export ZSH_THEME=fishy
 
-autoload predict-on
+  plugins=(
+    bundler   cabal
+    git       nmap
+    osx       rails
+    rake      ruby
+    stack     tmux
+    vi-mode
+  )
 
-plugins=(
-  bundler   cabal
-  git       nmap
-  osx       rails
-  rake      ruby
-  stack     # theFuck
-  tmux      vi-mode
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+  [[ -d "${HOME}/.zsh/zsh-autosuggestions" ]]     && plugins+=(zsh-autosuggestions)
+  [[ -d "${HOME}/.zsh/zsh-syntax-highlighting" ]] && plugins+=(zsh-syntax-highlighting)
+
+  source "${ZSH}/oh-my-zsh.sh"
+fi
 
 # adds a directory to the end of PATH if the directory exists
 function addpath() {
@@ -67,7 +71,6 @@ addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 # Solidify PATH changes for the rest of the shell sessions
 export PATH
 
-source "${ZSH}/oh-my-zsh.sh"
 [ -f "${HOME}/.fzf.zsh" ]         && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/.rvm/scripts/rvm" ] && source "${HOME}/.rvm/scripts/rvm"
 [ -f "${HOME}/bin/local.zsh" ]    && source "${HOME}/bin/local.zsh"
