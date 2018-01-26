@@ -217,13 +217,11 @@ if [[ -n $INSTALL_VIM ]]; then
         bundle install
         rake make
       ) 2>&1 | log
-    fi
-  fi
 
-  if [ ${PIPESTATUS[0]} -eq 0 ]; then
-    success "Installed CommandT to ${WHITE}${VIM_DIR}/bundle/command-t" | log -s
-  else
-    error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
+      [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
+    else
+      warning "rake not installed; skipping command-t"
+    fi
   fi
 
   # Install Powerline
@@ -234,24 +232,26 @@ if [[ -n $INSTALL_VIM ]]; then
       ./setup.py build   2>&1
       ./setup.py install 2>&1
     ) | log
-  fi
 
-  if [ ${PIPESTATUS[0]} -eq 0 ]; then
-    success "Installed Powerline to${WHITE} ${VIM_DIR}/bundle/powerline" | log -s
+    [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
   else
-    error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
+    warning "powerline directory not found, vim may not be installed with python support; skipping powerline"
   fi
 
   # Install Vimproc
   info  "Installing Vimproc" | log -s
   if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
     ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
+    [ ${PIPESTATUS[0]} -ne 0 ]  && error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
   fi
 
-  if [ ${PIPESTATUS[0]} -eq 0 ]; then
-    success "Installed Vimproc to${WHITE} ${VIM_DIR}/bundle/vimproc.vim" | log -s
+  # install Tern for JavaScript
+  info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
+  if commandExists npm; then
+    ( cd ${VIM_DIR}/bundle/tern_for_vim && npm install ) | log
+    [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install Tern" | log
   else
-    error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
+    warning "npm is not installed, skipping Tern" | log -s
   fi
 
   if [ ! -L ${INSTALL_DIR}/bin/thesaurus-lookup.sh ]; then
