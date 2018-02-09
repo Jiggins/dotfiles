@@ -123,34 +123,36 @@ function checkDependencies {
   done
 
   if [ ${dependenciesNotFound+x} ]; then
-    echo 'The following dependencies are not installed on this system' | log
-    echo -e "\n\t${dependenciesNotFound}\n" | log
+    echo 'The following dependencies are not installed on this system' | log -s
+    echo -e "\n\t${dependenciesNotFound}\n" | log -s
 
     case `uname` in
       'Darwin')
-        echo 'These can be installed using brew'
+        echo 'These can be installed using brew' | log -s
 
         if command -v brew > /dev/null; then
-          echo 'brew is not installed on this system, consider installing brew and running this script again'
-          echo 'http://brew.sh'
+          echo 'brew is not installed on this system, consider installing brew and running this script again' | log -s
+          echo 'http://brew.sh'| log -s
         else
-          echo "brew install ${dependenciesNotFound}"
+          echo "brew install ${dependenciesNotFound}" | log -s
         fi
         ;;
 
       *)
-        if commandExists apt-get; then
-          echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
+        if commandExists apt; then
+          echo -e "These can be installed using\n\n\tsudo apt install ${dependenciesNotFound}\n" | log -s
         elif commandExists yum; then
-          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
+          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n" | log -s
         else
-          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
+          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n" | log -s
         fi
         ;;
     esac
     exit 1
   fi
 }
+
+checkDependencies
 
 # Bash
 
