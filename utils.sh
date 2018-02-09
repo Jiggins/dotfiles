@@ -28,8 +28,8 @@ function prependFile {
     echo '  $2: File to prepend to (output file)'
     return 1
   elif [ ! -e $2 ]; then
-    echo -e "Copying $1 to $2" | log
-    cp $1 $2
+    echo -e "linking $1 to $2" | log
+    ln -s $1 $2
   else
     echo -e "Prepending $1 to $2" | log
     cp $1 tmp
