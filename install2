@@ -3,8 +3,8 @@
 source utils.sh
 
 function prependFileWithCheck {
-  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/dotfiles' $2; then
-    prependFile $1 $2
+  if [ ! -e "$2" ] || ! grep -q 'configurations added by github.com/Jiggins/dotfiles' "$2"; then
+    prependFile "$1" "$2"
   fi
 
   return 0
@@ -12,8 +12,7 @@ function prependFileWithCheck {
 
 # Options
 
-while [[ $# -gt 0 ]]
-do
+while [[ $# -gt 0 ]]; do
   key="$1"
 
   case $key in
@@ -112,21 +111,21 @@ function checkDependencies {
     git
   )
 
-  if [[ -n $INSTALL_TMUX ]]; then dependencies+=tmux; fi
-  if [[ -n $INSTALL_VIM ]]; then dependencies+=vim; dependencies+=cc; dependencies+=make; fi
-  if [[ -n $INSTALL_ZSH ]]; then dependencies+=zsh; fi
+  if [[ -n "${INSTALL_TMUX}" ]]; then dependencies+=(tmux); fi
+  if [[ -n "${INSTALL_VIM}" ]];  then dependencies+=(vim); dependencies+=(cc); dependencies+=(make); fi
+  if [[ -n "${INSTALL_ZSH}" ]];  then dependencies+=(zsh); fi
 
   for i in ${dependencies[*]}; do
-    if ! commandExists $i; then
+    if ! commandExists "$i"; then
       dependenciesNotFound="${dependenciesNotFound}$i "
     fi
   done
 
   if [ ${dependenciesNotFound+x} ]; then
     echo 'The following dependencies are not installed on this system' | log -s
-    echo -e "\n\t${dependenciesNotFound}\n" | log -s
+    echo -e "\\n\\t${dependenciesNotFound}\\n" | log -s
 
-    case `uname` in
+    case $(uname) in
       'Darwin')
         echo 'These can be installed using brew' | log -s
 
@@ -140,11 +139,11 @@ function checkDependencies {
 
       *)
         if commandExists apt; then
-          echo -e "These can be installed using\n\n\tsudo apt install ${dependenciesNotFound}\n" | log -s
+          echo -e "These can be installed using\\n\\n\\tsudo apt install ${dependenciesNotFound}\\n" | log -s
         elif commandExists yum; then
-          echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n" | log -s
+          echo -e "These can be installed using\\n\\n\\tsudo yum install ${dependenciesNotFound}\\n" | log -s
         else
-          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n" | log -s
+          echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\\n" | log -s
         fi
         ;;
     esac
@@ -161,7 +160,7 @@ if [[ -n $INSTALL_BASH ]]; then
   BASHDIR="${BASHDIR:-${INSTALL_DIR}/.config/bash}"
 
   info "Writing bashrc to ${BASHRC}" | log -s
-  prependFileWithCheck src/rcfiles/bashrc ${BASHRC}
+  prependFileWithCheck src/rcfiles/bashrc "${BASHRC}"
 
   # Bash completion for mac
   if [ "$(uname)" == "Darwin" ]; then
@@ -183,8 +182,8 @@ if [[ -n $INSTALL_GHCI ]]; then
   linkfile "${DOTFILES}/src/rcfiles/ghci" "${INSTALL_DIR}/.ghci" | log
 
   info "Enabling Vi-mode in ghci" | log -s
-  if ! grep -q "editMode vi" ${INSTALL_DIR}/.haskeline; then
-    echo "editMode: Vi" >> ${INSTALL_DIR}/.haskeline
+  if ! grep -q "editMode vi" "${INSTALL_DIR}/.haskeline"; then
+    echo "editMode: Vi" >> "${INSTALL_DIR}/.haskeline"
   fi
 fi
 
@@ -195,7 +194,7 @@ if [[ -n $INSTALL_READLINE ]]; then
 
   if [[ -e ${INPUTRC} ]]; then
     info "Writing inputrc to ${INPUTRC}" | log -s
-    linkfile "${DOTFILES}/src/rcfiles/inputrc" ${INPUTRC} | log
+    linkfile "${DOTFILES}/src/rcfiles/inputrc" "${INPUTRC}" | log
   fi
 fi
 
@@ -206,21 +205,21 @@ if [[ -n $INSTALL_VIM ]]; then
   VIM_DIR="${VIM_DIR:-${INSTALL_DIR}/.vim}"
 
   info "Writing vimrc to ${VIMRC}" | log -s
-  prependFileWithCheck src/rcfiles/vimrc ${VIMRC}
+  prependFileWithCheck "${DOTFILES}/src/rcfiles/vimrc" "${VIMRC}"
 
   echo "Copying vim scripts to ${VIM_DIR}" | log
-  mkdir ${VERBOSE} -p "${VIM_DIR}" | log
+  mkdir "${VERBOSE}" -p "${VIM_DIR}" | log
   linkfile "${DOTFILES}/src/vim" "${VIM_DIR}" 2>&1 | log
 
   # Installing or updating Vim plugins
   if [ ! -d "${VIM_DIR}/bundle" ]; then
     info "Installing vim plugins"
-    vi -u ${VIMRC} +PluginInstall +qall
-    [ $? -ne 0 ] && error "Could not install vim plugins to ${VIM_DIR}/bundle" && exit 0 | log -s
+    vi -u "${VIMRC}" +PluginInstall +qall \
+      || error "Could not install vim plugins to ${VIM_DIR}/bundle" && exit 0 | log -s
   else
     info "Updating vim plugins"
-    vi -u ${VIMRC} +PluginUpdate  +qall
-    [ $? -ne 0 ] && error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
+    vi -u "${VIMRC}" +PluginUpdate  +qall \
+      || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
   fi
 
   # Install CommandT
@@ -228,12 +227,12 @@ if [[ -n $INSTALL_VIM ]]; then
   if [ -d "${VIM_DIR}/bundle/command-t" ]; then
     if commandExists rake; then
       (
-        cd "${VIM_DIR}/bundle/command-t"
+        cd "${VIM_DIR}/bundle/command-t" || exit 1
         bundle install
         rake make
       ) 2>&1 | log
 
-      [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
+      [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
     else
       warning "rake not installed; skipping command-t"
     fi
@@ -241,36 +240,36 @@ if [[ -n $INSTALL_VIM ]]; then
 
   # Install Powerline
   info "Installing Powerline" | log -s
-  if [ -d ${VIM_DIR}/bundle/powerline ]; then
+  if [ -d "${VIM_DIR}/bundle/powerline" ]; then
     (
-      cd "${VIM_DIR}/bundle/powerline"
+      cd "${VIM_DIR}/bundle/powerline" || exit 1
       ./setup.py build   2>&1
       ./setup.py install 2>&1
     ) | log
 
-    [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
   else
     warning "powerline directory not found, vim may not be installed with python support; skipping powerline" | log -s
   fi
 
   # Install Vimproc
   info  "Installing Vimproc" | log -s
-  if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
-    ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
-    [ ${PIPESTATUS[0]} -ne 0 ]  && error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
+  if [[ -e "${VIM_DIR}/bundle/vimproc.vim" ]]; then
+    ( cd "${VIM_DIR}/bundle/vimproc.vim" && make ) | log
+    [[ "${PIPESTATUS[0]}" -ne 0 ]]  && error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
   fi
 
   # install Tern for JavaScript
   info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
   if commandExists npm; then
-    ( cd ${VIM_DIR}/bundle/tern_for_vim && npm install ) | log
-    [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install Tern" | log
+    ( cd "${VIM_DIR}/bundle/tern_for_vim" && npm install ) | log
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Tern" | log
   else
     warning "npm is not installed, skipping Tern" | log -s
   fi
 
-  if [ ! -L ${INSTALL_DIR}/bin/thesaurus-lookup.sh ]; then
-    ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${INSTALL_DIR}/bin/ | log
+  if [[ ! -L "${INSTALL_DIR}/bin/thesaurus-lookup.sh" ]]; then
+    ln -fsv "${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh" "${INSTALL_DIR}/bin/" | log
   fi
 fi
 
@@ -280,7 +279,7 @@ if [[ -n $INSTALL_TMUX ]]; then
   TMUX_CONF="${INSTALL_DIR}/.tmux.conf"
   linkfile "${DOTFILES}/src/rcfiles/tmux.conf" "${TMUX_CONF}" | log
 
-  [ ! -z ${TMUX} ] && tmux source ${TMUX_CONF}
+  [[ ! -z "${TMUX}" ]] && tmux source "${TMUX_CONF}"
 fi
 
 # Zsh
@@ -290,10 +289,10 @@ if [[ -n $INSTALL_ZSH ]]; then
   ZSHDIR="${ZSHDIR:-${INSTALL_DIR}/.oh-my-zsh}"
   ZSH_CUSTOM="${ZSHDIR}/custom"
 
-  if [[ ! -e ${ZSHRC} ]] || ! grep 'oh-my-zsh.sh' ${ZSHRC} > /dev/null; then
+  if [[ ! -e "${ZSHRC}" ]] || ! grep 'oh-my-zsh.sh' "${ZSHRC}" > /dev/null; then
     info "Installing Oh-My-Zsh" | log -s
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
-    [ $? -ne 0 ] && error "Could not install Oh-My-Zsh; check ${LOGFILE} for details" | log -s
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Could not install Oh-My-Zsh; check ${LOGFILE} for details" | log -s
   fi
 
   info "Writing zshrc to ${ZSHRC}" | log -s
@@ -301,7 +300,7 @@ if [[ -n $INSTALL_ZSH ]]; then
 
   if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
     echo "Installing zsh plugins to ${ZSH_CUSTOM}/plugins/" | log
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions | log
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting | log
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" | log
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" | log
   fi
 fi
