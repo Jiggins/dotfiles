@@ -90,7 +90,22 @@ done
 INSTALL_DIR="${INSTALL_DIR:-${HOME}}"
 mkdir -p ${VERBOSE} "${INSTALL_DIR}/bin" | log
 
-# Dependencies
+# DOTFILES - Location of this repository
+DOTFILES=$(pwd)
+
+function linkfile() {
+  local source=$1
+  local destination=$2
+
+  if [[ -f "${destination}" ]]; then
+    mv -v "${destination}" "${destination}.bak"
+  elif [[ -L "${destination}" ]]; then
+    return 0
+  fi
+
+  ln -s "${source}" "${destination}"
+  return $?
+}
 
 function checkDependencies {
   dependencies=(
@@ -163,7 +178,7 @@ fi
 
 #  Vi mode in ghci!
 if [[ -n $INSTALL_GHCI ]]; then
-  cp ${VERBOSE} src/rcfiles/ghci ${INSTALL_DIR}/.ghci | log
+  linkfile "${DOTFILES}/src/rcfiles/ghci" "${INSTALL_DIR}/.ghci" | log
 
   info "Enabling Vi-mode in ghci" | log -s
   if ! grep -q "editMode vi" ${INSTALL_DIR}/.haskeline; then
@@ -178,9 +193,7 @@ if [[ -n $INSTALL_READLINE ]]; then
 
   if [[ -e ${INPUTRC} ]]; then
     info "Writing inputrc to ${INPUTRC}" | log -s
-    cp ${VERBOSE} src/rcfiles/inputrc ${INPUTRC} | log
-  else
-    info "${INPUTRC} already exists, not writing" | log -s
+    linkfile "${DOTFILES}/src/rcfiles/inputrc" ${INPUTRC} | log
   fi
 fi
 
@@ -195,7 +208,7 @@ if [[ -n $INSTALL_VIM ]]; then
 
   echo "Copying vim scripts to ${VIM_DIR}" | log
   mkdir ${VERBOSE} -p "${VIM_DIR}" | log
-  cp -r src/vim/* "${VIM_DIR}" 2>&1 | log
+  linkfile "${DOTFILES}/src/vim" "${VIM_DIR}" 2>&1 | log
 
   # Installing or updating Vim plugins
   if [ ! -d "${VIM_DIR}/bundle" ]; then
@@ -235,7 +248,7 @@ if [[ -n $INSTALL_VIM ]]; then
 
     [ ${PIPESTATUS[0]} -ne 0 ] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
   else
-    warning "powerline directory not found, vim may not be installed with python support; skipping powerline"
+    warning "powerline directory not found, vim may not be installed with python support; skipping powerline" | log -s
   fi
 
   # Install Vimproc
@@ -263,7 +276,7 @@ fi
 
 if [[ -n $INSTALL_TMUX ]]; then
   TMUX_CONF="${INSTALL_DIR}/.tmux.conf"
-  cp ${VERBOSE} src/rcfiles/tmux.conf "${TMUX_CONF}" | log
+  linkfile "${DOTFILES}/src/rcfiles/tmux.conf" "${TMUX_CONF}" | log
 
   [ ! -z ${TMUX} ] && tmux source ${TMUX_CONF}
 fi
@@ -282,7 +295,7 @@ if [[ -n $INSTALL_ZSH ]]; then
   fi
 
   info "Writing zshrc to ${ZSHRC}" | log -s
-  prependFileWithCheck src/rcfiles/zshrc ${ZSHRC}
+  linkfile "${DOTFILES}/src/rcfiles/zshrc" "${ZSHRC}" | log
 
   if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
     echo "Installing zsh plugins to ${ZSH_CUSTOM}/plugins/" | log
