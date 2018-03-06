@@ -71,9 +71,10 @@ addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 # Solidify PATH changes for the rest of the shell sessions
 export PATH
 
-[ -f "${HOME}/.fzf.zsh" ]         && source "${HOME}/.fzf.zsh"
-[ -f "${HOME}/.rvm/scripts/rvm" ] && source "${HOME}/.rvm/scripts/rvm"
-[ -f "${HOME}/bin/local.zsh" ]    && source "${HOME}/bin/local.zsh"
+[ -f "${HOME}/.fzf.zsh" ]           && source "${HOME}/.fzf.zsh"
+[ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
+[ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
+[ -f "${HOME}/bin/local.zsh" ]      && source "${HOME}/bin/local.zsh"
 
 export EDITOR=$(which vim)
 export LESS="SR"
