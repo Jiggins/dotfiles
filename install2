@@ -208,7 +208,6 @@ if [[ -n $INSTALL_VIM ]]; then
   prependFileWithCheck "${DOTFILES}/src/rcfiles/vimrc" "${VIMRC}"
 
   echo "Copying vim scripts to ${VIM_DIR}" | log
-  mkdir "${VERBOSE}" -p "${VIM_DIR}" | log
   linkfile "${DOTFILES}/src/vim" "${VIM_DIR}" 2>&1 | log
 
   # Installing or updating Vim plugins

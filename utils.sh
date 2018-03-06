@@ -18,7 +18,7 @@ function log {
 
 # Checks if a command is installed
 function commandExists {
-  return "$(command -v "$1" > /dev/null)"
+  return $(command -v "$1" > /dev/null)
 }
 
 # $1: File to prepend (Will appear at the top of $2)
