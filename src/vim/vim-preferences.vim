@@ -17,6 +17,19 @@ set nolist
 set spelllang=en_gb
 set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: too much)
 
+if exists("+undofile")
+  " undofile - This allows you to use undos after exiting and restarting
+  " This, like swap and backup files, uses ~/.vim/undo
+  " :help undo-persistence
+  " This is only present in 7.3+
+  if ! isdirectory($HOME . '/.vim/undo')
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+
+  set undodir=~/.vim/undo//
+  set undofile
+endif
+
 " Tabs
 set tabstop=2 shiftwidth=2 expandtab
 set smarttab
