@@ -86,6 +86,7 @@ command -v 'gtar' >/dev/null && alias tar='gtar'
 
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
+alias focusfix='printf "\e[?1004l"'
 alias gpg="gpg2"
 alias isodate='date +%Y-%m-%d'
 alias n='task next'
@@ -203,5 +204,3 @@ if [ ! -z ${USE_POWERLINE} ]; then
     . $POWERLINE_ZSH
   fi
 fi
-
-printf "\e[?1004l"
