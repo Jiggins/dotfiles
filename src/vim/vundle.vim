@@ -111,13 +111,16 @@ Plugin 'jpalardy/vim-slime'                  " Copy text to repl in tmux
 Plugin 'tmux-plugins/vim-tmux-focus-events'  " Fix for FocusGained and FocusLost autocommand events in tmux.
 Plugin 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/scripts/script.php?script_id=4488
 
+if v:version >= 740
+  Plugin 'vim-pandoc/vim-pandoc'             " pandoc integration and utilities for vim
+  Plugin 'vim-pandoc/vim-pandoc-syntax'      " pandoc markdown syntax, to be installed alongside vim-pandoc
+endif
+
 " Plugins requiring async support
-if has('async')
+if v:version >= 800
   Plugin 'drzel/vim-in-proportion'           " Resize vim's containing window and your splits resize proportionally
   Plugin 'metakirby5/codi.vim'               " The interactive scratchpad for hackers.
   Plugin 'ramele/agrep'                      " Asynchronous grep plugin for Vim
-  Plugin 'vim-pandoc/vim-pandoc'
-  Plugin 'vim-pandoc/vim-pandoc-syntax'
 endif
 
 if has('lua')
