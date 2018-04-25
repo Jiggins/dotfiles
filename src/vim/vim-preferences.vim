@@ -108,6 +108,7 @@ map <C-P> :NERDTreeToggle<CR>
 let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
 let g:pandoc#syntax#conceal#blacklist = ["atx", "list", "quotes"]
 let g:pandoc#syntax#conceal#urls = 1
+let g:pandoc#modules#disabled = [ "spell" ]
 
 " Proselint
 let g:syntastic_asciidoc_checkers = ['proselint']
