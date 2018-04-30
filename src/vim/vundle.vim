@@ -51,6 +51,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'm-kat/aws-vim'                       " aws-vim
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'                " Syntax checking hacks for vim
+Plugin 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 
 "" Languages - English
 Plugin 'amperser/proselint'                  " Proselint plugin for Vim
