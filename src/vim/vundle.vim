@@ -76,8 +76,10 @@ Plugin 'tpope/vim-rake'
 Plugin 'vim-ruby/vim-ruby'
 
 "" Languages - Web Dev
+Plugin 'Quramy/tsuquyomi'                    " A Vim plugin for TypeScript
 Plugin 'cakebaker/scss-syntax.vim'           " Vim syntax file for scss (Sassy CSS)
 Plugin 'gregsexton/MatchTag'                 " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
+Plugin 'leafgarland/typescript-vim'          " Typescript syntax files for Vim
 Plugin 'mattn/emmet-vim'                     " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
 Plugin 'pangloss/vim-javascript'             " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'ternjs/tern_for_vim'                 " Tern plugin for Vim
