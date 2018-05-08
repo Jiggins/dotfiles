@@ -56,9 +56,9 @@ RESET="$(tput sgr0)"; export RESET
 CLEARLN="\\r$(tput el)"; export CLEARLN
 
 function info() {
-  echo -e "${BOLD}${@}${RESET}"
+  echo -e "${BOLD}${*}${RESET}"
 }
 
-function success() { info "${GREEN}${@}"; }
-function warn()    { info "${YELLOW}${@}"; }
-function error()   { info "${RED}${@}"; }
+function success() { info "${GREEN}${*}"; }
+function warn()    { info "${YELLOW}${*}"; }
+function error()   { info "${RED}${*}"; }
