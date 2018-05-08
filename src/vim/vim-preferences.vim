@@ -73,7 +73,6 @@ set wildmenu
 " Allows for Ctrl+a to increment letters and hex
 " Ctrl+x decrements
 set nrformats-=alpha,hex
-
 " File handling
 set nobackup
 set nowritebackup
@@ -132,6 +131,9 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " neco-ghc
 let g:necoghc_enable_detailed_browse = 1                       " https://github.com/eagletmt/neco-ghc#options
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = 'context'
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
