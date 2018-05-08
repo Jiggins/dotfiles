@@ -26,7 +26,7 @@ if exists(':GitGutterToggle')
 endif
 
 " Toggle background transparency
-:function! ToggleTransparency()
+function! ToggleTransparency()
   if g:colors_name == 'monokai'
     colorscheme Monokai-Transparent
     echo g:colors_name
@@ -141,8 +141,8 @@ nmap <F6> :TagbarToggle<CR>
 nmap <leader>t :TagbarToggle<CR>
 
 " TMUX
-let tmux=$TMUX
-if tmux != ''
+let g:tmux=$TMUX
+if g:tmux != ''
   nnoremap <silent> <C-Left>  :TmuxNavigateLeft<cr>
   nnoremap <silent> <C-Down>  :TmuxNavigateDown<cr>
   nnoremap <silent> <C-Up>    :TmuxNavigateUp<cr>
@@ -170,7 +170,7 @@ nnoremap <Leader>vz :call VimuxZoomRunner()<CR>
 
 function! VimuxSlime()
   call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
+  call VimuxSendKeys('Enter')
 endfunction
 
 " If text is selected, save it in the v buffer and send that buffer it to tmux
