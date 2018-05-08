@@ -60,7 +60,7 @@ if [[ -z ${host+x} ]]; then
     output_file="${output_file}/dotfiles.tar.gz"
   fi
 
-  tar --dereference -C ${HOME} -czf "${output_file}" "${bundle[@]}"
+  tar --dereference -C "${HOME}" -czf "${output_file}" "${bundle[@]}"
   du -h "${output_file}"
 
 else
@@ -73,5 +73,5 @@ else
     ident="-i ${identity_file}"
   fi
 
-  tar --dereference -C ${HOME} -cz "${bundle[@]}" | ssh ${ident} "$host" 'tar -C ${HOME} -xz'
+  tar --dereference -C "${HOME}" -cz "${bundle[@]}" | ssh "${ident}" "$host" 'tar -C ${HOME} -xz'
 fi
