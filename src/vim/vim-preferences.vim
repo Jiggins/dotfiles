@@ -15,6 +15,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set encoding=utf-8
+scriptencoding utf-8
 set fileencoding=utf-8
 set iskeyword-=_               " Sets '_' as a word boundary - useful for Ruby
 set listchars=tab:▒░,trail:▓   " Highlights tabs and trailing whitespace when list is set
@@ -22,7 +23,7 @@ set nolist
 set spelllang=en_gb
 set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: too much)
 
-if exists("+undofile")
+if exists('+undofile')
   " undofile - This allows you to use undos after exiting and restarting
   " This, like swap and backup files, uses ~/.vim/undo
   " :help undo-persistence

@@ -12,7 +12,7 @@ endif
 set nocompatible
 filetype off
 
-set rtp+=$VIMHOME/bundle/Vundle.vim
+set runtimepath+=$VIMHOME/bundle/Vundle.vim
 call vundle#begin("$VIMHOME/bundle")
 
 " Package Manager
