@@ -33,6 +33,7 @@ Plugin 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the 
 Plugin 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
 Plugin 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
 Plugin 'Shougo/vimproc.vim'                  " Interactive command execution in Vim.
+Plugin 'tpope/vim-apathy'                    " apathy.vim: Set the 'path' option for miscellaneous file types
 Plugin 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plugin 'tpope/vim-obsession'                 " obsession.vim: continuously updated session files
 Plugin 'tpope/vim-rhubarb'                   " GitHub extension for fugitive.vim
