@@ -52,6 +52,7 @@ Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax fil
 Plugin 'm-kat/aws-vim'                       " aws-vim
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
+Plugin 'tpope/vim-scriptease'                " scriptease.vim: A Vim plugin for Vim plugins
 Plugin 'w0rp/ale'                            " Asynchronous Lint Engine
 
 "" Languages - English
