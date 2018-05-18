@@ -2,6 +2,11 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
+" Colour Scheme
+if filereadable(expand('~/.vim/colors/maui.vim'))
+  colorscheme maui
+endif
+
 " Reload session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
@@ -82,10 +87,18 @@ endif
 " Agrep
 let agrep_win_sp_mod = 'botright vert'
 
-" Colour Scheme
-if filereadable(expand('~/.vim/colors/maui.vim'))
-  colorscheme maui
-endif
+" ALE - Asynchronous Linting Engine
+let g:ale_linters = {
+\   'haskell': ['stack-build', 'stack-ghc-mod'],
+\   'pandoc': ['proselint'],
+\}
+
+let g:ale_fixers = {
+\   'ruby': ['rufo'],
+\}
+
+" Enable ale completion
+let g:ale_completion_enabled = 1
 
 " EditorConfig
 " Disable EditorConfig for tpope's fugitive.
@@ -105,24 +118,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-P> :NERDTreeToggle<CR>
 
 " Pandoc
-let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell","python","ruby"]
-let g:pandoc#syntax#conceal#blacklist = ["atx", "list", "quotes"]
+let g:pandoc#syntax#codeblocks#embeds#langs = ['haskell','python','ruby']
+let g:pandoc#syntax#conceal#blacklist = ['atx', 'list', 'quotes']
 let g:pandoc#syntax#conceal#urls = 1
-let g:pandoc#modules#disabled = [ "spell" ]
-
-" Proselint
-let g:syntastic_asciidoc_checkers = ['proselint']
-let g:syntastic_help_checkers     = ['proselint']
-let g:syntastic_html_checkers     = ['proselint']
-let g:syntastic_markdown_checkers = ['proselint']
-let g:syntastic_nroff_checkers    = ['proselint']
-let g:syntastic_pandoc_checkers   = ['proselint']
-let g:syntastic_pod_checkers      = ['proselint']
-let g:syntastic_rst_checkers      = ['proselint']
-let g:syntastic_tex_checkers      = ['proselint']
-let g:syntastic_texinfo_checkers  = ['proselint']
-let g:syntastic_text_checkers     = ['proselint']
-let g:syntastic_xhtml_checkers    = ['proselint']
+let g:pandoc#modules#disabled = [ 'spell' ]
 
 " Neocomplete options
 let g:neocomplete#enable_at_startup=1
@@ -148,11 +147,5 @@ let g:haskell_indent_in = 2
 let g:cabal_indent_section = 2
 
 " vim-slime
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": ":1.1"}
-
-" Syntastic
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-
+let g:slime_target = 'tmux'
+let g:slime_default_config = {'socket_name': 'default', 'target_pane': ':1.1'}

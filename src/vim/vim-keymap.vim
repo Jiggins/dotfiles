@@ -111,6 +111,10 @@ noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljz
 nnoremap <F8> :Aprev<CR>
 nnoremap <F9> :Anext<CR>
 
+" ALE
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)
+
 " GhcMod
 " Remap Haskell-mode bindings to the better GhcMod commands.
 nnoremap _t :GhcModType<CR>
