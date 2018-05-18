@@ -42,17 +42,17 @@ Plugin 'vimwiki/vimwiki'                     " Personal Wiki for Vim http://vimw
 
 " Languages
 Plugin 'Absolight/vim-bind'                  " DNS Bind zone & named plugin
-Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
 Plugin 'adimit/prolog.vim'
 Plugin 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plugin 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
 Plugin 'm-kat/aws-vim'                       " aws-vim
 Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/syntastic'                " Syntax checking hacks for vim
 Plugin 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
+Plugin 'w0rp/ale'                            " Asynchronous Lint Engine
 
 "" Languages - English
 Plugin 'amperser/proselint'                  " Proselint plugin for Vim
