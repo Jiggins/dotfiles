@@ -32,6 +32,7 @@ Plugin 'romainl/flattened'                   " Solarized, without the bullshit.
 Plugin 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the transition between multiline and single-line code
 Plugin 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
 Plugin 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
+Plugin 'powerman/vim-plugin-AnsiEsc'         " ansi escape sequences concealed, but highlighted as specified (conceal)
 Plugin 'Shougo/vimproc.vim'                  " Interactive command execution in Vim.
 Plugin 'tpope/vim-apathy'                    " apathy.vim: Set the 'path' option for miscellaneous file types
 Plugin 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
