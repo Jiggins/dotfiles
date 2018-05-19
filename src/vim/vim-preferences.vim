@@ -17,7 +17,7 @@ set complete-=i
 set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8
-set iskeyword-=_               " Sets '_' as a word boundary - useful for Ruby
+set iskeyword+=-               " Sets '-' as a non word boundary - useful for Bash
 set listchars=tab:▒░,trail:▓   " Highlights tabs and trailing whitespace when list is set
 set nolist
 set spelllang=en_gb
