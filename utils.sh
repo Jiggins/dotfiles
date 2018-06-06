@@ -3,7 +3,7 @@
 LOGFILE="log/$(date +%Y-%m-%d)-install.log"
 
 # Logging
-mkdir "${VERBOSE}" -p log
+mkdir ${VERBOSE} -p log
 date > "${LOGFILE}"
 
 function log {
