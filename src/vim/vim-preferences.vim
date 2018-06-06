@@ -115,7 +115,6 @@ let g:limelight_conceal_ctermfg = 240
 " NERDTree
 " Exit vim if NERDTree is the only open window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-map <C-P> :NERDTreeToggle<CR>
 
 " Pandoc
 let g:pandoc#syntax#codeblocks#embeds#langs = ['haskell','python','ruby']
