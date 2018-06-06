@@ -1,216 +1,274 @@
 #!/bin/bash
 
-source utils.sh
+source ./utils.sh
 
-if [[ $1 == "-v" ]]; then
-  VERBOSE='-v';
-fi
+# install_dir defaults to home
+install_dir="${install_dir:-${HOME}}"
+mkdir -p ${VERBOSE} "${install_dir}/bin" | log
 
-dependencies=(
-  cc
-  git
-  make
-  vim
-  wget
-)
+# dotfiles - Location of this repository
+dotfiles=${PWD}
 
-optionalDependencies=(
-  npm
-  pip
-)
+BASHDIR="${BASHDIR:-${install_dir}/.config/bash}"
+BASHRC="${BASHRC:-${install_dir}/.bashrc}"
+INPUTRC="${install_dir}/.inputrc"
+TMUX_CONF="${install_dir}/.tmux.conf"
+VIMRC="${VIMRC:-${install_dir}/.vimrc}"
+VIM_DIR="${VIM_DIR:-${install_dir}/.vim}"
+ZSHDIR="${ZSHDIR:-${install_dir}/.oh-my-zsh}"
+ZSHRC="${ZSHRC:-${install_dir}/.zshrc}"
+ZSH_CUSTOM="${ZSHDIR}/custom"
 
-echo "Checking dependencies:" | log
-
-for i in ${dependencies[*]}; do
-  if ! commandExists $i; then
-    dependenciesNotFound="${dependenciesNotFound}$i "
+function prependFileWithCheck {
+  if [ ! -e "$2" ] || ! grep -q 'configurations added by github.com/Jiggins/dotfiles' "$2"; then
+    prependFile "$1" "$2"
   fi
-done
 
-if [ ${dependenciesNotFound+x} ]; then
-  echo 'The following dependencies are not installed on this system:'
-  echo "\t${dependenciesNotFound}" | sed 's/ /\n\t/g'
+  return 0
+}
 
-  case `uname` in
-    'Darwin')
-      echo 'These can be installed using brew'
+function linkfile() {
+  local source=$1
+  local destination=$2
 
-      if commandExists brew; then
-        echo "\n\tbrew install ${dependenciesNotFound}\n"
-      else
-        echo 'brew is not installed on this system, consider installing brew and running this script again'
-        echo 'http://brew.sh'
+  if [[ -f "${destination}" ]]; then
+    mv -v "${destination}" "${destination}.bak"
+    info "Original ${destination} moved to ${destination}.bak" | log -s
+  elif [[ -L "${destination}" ]]; then
+    return 0
+  fi
+
+  ln -s "${source}" "${destination}" \
+    || { ret=$?; error "Could not symlink ${source} to ${destination}"; return $ret; }
+  return $?
+}
+
+function checkDependency() {
+  local -a missing
+
+  for i in "$@"; do
+    commandExists "$i" || missing+=( "$i" )
+  done
+
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    echo 'The following dependencies are not installed on this system' | log -s
+    echo -e "\\n\\t${missing[*]}\\n" | log -s
+    return 1
+  fi
+
+  return 0
+}
+
+# Bash
+function installBashCustomisation() {
+  info "Writing bashrc to ${BASHRC}" | log -s
+  prependFileWithCheck src/rcfiles/bashrc "${BASHRC}"
+
+  # Bash completion for mac
+  if [ "$(uname)" == "Darwin" ]; then
+    if commandExists brew; then
+      if ! brew ls --version bash-completion > /dev/null; then
+        info "Installing bash completion for mac" | log -s
+        brew install git bash-completion
       fi
+    fi
+  fi
+
+  echo ""
+}
+
+# GHCi
+function installGHCiCustomisation() {
+  checkDependency ghci || return 1
+  #  Vi mode in ghci!
+  linkfile "${dotfiles}/src/rcfiles/ghci" "${install_dir}/.ghci" | log
+
+  info "Enabling Vi-mode in ghci" | log -s
+  if ! grep -q "editMode vi" "${install_dir}/.haskeline"; then
+    echo "editMode: Vi" >> "${install_dir}/.haskeline"
+  fi
+}
+
+# Readline
+function installReadlineCustomisation() {
+  if [[ -e ${INPUTRC} ]]; then
+    info "Writing inputrc to ${INPUTRC}" | log -s
+    linkfile "${dotfiles}/src/rcfiles/inputrc" "${INPUTRC}" | log
+  fi
+}
+
+# Vim
+function installVimCustomisation() {
+  checkDependency vim
+  info "Writing vimrc to ${VIMRC}" | log -s
+  prependFileWithCheck "${dotfiles}/src/rcfiles/vimrc" "${VIMRC}"
+
+  echo "Copying vim scripts to ${VIM_DIR}" | log
+  linkfile "${dotfiles}/src/vim" "${VIM_DIR}" 2>&1 | log
+
+  # Installing or updating Vim plugins
+  if [ ! -d "${VIM_DIR}/bundle" ]; then
+    info "Installing vim plugins"
+    vi -u "${VIMRC}" +PluginInstall +qall \
+      || error "Could not install vim plugins to ${VIM_DIR}/bundle" && return 1 | log -s
+  else
+    info "Updating vim plugins"
+    vi -u "${VIMRC}" +PluginUpdate  +qall \
+      || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
+  fi
+
+  # Install CommandT
+  info "Installing CommandT" | log -s
+  if [ -d "${VIM_DIR}/bundle/command-t" ]; then
+    if commandExists rake; then
+      (
+        cd "${VIM_DIR}/bundle/command-t" || exit 1
+        bundle install
+        rake make
+      ) 2>&1 | log
+
+      [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
+    else
+      warning "rake not installed; skipping command-t"
+    fi
+  fi
+
+  # Install Powerline
+  info "Installing Powerline" | log -s
+  if [ -d "${VIM_DIR}/bundle/powerline" ]; then
+    (
+      cd "${VIM_DIR}/bundle/powerline" || exit 1
+      ./setup.py build   2>&1
+      ./setup.py install 2>&1
+    ) | log
+
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
+  else
+    warning "powerline directory not found, vim may not be installed with python support; skipping powerline" | log -s
+  fi
+
+  # Install Vimproc
+  info  "Installing Vimproc" | log -s
+  if [[ -e "${VIM_DIR}/bundle/vimproc.vim" ]]; then
+    ( cd "${VIM_DIR}/bundle/vimproc.vim" && make ) | log
+    [[ "${PIPESTATUS[0]}" -ne 0 ]]  && error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
+  fi
+
+  # install Tern for JavaScript
+  info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
+  if commandExists npm; then
+    ( cd "${VIM_DIR}/bundle/tern_for_vim" && npm install ) | log
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Tern" | log
+  else
+    warning "npm is not installed, skipping Tern" | log -s
+  fi
+
+  if [[ ! -L "${install_dir}/bin/thesaurus-lookup.sh" ]]; then
+    ln -fsv "${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh" "${install_dir}/bin/" | log
+  fi
+}
+
+# Tmux
+
+function installTmuxCustomisation() {
+  checkDependency tmux || return 1
+
+  linkfile "${dotfiles}/src/rcfiles/tmux.conf" "${TMUX_CONF}" | log
+
+  [[ ! -z "${TMUX}" ]] && tmux source "${TMUX_CONF}"
+}
+
+# Zsh
+function installZSHCustomisation() {
+  checkDependency zsh git
+
+  if [[ ! -e "${ZSHRC}" ]] || ! grep 'oh-my-zsh.sh' "${ZSHRC}" > /dev/null; then
+    info "Installing Oh-My-Zsh" | log -s
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Could not install Oh-My-Zsh; check ${LOGFILE} for details" | log -s
+  fi
+
+  info "Writing zshrc to ${ZSHRC}" | log -s
+  linkfile "${dotfiles}/src/rcfiles/zshrc" "${ZSHRC}" | log
+
+  if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
+    echo "Installing zsh plugins to ${ZSH_CUSTOM}/plugins/" | log
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" | log
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" | log
+  fi
+}
+
+# Options
+while [[ $# -gt 0 ]]; do
+  key="$1"
+
+  case $key in
+    -v|--verbose)
+      VERBOSE='-v'
+      ;;
+
+    all)
+      installBashCustomisation
+      installGHCiCustomisation
+      installReadlineCustomisation
+      installTmuxCustomisation
+      installVimCustomisation
+      installZSHCustomisation
+      ;;
+
+    -d|--install-dir|--install-directory)
+      install_dir="$2"
+      shift
+      ;;
+
+    bash)
+      installBashCustomisation
+      ;;
+
+    -b|--bashrc)
+      BASHRC="$2"
+      shift
+      ;;
+
+    --bashdir)
+      BASHDIR="$2"
+      shift
+      ;;
+
+    ghci)
+      installGHCiCustomisation
+      ;;
+
+    readline)
+      installReadlineCustomisation
+      ;;
+
+    tmux)
+      installTmuxCustomisation
+      ;;
+
+    vim)
+      installVimCustomisation
+      ;;
+
+    --vimrc)
+      VIMRC="$2"
+      shift
+      ;;
+
+    --vimdir)
+      VIM_DIR="$2"
+      ;;
+
+    zsh)
+      installZSHCustomisation
       ;;
 
     *)
-      if commandExists apt-get; then
-        echo -e "These can be installed using\n\n\tsudo apt-get install ${dependenciesNotFound}\n"
-      elif commandExists yum; then
-        echo -e "These can be installed using\n\n\tsudo yum install ${dependenciesNotFound}\n"
-      else
-        echo -e "These can be installed using your package manager to install: ${dependenciesNotFound}\n"
-      fi
+      echo "Invalid argument $1"
+      exit 128
       ;;
   esac
-  exit 1
-fi
-
-# $1: File to prepend (Will appear at the top of $2)
-# $2: File to prepend to (output file)
-function prependFile {
-  if [ ! $# -eq 2 ]; then
-    echo 'prependFile expects two arguments:'
-    echo '  $1: File to prepend (Will appear at the top of $2)'
-    echo '  $2: File to prepend to (output file)'
-    exit 1
-  elif [ ! -e $2 ]; then
-    echo -e "Copying $1 to $2" | log
-    cp $1 $2
-  else
-    echo -e "Prepending $1 to $2" | log
-    cp $1 tmp
-    cat $2 >> tmp
-    mv tmp $2
-  fi
-
-  return 0
-}
-
-function prependFileWithCheck {
-  if [ ! -e $2 ] || ! grep -q 'configurations added by github.com/Jiggins/Bash-Config' $2; then
-    prependFile $1 $2
-  fi
-
-  return 0
-}
-
-# Variables
-BASHRC="${HOME}/.bashrc"
-BASH_DIR="${HOME}/.config/bash"
-GHCI="${HOME}/.ghci"
-POWERLINE_DIR="${HOME}/.vim/bundle/powerline"
-TMUX="${HOME}/.tmux.conf"
-VIMRC="${HOME}/.vimrc"
-VIM_DIR="${HOME}/.vim"
-
-printf "Creating new directories\n in ${HOME}:" | log
-# Install config directory
-mkdir -p ${HOME}/.config | log
-mkdir -p ${HOME}/.vim    | log
-mkdir -p ${HOME}/bin     | log
-
-cp -r src/config/* ${HOME}/.config | log
-cp -r src/vim/* ${HOME}/.vim       | log
-echo "" | log
-
-# Install rcfiles
-echo "Installing rcfiles:" | log
-for f in src/rcfiles/*; do
-  file=$(basename $f)
-  prependFileWithCheck ${f} ${HOME}/.${file}
-done
-echo "Installed rcfiles.\n" | log
-
-# Download Scripts
-scripts=(
-  https://raw.githubusercontent.com/jwiegley/git-scripts/master/git-forest
-  https://raw.githubusercontent.com/whiteinge/dotfiles/master/bin/diffconflicts
-)
-
-mkdir -pv ${HOME}/bin | log
-if commandExists wget; then
-  echo "Installing scripts from github:" | log
-  for i in ${scripts[*]}; do
-    # --no-clobber - Don't download if script already exists
-    # --directory-prefix - Download scripts to ~/.bash/scripts
-    wget --no-clobber --directory-prefix=${HOME}/bin $i 2>&1 | log
-  done
-
-  chmod -v +x ${HOME}/bin/* | log
-  echo "Done installing scripts\n" | log
-
-  # Powerline Fonts
-  echo "Installing Powerline fonts:" | log
-  if [ ! -e ${HOME}/.fonts/ubuntu-mono-power ] && [ ! -e ${HOME}/.config/fontconfig/conf.d ]; then
-    mkdir -pv ${HOME}/.fonts/ubuntu-mono-power | log
-    mkdir -pv ${HOME}/.config/fontconfig/conf.d/ | log
-    wget --no-clobber https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ${HOME}/.fonts/PowerlineSymbols.otf | log
-    wget --no-clobber https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ${HOME}/.config/fontconfig/conf.d/10-powerline-symbols.conf | log
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-power | log
-    fc-cache -vf ${HOME}/.config/fonts | grep 'fc-cache:'
-    fc-cache -vf ${HOME}/.fonts | grep 'fc-cache:'
-  fi
-  echo "" | log
-fi
-
-for script in src/scripts/*; do
-  chmod -v +x $script | log
-  cp -v $script ${HOME}/bin | log
+  shift # past argument or value
 done
 
-# Bash completion for mac
-if [ "$(uname)" == "Darwin" ]; then
-  echo "Bash completion for mac" | log
-  if commandExists brew; then
-    if ! brew ls --version bash-completion > /dev/null; then
-      brew install git bash-completion
-    fi
-  fi
-fi
-
-echo "Configuring git:" | log
-# Git configuration
-if command -v git > /dev/null; then
-  ./src/gitconfig
-fi
-
-#  Vi mode in ghci!
-echo "Enabling Vi-mode in ghci" | log
-if ! grep -q "editMode vi" ${HOME}/.haskeline; then
-  echo "editMode: Vi" >> ${HOME}/.haskeline
-fi
-
-# Installing Vim plugins
-vi +PluginInstall +qall
-
-# Install CommandT
-echo "Installing CommandT:" | log
-if [ -e ${VIM_DIR}/bundle/command-t ]; then
-  if commandExists rake; then
-    ( cd ${VIM_DIR}/bundle/command-t; rake make ) 2>&1 | log
-  fi
-fi
-echo -e "Done installing Vimproc\n" | log
-
-# install Tern for JavaScript
-if commandExists npm; then
-  ( cd ${VIM_DIR}/bundle/tern_for_vim && npm install ) | log
-fi
-
-# Install Vimproc
-echo "Installing Vimproc:" | log
-if [ -e ${VIM_DIR}/bundle/vimproc.vim ]; then
-  ( cd ${VIM_DIR}/bundle/vimproc.vim; make ) | log
-fi
-echo -e "Done installing Vimproc\n" | log
-
-# Powerline installation
-if commandExists pip; then
-  echo "Installing powerline" | log
-  export PATH="${PATH}:${HOME}/.config/bash/scripts"
-  pip install --user --editable=${POWERLINE_DIR} | log
-
-  # Symlink the powerline shell command to the bash scripts directore
-  if [ ! -L ${HOME}/bin/powerline ]; then
-    ln -fsv ${POWERLINE_DIR}/scripts/* ${HOME}/bin/ | log
-  fi
-fi
-
-if [ ! -L ${HOME}/bin/thesaurus-lookup.sh ]; then
-  ln -fsv ${VIM_DIR}/bundle/vim-online-thesaurus/plugin/thesaurus-lookup.sh ${HOME}/bin/ | log
-fi
-
-source ${BASHRC}
-
-exit 0
