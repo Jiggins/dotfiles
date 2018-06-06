@@ -115,6 +115,9 @@ nnoremap <F9> :Anext<CR>
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
 
+" CtrlP
+nnoremap <silent> <c-s-p> :CtrlPTag<cr>
+
 " GhcMod
 " Remap Haskell-mode bindings to the better GhcMod commands.
 nnoremap _t :GhcModType<CR>
