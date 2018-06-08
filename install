@@ -77,6 +77,17 @@ function installBashCustomisation() {
   echo ""
 }
 
+function installGitCustomisation() {
+  checkDependency git ctags \
+    || return $?
+
+  linkfile "${dotfiles}/src/git_template" "${install_dir}/.git_template" \
+    || return $?
+
+  git config --global init.templatedir "${install_dir}/.git_template" | log -s
+  git config --global alias.ctags '!.git/hooks/ctags' | log -s
+}
+
 # GHCi
 function installGHCiCustomisation() {
   checkDependency ghci || return 1
@@ -233,6 +244,10 @@ while [[ $# -gt 0 ]]; do
     --bashdir)
       BASHDIR="$2"
       shift
+      ;;
+
+    git)
+      installGitCustomisation
       ;;
 
     ghci)
