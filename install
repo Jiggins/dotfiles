@@ -88,6 +88,24 @@ function installGitCustomisation() {
   git config --global alias.ctags '!.git/hooks/ctags' | log -s
 }
 
+function installCtagsCustomisation() {
+  checkDependency ctags \
+    || return $?
+
+  if ctags --version | grep 'Universal Ctags' | log; then
+    info "using Universal Ctags" | log -s
+    linkfile "${dotfiles}/src/ctags.d" "${install_dir}/.ctags.d"
+    return 0
+  elif ctags --verson | grep 'Exuberant Ctags'; then
+    info "Using Exuberent Ctags" | log -s
+    linkfile "${dotfiles}/src/ctags.d/default.ctags" "${install_dir}/.ctags"
+    return 0
+  else
+    warn "Using an unsupported version of ctags; consider installing Universal Ctags" | log -s
+    return 1
+  fi
+}
+
 # GHCi
 function installGHCiCustomisation() {
   checkDependency ghci || return 1
@@ -220,6 +238,7 @@ while [[ $# -gt 0 ]]; do
 
     all)
       installBashCustomisation
+      installCtagsCustomisation
       installGHCiCustomisation
       installReadlineCustomisation
       installTmuxCustomisation
@@ -244,6 +263,10 @@ while [[ $# -gt 0 ]]; do
     --bashdir)
       BASHDIR="$2"
       shift
+      ;;
+
+    ctags)
+      installCtagsCustomisation
       ;;
 
     git)
