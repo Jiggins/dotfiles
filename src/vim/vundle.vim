@@ -80,7 +80,6 @@ Plugin 'tpope/vim-rake'
 Plugin 'vim-ruby/vim-ruby'
 
 "" Languages - Web Dev
-Plugin 'Quramy/tsuquyomi'                    " A Vim plugin for TypeScript
 Plugin 'cakebaker/scss-syntax.vim'           " Vim syntax file for scss (Sassy CSS)
 Plugin 'gregsexton/MatchTag'                 " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
 Plugin 'leafgarland/typescript-vim'          " Typescript syntax files for Vim
@@ -122,6 +121,7 @@ Plugin 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/sc
 if v:version >= 740
   Plugin 'vim-pandoc/vim-pandoc'             " pandoc integration and utilities for vim
   Plugin 'vim-pandoc/vim-pandoc-syntax'      " pandoc markdown syntax, to be installed alongside vim-pandoc
+  Plugin 'Quramy/tsuquyomi'                  " A Vim plugin for TypeScript
 endif
 
 " Plugins requiring async support
