@@ -92,11 +92,11 @@ function installCtagsCustomisation() {
   checkDependency ctags \
     || return $?
 
-  if ctags --version | grep 'Universal Ctags' | log; then
+  if ctags --version | grep 'Universal Ctags' > /dev/null; then
     info "using Universal Ctags" | log -s
     linkfile "${dotfiles}/src/ctags.d" "${install_dir}/.ctags.d"
     return 0
-  elif ctags --verson | grep 'Exuberant Ctags'; then
+  elif ctags --version | grep 'Exuberant Ctags'; then
     info "Using Exuberent Ctags" | log -s
     linkfile "${dotfiles}/src/ctags.d/default.ctags" "${install_dir}/.ctags"
     return 0
