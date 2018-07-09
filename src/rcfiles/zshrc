@@ -212,3 +212,8 @@ if [ ! -z ${USE_POWERLINE} ]; then
     . $POWERLINE_ZSH
   fi
 fi
+
+# iTerm2 integration
+if [[ $(uname -s) -eq 'Darwin' ]] && [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+  source "${HOME}/.iterm2_shell_integration.zsh"
+fi
