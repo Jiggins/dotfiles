@@ -94,8 +94,19 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'ruby': ['rufo'],
+\   'ruby': ['rubocop'],
 \}
+
+" cache failing executable checks for linters. AKA don't keep checking for
+" linters that are not installed
+let g:ale_cache_executable_check_failures=1
+
+" Prefix all commands with nice.
+let g:ale_command_wrapper = 'nice -n5'
+
+" Don't lint whilst in insert mode
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'normal'
 
 " Enable ale completion
 let g:ale_completion_enabled = 1
