@@ -1,6 +1,10 @@
 " Code folding
 nnoremap <space> za
 
+" Fix syntax highlighting
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
+
 " Tabs
 vnoremap <Tab> >
 vnoremap <S-Tab> <
