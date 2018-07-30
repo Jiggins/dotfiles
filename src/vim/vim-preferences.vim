@@ -76,7 +76,9 @@ set nrformats-=alpha,hex
 " File handling
 set nobackup
 set nowritebackup
-set noswapfile
+set swapfile
+silent call mkdir($HOME . '/.vim/tmp', 'p')
+set dir=~/.vim/tmp/
 set fileformats=unix,dos,mac
 
 " Shell
