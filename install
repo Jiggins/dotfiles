@@ -220,11 +220,20 @@ function installZSHCustomisation() {
   info "Writing zshrc to ${ZSHRC}" | log -s
   linkfile "${dotfiles}/src/rcfiles/zshrc" "${ZSHRC}" | log
 
-  if [[ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]] && [[ -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]]; then
-    echo "Installing zsh plugins to ${ZSH_CUSTOM}/plugins/" | log
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" | log
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" | log
-  fi
+  local plugin_name
+  local -a plugins=(
+    zsh-users/zsh-completions
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-syntax-highlighting
+  )
+
+  for plugin in "${plugins[@]}"; do
+    plugin_name="${plugin//*\//}"
+    if [[ ! -d "${ZSH_CUSTOM}/plugins/${plugin_name}" ]]; then
+      info "Installing zsh plugin: ${plugin} to ${ZSH_CUSTOM}/plugins/${plugin_name}" | log -s
+      git clone "https://github.com/${plugin}" "${ZSH_CUSTOM}/plugins/${plugin_name}" | log
+    fi
+  done
 }
 
 # Options
