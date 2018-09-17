@@ -225,6 +225,7 @@ function installZSHCustomisation() {
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
     zsh-users/zsh-syntax-highlighting
+    RobSis/zsh-completion-generator
   )
 
   for plugin in "${plugins[@]}"; do

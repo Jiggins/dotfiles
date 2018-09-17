@@ -40,9 +40,10 @@ if [[ -d "${HOME}/.oh-my-zsh" ]]; then
     vi-mode
   )
 
-  [[ -d "${HOME}/.zsh/zsh-completions" ]]         && plugins+=(zsh-completions)
-  [[ -d "${HOME}/.zsh/zsh-autosuggestions" ]]     && plugins+=(zsh-autosuggestions)
-  [[ -d "${HOME}/.zsh/zsh-syntax-highlighting" ]] && plugins+=(zsh-syntax-highlighting)
+  [[ -d "${HOME}/.zsh/zsh-completions" ]]          && plugins+=(zsh-completions)
+  [[ -d "${HOME}/.zsh/zsh-autosuggestions" ]]      && plugins+=(zsh-autosuggestions)
+  [[ -d "${HOME}/.zsh/zsh-syntax-highlighting" ]]  && plugins+=(zsh-syntax-highlighting)
+  [[ -d "${HOME}/.zsh/zsh-completion-generator" ]] && plugins+=(zsh-completion-generator)
 
   source "${ZSH}/oh-my-zsh.sh"
 fi
