@@ -49,6 +49,7 @@ Plugin 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki
 Plugin 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
+Plugin 'davidhalter/jedi-vim'                " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plugin 'derekwyatt/vim-scala'
 Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
 Plugin 'm-kat/aws-vim'                       " aws-vim
