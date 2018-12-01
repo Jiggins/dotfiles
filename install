@@ -167,8 +167,8 @@ function installVimCustomisation() {
   if [ -d "${VIM_DIR}/bundle/powerline" ]; then
     (
       cd "${VIM_DIR}/bundle/powerline" || exit 1
-      ./setup.py build   2>&1
-      ./setup.py install 2>&1
+      python setup.py build   2>&1
+      python setup.py install 2>&1
     ) | log
 
     [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
