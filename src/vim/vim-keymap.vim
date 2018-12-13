@@ -128,8 +128,8 @@ nnoremap _t :GhcModType<CR>
 nnoremap _T :GhcModTypeInsert<CR>
 
 " LimeLight
-nnoremap <Leader>i :Limelight<CR>
-xnoremap <Leader>i :Limelight<CR>
+nnoremap <Leader>i :Limelight!!<CR>
+xnoremap <Leader>i :Limelight!!<CR>
 
 " MultipleCursorFind
 if exists(':MultipleCursorFind')
