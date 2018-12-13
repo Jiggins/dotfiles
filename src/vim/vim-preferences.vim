@@ -151,6 +151,9 @@ let g:necoghc_enable_detailed_browse = 1                       " https://github.
 " SuperTab
 let g:SuperTabDefaultCompletionType = 'context'
 
+" Tagbar
+let g:tagbar_sort = 0
+
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
