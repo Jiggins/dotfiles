@@ -69,6 +69,9 @@ set ruler
 set showcmd
 set wildmenu
 
+" Open vsplits on the right
+set splitright
+
 " Numbers
 " Allows for Ctrl+a to increment letters and hex
 " Ctrl+x decrements
