@@ -3,7 +3,6 @@
 source utils.sh
 
 set -e
-set -x
 
 declare -a bundle=(
   .bashrc
@@ -43,6 +42,10 @@ do
       VERBOSE='-v'
       ;;
 
+    --tar)
+      use_tar=1
+      ;;
+
     *)
       echo "Invalid argument $1"
       exit 128
@@ -65,13 +68,23 @@ if [[ -z ${host+x} ]]; then
 
 else
 
-  if [[ ! -z ${output_file+x} ]]; then
+  if [[ -n ${output_file+x} ]]; then
     echo >&2 'WARN: --output-file is ignored when using --host'
   fi
 
-  if [[ ! -z ${identity_file+x} ]]; then
+  if [[ -n ${identity_file+x} ]]; then
     ident="-i ${identity_file}"
   fi
 
-  tar --dereference -C "${HOME}" -cz "${bundle[@]}" | ssh "${ident}" "$host" 'tar -C ${HOME} -xz'
+  if [[ -n ${use_tar+x} ]]; then
+    tar --dereference -C "${HOME}" -cz "${bundle[@]}" | ssh ${ident} "$host" 'tar -C ${HOME} -xz'
+  else
+    rsync -avz \
+      --no-motd \
+      --copy-links \
+      --copy-dirlinks \
+      --exclude "*.git" \
+      $(printf "${HOME}/%s " "${bundle[@]}") \
+      "${host}:~"
+  fi
 fi
