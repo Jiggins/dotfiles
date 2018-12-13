@@ -133,6 +133,10 @@ function compress() {
   tar -cf - "$@" | pigz | pv
 }
 
+function intercalate() {
+  ghc -e "getContents >>= putStrLn . foldr1 (\a c -> a ++ \"${1}\" ++ c) . words"
+}
+
 function js() {
   jshon "$@" | pygmentize -l 'json'
 }
