@@ -20,6 +20,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Aesthetics
 Plugin 'airblade/vim-gitgutter'              " Show git diff in gutter
+Plugin 'junegunn/goyo.vim'                   " Distraction-free writing in Vim
 Plugin 'junegunn/limelight.vim'              " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'kien/rainbow_parentheses.vim'        " Better Rainbow Parentheses
 
