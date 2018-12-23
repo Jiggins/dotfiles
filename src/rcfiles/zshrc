@@ -110,6 +110,11 @@ if command -v pigz > /dev/null; then
   alias tarz='tar --use-compress-program=pigz'
 fi
 
+# https://github.com/nvbn/thefuck
+if command -v thefuck > /dev/null; then
+  eval $(thefuck --alias)
+fi
+
 # Codi
 # Usage: codi [filetype] [filename]
 function codi() {
