@@ -142,7 +142,7 @@ function installVimCustomisation() {
       || error "Could not install vim plugins to ${VIM_DIR}/bundle" && return 1 | log -s
   else
     info "Updating vim plugins"
-    vi -u "${VIMRC}" +PluginUpdate  +qall \
+    vim -u "${VIMRC}" +PluginUpdate  +qall \
       || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
   fi
 
