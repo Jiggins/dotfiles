@@ -23,6 +23,9 @@ Plugin 'airblade/vim-gitgutter'              " Show git diff in gutter
 Plugin 'junegunn/goyo.vim'                   " Distraction-free writing in Vim
 Plugin 'junegunn/limelight.vim'              " :flashlight: All the world's indeed a stage and we are merely players
 Plugin 'kien/rainbow_parentheses.vim'        " Better Rainbow Parentheses
+Plugin 'vim-airline/vim-airline'             " lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline-themes'      " A collection of themes for vim-airline
+Plugin 'edkolev/tmuxline.vim'                " Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration
 
 " Colourschemes
 Plugin 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
@@ -140,10 +143,6 @@ endif
 
 if has('mac')
   Plugin 'vim-scripts/MailApp'               " This plugin allows Mac OS X users to send e-mails from Vim using Mail.app.
-endif
-
-if has('python') || has('python3')
-  Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}  " Powerline - The triangular characters in Vim and tmux
 endif
 
 " After
