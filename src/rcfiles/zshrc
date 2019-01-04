@@ -91,11 +91,14 @@ alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
 alias gpg="gpg2"
 alias isodate='date +%Y-%m-%d'
-alias n='task next'
-alias next='task next'
 alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
 alias path='echo $PATH | sed "s/:/\n/g"'
+alias tidy='tidy -quiet -indent'
 alias tree='tree -C'
+
+# Task Warrior
+alias n='task ready'
+alias nn="task project:${CURRENT_PROJECT}"
 
 # Colours and text formatting
 export BOLD=$(tput bold)
