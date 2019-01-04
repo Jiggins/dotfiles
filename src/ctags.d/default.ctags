@@ -4,3 +4,4 @@
 --exclude="@.gitignore"
 --exclude=build
 --regex-sh=/^[ \t]*(local)?[ \t]*([A-Za-z0-9_-]+)=/\2/v,variable,variables/
+--regex-markdown=/^#[ \t](.*$)/\1/h,heading,headings/
