@@ -45,6 +45,7 @@ Plugin 'vimwiki/vimwiki'                     " Personal Wiki for Vim http://vimw
 
 " Languages
 Plugin 'Absolight/vim-bind'                  " DNS Bind zone & named plugin
+Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
 Plugin 'adimit/prolog.vim'
 Plugin 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plugin 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
@@ -52,8 +53,8 @@ Plugin 'chrisbra/unicode.vim'
 Plugin 'dag/vim-fish'
 Plugin 'davidhalter/jedi-vim'                " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plugin 'derekwyatt/vim-scala'
-Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
 Plugin 'm-kat/aws-vim'                       " aws-vim
+Plugin 'momota/junos.vim'                    " Vim syntax for Junos configuration files
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 Plugin 'tpope/vim-scriptease'                " scriptease.vim: A Vim plugin for Vim plugins
