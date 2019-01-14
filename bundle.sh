@@ -13,6 +13,7 @@ declare -a bundle=(
   .tmux.conf
   .vim
   .vimrc
+  .zlogout
   .zshrc
 )
 
