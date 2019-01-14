@@ -1,0 +1,2 @@
+# Don't wipe screen on logout
+setopt norcs
