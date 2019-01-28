@@ -227,17 +227,6 @@ function tn() {
   tmux attach -t "$name" || tmux new -s "$name"
 }
 
-# Set USE_POWERLINE=1 in .zprofile to use powerline
-if [ ! -z ${USE_POWERLINE} ]; then
-  if [ -e "${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh" ]; then
-    export POWERLINE_ZSH="${HOME}/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh"
-  fi
-
-  if $(command -v powerline-config > /dev/null); then
-    . $POWERLINE_ZSH
-  fi
-fi
-
 # iTerm2 integration
 if [[ $(uname -s) -eq 'Darwin' ]] && [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
   source "${HOME}/.iterm2_shell_integration.zsh"
