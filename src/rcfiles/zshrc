@@ -120,6 +120,15 @@ if command -v thefuck > /dev/null; then
   eval $(thefuck --alias)
 fi
 
+function review() {
+  description="Review ${1}"
+  [[ -n "${2}" ]] && description+=" for ${2}"
+  shift; shift
+  task add scheduled:today ${@} "${description}" \
+    || return $?
+  task reviews
+}
+
 # Codi
 # Usage: codi [filetype] [filename]
 function codi() {
