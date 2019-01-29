@@ -222,7 +222,7 @@ function installZSHCustomisation() {
   linkfile "${dotfiles}/src/rcfiles/zshrc" "${ZSHRC}" | log
 
   info "Writing zlogout to ${ZLOGOUT}" | log -s
-  linkfile "${dotfiles}/src/rcfiles/zshrc" "${ZLOGOUT}" | log
+  linkfile "${dotfiles}/src/rcfiles/zlogout" "${ZLOGOUT}" | log
 
   local plugin_name
   local -a plugins=(
