@@ -89,6 +89,9 @@ if $SHELL =~ 'bin/fish'
   set shell=/bin/sh
 endif
 
+" Load local .vimrc
+set exrc
+
 " Agrep
 let agrep_win_sp_mod = 'botright vert'
 
