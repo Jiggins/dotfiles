@@ -154,6 +154,16 @@ let g:SuperTabDefaultCompletionType = 'context'
 " Tagbar
 let g:tagbar_sort = 0
 
+" Tmuxline
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I #W'],
+      \'cwin' : ['#I #W #F'],
+      \'x'    : '#(~/bin/active-task.sh)',
+      \'y'    : ['#P', '#W %R'],
+      \'z'    : '#H',
+      \'options' : {'status-justify' : 'left' }}
+
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
