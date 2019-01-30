@@ -64,10 +64,26 @@ function checkDependency() {
   return 0
 }
 
+bin_linked=
+
+function linkbin() {
+  # Only try to link files once
+  [[ ${bin_linked} ]] && return 0
+
+  info "Symlinking scripts to bin"
+  for script in bin/*; do
+    linkfile "${dotfiles}/${script}" "${install_dir}/bin/$(basename ${script})" | log -s
+  done
+
+  bin_linked=true
+}
+
 # Bash
 function installBashCustomisation() {
   info "Writing bashrc to ${BASHRC}" | log -s
   prependFileWithCheck src/rcfiles/bashrc "${BASHRC}"
+
+  linkbin
 
   # Bash completion for mac
   if [ "$(uname)" == "Darwin" ]; then
@@ -207,6 +223,8 @@ function installVimCustomisation() {
 function installTmuxCustomisation() {
   checkDependency tmux || return 1
 
+  linkbin
+
   linkfile "${dotfiles}/src/rcfiles/tmux.conf" "${TMUX_CONF}" | log
   linkfile "${dotfiles}/src/tmux" "${TMUX_DIR}" | log
 
@@ -216,6 +234,8 @@ function installTmuxCustomisation() {
 # Zsh
 function installZSHCustomisation() {
   checkDependency zsh git
+
+  linkbin
 
   if [[ ! -e "${ZSHRC}" ]] || ! grep 'oh-my-zsh.sh' "${ZSHRC}" > /dev/null; then
     info "Installing Oh-My-Zsh" | log -s

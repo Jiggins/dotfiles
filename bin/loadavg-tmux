@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+declare -a loadavg
+
+# Linux environment
+if [[ -f /proc/loadavg ]]; then
+  cat /proc/loadavg | read one five fifteen _rest
+  loadavg=( "${one}" "${five}" "${fifteen}" )
+elif sysctl -n vm.loadavg > /dev/null; then # Probably a mac
+  loadavg=( $(sysctl -n vm.loadavg | cut -d ' ' -f 2,3,4) )
+else
+  exit 1
+fi
+
+echo ${loadavg}
