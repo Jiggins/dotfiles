@@ -5,6 +5,9 @@ COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
 
+# ZSH style
+zstyle ':completion:*' menu select
+
 # History options
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
