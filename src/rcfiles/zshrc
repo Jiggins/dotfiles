@@ -67,6 +67,7 @@ typeset -U path
 addpath "${HOME}/bin"
 addpath "${HOME}/.local/bin"
 addpath "${HOME}/.rvm/bin"
+addpath "${HOME}/.cargo/bin"
 addpath "${HOME}/.vim/bundle/powerline/scripts"
 addpath "/usr/local/bin"
 addpath "/usr/local/sbin"
