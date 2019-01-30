@@ -99,8 +99,8 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'python': ['autopep8'],
-\   'ruby': ['rubocop'],
+\   'python': ['autopep8', 'add_blank_lines_for_python_control_statements'],
+\   'ruby': ['rubocop']
 \}
 
 " cache failing executable checks for linters. AKA don't keep checking for
