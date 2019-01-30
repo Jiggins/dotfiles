@@ -33,15 +33,18 @@ function linkfile() {
   local source=$1
   local destination=$2
 
-  if [[ -f "${destination}" ]]; then
+  if [[ -L "${destination}" ]]; then
+    return 0
+  elif [[ -f "${destination}" ]]; then
     mv -v "${destination}" "${destination}.bak"
     info "Original ${destination} moved to ${destination}.bak" | log -s
-  elif [[ -L "${destination}" ]]; then
-    return 0
   fi
 
-  ln -s "${source}" "${destination}" \
-    || { ret=$?; error "Could not symlink ${source} to ${destination}"; return $ret; }
+  {
+    info "Linking ${source} to ${destination}"
+    ln -s "${source}" "${destination}" \
+      || { ret=$?; error "Could not symlink ${source} to ${destination}"; return $ret; }
+  } | log -s;
   return $?
 }
 
