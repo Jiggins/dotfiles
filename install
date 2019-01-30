@@ -12,6 +12,7 @@ dotfiles=${PWD}
 BASHDIR="${BASHDIR:-${install_dir}/.config/bash}"
 BASHRC="${BASHRC:-${install_dir}/.bashrc}"
 INPUTRC="${install_dir}/.inputrc"
+TMUX_DIR="${install_dir}/.tmux"
 TMUX_CONF="${install_dir}/.tmux.conf"
 VIMRC="${VIMRC:-${install_dir}/.vimrc}"
 VIM_DIR="${VIM_DIR:-${install_dir}/.vim}"
@@ -204,8 +205,9 @@ function installTmuxCustomisation() {
   checkDependency tmux || return 1
 
   linkfile "${dotfiles}/src/rcfiles/tmux.conf" "${TMUX_CONF}" | log
+  linkfile "${dotfiles}/src/tmux" "${TMUX_DIR}" | log
 
-  [[ ! -z "${TMUX}" ]] && tmux source "${TMUX_CONF}"
+  [[ -n "${TMUX}" ]] && tmux source "${TMUX_CONF}"
 }
 
 # Zsh
