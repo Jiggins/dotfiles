@@ -1,157 +1,143 @@
-" `<sfile>` gives the location of the current file being sourced
-" `:p` gives full path rather than relative
-" `:h` knocks off the last item in the path
-let $VIMHOME=expand('<sfile>:p:h')
+scriptencoding utf-8
 
-if !exists(':PluginInstall')
-  if !isdirectory(expand("$VIMHOME/bundle/Vundle.vim/.git"))
-    !git clone https://github.com/VundleVim/Vundle.vim.git $VIMHOME/bundle/Vundle.vim
-  endif
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set nocompatible
-filetype off
-
-set runtimepath+=$VIMHOME/bundle/Vundle.vim
-call vundle#begin("$VIMHOME/bundle")
-
-" Package Manager
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/bundle')
 
 " Aesthetics
-Plugin 'airblade/vim-gitgutter'              " Show git diff in gutter
-Plugin 'junegunn/goyo.vim'                   " Distraction-free writing in Vim
-Plugin 'junegunn/limelight.vim'              " :flashlight: All the world's indeed a stage and we are merely players
-Plugin 'kien/rainbow_parentheses.vim'        " Better Rainbow Parentheses
-Plugin 'vim-airline/vim-airline'             " lean & mean status/tabline for vim that's light as air
-Plugin 'vim-airline/vim-airline-themes'      " A collection of themes for vim-airline
-Plugin 'edkolev/tmuxline.vim'                " Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration
+Plug 'airblade/vim-gitgutter'              " Show git diff in gutter
+Plug 'junegunn/goyo.vim'                   " Distraction-free writing in Vim
+Plug 'junegunn/limelight.vim'              " :flashlight: All the world's indeed a stage and we are merely players
+Plug 'kien/rainbow_parentheses.vim'        " Better Rainbow Parentheses
+Plug 'vim-airline/vim-airline'             " lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline-themes'      " A collection of themes for vim-airline
+Plug 'edkolev/tmuxline.vim'                " Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration
 
 " Colourschemes
-Plugin 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
-Plugin 'widatama/vim-phoenix'                " Monochrome color schemes for Vim
-Plugin 'romainl/flattened'                   " Solarized, without the bullshit.
+Plug 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plug 'widatama/vim-phoenix'                " Monochrome color schemes for Vim
+Plug 'romainl/flattened'                   " Solarized, without the bullshit.
 
 " General
-Plugin 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the transition between multiline and single-line code
-Plugin 'ctrlpvim/ctrlp.vim'                  " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder. http://ctrlpvim.github.com/ctrlp.vim
-Plugin 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
-Plugin 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
-Plugin 'powerman/vim-plugin-AnsiEsc'         " ansi escape sequences concealed, but highlighted as specified (conceal)
-Plugin 'Shougo/vimproc.vim'                  " Interactive command execution in Vim.
-Plugin 'tpope/vim-apathy'                    " apathy.vim: Set the 'path' option for miscellaneous file types
-Plugin 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
-Plugin 'tpope/vim-obsession'                 " obsession.vim: continuously updated session files
-Plugin 'tpope/vim-rhubarb'                   " GitHub extension for fugitive.vim
-Plugin 'tpope/vim-sleuth'                    " sleuth.vim: Heuristically set buffer options
-Plugin 'vimwiki/vimwiki'                     " Personal Wiki for Vim http://vimwiki.github.io/
+Plug 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the transition between multiline and single-line code
+Plug 'ctrlpvim/ctrlp.vim'                  " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder. http://ctrlpvim.github.com/ctrlp.vim
+Plug 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
+Plug 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
+Plug 'powerman/vim-plugin-AnsiEsc'         " ansi escape sequences concealed, but highlighted as specified (conceal)
+Plug 'Shougo/vimproc.vim'                  " Interactive command execution in Vim.
+Plug 'tpope/vim-apathy'                    " apathy.vim: Set the 'path' option for miscellaneous file types
+Plug 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
+Plug 'tpope/vim-obsession'                 " obsession.vim: continuously updated session files
+Plug 'tpope/vim-rhubarb'                   " GitHub extension for fugitive.vim
+Plug 'tpope/vim-sleuth'                    " sleuth.vim: Heuristically set buffer options
+Plug 'vimwiki/vimwiki'                     " Personal Wiki for Vim http://vimwiki.github.io/
 
 " Languages
-Plugin 'Absolight/vim-bind'                  " DNS Bind zone & named plugin
-Plugin 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
-Plugin 'adimit/prolog.vim'
-Plugin 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
-Plugin 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
-Plugin 'chrisbra/unicode.vim'
-Plugin 'dag/vim-fish'
-Plugin 'davidhalter/jedi-vim'                " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
-Plugin 'derekwyatt/vim-scala'
-Plugin 'm-kat/aws-vim'                       " aws-vim
-Plugin 'momota/junos.vim'                    " Vim syntax for Junos configuration files
-Plugin 'plasticboy/vim-markdown'
-Plugin 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
-Plugin 'tpope/vim-scriptease'                " scriptease.vim: A Vim plugin for Vim plugins
-Plugin 'w0rp/ale'                            " Asynchronous Lint Engine
+Plug 'Absolight/vim-bind'                  " DNS Bind zone & named plugin
+Plug 'Glench/Vim-Jinja2-Syntax'            " An 'up-to-date' jinja2 syntax file.
+Plug 'adimit/prolog.vim'
+Plug 'chikamichi/mediawiki.vim'            " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
+Plug 'chr4/nginx.vim'                      " Improved nginx vim plugin (incl. syntax highlighting)
+Plug 'chrisbra/unicode.vim'
+Plug 'dag/vim-fish'
+Plug 'davidhalter/jedi-vim'                " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
+Plug 'derekwyatt/vim-scala'
+Plug 'm-kat/aws-vim'                       " aws-vim
+Plug 'momota/junos.vim'                    " Vim syntax for Junos configuration files
+Plug 'plasticboy/vim-markdown'
+Plug 'rhysd/vim-crystal'                   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
+Plug 'tpope/vim-scriptease'                " scriptease.vim: A Vim plugin for Vim plugins
+Plug 'w0rp/ale'                            " Asynchronous Lint Engine
 
 "" Languages - English
-Plugin 'amperser/proselint'                  " Proselint plugin for Vim
-Plugin 'beloglazov/vim-online-thesaurus'     " A Vim plugin for looking up words in an online thesaurus
+Plug 'amperser/proselint'                  " Proselint plugin for Vim
+Plug 'beloglazov/vim-online-thesaurus'     " A Vim plugin for looking up words in an online thesaurus
 
 "" Languages - Haskell
-Plugin 'eagletmt/ghcmod-vim'                 " Happy Haskell programming on Vim, powered by ghc-mod
-Plugin 'eagletmt/neco-ghc'                   " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
-Plugin 'hspec/hspec.vim'                     " Vim syntax file for Hspec
-Plugin 'lukerandall/haskellmode-vim'
-Plugin 'raichoo/haskell-vim'
-Plugin 'Twinside/vim-hoogle'                 " Vim plugin used to query hoogle, the haskell search engine
-Plugin 'Twinside/vim-syntax-haskell-cabal'   " Syntax file for Haskell's cabal syntax file
-Plugin 'vim-scripts/hlint'                   " Compiler definition for the hlint (haskell checker) tool
+Plug 'eagletmt/ghcmod-vim'                 " Happy Haskell programming on Vim, powered by ghc-mod
+Plug 'eagletmt/neco-ghc'                   " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
+Plug 'hspec/hspec.vim'                     " Vim syntax file for Hspec
+Plug 'lukerandall/haskellmode-vim'
+Plug 'raichoo/haskell-vim'
+Plug 'Twinside/vim-hoogle'                 " Vim plugin used to query hoogle, the haskell search engine
+Plug 'Twinside/vim-syntax-haskell-cabal'   " Syntax file for Haskell's cabal syntax file
+Plug 'vim-scripts/hlint'                   " Compiler definition for the hlint (haskell checker) tool
 
 "" Languages - Ruby
-Plugin 'danchoi/ri.vim'                      " browse ri documentation from Vim http://github.com/danchoi/ri.vim
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-endwise'                   " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'danchoi/ri.vim'                      " browse ri documentation from Vim http://github.com/danchoi/ri.vim
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'                   " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'vim-ruby/vim-ruby'
 
 "" Languages - Web Dev
-Plugin 'cakebaker/scss-syntax.vim'           " Vim syntax file for scss (Sassy CSS)
-Plugin 'gregsexton/MatchTag'                 " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
-Plugin 'leafgarland/typescript-vim'          " Typescript syntax files for Vim
-Plugin 'mattn/emmet-vim'                     " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
-Plugin 'pangloss/vim-javascript'             " Vastly improved Javascript indentation and syntax support in Vim.
-Plugin 'ternjs/tern_for_vim'                 " Tern plugin for Vim
-Plugin 'tmhedberg/matchit'                   " extended % matching for HTML, LaTeX, and many other languages
+Plug 'cakebaker/scss-syntax.vim'           " Vim syntax file for scss (Sassy CSS)
+Plug 'gregsexton/MatchTag'                 " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
+Plug 'leafgarland/typescript-vim'          " Typescript syntax files for Vim
+Plug 'mattn/emmet-vim'                     " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
+Plug 'pangloss/vim-javascript'             " Vastly improved Javascript indentation and syntax support in Vim.
+Plug 'ternjs/tern_for_vim'                 " Tern plugin for Vim
+Plug 'tmhedberg/matchit'                   " extended % matching for HTML, LaTeX, and many other languages
 
 " Navigation
-Plugin 'majutsushi/tagbar'                   " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
-Plugin 'mbbill/undotree'                     " Visualise undo tree
-Plugin 'scrooloose/nerdtree'                 " A tree explorer plugin for vim.
-Plugin 'vim-utils/vim-vertical-move'         " Move to bottom of text easily
-Plugin 'wesQ3/vim-windowswap'                " Swap two panes in Vim
-Plugin 'wincent/command-t'                   " Fast file navigation for VIM
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'majutsushi/tagbar'                   " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
+Plug 'mbbill/undotree'                     " Visualise undo tree
+Plug 'scrooloose/nerdtree'                 " A tree explorer plugin for vim.
+Plug 'vim-utils/vim-vertical-move'         " Move to bottom of text easily
+Plug 'wesQ3/vim-windowswap'                " Swap two panes in Vim
+Plug 'wincent/command-t'                   " Fast file navigation for VIM
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Text Editing
-Plugin 'ervandew/supertab'                   " Tab completion with Tab
-Plugin 'godlygeek/tabular'                   " Align text; like these comments
-Plugin 'inkarkat/argtextobj.vim'             " Text-object like motion for arguments http://www.vim.org/scripts/script.php?script_id=2699
-Plugin 'junegunn/vim-emoji'                  " Vim support for Emoji
-Plugin 'terryma/vim-multiple-cursors'        " Create multiple cursors in Vim
-Plugin 'tomtom/tcomment_vim'                 " Comment a line with gcc
-Plugin 'tpope/vim-characterize'              " Print the unicode value of the character under the cursor - ga
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-speeddating'               " use CTRL-A/CTRL-X to increment dates, times, and more http://www.vim.org/scripts/script.php?script_id=2120
-Plugin 'tpope/vim-surround'                  " Surround text with a character or brackets
-Plugin 'vim-utils/vim-space'                 " Select in and around whitespace
-Plugin 'wellle/targets.vim'                  " Vim plugin that provides additional text objects
+Plug 'ervandew/supertab'                   " Tab completion with Tab
+Plug 'godlygeek/tabular'                   " Align text; like these comments
+Plug 'inkarkat/argtextobj.vim'             " Text-object like motion for arguments http://www.vim.org/scripts/script.php?script_id=2699
+Plug 'junegunn/vim-emoji'                  " Vim support for Emoji
+Plug 'terryma/vim-multiple-cursors'        " Create multiple cursors in Vim
+Plug 'tomtom/tcomment_vim'                 " Comment a line with gcc
+Plug 'tpope/vim-characterize'              " Print the unicode value of the character under the cursor - ga
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'               " use CTRL-A/CTRL-X to increment dates, times, and more http://www.vim.org/scripts/script.php?script_id=2120
+Plug 'tpope/vim-surround'                  " Surround text with a character or brackets
+Plug 'vim-utils/vim-space'                 " Select in and around whitespace
+Plug 'wellle/targets.vim'                  " Vim plugin that provides additional text objects
 
 " tmux Integration
-Plugin 'benmills/vimux'                      " Open a tmux session from Vim
-Plugin 'christoomey/vim-tmux-navigator'      " Move between Vim and tmux panes with one short cut
-Plugin 'jpalardy/vim-slime'                  " Copy text to repl in tmux
-Plugin 'tmux-plugins/vim-tmux-focus-events'  " Fix for FocusGained and FocusLost autocommand events in tmux.
-Plugin 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/scripts/script.php?script_id=4488
+Plug 'benmills/vimux'                      " Open a tmux session from Vim
+Plug 'christoomey/vim-tmux-navigator'      " Move between Vim and tmux panes with one short cut
+Plug 'jpalardy/vim-slime'                  " Copy text to repl in tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'  " Fix for FocusGained and FocusLost autocommand events in tmux.
+Plug 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/scripts/script.php?script_id=4488
 
 if v:version >= 740
-  Plugin 'vim-pandoc/vim-pandoc'             " pandoc integration and utilities for vim
-  Plugin 'vim-pandoc/vim-pandoc-syntax'      " pandoc markdown syntax, to be installed alongside vim-pandoc
-  Plugin 'Quramy/tsuquyomi'                  " A Vim plugin for TypeScript
+  Plug 'vim-pandoc/vim-pandoc'             " pandoc integration and utilities for vim
+  Plug 'vim-pandoc/vim-pandoc-syntax'      " pandoc markdown syntax, to be installed alongside vim-pandoc
+  Plug 'Quramy/tsuquyomi'                  " A Vim plugin for TypeScript
 endif
 
 " Plugins requiring async support
 if v:version >= 800
-  Plugin 'drzel/vim-in-proportion'           " Resize vim's containing window and your splits resize proportionally
-  Plugin 'metakirby5/codi.vim'               " The interactive scratchpad for hackers.
-  Plugin 'ramele/agrep'                      " Asynchronous grep plugin for Vim
+  Plug 'drzel/vim-in-proportion'           " Resize vim's containing window and your splits resize proportionally
+  Plug 'metakirby5/codi.vim'               " The interactive scratchpad for hackers.
+  Plug 'ramele/agrep'                      " Asynchronous grep plugin for Vim
 endif
 
 if has('lua')
-  Plugin 'Shougo/neocomplete.vim'            " Next generation completion framework after neocomplcache
+  Plug 'Shougo/neocomplete.vim'            " Next generation completion framework after neocomplcache
 endif
 
 if has('mac')
-  Plugin 'vim-scripts/MailApp'               " This plugin allows Mac OS X users to send e-mails from Vim using Mail.app.
+  Plug 'vim-scripts/MailApp'               " This plugin allows Mac OS X users to send e-mails from Vim using Mail.app.
 endif
 
 " After
-Plugin 'ryanoasis/vim-devicons'              " Adds font icons (glyphs ★♨☢) to programming languages, libraries,
-                                             " and web developer filetypes for: NERDTree, powerline, vim-airline,
-                                             " ctrlp, unite, lightline.vim, vim-startify, vimfiler, and flagship
+Plug 'ryanoasis/vim-devicons'              " Adds font icons (glyphs ★♨☢) to programming languages, libraries,
+                                           " and web developer filetypes for: NERDTree, powerline, vim-airline,
+                                           " ctrlp, unite, lightline.vim, vim-startify, vimfiler, and flagship
 
-call vundle#end()
-
-if has('autocmd')
-  filetype plugin indent on
-endif
+call plug#end()
