@@ -54,7 +54,6 @@ Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',        { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 Plug 'tmhedberg/matchit'                                " extended % matching for HTML, LaTeX, and many other languages
 Plug 'tpope/vim-scriptease',     { 'for': 'vim' }       " scriptease.vim: A Vim plugin for Vim plugins
-Plug 'w0rp/ale'                                         " Asynchronous Lint Engine
 
 "" Languages - English
 Plug 'amperser/proselint'                  " Proselint plugin for Vim
@@ -121,9 +120,10 @@ endif
 
 " Plugins requiring async support
 if v:version >= 800
-  Plug 'drzel/vim-in-proportion'           " Resize vim's containing window and your splits resize proportionally
-  Plug 'metakirby5/codi.vim'               " The interactive scratchpad for hackers.
-  Plug 'ramele/agrep', { 'on': 'Agrep' }   " Asynchronous grep plugin for Vim
+  Plug 'drzel/vim-in-proportion'         " Resize vim's containing window and your splits resize proportionally
+  Plug 'metakirby5/codi.vim'             " The interactive scratchpad for hackers.
+  Plug 'ramele/agrep', { 'on': 'Agrep' } " Asynchronous grep plugin for Vim
+  Plug 'w0rp/ale'                        " Asynchronous Lint Engine
 endif
 
 if has('lua')
