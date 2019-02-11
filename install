@@ -159,11 +159,11 @@ function installVimCustomisation() {
   # Installing or updating Vim plugins
   if [ ! -d "${VIM_DIR}/bundle" ]; then
     info "Installing vim plugins"
-    vim -u "${VIMRC}" +PluginInstall +qall \
+    vim -u "${VIMRC}" +qall \
       || error "Could not install vim plugins to ${VIM_DIR}/bundle" && return 1 | log -s
   else
     info "Updating vim plugins"
-    vim -u "${VIMRC}" +PluginUpdate  +qall \
+    vim -u "${VIMRC}" +PlugUpdate  +qall \
       || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
   fi
 
