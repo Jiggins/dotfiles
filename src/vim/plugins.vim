@@ -90,7 +90,6 @@ Plug 'mbbill/undotree'                                   " Visualise undo tree
 Plug 'scrooloose/nerdtree',         { 'on': 'NERDTree' } " A tree explorer plugin for vim.
 Plug 'vim-utils/vim-vertical-move'                       " Move to bottom of text easily
 Plug 'wesQ3/vim-windowswap'                              " Swap two panes in Vim
-Plug 'wincent/command-t'                                 " Fast file navigation for VIM
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
 
 " Text Editing

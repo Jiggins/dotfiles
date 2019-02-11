@@ -167,22 +167,6 @@ function installVimCustomisation() {
       || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
   fi
 
-  # Install CommandT
-  info "Installing CommandT" | log -s
-  if [ -d "${VIM_DIR}/bundle/command-t" ]; then
-    if commandExists rake; then
-      (
-        cd "${VIM_DIR}/bundle/command-t" || exit 1
-        bundle install
-        rake make
-      ) 2>&1 | log
-
-      [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install CommandT; check ${LOGFILE} for details" | log -s
-    else
-      warn "rake not installed; skipping command-t"
-    fi
-  fi
-
   # Install Powerline
   info "Installing Powerline" | log -s
   if [ -d "${VIM_DIR}/bundle/powerline" ]; then
