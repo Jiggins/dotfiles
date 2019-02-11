@@ -181,13 +181,6 @@ function installVimCustomisation() {
     warn "powerline directory not found, vim may not be installed with python support; skipping powerline" | log -s
   fi
 
-  # Install Vimproc
-  info  "Installing Vimproc" | log -s
-  if [[ -e "${VIM_DIR}/bundle/vimproc.vim" ]]; then
-    ( cd "${VIM_DIR}/bundle/vimproc.vim" && make ) | log
-    [[ "${PIPESTATUS[0]}" -ne 0 ]]  && error "Failed to install Vimproc; check ${LOGFILE} for details" | log -s
-  fi
-
   # install Tern for JavaScript
   info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
   if commandExists npm; then

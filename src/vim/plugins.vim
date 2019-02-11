@@ -36,6 +36,7 @@ Plug 'tpope/vim-obsession'           " obsession.vim: continuously updated sessi
 Plug 'tpope/vim-rhubarb'             " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer options
 Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.github.io/
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
 
 " Languages
 Plug 'Absolight/vim-bind'                               " DNS Bind zone & named plugin
