@@ -167,20 +167,6 @@ function installVimCustomisation() {
       || error "Could not update vim plugins in ${VIM_DIR}/bundle" | log -s
   fi
 
-  # Install Powerline
-  info "Installing Powerline" | log -s
-  if [ -d "${VIM_DIR}/bundle/powerline" ]; then
-    (
-      cd "${VIM_DIR}/bundle/powerline" || exit 1
-      python setup.py build   2>&1
-      python setup.py install 2>&1
-    ) | log
-
-    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Powerline; check ${LOGFILE} for details" | log -s
-  else
-    warn "powerline directory not found, vim may not be installed with python support; skipping powerline" | log -s
-  fi
-
   # install Tern for JavaScript
   info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
   if commandExists npm; then
