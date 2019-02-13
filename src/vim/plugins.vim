@@ -39,7 +39,7 @@ Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.gith
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
 
 " Languages
-Plug 'Absolight/vim-bind'                               " DNS Bind zone & named plugin
+Plug 'Absolight/vim-bind',       { 'for': 'bindzone' }  " DNS Bind zone & named plugin
 Plug 'adimit/prolog.vim',        { 'for': 'prolog' }
 Plug 'chikamichi/mediawiki.vim', { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',           { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
@@ -47,7 +47,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',     { 'for': 'scala' }
-Plug 'Glench/Vim-Jinja2-Syntax'                         " An 'up-to-date' jinja2 syntax file.
+Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file. 
 Plug 'm-kat/aws-vim'                                    " aws-vim
 Plug 'momota/junos.vim',         { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
