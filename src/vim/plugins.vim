@@ -19,7 +19,10 @@ Plug 'vim-airline/vim-airline-themes'                       " A collection of th
 
 " Colourschemes
 Plug 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plug 'nightsense/carbonized'               " vim theme inspired by the Carbon keycap set
 Plug 'romainl/flattened'                   " Solarized, without the bullshit.
+Plug 'smallwat3r/vim-mono_sw'              " Monochrome vim color scheme with little touch or red
+Plug 'treycucco/vim-monotonic'             " A low-key vim color scheme
 Plug 'widatama/vim-phoenix'                " Monochrome color schemes for Vim
 
 " General
