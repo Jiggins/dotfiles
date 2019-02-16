@@ -3,7 +3,9 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Colour Scheme
-if filereadable(expand('~/.vim/colors/maui.vim'))
+if &t_Co == 8
+  colorscheme carbonized-dark
+elseif filereadable(expand('~/.vim/colors/maui.vim'))
   colorscheme maui
 endif
 
