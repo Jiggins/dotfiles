@@ -63,7 +63,6 @@ Plug 'beloglazov/vim-online-thesaurus'     " A Vim plugin for looking up words i
 
 "" Languages - Haskell
 Plug 'eagletmt/ghcmod-vim',               { 'for': 'haskell' } " Happy Haskell programming on Vim, powered by ghc-mod
-Plug 'eagletmt/neco-ghc',                 { 'for': 'haskell' } " A completion plugin for Haskell, using ghc-mod http://www.vim.org/scripts/script.php?script_id=3423
 Plug 'hspec/hspec.vim',                   { 'for': 'haskell' } " Vim syntax file for Hspec
 Plug 'lukerandall/haskellmode-vim',       { 'for': 'haskell' }
 Plug 'raichoo/haskell-vim',               { 'for': 'haskell' }
@@ -126,10 +125,6 @@ if v:version >= 800
   Plug 'metakirby5/codi.vim'             " The interactive scratchpad for hackers.
   Plug 'ramele/agrep', { 'on': 'Agrep' } " Asynchronous grep plugin for Vim
   Plug 'w0rp/ale'                        " Asynchronous Lint Engine
-endif
-
-if has('lua')
-  Plug 'Shougo/neocomplete.vim'            " Next generation completion framework after neocomplcache
 endif
 
 if has('mac')

@@ -142,15 +142,6 @@ let g:pandoc#syntax#conceal#blacklist = ['atx', 'list', 'quotes']
 let g:pandoc#syntax#conceal#urls = 1
 let g:pandoc#modules#disabled = [ 'spell' ]
 
-" Neocomplete options
-let g:neocomplete#enable_at_startup=1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" neco-ghc
-let g:necoghc_enable_detailed_browse = 1                       " https://github.com/eagletmt/neco-ghc#options
-
 " SuperTab
 let g:SuperTabDefaultCompletionType = 'context'
 
