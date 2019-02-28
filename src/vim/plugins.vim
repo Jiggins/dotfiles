@@ -127,7 +127,6 @@ endif
 if v:version >= 800
   Plug 'drzel/vim-in-proportion'         " Resize vim's containing window and your splits resize proportionally
   Plug 'metakirby5/codi.vim'             " The interactive scratchpad for hackers.
-  Plug 'ramele/agrep', { 'on': 'Agrep' } " Asynchronous grep plugin for Vim
   Plug 'w0rp/ale'                        " Asynchronous Lint Engine
 endif
 
