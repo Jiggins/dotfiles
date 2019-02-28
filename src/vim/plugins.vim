@@ -40,6 +40,10 @@ Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer opti
 Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.github.io/
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
 
+" FZF - 🌸 A command-line fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " Languages
 Plug 'Absolight/vim-bind',       { 'for': 'bindzone' }  " DNS Bind zone & named plugin
 Plug 'adimit/prolog.vim',        { 'for': 'prolog' }
