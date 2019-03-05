@@ -79,7 +79,6 @@ Plug 'danchoi/ri.vim',    { 'for': 'ruby' } " browse ri documentation from Vim h
 Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'tpope/vim-rails',   { 'for': 'ruby' }
 Plug 'tpope/vim-rake',    { 'for': 'ruby' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 
 "" Languages - Web Dev
 Plug 'cakebaker/scss-syntax.vim',  { 'for': 'css' }        " Vim syntax file for scss (Sassy CSS)
