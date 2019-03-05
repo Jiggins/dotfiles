@@ -53,7 +53,8 @@ Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',     { 'for': 'scala' }
-Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file. 
+Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
+Plug 'hashivim/vim-terraform',   { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
 Plug 'm-kat/aws-vim'                                    " aws-vim
 Plug 'momota/junos.vim',         { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
