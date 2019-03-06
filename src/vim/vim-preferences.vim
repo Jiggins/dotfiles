@@ -23,18 +23,28 @@ set nolist
 set spelllang=en_gb
 set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: too much)
 
+" Undofile
 if exists('+undofile')
   " undofile - This allows you to use undos after exiting and restarting
   " This, like swap and backup files, uses ~/.vim/undo
   " :help undo-persistence
   " This is only present in 7.3+
   if ! isdirectory($HOME . '/.vim/undo')
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+    silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
   endif
 
   set undodir=~/.vim/undo//
   set undofile
 endif
+
+" Swapfile
+" This will warn you if you try to open the same file in two vim instances it
+" will also let you recover if vim crashes or an ssh session ends.
+set swapfile
+if ! isdirectory($HOME . '/.vim/tmp')
+  silent !mkdir -p ~/.vim/tmp > /dev/null 2>&1
+endif
+set directory=~/.vim/tmp/
 
 " Tabs
 set tabstop=2 shiftwidth=2 expandtab
@@ -78,10 +88,6 @@ set splitright
 set nrformats-=alpha,hex
 " File handling
 set nobackup
-set nowritebackup
-set swapfile
-silent call mkdir($HOME . '/.vim/tmp', 'p')
-set dir=~/.vim/tmp/
 set fileformats=unix,dos,mac
 
 " Shell
