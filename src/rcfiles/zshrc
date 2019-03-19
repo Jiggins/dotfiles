@@ -90,7 +90,10 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 command -v 'gsed' >/dev/null && alias sed='gsed'
 command -v 'gtar' >/dev/null && alias tar='gtar'
 
-command -v 'bat' >/dev/null && alias cat='bat'
+if command -v 'bat' >/dev/null; then
+  alias cat='bat'
+  export BAT_STYLE="grid,header"
+fi
 
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
