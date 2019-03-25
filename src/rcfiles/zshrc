@@ -98,7 +98,6 @@ fi
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
-alias gpg="gpg2"
 alias isodate='date +%Y-%m-%d'
 alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
 alias path='echo $PATH | sed "s/:/\n/g"'
