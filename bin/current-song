@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if command -v osascript > /dev/null; then
+  osascript "${HOME}/.config/applescript/iTunes-current-song"
+fi
