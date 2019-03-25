@@ -114,6 +114,7 @@ noremap <silent> <leader>sc :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljz
 " ALE
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
+nmap <silent> gd :ALEGoToDefinitionInVSplit<CR>
 
 " CtrlP
 nnoremap <silent> <c-s-p> :CtrlPTag<cr>
