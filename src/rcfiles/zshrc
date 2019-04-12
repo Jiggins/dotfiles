@@ -24,6 +24,11 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
+# Disable zsh correction on shell arguments
+# $ which vim
+# "zsh: correct 'vim' to '.vim' [nyae]?"
+unsetopt correct_all
+
 autoload predict-on
 
 # 10ms for key sequences
