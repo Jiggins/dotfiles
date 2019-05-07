@@ -147,6 +147,35 @@ function installReadlineCustomisation() {
   fi
 }
 
+# Ruby
+function installRuby() {
+  checkDependency ruby
+
+  declare -a gems=(
+    bundler
+    openssl
+    pry
+    pry-byebug
+    pry-inline
+    pry-toys
+    rubocop
+    rubocop-performance
+    yard
+  )
+
+  if ! command -v rvm > /dev/null; then
+    info "Installing Ruby via rvm"
+    gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB | log
+    curl -sSL https://get.rvm.io | bash -s stable --ruby \
+      || error "Failed to install rvm"
+  fi
+
+  info "Installing Ruby gems" | log -s
+  gem install "${gems[@]}" | log
+
+  yard config --gem-install-yri | log
+}
+
 # Vim
 function installVimCustomisation() {
   checkDependency vim
@@ -281,6 +310,10 @@ while [[ $# -gt 0 ]]; do
 
     readline)
       installReadlineCustomisation
+      ;;
+
+    ruby)
+      installRuby
       ;;
 
     tmux)
