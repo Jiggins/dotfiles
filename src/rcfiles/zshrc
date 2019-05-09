@@ -180,6 +180,12 @@ function intercalate() {
   ghc -e "getContents >>= putStrLn . foldr1 (\a c -> a ++ \"${1}\" ++ c) . words"
 }
 
+# This should be done by `git init` but it does not work sometimes
+function install-git-hooks() {
+  [[ -d .git ]] \
+    && rsync -Lav --delete ~/.git_template/hooks/ .git/hooks
+}
+
 function js() {
   jshon "$@" | pygmentize -l 'json'
 }
