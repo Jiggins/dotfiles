@@ -100,6 +100,7 @@ if command -v 'bat' >/dev/null; then
   export BAT_STYLE="grid,header"
 fi
 
+alias gls='git ls-files'
 alias ccat='pygmentize -f 256'
 alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
@@ -108,6 +109,10 @@ alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.htm
 alias path='echo $PATH | sed "s/:/\n/g"'
 alias tidy='tidy -quiet -indent'
 alias tree='tree -C'
+
+# Tmux
+alias ta='tmux attach -t'
+alias tl='tmux list-sessions'
 
 # Task Warrior
 alias n='task ready'
