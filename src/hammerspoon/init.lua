@@ -21,6 +21,7 @@ work = {
   {default_browser,  nil,             "DELL U2715H",  hs.layout.maximized,   nil,  nil},
   {"iTunes",         "Mini Player",   "Color LCD",    hs.layout.iTunesMini,  nil,  nil},
   {"iTunes",         nil,             "Color LCD",    nil,                   nil,  nil},
+  {"Fantastical",    nil,             "Color LCD",    nil,                   nil,  nil},
 }
 
 work_browser = {
@@ -30,6 +31,7 @@ work_browser = {
   {"iTerm2",         nil,             "DELL U2715H",  hs.layout.maximized,   nil,  nil},
   {"iTunes",         "Mini Player",   "Color LCD",    hs.layout.iTunesMini,  nil,  nil},
   {"iTunes",         nil,             "Color LCD",    nil,                   nil,  nil},
+  {"Fantastical",    nil,             "Color LCD",    nil,                   nil,  nil},
 }
 
 home = {
