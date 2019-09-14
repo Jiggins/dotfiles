@@ -49,6 +49,7 @@ Plug 'Absolight/vim-bind',       { 'for': 'bindzone' }  " DNS Bind zone & named 
 Plug 'adimit/prolog.vim',        { 'for': 'prolog' }
 Plug 'chikamichi/mediawiki.vim', { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',           { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
+Plug 'chrisbra/csv.vim',         { 'for': 'csv' }       " A Filetype plugin for csv files
 Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
