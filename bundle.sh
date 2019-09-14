@@ -5,16 +5,14 @@ source utils.sh
 set -e
 
 declare -a bundle=(
-  .bashrc
-  .config/bash
-  .config/powerline
   .irbrc
-  .oh-my-zsh
   .tmux.conf
   .vim
   .vimrc
   .zlogout
   .zshrc
+  .config/bash
+  .config/zsh
 )
 
 output_file="dotfiles.tar.gz"
@@ -59,6 +57,10 @@ done
 # host and unpack dotfiles
 if [[ -z ${host+x} ]]; then
 
+  if [[ -n ${output_file+x} ]]; then
+    echo >&2 'WARN: --output-file is ignored when using --host'
+  fi
+
   # If directory is given, file name defaults to dotfiles.tar.gz
   if [[ -d "${output_file}" ]]; then
     output_file="${output_file}/dotfiles.tar.gz"
@@ -68,10 +70,6 @@ if [[ -z ${host+x} ]]; then
   du -h "${output_file}"
 
 else
-
-  if [[ -n ${output_file+x} ]]; then
-    echo >&2 'WARN: --output-file is ignored when using --host'
-  fi
 
   if [[ -n ${identity_file+x} ]]; then
     ident="-i ${identity_file}"

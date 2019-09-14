@@ -1,0 +1,64 @@
+# vim: filetype=zsh
+
+autoload -U colors && colors
+
+# usage: colour COLOUR WORD [WORD]
+function colour() {
+  local color=$1
+  shift
+  echo "%{$fg[${color}]%}${*}%{$reset_color%}"
+}
+
+function _username() {
+  if (( UID == 0 )); then
+    colour red 'root'
+    return $?
+  fi
+
+  echo '%n'
+}
+
+function _last_status() {
+  local return_code=$1
+  if (( return_code == 0 )); then
+    colour green '$ '
+  else
+    colour red "$1 "
+  fi
+}
+
+# Show hostname if in an ssh session
+function _ssh_hostname() {
+  [[ -n "${SSH_CONNECTION}" ]] && echo '@%m'
+}
+
+function _git_branch() {
+  (
+    command git symbolic-ref -q HEAD \
+      || command git name-rev --name-only --no-undefined --always HEAD
+  ) 2>/dev/null
+}
+
+function _show_mode() {
+  case "${KEYMAP}" in
+    main)  echo '>' ;;
+    vicmd) echo '<' ;;
+    *)     echo '>' ;;
+  esac
+}
+
+# https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+function prompt_custom_setup() {
+  prompt_opts=(cr subst percent)
+  PS1='$(_username)$(_ssh_hostname) $(colour green %~)$(_show_mode) '
+}
+
+prompt_custom_setup "$@"

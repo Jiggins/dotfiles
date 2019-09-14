@@ -17,7 +17,7 @@ TMUX_CONF="${install_dir}/.tmux.conf"
 VIMRC="${VIMRC:-${install_dir}/.vimrc}"
 VIM_DIR="${VIM_DIR:-${install_dir}/.vim}"
 ZLOGOUT="${ZLOGOUT:-${install_dir}/.zlogout}"
-ZSHDIR="${ZSHDIR:-${install_dir}/.oh-my-zsh}"
+ZSHDIR="${ZSHDIR:-${install_dir}/.config/zsh}"
 ZSHRC="${ZSHRC:-${install_dir}/.zshrc}"
 ZSH_CUSTOM="${ZSHDIR}/custom"
 
@@ -229,33 +229,14 @@ function installZSHCustomisation() {
 
   linkbin
 
-  if [[ ! -e "${ZSHRC}" ]] || ! grep 'oh-my-zsh.sh' "${ZSHRC}" > /dev/null; then
-    info "Installing Oh-My-Zsh" | log -s
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | log
-    [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Could not install Oh-My-Zsh; check ${LOGFILE} for details" | log -s
-  fi
-
   info "Writing zshrc to ${ZSHRC}" | log -s
   linkfile "${dotfiles}/src/rcfiles/zshrc" "${ZSHRC}" | log
 
   info "Writing zlogout to ${ZLOGOUT}" | log -s
   linkfile "${dotfiles}/src/rcfiles/zlogout" "${ZLOGOUT}" | log
 
-  local plugin_name
-  local -a plugins=(
-    zsh-users/zsh-completions
-    zsh-users/zsh-autosuggestions
-    zsh-users/zsh-syntax-highlighting
-    RobSis/zsh-completion-generator
-  )
-
-  for plugin in "${plugins[@]}"; do
-    plugin_name="${plugin//*\//}"
-    if [[ ! -d "${ZSH_CUSTOM}/plugins/${plugin_name}" ]]; then
-      info "Installing zsh plugin: ${plugin} to ${ZSH_CUSTOM}/plugins/${plugin_name}" | log -s
-      git clone "https://github.com/${plugin}" "${ZSH_CUSTOM}/plugins/${plugin_name}" | log
-    fi
-  done
+  info "Writing zsh dir to ${ZSHDIR}" | log -s
+  linkfile "${dotfiles}/src/config/zsh" "${ZSHDIR}" | log
 }
 
 # Options
