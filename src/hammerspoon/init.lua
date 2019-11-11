@@ -11,7 +11,8 @@ hs.layout.bottomleft  = hs.geometry.new({x = 0,     y = 0.77,  w = 0.8,   h = 0.
 hs.layout.bottomright = hs.geometry.new({x = 0.8,   y = 0.77,  w = 0.2,   h = 0.23})
 hs.layout.iTunesMini  = hs.geometry.new({x = 0.83,  y = 0,     w = 0.17,  h = 1})
 
-default_browser = "Google Chrome"
+-- default_browser = "Google Chrome"
+default_browser = "Firefox"
 
 -- Layouts
 work = {
