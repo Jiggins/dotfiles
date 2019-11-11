@@ -116,25 +116,15 @@ zplug load
 [ -f "${HOME}/.fzf.zsh" ]           && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
 [ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
-[ -f "${HOME}/bin/local.zsh" ]      && source "${HOME}/bin/local.zsh"
 
 export EDITOR=$(which vim)
 export LESS="SR"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
-# Use GNU versions of common shell tools if the exist (useful on macOS)
-command -v 'gsed' >/dev/null && alias sed='gsed'
-command -v 'gtar' >/dev/null && alias tar='gtar'
-
 if command -v 'bat' >/dev/null; then
   alias cat='bat'
   export BAT_STYLE="grid,header"
 fi
-
-case "$(uname -s)" in
-  Linux*)  source "${ZSH_CONFIG_DIR}/linux.zsh" ;;
-  Darwin*) source "${ZSH_CONFIG_DIR}/macos.zsh" ;;
-esac
 
 alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
@@ -143,14 +133,6 @@ alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.htm
 alias path='echo $PATH | sed "s/:/\n/g"'
 alias tidy='tidy -quiet -indent'
 alias tree='tree -C'
-
-# Tmux
-alias ta='tmux attach -t'
-alias tl='tmux list-sessions'
-
-# Task Warrior
-alias n='task ready'
-alias nn="task project:${CURRENT_PROJECT}"
 
 # Colours and text formatting
 export BOLD=$(tput bold)
@@ -178,19 +160,24 @@ if command -v fd > /dev/null; then
   export FZF_DEFAULT_COMMAND="fd --type file --color=always"
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS="--ansi"
+
   if command -v bat > /dev/null; then
     export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --preview '[[ -f {} ]] && bat --style grid --color always {}' --preview-window down:10"
   fi
 fi
 
-function review() {
-  description="Review ${1}"
-  [[ -n "${2}" ]] && description+=" for ${2}"
-  shift; shift
-  task add scheduled:today ${@} "${description}" \
-    || return $?
-  task reviews
-}
+source "${ZSH_CONFIG_DIR}/taskwarrior.zsh"
+source "${ZSH_CONFIG_DIR}/tmux.zsh"
+
+case "$(uname -s)" in
+  Linux*)  source "${ZSH_CONFIG_DIR}/linux.zsh" ;;
+  Darwin*) source "${ZSH_CONFIG_DIR}/macos.zsh" ;;
+esac
+
+# Local override
+if [[ -f "${ZSH_CONFIG_DIR}/local.zsh" ]]; then
+  source "${ZSH_CONFIG_DIR}/local.zsh"
+fi
 
 # Codi
 # Usage: codi [filetype] [filename]
@@ -301,16 +288,3 @@ function pip() {
 function mmail() {
   pandoc --standalone --from markdown --to rtf --template bootstrap.rtf --output - $1 | pbcopy
 }
-
-function tn() {
-  [[ "$PWD" = "$HOME" ]] && (tmux attach -t "Local" || tmux new -s "Local") && return 0
-  local dirname=${PWD##*/}
-  local name=${1:-${dirname}}
-
-  tmux attach -t "$name" || tmux new -s "$name"
-}
-
-# iTerm2 integration
-if [[ $(uname -s) -eq 'Darwin' ]] && [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
-  source "${HOME}/.iterm2_shell_integration.zsh"
-fi

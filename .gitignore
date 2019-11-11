@@ -11,3 +11,6 @@ src/vim/haskellmode.config
 src/vim/spell
 src/vim/tmp/
 src/vim/undo
+
+# Zsh plugin dir
+src/config/zsh/zplug/
