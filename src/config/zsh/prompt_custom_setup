@@ -20,9 +20,7 @@ function _username() {
 
 function _last_status() {
   local return_code=$1
-  if (( return_code == 0 )); then
-    colour green '$ '
-  else
+  if (( return_code != 0 )); then
     colour red "$1 "
   fi
 }
@@ -47,10 +45,16 @@ function _show_mode() {
   esac
 }
 
-# https://dougblack.io/words/zsh-vi-mode.html
+function _git_branch() {
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    git rev-parse --abbrev-ref HEAD
+  fi
+}
+
+# # https://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+  _mode="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
   zle reset-prompt
 }
 zle -N zle-line-init
@@ -59,6 +63,7 @@ zle -N zle-keymap-select
 function prompt_custom_setup() {
   prompt_opts=(cr subst percent)
   PS1='$(_username)$(_ssh_hostname) $(colour green %~)$(_show_mode) '
+  RPS1='$(_last_status $?)$(_git_branch)${_mode}'
 }
 
 prompt_custom_setup "$@"
