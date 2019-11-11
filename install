@@ -35,7 +35,7 @@ function linkfile() {
 
   if [[ -L "${destination}" ]]; then
     return 0
-  elif [[ -f "${destination}" ]]; then
+  elif [[ -f "${destination}" ]] || [[ -d "${destination}" ]]; then
     mv -v "${destination}" "${destination}.bak"
     info "Original ${destination} moved to ${destination}.bak" | log -s
   fi
