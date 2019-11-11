@@ -13,7 +13,6 @@ Plug 'airblade/vim-gitgutter'                               " Show git diff in g
 Plug 'edkolev/tmuxline.vim'                                 " Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration
 Plug 'junegunn/goyo.vim',             { 'on': 'Goyo' }      " Distraction-free writing in Vim
 Plug 'junegunn/limelight.vim',        { 'on': 'Limelight' } " :flashlight: All the world's indeed a stage and we are merely players
-Plug 'kien/rainbow_parentheses.vim'                         " Better Rainbow Parentheses
 Plug 'vim-airline/vim-airline'                              " lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline-themes'                       " A collection of themes for vim-airline
 
@@ -30,7 +29,6 @@ Plug 'ctrlpvim/ctrlp.vim'            " Active fork of kien/ctrlp.vim—Fuzzy fil
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim http://editorconfig.org
 Plug 'farmergreg/vim-lastplace'      " Intelligently reopen files at your last edit position in Vim.
 Plug 'powerman/vim-plugin-AnsiEsc'   " ansi escape sequences concealed, but highlighted as specified (conceal)
-Plug 'Shougo/vimproc.vim'            " Interactive command execution in Vim.
 Plug 'tpope/vim-apathy'              " apathy.vim: Set the 'path' option for miscellaneous file types
 Plug 'tpope/vim-endwise'             " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plug 'tpope/vim-fugitive'            " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
@@ -39,7 +37,7 @@ Plug 'tpope/vim-rhubarb'             " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer options
 Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.github.io/
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
-
+"
 " FZF - 🌸 A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
