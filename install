@@ -12,6 +12,8 @@ dotfiles=${PWD}
 BASHDIR="${BASHDIR:-${install_dir}/.config/bash}"
 BASHRC="${BASHRC:-${install_dir}/.bashrc}"
 INPUTRC="${install_dir}/.inputrc"
+NPMRC="${install_dir}/.npmrc"
+NPM_PACKAGES="${HOME}/.npm-packages"
 TMUX_DIR="${install_dir}/.tmux"
 TMUX_CONF="${install_dir}/.tmux.conf"
 VIMRC="${VIMRC:-${install_dir}/.vimrc}"
@@ -139,6 +141,14 @@ function installGHCiCustomisation() {
   fi
 }
 
+# NPM
+function installNPMCustomisation() {
+  checkDependency npm || return 1
+
+  mkdir -p "${NPM_PACKAGES}"
+  linkfile "${dotfiles}/src/rcfiles/npmrc" "${NPMRC}" | log
+}
+
 # Readline
 function installReadlineCustomisation() {
   if [[ -e ${INPUTRC} ]]; then
@@ -252,6 +262,7 @@ while [[ $# -gt 0 ]]; do
       installBashCustomisation
       installCtagsCustomisation
       installGHCiCustomisation
+      installNPMCustomisation
       installReadlineCustomisation
       installTmuxCustomisation
       installVimCustomisation
@@ -287,6 +298,10 @@ while [[ $# -gt 0 ]]; do
 
     ghci)
       installGHCiCustomisation
+      ;;
+
+    npm)
+      installNPMCustomisation
       ;;
 
     readline)

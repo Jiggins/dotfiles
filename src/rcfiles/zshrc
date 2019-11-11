@@ -80,10 +80,10 @@ typeset -U path
 
 addpath "${HOME}/bin"
 addpath "${HOME}/.local/bin"
-addpath "${HOME}/.rvm/bin"
 addpath "${HOME}/.cargo/bin"
-addpath "${HOME}/.vim/bundle/powerline/scripts"
 addpath "${HOME}/go/bin"
+addpath "${HOME}/.npm-packages/bin"
+addpath "${HOME}/.rvm/bin"
 addpath "/usr/local/bin"
 addpath "/usr/local/sbin"
 addpath "/usr/local/opt/python/libexec/bin"
