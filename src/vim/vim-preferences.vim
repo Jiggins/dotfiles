@@ -95,6 +95,9 @@ if $SHELL =~ 'bin/fish'
   set shell=/bin/sh
 endif
 
+" Syntax aliases
+autocmd BufRead,BufNewFile .simplecov set syntax=ruby
+
 " Load local .vimrc
 set exrc
 
@@ -187,3 +190,7 @@ let g:cabal_indent_section = 2
 " vim-slime
 let g:slime_target = 'tmux'
 let g:slime_default_config = {'socket_name': 'default', 'target_pane': ':1.1'}
+
+" vim-slash
+" Places the current match at the center of the window.
+noremap <plug>(slash-after) zz

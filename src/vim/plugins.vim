@@ -28,6 +28,9 @@ Plug 'AndrewRadev/splitjoin.vim'     " A vim plugin that simplifies the transiti
 Plug 'ctrlpvim/ctrlp.vim'            " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder. http://ctrlpvim.github.com/ctrlp.vim
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim http://editorconfig.org
 Plug 'farmergreg/vim-lastplace'      " Intelligently reopen files at your last edit position in Vim.
+Plug 'idanarye/vim-vebugger'         " Yes, we do need another debugger plugin
+Plug 'junegunn/vim-slash'            " Enhancing in-buffer search experience
+Plug 'jiangmiao/auto-pairs'          " Vim plugin, insert or delete brackets, parens, quotes in pair http://www.vim.org/scripts/script.php…
 Plug 'powerman/vim-plugin-AnsiEsc'   " ansi escape sequences concealed, but highlighted as specified (conceal)
 Plug 'tpope/vim-apathy'              " apathy.vim: Set the 'path' option for miscellaneous file types
 Plug 'tpope/vim-endwise'             " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
@@ -53,13 +56,13 @@ Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',     { 'for': 'scala' }
 Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
-Plug 'hashivim/vim-terraform',   { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
 Plug 'm-kat/aws-vim'                                    " aws-vim
 Plug 'momota/junos.vim',         { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',        { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 Plug 'tmhedberg/matchit'                                " extended % matching for HTML, LaTeX, and many other languages
 Plug 'tpope/vim-scriptease',     { 'for': 'vim' }       " scriptease.vim: A Vim plugin for Vim plugins
+Plug 'tangledhelix/vim-rdist',   { 'for': 'rdist' }     " Vim syntax highlighting for Rdist
 
 "" Languages - English
 Plug 'amperser/proselint'                  " Proselint plugin for Vim
@@ -79,6 +82,9 @@ Plug 'danchoi/ri.vim',    { 'for': 'ruby' } " browse ri documentation from Vim h
 Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'tpope/vim-rails',   { 'for': 'ruby' }
 Plug 'tpope/vim-rake',    { 'for': 'ruby' }
+
+"" Languages - Terraform
+Plug 'hashivim/vim-terraform',                { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
 
 "" Languages - Web Dev
 Plug 'cakebaker/scss-syntax.vim',  { 'for': 'css' }        " Vim syntax file for scss (Sassy CSS)
