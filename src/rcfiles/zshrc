@@ -5,6 +5,8 @@ COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
 
+export ZSH_CONFIG_DIR="${HOME}/.config/zsh"
+
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
@@ -22,7 +24,7 @@ zle -N edit-command-line
 
 # Prompt
 # fpath=("${HOME}/git/dotfiles/src/config/zsh" $fpath)
-fpath=("${HOME}/.config/zsh" $fpath)
+fpath=("${ZSH_CONFIG_DIR}" $fpath)
 autoload -U promptinit
 promptinit
 prompt custom
@@ -91,7 +93,7 @@ addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
 export PATH
 
 # # zplug
-export ZPLUG_HOME="${HOME}/.config/zsh/zplug"
+export ZPLUG_HOME="${ZSH_CONFIG_DIR}/zplug"
 
 if ! [[ -d "${ZPLUG_HOME}" ]]; then
   echo "Installing zplug"
@@ -129,8 +131,11 @@ if command -v 'bat' >/dev/null; then
   export BAT_STYLE="grid,header"
 fi
 
-alias gls='git ls-files'
-alias ccat='pygmentize -f 256'
+case "$(uname -s)" in
+  Linux*)  source "${ZSH_CONFIG_DIR}/linux.zsh" ;;
+  Darwin*) source "${ZSH_CONFIG_DIR}/macos.zsh" ;;
+esac
+
 alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
 alias isodate='date +%Y-%m-%d'
