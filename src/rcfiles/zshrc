@@ -128,8 +128,9 @@ fi
 
 alias cgrep='grep --color=always'
 alias focusfix='printf "\e[?1004l"'
+alias gls='git ls-files'
 alias isodate='date +%Y-%m-%d'
-alias pandoc-html='pandoc --standalone -t html --template ~/.pandoc/template.html --css ~/.pandoc/template.css'
+alias ll='ls -lh'
 alias path='echo $PATH | sed "s/:/\n/g"'
 alias tidy='tidy -quiet -indent'
 alias tree='tree -C'
