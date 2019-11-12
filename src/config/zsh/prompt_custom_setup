@@ -30,13 +30,6 @@ function _ssh_hostname() {
   [[ -n "${SSH_CONNECTION}" ]] && echo '@%m'
 }
 
-function _git_branch() {
-  (
-    command git symbolic-ref -q HEAD \
-      || command git name-rev --name-only --no-undefined --always HEAD
-  ) 2>/dev/null
-}
-
 function _show_mode() {
   case "${KEYMAP}" in
     main)  echo '>' ;;
@@ -45,7 +38,7 @@ function _show_mode() {
   esac
 }
 
-function _git_branch() {
+function _git_current_branch() {
   if git rev-parse --is-inside-work-tree &>/dev/null; then
     git rev-parse --abbrev-ref HEAD
   fi
@@ -63,7 +56,7 @@ zle -N zle-keymap-select
 function prompt_custom_setup() {
   prompt_opts=(cr subst percent)
   PS1='$(_username)$(_ssh_hostname) $(colour green %~)$(_show_mode) '
-  RPS1='$(_last_status $?)$(_git_branch)${_mode}'
+  RPS1='$(_last_status $?)$(_git_current_branch)${_mode}'
 }
 
 prompt_custom_setup "$@"
