@@ -23,8 +23,7 @@ autoload -z edit-command-line
 zle -N edit-command-line
 
 # Prompt
-# fpath=("${HOME}/git/dotfiles/src/config/zsh" $fpath)
-fpath=("${ZSH_CONFIG_DIR}" $fpath)
+fpath=( "${ZSH_CONFIG_DIR}" $fpath )
 autoload -U promptinit
 promptinit
 prompt custom
