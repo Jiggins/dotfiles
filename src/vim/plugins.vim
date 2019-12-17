@@ -30,7 +30,6 @@ Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim http://editor
 Plug 'farmergreg/vim-lastplace'      " Intelligently reopen files at your last edit position in Vim.
 Plug 'idanarye/vim-vebugger'         " Yes, we do need another debugger plugin
 Plug 'junegunn/vim-slash'            " Enhancing in-buffer search experience
-Plug 'jiangmiao/auto-pairs'          " Vim plugin, insert or delete brackets, parens, quotes in pair http://www.vim.org/scripts/script.php…
 Plug 'powerman/vim-plugin-AnsiEsc'   " ansi escape sequences concealed, but highlighted as specified (conceal)
 Plug 'tpope/vim-apathy'              " apathy.vim: Set the 'path' option for miscellaneous file types
 Plug 'tpope/vim-endwise'             " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
@@ -40,7 +39,7 @@ Plug 'tpope/vim-rhubarb'             " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer options
 Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.github.io/
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
-"
+
 " FZF - 🌸 A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
