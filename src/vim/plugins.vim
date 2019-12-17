@@ -124,8 +124,8 @@ Plug 'tpope/vim-tbone'                     " tmux basics http://www.vim.org/scri
 
 if v:version >= 740
   Plug 'Quramy/tsuquyomi',             { 'for': 'typescript' } " A Vim plugin for TypeScript
-  Plug 'vim-pandoc/vim-pandoc',        { 'for': 'pandoc' }     " pandoc integration and utilities for vim
-  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'pandoc' }     " pandoc markdown syntax, to be installed alongside vim-pandoc
+  Plug 'vim-pandoc/vim-pandoc',                                " pandoc integration and utilities for vim
+  Plug 'vim-pandoc/vim-pandoc-syntax',                         " pandoc markdown syntax, to be installed alongside vim-pandoc
 endif
 
 " Plugins requiring async support

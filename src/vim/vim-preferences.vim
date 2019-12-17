@@ -149,12 +149,6 @@ let g:limelight_conceal_ctermfg = 240
 " Exit vim if NERDTree is the only open window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Pandoc
-let g:pandoc#syntax#codeblocks#embeds#langs = ['haskell','python','ruby']
-let g:pandoc#syntax#conceal#blacklist = ['atx', 'list', 'quotes']
-let g:pandoc#syntax#conceal#urls = 1
-let g:pandoc#modules#disabled = [ 'spell' ]
-
 " SuperTab
 let g:SuperTabDefaultCompletionType = 'context'
 
