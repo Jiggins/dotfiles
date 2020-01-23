@@ -106,10 +106,11 @@ source "${ZPLUG_HOME}/init.zsh"
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "RobSis/zsh-completion-generator"
+zplug "lib/completion", from:oh-my-zsh
+zplug "srijanshetty/zsh-pandoc-completion"
 zplug "trapd00r/LS_COLORS", hook-build:"dircolors -b LS_COLORS > c.zsh"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "lib/completion", from:oh-my-zsh
 
 zplug check || zplug install
 zplug load
