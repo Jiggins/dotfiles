@@ -111,9 +111,14 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
+\   'html': ['prettier'],
+\   'javascript': ['eslint'],
 \   'python': ['autopep8', 'add_blank_lines_for_python_control_statements'],
 \   'ruby': ['rubocop'],
-\   'terraform': ['terraform', 'terraform-lsp']
+\   'scss': ['prettier'],
+\   'terraform': ['terraform', 'terraform-lsp'],
+\   'typescript': ['eslint', 'prettier'],
+\   'vue': ['eslint'],
 \}
 
 " cache failing executable checks for linters. AKA don't keep checking for
