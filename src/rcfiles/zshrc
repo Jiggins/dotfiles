@@ -110,6 +110,7 @@ zplug "lib/completion", from:oh-my-zsh
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "trapd00r/LS_COLORS", hook-build:"dircolors -b LS_COLORS > c.zsh"
 zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
 zplug check || zplug install
