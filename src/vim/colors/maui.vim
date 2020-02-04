@@ -14,8 +14,8 @@ hi SpecialKey term=bold guifg=#5f5f5f ctermfg=59
 hi NonText term=bold guifg=#5f5f5f ctermfg=59
 hi Directory term=bold gui=bold cterm=bold guifg=#5f87af ctermfg=67
 hi ErrorMsg term=standout gui=bold cterm=bold guifg=#ff00af ctermfg=199 guibg=#000000 ctermbg=16
-hi IncSearch term=reverse gui=reverse cterm=reverse guifg=#1c1c1c ctermfg=234 guibg=#ff8700 ctermbg=208
-hi Search term=reverse guibg=#df5f00 ctermbg=166
+hi IncSearch term=underline gui=underline cterm=underline guifg=#1c1c1c ctermfg=208 guibg=#ff8700 ctermbg=236
+hi Search term=underline gui=underline cterm=underline guifg=#1c1c1c ctermfg=208 guibg=#ff8700 ctermbg=236
 hi MoreMsg term=bold guifg=#ffffaf ctermfg=229
 hi ModeMsg term=bold gui=bold cterm=bold guifg=#ffffaf ctermfg=229
 hi LineNr term=underline guifg=#303030 ctermfg=236 guibg=#101010 ctermbg=233
