@@ -4,6 +4,9 @@ set shiftwidth=4
 set nowrap
 set conceallevel=0
 
+set textwidth=80
+set formatoptions=tcq
+
 let g:pandoc#formatting#textwidth = 80
 let g:pandoc#formatting#equalprg = 'pandoc -t markdown'
 let g:pandoc#formatting#extra_equalprg = '--atx-headers --reference-links --columns=80'
