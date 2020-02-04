@@ -291,3 +291,7 @@ function pip() {
 function mmail() {
   pandoc --standalone --from markdown --to rtf --template bootstrap.rtf --output - $1 | pbcopy
 }
+
+function testItalics() {
+  echo "$(tput sitm)italics$(tput ritm) $(tput smso)standout$(tput rmso)"
+}

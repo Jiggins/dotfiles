@@ -9,7 +9,9 @@ mkdir -p ${VERBOSE} "${install_dir}/bin" | log
 # dotfiles - Location of this repository
 dotfiles=${PWD}
 
-BASHDIR="${BASHDIR:-${install_dir}/.config/bash}"
+CONFIG_DIR="${install_dir}/.config"
+
+BASHDIR="${BASHDIR:-${CONFIG_DIR}/bash}"
 BASHRC="${BASHRC:-${install_dir}/.bashrc}"
 INPUTRC="${install_dir}/.inputrc"
 NPMRC="${install_dir}/.npmrc"
@@ -19,9 +21,10 @@ TMUX_CONF="${install_dir}/.tmux.conf"
 VIMRC="${VIMRC:-${install_dir}/.vimrc}"
 VIM_DIR="${VIM_DIR:-${install_dir}/.vim}"
 ZLOGOUT="${ZLOGOUT:-${install_dir}/.zlogout}"
-ZSHDIR="${ZSHDIR:-${install_dir}/.config/zsh}"
+ZSHDIR="${ZSHDIR:-${CONFIG_DIR}/zsh}"
 ZSHRC="${ZSHRC:-${install_dir}/.zshrc}"
 ZSH_CUSTOM="${ZSHDIR}/custom"
+TERMINFO="${CONFIG_DIR}/terminfo"
 
 function prependFileWithCheck {
   if [ ! -e "$2" ] || ! grep -q 'configurations added by github.com/Jiggins/dotfiles' "$2"; then
@@ -233,6 +236,16 @@ function installTmuxCustomisation() {
   [[ -n "${TMUX}" ]] && tmux source "${TMUX_CONF}"
 }
 
+function installTerminfoCustomisation() {
+  set -x
+  linkfile "${dotfiles}/src/terminfo" "${TERMINFO}" | log
+
+  find "${TERMINFO}/" -type f -exec tic -o "${HOME}/.terminfo" {} \;
+
+  set +x
+}
+
+
 # Zsh
 function installZSHCustomisation() {
   checkDependency zsh git
@@ -264,6 +277,7 @@ while [[ $# -gt 0 ]]; do
       installGHCiCustomisation
       installNPMCustomisation
       installReadlineCustomisation
+      installTerminfoCustomisation
       installTmuxCustomisation
       installVimCustomisation
       installZSHCustomisation
@@ -310,6 +324,10 @@ while [[ $# -gt 0 ]]; do
 
     ruby)
       installRuby
+      ;;
+
+    terminfo)
+      installTerminfoCustomisation
       ;;
 
     tmux)
