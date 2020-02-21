@@ -117,7 +117,7 @@ let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'scss': ['prettier'],
 \   'terraform': ['terraform', 'terraform-lsp'],
-\   'typescript': ['eslint', 'prettier'],
+\   'typescript': ['eslint'],
 \   'vue': ['eslint'],
 \   'yaml': ['prettier'],
 \}
