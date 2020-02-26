@@ -280,20 +280,6 @@ function remove-spaces() {
   done
 }
 
-function pip() {
-  if (( $# < 1 )); then
-    echo "usage: $0 <package> [<packages>]"
-    return 1
-  fi
-
-  for i in 3 2; do
-    "python${i}" -m pip "${@}" \
-      || echo "${YELLO}Warning: Failed to install ${*} for python${i}${RESET}"
-  done
-
-  return $?
-}
-
 function mmail() {
   pandoc --standalone --from markdown --to rtf --template bootstrap.rtf --output - $1 | pbcopy
 }
