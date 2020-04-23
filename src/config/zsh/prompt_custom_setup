@@ -55,7 +55,11 @@ zle -N zle-keymap-select
 
 function prompt_custom_setup() {
   prompt_opts=(cr subst percent)
-  PS1='$(_username)$(_ssh_hostname) $(colour green %~)$(_show_mode) '
+  if [[ -n "${SHORT_PROMPT}" ]]; then
+    PS1='$(_username) $(colour green %2/)$(_show_mode) '
+  else
+    PS1='$(_username)$(_ssh_hostname) $(colour green %~)$(_show_mode) '
+  fi
   RPS1='$(_last_status $?)$(_git_current_branch)${_mode}'
 }
 

@@ -159,25 +159,18 @@ if command -v thefuck > /dev/null; then
   eval $(thefuck --alias)
 fi
 
-# FZF
-if command -v fd > /dev/null; then
-  export FZF_DEFAULT_COMMAND="fd --type file --color=always"
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS="--ansi"
+# Completion
+for file in ${ZSH_CONFIG_DIR}/completion/*.zsh; do
+  source "${file}"
+done
+compinit
 
-  if command -v bat > /dev/null; then
-    export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --preview '[[ -f {} ]] && bat --style grid --color always {}' --preview-window down:10"
-  fi
-fi
+# Load all scripts in .config/zsh/autoload
+for file in ${ZSH_CONFIG_DIR}/autoload/*.zsh; do
+  source "${file}"
+done
 
-# Fix Docker trying to use TLS on a unix socket
-if [[ -n "${DOCKER_TLS_VERIFY}" ]] && [[ "${DOCKER_HOST}" =~ 'unix://' ]]; then
-  unset DOCKER_TLS_VERIFY
-fi
-
-source "${ZSH_CONFIG_DIR}/taskwarrior.zsh"
-source "${ZSH_CONFIG_DIR}/tmux.zsh"
-
+# OS specific config
 case "$(uname -s)" in
   Linux*)  source "${ZSH_CONFIG_DIR}/linux.zsh" ;;
   Darwin*) source "${ZSH_CONFIG_DIR}/macos.zsh" ;;
