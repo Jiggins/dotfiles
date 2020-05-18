@@ -15,6 +15,8 @@ Plug 'junegunn/goyo.vim',             { 'on': 'Goyo' }      " Distraction-free w
 Plug 'junegunn/limelight.vim',        { 'on': 'Limelight' } " :flashlight: All the world's indeed a stage and we are merely players
 Plug 'vim-airline/vim-airline'                              " lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline-themes'                       " A collection of themes for vim-airline
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'                                   " A Vim Automatic Window Resizing Plugin
 
 " Colourschemes
 Plug 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
@@ -130,7 +132,6 @@ endif
 
 " Plugins requiring async support
 if v:version >= 800
-  Plug 'drzel/vim-in-proportion'         " Resize vim's containing window and your splits resize proportionally
   Plug 'metakirby5/codi.vim'             " The interactive scratchpad for hackers.
   Plug 'w0rp/ale'                        " Asynchronous Lint Engine
 endif
