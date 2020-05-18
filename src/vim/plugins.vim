@@ -58,7 +58,6 @@ Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',     { 'for': 'scala' }
 Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
-Plug 'm-kat/aws-vim'                                    " aws-vim
 Plug 'momota/junos.vim',         { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',        { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
@@ -91,10 +90,7 @@ Plug 'hashivim/vim-terraform',                { 'for': 'terraform' } " Basic vim
 "" Languages - Web Dev
 Plug 'cakebaker/scss-syntax.vim',  { 'for': 'css' }        " Vim syntax file for scss (Sassy CSS)
 Plug 'gregsexton/MatchTag',        { 'for': 'html' }       " Vim's MatchParen for HTML tags http://www.vim.org/scripts/script.php?script_id=3818
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " Typescript syntax files for Vim
 Plug 'mattn/emmet-vim',            { 'for': 'html' }       " emmet for vim: http://emmet.io/ http://mattn.github.io/emmet-vim
-Plug 'pangloss/vim-javascript',    { 'for': 'javascript' } " Vastly improved Javascript indentation and syntax support in Vim.
-Plug 'ternjs/tern_for_vim',        { 'for': 'javascript' } " Tern plugin for Vim
 
 " Navigation
 Plug 'majutsushi/tagbar',           { 'on': 'Tagbar' }   " Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar
