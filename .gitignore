@@ -6,6 +6,7 @@ dotfiles.tar.gz
 
 # Vim generated files
 src/vim/.netrwhist
+src/vim/autoload/plug.vim
 src/vim/bundle
 src/vim/haskellmode.config
 src/vim/spell
