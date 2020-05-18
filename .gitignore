@@ -15,3 +15,6 @@ src/vim/undo
 
 # Zsh plugin dir
 src/config/zsh/zplug/
+
+# Machine specific zsh config
+local.zsh
