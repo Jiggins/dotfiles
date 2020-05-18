@@ -13,7 +13,7 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
 " Text editing
 set autoindent
 set backspace=indent,eol,start
-set completeopt=menu,menuone,preview,noselect,noinsert
+set completeopt=menu,menuone,noselect,noinsert
 set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8
