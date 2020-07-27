@@ -18,5 +18,26 @@ function decolour() {
 }
 
 function choose() {
-  fzf "${@}" --height 10
+  fzf --height 10 "${@}"
+}
+
+function ask() {
+  if [[ -n "${REPLY:-}" ]]; then
+    unset REPLY
+  fi
+
+  if [[ -n "${ZSH_VERSION:-}" ]]; then
+    vared -p "${*} y[n] " -c REPLY
+  else
+    read -p "${*} y[n] " -n 1
+    echo
+  fi
+
+  [[ "${REPLY}" =~ ^[Yy]$ ]]
+}
+
+function join_with() {
+  local delimiter=$1; shift
+  echo -n "${1}"; shift
+  printf "%s" "${@/#/$delimiter}"
 }
