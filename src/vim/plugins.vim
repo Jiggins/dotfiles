@@ -50,6 +50,7 @@ Plug 'junegunn/fzf.vim'
 " Languages
 Plug 'Absolight/vim-bind',       { 'for': 'bindzone' }  " DNS Bind zone & named plugin
 Plug 'adimit/prolog.vim',        { 'for': 'prolog' }
+Plug 'bps/vim-textobj-python',   { 'for': 'python' }    " Text objects for Python.
 Plug 'chikamichi/mediawiki.vim', { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',           { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
 Plug 'chrisbra/csv.vim',         { 'for': 'csv' }       " A Filetype plugin for csv files
@@ -58,12 +59,13 @@ Plug 'dag/vim-fish',             { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',     { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',     { 'for': 'scala' }
 Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
+Plug 'kana/vim-textobj-user'                            " Vim plugin: Create your own text objects
 Plug 'momota/junos.vim',         { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',        { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
+Plug 'tangledhelix/vim-rdist',   { 'for': 'rdist' }     " Vim syntax highlighting for Rdist
 Plug 'tmhedberg/matchit'                                " extended % matching for HTML, LaTeX, and many other languages
 Plug 'tpope/vim-scriptease',     { 'for': 'vim' }       " scriptease.vim: A Vim plugin for Vim plugins
-Plug 'tangledhelix/vim-rdist',   { 'for': 'rdist' }     " Vim syntax highlighting for Rdist
 
 "" Languages - English
 Plug 'amperser/proselint'                  " Proselint plugin for Vim
