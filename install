@@ -199,7 +199,7 @@ function installVimCustomisation() {
   linkfile "${dotfiles}/src/vim" "${VIM_DIR}" 2>&1 | log
 
   # Installing or updating Vim plugins
-  if [ ! -d "${VIM_DIR}/bundle" ]; then
+  if [[ ! -d "${VIM_DIR}/bundle" ]]; then
     info "Installing vim plugins"
     vim -u "${VIMRC}" +qall \
       || error "Could not install vim plugins to ${VIM_DIR}/bundle" && return 1 | log -s
@@ -212,8 +212,10 @@ function installVimCustomisation() {
   # install Tern for JavaScript
   info "Installing Tern for JavaScript; check ${LOGFILE} for details" | log -s
   if commandExists npm; then
-    ( cd "${VIM_DIR}/bundle/tern_for_vim" && npm install ) | log
+    pushd "${VIM_DIR}/bundle/tern_for_vim"
+    npm install  | log
     [[ "${PIPESTATUS[0]}" -ne 0 ]] && error "Failed to install Tern" | log
+    popd
   else
     warn "npm is not installed, skipping Tern" | log -s
   fi
