@@ -40,7 +40,6 @@ Plug 'tpope/vim-fugitive'            " a Git wrapper so awesome, it should be il
 Plug 'tpope/vim-obsession'           " obsession.vim: continuously updated session files
 Plug 'tpope/vim-rhubarb'             " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer options
-Plug 'vimwiki/vimwiki'               " Personal Wiki for Vim http://vimwiki.github.io/
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
 
 " FZF - 🌸 A command-line fuzzy finder
