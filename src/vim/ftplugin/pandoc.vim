@@ -1,15 +1,15 @@
-set tabstop=4
-set shiftwidth=4
+setlocal tabstop=4
+setlocal shiftwidth=4
 
-set nowrap
-set conceallevel=0
+setlocal nowrap
+setlocal conceallevel=0
 
-set textwidth=80
-set formatoptions=tcq
+setlocal textwidth=120
+setlocal formatoptions=tcq
 
-let g:pandoc#formatting#textwidth = 80
+let g:pandoc#formatting#textwidth = 120
 let g:pandoc#formatting#equalprg = 'pandoc -t markdown'
-let g:pandoc#formatting#extra_equalprg = '--atx-headers --reference-links --columns=80'
+let g:pandoc#formatting#extra_equalprg = '--atx-headers --reference-links --columns=120'
 
 let g:pandoc#syntax#codeblocks#embeds#langs = ['bash=sh', 'haskell', 'ruby', 'python', 'sh', 'typescript']
 let g:pandoc#syntax#conceal#blacklist = ['atx', 'list', 'quotes']
@@ -21,3 +21,5 @@ nnoremap <buffer> ]] :call CustomJump('/^#')<cr>
 nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
 
 map K :OnlineThesaurusCurrentWord<CR>
+
+let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<|setlocal textwidth<'
