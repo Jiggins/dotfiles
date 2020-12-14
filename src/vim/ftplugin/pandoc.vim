@@ -8,7 +8,7 @@ setlocal textwidth=120
 setlocal formatoptions=tcq
 
 let g:pandoc#formatting#textwidth = 120
-let g:pandoc#formatting#equalprg = 'pandoc -t markdown'
+let g:pandoc#formatting#equalprg = 'pandoc -t markdown+pipe_tables'
 let g:pandoc#formatting#extra_equalprg = '--atx-headers --reference-links --columns=120'
 
 let g:pandoc#syntax#codeblocks#embeds#langs = ['bash=sh', 'haskell', 'ruby', 'python', 'sh', 'typescript']
