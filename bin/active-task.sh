@@ -5,19 +5,79 @@ set -eu
 # requires task warrior
 command -v task >/dev/null || exit 1
 
+# BSD sed on Mac is not as good as GNU sed. If GNU sed is installed, use that
+if command -v gsed >/dev/null; then
+  sed_cmd='gsed'
+fi
+
+sed_cmd="${sed_cmd:-sed}"
+
+function parse_task_from_timew() {
+  # Only parse first line
+  # Remove "Tracking"
+  # Remove quotes
+  # Remove tags (starting with +)
+  # Remove extra whitespace
+  ${sed_cmd} -n \
+    -e '1!d' \
+    -e '/^Tracking/!d' \
+    -e 's/Tracking //' \
+    -e 's/"//g' \
+    -e 's/+[[:alnum:]]*\b//g' \
+    -e 's/^ *//' \
+    -e 's/ *$//p'
+}
+
 task_id=$(task +ACTIVE _ids | head -n 1)
-time=$(timew | sed -n 's/ *Total *//p')
 
-# If there are active tasks, use taskwarrior
 if [[ -n "${task_id}" ]]; then
-  echo -n " ${task_id}  $(task _get ${task_id}.description)  ${time} "
-  exit 0
+  task_description=$(task _get ${task_id}.description)
+else
+  task_description=$(timew | parse_task_from_timew)
 fi
 
-task=$(timew | sed -n 's/Tracking "*\([^"]*\)"*$/\1/p')
+time=$(timew | ${sed_cmd} -n 's/ *Total *//p')
 
-if [[ -z "${task}" ]]; then
-  exit 1
-fi
+function touchbar() {
+  local -a output=( ${task_id} )
 
-echo -n " ${task}  ⌚️ ${time} "
+  if [[ -n "${task_description}" ]]; then
+    output+=( "${task_description}" )
+  fi
+
+  if [[ -n "${time}" ]]; then
+    output+=( ⌚️ "${time}" )
+  fi
+
+  if (( ${#output[@]} == 0 )); then
+    echo 'task'
+  else
+    echo "${output[*]}"
+  fi
+}
+
+function tmuxline() {
+  if [[ -n "${task_id}" ]]; then
+    echo -n " ${task_id}  "${task_description}"  ⌚️ ${time} "
+    return $?
+  fi
+
+  if [[ -n "${task_description}" ]]; then
+    echo -n " ${task_description}  ⌚️ ${time} "
+    return $?
+  fi
+}
+
+while (( $# > 0 )); do
+  case "${1}" in
+    --touchbar)
+      touchbar
+      ;;
+
+    --tmux)
+      tmuxline
+      ;;
+  esac
+
+  shift
+done

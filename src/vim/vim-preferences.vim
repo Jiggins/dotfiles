@@ -136,7 +136,7 @@ let g:tmuxline_preset = {
       \'a'    : '#S',
       \'win'  : ['#I #W'],
       \'cwin' : ['#I #W #F'],
-      \'x'    : ['#(~/bin/active-task.sh)', '#(~/bin/loadavg-tmux)'],
+      \'x'    : ['#(~/bin/active-task.sh --tmux)', '#(~/bin/loadavg-tmux)'],
       \'y'    : ['#I:#P', '%F', '%R'],
       \'z'    : '#h',
       \'options' : {'status-justify' : 'left' }}
