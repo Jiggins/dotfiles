@@ -3,15 +3,13 @@
 " 	leader automatically.
 " r	Automatically insert the current comment leader after hitting
 " 	<Enter> in Insert mode.
-" o	Automatically insert the current comment leader after hitting 'o' or
-" 	'O' in Normal mode.
 " q	Allow formatting of comments with "gq".
 " 	Note that formatting will not change blank lines or lines containing
 " 	only the comment leader.  A new paragraph starts after such a line,
 " 	or when the comment leader changes.
 " j	Where it makes sense, remove a comment leader when joining lines.  For
 " 	example, joining:
-setlocal formatoptions=tcroqj
+setlocal formatoptions=tcrqj
 
 let g:tsuquyomi_shortest_import_path = 1
 

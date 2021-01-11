@@ -1,5 +1,20 @@
+" t	Auto-wrap text using textwidth
+" c	Auto-wrap comments using textwidth, inserting the current comment
+" 	leader automatically.
+" r	Automatically insert the current comment leader after hitting
+" 	<Enter> in Insert mode.
+" q	Allow formatting of comments with "gq".
+" 	Note that formatting will not change blank lines or lines containing
+" 	only the comment leader.  A new paragraph starts after such a line,
+" 	or when the comment leader changes.
+" j	Where it makes sense, remove a comment leader when joining lines.  For
+" 	example, joining:
+setlocal formatoptions=tcrqj
+
 highlight BadWhitespace ctermbg=red guibg=red
 let matchBadWhitespace = matchadd("BadWhitespace", "\\s\\+$")
 
 highlight BadTabs ctermbg=red guibg=red
 let matchBadTabs = matchadd("BadTabs", "^\\t+")
+
+let b:undo_ftplugin = 'setlocal formatoptions<|setlocal completeopt<'
