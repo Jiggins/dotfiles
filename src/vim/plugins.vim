@@ -28,7 +28,6 @@ Plug 'widatama/vim-phoenix'                " Monochrome color schemes for Vim
 
 " General
 Plug 'AndrewRadev/splitjoin.vim'     " A vim plugin that simplifies the transition between multiline and single-line code
-Plug 'ctrlpvim/ctrlp.vim'            " Active fork of kien/ctrlp.vim—Fuzzy file, buffer, mru, tag, etc finder. http://ctrlpvim.github.com/ctrlp.vim
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim http://editorconfig.org
 Plug 'farmergreg/vim-lastplace'      " Intelligently reopen files at your last edit position in Vim.
 Plug 'idanarye/vim-vebugger'         " Yes, we do need another debugger plugin
@@ -43,7 +42,7 @@ Plug 'tpope/vim-sleuth'              " sleuth.vim: Heuristically set buffer opti
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
 
 " FZF - 🌸 A command-line fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Languages
