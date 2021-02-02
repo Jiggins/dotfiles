@@ -1,3 +1,4 @@
+nmap <leader>a :Ag<cr>
 nmap <leader>f :Files<cr>
 nmap <leader>c :Commits<cr>
 
