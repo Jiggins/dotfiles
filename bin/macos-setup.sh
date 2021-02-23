@@ -22,9 +22,6 @@ defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screen
 # # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true ; killall SystemUIServer
 
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool true
