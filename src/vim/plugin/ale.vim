@@ -8,7 +8,7 @@
 
 let g:ale_linters = {
 \   'haskell': ['stack-build', 'stack-ghc-mod'],
-\   'pandoc': ['proselint'],
+\   'pandoc': ['markdownlint', 'proselint'],
 \   'python': ['pyls'],
 \   'typescript': ['eslint', 'tsserver']
 \}
