@@ -65,12 +65,52 @@ end)
 --   print(screen:name())
 -- end
 
-function windowdetails()
-  win = hs.window.focusedWindow()
-  frame = win:frame()
-  screen = win:screen()
+function table.contains(table, value)
+  for _, v in pairs(table) do
+    if v == value then
+      return true
+    end
+  end
+  return false
+end
 
-  output = win:title()
+function mutechime()
+  local chime = hs.application.find('Amazon Chime')
+  local current_window = hs.window.focusedWindow()
+  local meeting_window = nil
+
+  local window_filter = {
+    'Amazon Chime',
+    'Video',
+  }
+
+  for _, window in pairs(chime:allWindows()) do
+    -- filter out the main Chime window
+    if not table.contains(window_filter, window:title()) and window:title() ~= "" then
+      meeting_window = window
+      break
+    end
+  end
+
+  if meeting_window then
+    print("Focusing window: " .. meeting_window:title())
+    meeting_window:focus()
+    hs.eventtap.keyStroke({"cmd"}, "y")
+    current_window:focus()
+  end
+end
+
+hs.hotkey.bind({}, "F13", function()
+  mutechime()
+end)
+
+function windowdetails()
+  local win = hs.window.focusedWindow()
+  local frame = win:frame()
+  local screen = win:screen()
+
+  local output = "Application:    " .. win:application():name()
+  output = output .. "\n" .. "Window Title:   " ..  win:title()
   output = output .. "\n" .. "Screen name:    " .. screen:name()
   output = output .. "\n" .. "Top left:       " .. frame.x .. ", " .. frame.y
   output = output .. "\n" .. "Top left ratio: " .. string.format("%.2f", (frame.x / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y / screen:frame().h))
@@ -82,7 +122,7 @@ function windowdetails()
 end
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
-  s = windowdetails()
+  local s = windowdetails()
   print(s)
   hs.alert.show(s)
   -- hs.notify.new({title="Hammerspoon", informativeText=s}):send()
