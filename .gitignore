@@ -21,3 +21,6 @@ local.zsh
 
 # Tmux plugins
 src/tmux/plugins
+
+# Zsh compiled files
+*.zwc
