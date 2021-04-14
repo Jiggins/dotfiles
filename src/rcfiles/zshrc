@@ -159,15 +159,14 @@ if command -v thefuck > /dev/null; then
   eval $(thefuck --alias)
 fi
 
-# Completion
-for file in ${ZSH_CONFIG_DIR}/completion/*.zsh; do
-  source "${file}"
-done
-
 # Load all scripts in .config/zsh/autoload
 for file in ${ZSH_CONFIG_DIR}/autoload/*.zsh; do
   source "${file}"
 done
+
+# Completion
+fpath=(~/.config/zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
 
 # OS specific config
 case "$(uname -s)" in

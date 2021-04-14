@@ -16,6 +16,9 @@ src/vim/undo
 # Zsh plugin dir
 src/config/zsh/zplug/
 
+# Zsh completion
+src/config/zsh/completion/_*
+
 # Machine specific zsh config
 local.zsh
 
