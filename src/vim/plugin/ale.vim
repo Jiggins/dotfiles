@@ -27,6 +27,11 @@ let g:ale_fixers = {
 \   'yaml': ['prettier'],
 \}
 
+" Enable balloon support
+let g:ale_set_balloons= 1
+set balloonevalterm
+set balloonexpr=ale#balloon#Expr()
+
 " cache failing executable checks for linters. AKA don't keep checking for
 " linters that are not installed
 let g:ale_cache_executable_check_failures=1
