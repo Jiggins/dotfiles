@@ -45,3 +45,6 @@ let g:ale_lint_on_text_changed = 'normal'
 
 " Enable ale completion
 let g:ale_completion_enabled = 1
+
+" Enable auto imports
+let g:ale_completion_autoimport = 1
