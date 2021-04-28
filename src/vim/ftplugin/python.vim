@@ -11,6 +11,10 @@
 " 	example, joining:
 setlocal formatoptions=tcrqj
 
+" Since Python uses 4 spaces for indentaion and relatively large variable
+" names, wrap at 120 characters iunstead of 80.
+setlocal textwidth=120
+
 highlight BadWhitespace ctermbg=red guibg=red
 let matchBadWhitespace = matchadd("BadWhitespace", "\\s\\+$")
 
