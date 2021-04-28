@@ -10,18 +10,10 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Tabs
-vnoremap <Tab> >
-vnoremap <S-Tab> <
-
 nnoremap <C-b>  :tabprevious<CR>
-inoremap <C-b>  <Esc>:tabprevious<CR>i
 nnoremap <C-l>  :redraw!<CR>
-inoremap <C-l>  <Esc>:redraw!<CR>i
 nnoremap <C-n>  :tabnext<CR>
-inoremap <C-n>  <Esc>:tabnext<CR>i
 nnoremap <C-t>  :tabnew<CR>
-inoremap <C-t>  <Esc>:tabnew<CR>i
 
 " Toggles
 let mapleader = ';'
@@ -123,9 +115,6 @@ nmap <silent> gd :ALEGoToDefinitionInVSplit<CR>
 nmap <silent> <F5> :ALEFix<CR>
 nmap <silent> g<F5> :ALEInfo<CR>
 
-" CtrlP
-nnoremap <silent> <c-s-p> :CtrlPTag<cr>
-
 " GhcMod
 " Remap Haskell-mode bindings to the better GhcMod commands.
 nnoremap _t :GhcModType<CR>
@@ -142,14 +131,6 @@ if exists(':MultipleCursorFind')
   let g:multi_cursor_skip_key='<C-D>'
   let g:multi_cursor_quit_key='<Esc>'
 endif
-
-" Syntastic
-nnoremap <Leader>s :SyntasticCheck<CR>
-nnoremap <Leader>S :SyntasticCheck<CR> :SyntasticReset<CR> :SyntasticToggleMode<CR>"
-
-" Tagbar
-nmap <F6> :TagbarToggle<CR>
-nmap <leader>t :TagbarToggle<CR>
 
 " TMUX
 let g:tmux=$TMUX
