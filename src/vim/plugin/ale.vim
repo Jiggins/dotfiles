@@ -10,6 +10,7 @@ let g:ale_linters = {
 \   'haskell': ['stack-build', 'stack-ghc-mod'],
 \   'pandoc': ['markdownlint', 'proselint'],
 \   'python': ['pyls'],
+\   'sh': ['language-server'],
 \   'typescript': ['eslint', 'tsserver']
 \}
 
