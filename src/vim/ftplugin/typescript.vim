@@ -35,14 +35,13 @@ let g:tsuquyomi_completion_detail = 1
 " the end when |:TsuquyomiImport|.
 let g:tsuquyomi_semicolon_import = 0
 
+" Import the symbol under the cursor
+nmap <buffer> <F6> :TsuImport<CR>
 
 " Returns information about the symbol under the cursor. This
 " function is similar to |tsuquyomi#balloonexpr|, but
 " works not only in GVim but also in terminal Vim.
 nmap <buffer> <Leader>t :<C-u>echo tsuquyomi#hint()<CR>
-
-" Enable auto imports
-let g:ale_completion_tsserver_autoimport = 1
 
 " Disable ALE completion in favour of Tsuquyomi completion
 let g:ale_completion_enabled = 0
