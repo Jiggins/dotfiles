@@ -7,7 +7,6 @@
 " https://github.com/dense-analysis/ale#usage-completion
 
 let g:ale_linters = {
-\   'haskell': ['stack-build', 'stack-ghc-mod'],
 \   'pandoc': ['markdownlint', 'proselint'],
 \   'python': ['pyls'],
 \   'sh': ['language-server'],
@@ -15,6 +14,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
+\   'haskell': ['hie'],
 \   'html': ['prettier'],
 \   'javascript': ['eslint'],
 \   'json': ['jq'],

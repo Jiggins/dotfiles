@@ -71,13 +71,11 @@ Plug 'amperser/proselint'                  " Proselint plugin for Vim
 Plug 'beloglazov/vim-online-thesaurus'     " A Vim plugin for looking up words in an online thesaurus
 
 "" Languages - Haskell
-Plug 'eagletmt/ghcmod-vim',               { 'for': 'haskell' } " Happy Haskell programming on Vim, powered by ghc-mod
 Plug 'hspec/hspec.vim',                   { 'for': 'haskell' } " Vim syntax file for Hspec
 Plug 'lukerandall/haskellmode-vim',       { 'for': 'haskell' }
-Plug 'raichoo/haskell-vim',               { 'for': 'haskell' }
+Plug 'raichoo/haskell-vim',               { 'for': 'haskell' } " Custom Haskell Vimscripts
 Plug 'Twinside/vim-hoogle',               { 'for': 'haskell' } " Vim plugin used to query hoogle, the haskell search engine
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for Haskell's cabal syntax file
-Plug 'vim-scripts/hlint',                 { 'for': 'haskell' } " Compiler definition for the hlint (haskell checker) tool
 
 "" Languages - Ruby
 Plug 'danchoi/ri.vim',    { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
