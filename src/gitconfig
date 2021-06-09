@@ -6,6 +6,9 @@ git config --global color.grep always
 git config --global color.status always
 git config --global color.ui always
 
+git config --global pull.rebase true
+git config --global commit.verbose true
+
 if command -v vimdiff > /dev/null; then
   git config --global diff.editor vimdiff
   git config --global merge.tool diffconflicts
