@@ -1,5 +1,7 @@
 # Vim configurations added by github.com/Jiggins/dotfiles
 
+export GENCOMPL_FPATH="${HOME}/.config/zsh/completion"
+
 # ZSH Options
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
