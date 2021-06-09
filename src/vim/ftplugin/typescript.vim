@@ -11,6 +11,8 @@
 " 	example, joining:
 setlocal formatoptions=tcrqj
 
+setlocal textwidth=120
+
 let g:tsuquyomi_shortest_import_path = 1
 
 " A way to open a target file when navigating with
@@ -49,4 +51,4 @@ let g:ale_completion_enabled = 0
 " Tab completion is omnicomple
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
-let b:undo_ftplugin = 'setlocal formatoptions<|setlocal completeopt<'
+let b:undo_ftplugin = 'setlocal formatoptions<|setlocal textwidth<|setlocal completeopt<'
