@@ -74,14 +74,14 @@ function table.contains(table, value)
   return false
 end
 
-function mutechime()
+function sendkeystochime(modifiers, key)
   local chime = hs.application.find('Amazon Chime')
-  local current_window = hs.window.focusedWindow()
   local meeting_window = nil
 
   local window_filter = {
     'Amazon Chime',
     'Video',
+    'Window'
   }
 
   for _, window in pairs(chime:allWindows()) do
@@ -93,15 +93,29 @@ function mutechime()
   end
 
   if meeting_window then
-    print("Focusing window: " .. meeting_window:title())
-    meeting_window:focus()
-    hs.eventtap.keyStroke({"cmd"}, "y")
-    current_window:focus()
+    if chime:focusedWindow():title() ~= meeting_window:title() then
+      print("Focusing window: " .. meeting_window:title())
+      meeting_window:becomeMain()
+    end
+
+    hs.eventtap.keyStroke(modifiers, key, 0, chime)
   end
+end
+
+function mutechime()
+  sendkeystochime({"cmd"}, "y")
+end
+
+function togglechimevideo()
+  sendkeystochime({"cmd", "alt"}, "v")
 end
 
 hs.hotkey.bind({}, "F13", function()
   mutechime()
+end)
+
+hs.hotkey.bind({}, "F14", function()
+  togglechimevideo()
 end)
 
 function windowdetails()
