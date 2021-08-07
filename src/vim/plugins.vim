@@ -51,6 +51,7 @@ Plug 'Absolight/vim-bind',        { 'for': 'bindzone' }  " DNS Bind zone & named
 Plug 'Glench/Vim-Jinja2-Syntax',  { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
 Plug 'adimit/prolog.vim',         { 'for': 'prolog' }
 Plug 'bps/vim-textobj-python',    { 'for': 'python' }    " Text objects for Python.
+Plug 'cespare/vim-toml',          { 'for': 'toml' }      " Vim syntax for TOML
 Plug 'chikamichi/mediawiki.vim',  { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',            { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
 Plug 'chrisbra/csv.vim',          { 'for': 'csv' }       " A Filetype plugin for csv files
