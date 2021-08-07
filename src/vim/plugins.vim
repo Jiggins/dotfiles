@@ -74,7 +74,6 @@ Plug 'beloglazov/vim-online-thesaurus'     " A Vim plugin for looking up words i
 
 "" Languages - Haskell
 Plug 'hspec/hspec.vim',                   { 'for': 'haskell' } " Vim syntax file for Hspec
-Plug 'lukerandall/haskellmode-vim',       { 'for': 'haskell' }
 Plug 'raichoo/haskell-vim',               { 'for': 'haskell' } " Custom Haskell Vimscripts
 Plug 'Twinside/vim-hoogle',               { 'for': 'haskell' } " Vim plugin used to query hoogle, the haskell search engine
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for Haskell's cabal syntax file
