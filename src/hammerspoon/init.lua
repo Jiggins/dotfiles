@@ -80,6 +80,8 @@ function sendkeystochime(modifiers, key)
 
   local window_filter = {
     'Amazon Chime',
+    'Mute box',
+    'Screen share toolbar',
     'Video',
     'Window'
   }
