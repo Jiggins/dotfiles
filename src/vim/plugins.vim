@@ -49,6 +49,7 @@ Plug 'junegunn/fzf.vim'
 " Languages
 Plug 'Absolight/vim-bind',        { 'for': 'bindzone' }  " DNS Bind zone & named plugin
 Plug 'Glench/Vim-Jinja2-Syntax',  { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
+Plug 'Joorem/vim-haproxy',        { 'for': 'haproxy' }   " HAProxy syntax file
 Plug 'adimit/prolog.vim',         { 'for': 'prolog' }
 Plug 'bps/vim-textobj-python',    { 'for': 'python' }    " Text objects for Python.
 Plug 'cespare/vim-toml',          { 'for': 'toml' }      " Vim syntax for TOML

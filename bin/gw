@@ -30,7 +30,7 @@ function usage() {
 
 case "${1:-status}" in
   l*)
-    cmd="git log --color --decorate --all --graph --oneline | ${truncate_cmd}"
+    cmd="git log --color --oneline --decorate --graph --exclude=refs/stash --all | ${truncate_cmd}"
     ;;
 
   s*)
