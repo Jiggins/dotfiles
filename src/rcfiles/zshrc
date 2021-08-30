@@ -98,6 +98,7 @@ addpath "/usr/local/bin"
 addpath "/usr/local/sbin"
 addpath "/usr/local/opt/python/libexec/bin"
 addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+addpath "$(python3 -m site --user-base)/bin"
 
 # Solidify PATH changes for the rest of the shell sessions
 export PATH
