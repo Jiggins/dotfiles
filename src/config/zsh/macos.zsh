@@ -2,6 +2,10 @@
 
 alias ls='ls -G'
 
+if find /Applications ~/Applications -maxdepth 1 -mindepth 1 -iname 'yoink.app' > /dev/null; then
+  alias yoink='open -a yoink'
+fi
+
 # Use GNU versions of common shell tools if the exist (useful on macOS)
 command -v 'gsed' >/dev/null && alias sed='gsed'
 command -v 'gtar' >/dev/null && alias tar='gtar'
