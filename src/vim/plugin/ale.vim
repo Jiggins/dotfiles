@@ -47,3 +47,6 @@ let g:ale_completion_enabled = 1
 
 " Enable auto imports
 let g:ale_completion_autoimport = 1
+
+" Replace Vim's 'Go to Tag' feature with ALE's go to fucntion
+nnoremap <c-]> :ALEGoToDefinition<cr>
