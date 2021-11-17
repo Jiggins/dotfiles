@@ -81,9 +81,6 @@ Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for
 
 "" Languages - Ruby
 Plug 'danchoi/ri.vim',    { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
-Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-Plug 'tpope/vim-rails',   { 'for': 'ruby' }
-Plug 'tpope/vim-rake',    { 'for': 'ruby' }
 
 "" Languages - Terraform
 Plug 'hashivim/vim-terraform',                { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
