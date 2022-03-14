@@ -5,59 +5,71 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", hs.reload)
 -- enable Spotlight support with
 hs.application.enableSpotlightForNameSearches(true)
 
-hs.layout.mid50       = hs.geometry.new({x = 0.25,  y = 0,     w = 0.5,   h = 1.0})
-hs.layout.top75       = hs.geometry.new({x = 0,     y = 0,     w = 1.0,   h = 0.77})
-hs.layout.bottomleft  = hs.geometry.new({x = 0,     y = 0.77,  w = 0.8,   h = 0.23})
-hs.layout.bottomright = hs.geometry.new({x = 0.8,   y = 0.77,  w = 0.2,   h = 0.23})
-hs.layout.iTunesMini  = hs.geometry.new({x = 0.83,  y = 0,     w = 0.17,  h = 1})
-
 -- default_browser = "Google Chrome"
 default_browser = "Firefox"
 
--- Layouts
-work = {
-  {"Mail",           nil,             "DELL U3415W",  hs.layout.left25,      nil,  nil},
-  {"iTerm2",         nil,             "DELL U3415W",  hs.layout.mid50,       nil,  nil},
-  {"Amazon Chime",   "Amazon Chime",  "DELL U3415W",  hs.layout.right25,     nil,  nil},
-  {default_browser,  nil,             "DELL U2715H",  hs.layout.maximized,   nil,  nil},
-  {"iTunes",         "Mini Player",   "Color LCD",    hs.layout.iTunesMini,  nil,  nil},
-  {"iTunes",         nil,             "Color LCD",    nil,                   nil,  nil},
-  {"Fantastical",    nil,             "Color LCD",    nil,                   nil,  nil},
+macbook_monitor = "Built-in Retina Display"
+
+locations = {
+  work = {
+    ["centre_monitor"] = "DELL U3419W",
+    ["vertical_monitor"] = "DELL U2715H"
+  },
+
+  home = {
+    ["centre_monitor"] = "LC32G7xT",
+    ["vertical_monitor"] = "ASUS PB287Q"
+  }
 }
 
-work_browser = {
-  {"Mail",           nil,             "DELL U3415W",  hs.layout.left25,      nil,  nil},
-  {default_browser,  nil,             "DELL U3415W",  hs.layout.mid50,       nil,  nil},
-  {"Amazon Chime",   "Amazon Chime",  "DELL U3415W",  hs.layout.right25,     nil,  nil},
-  {"iTerm2",         nil,             "DELL U2715H",  hs.layout.maximized,   nil,  nil},
-  {"iTunes",         "Mini Player",   "Color LCD",    hs.layout.iTunesMini,  nil,  nil},
-  {"iTunes",         nil,             "Color LCD",    nil,                   nil,  nil},
-  {"Fantastical",    nil,             "Color LCD",    nil,                   nil,  nil},
-}
+function getMusicMiniPlayerWidth()
+  local music_mini_width = 288
+  local screen_width = hs.screen.primaryScreen():frame().w
 
-home = {
-  {"Mail",           nil,             "ASUS PB287Q",  hs.layout.left25,      nil,  nil},
-  {"iTerm2",         nil,             "ASUS PB287Q",  hs.layout.mid50,       nil,  nil},
-  {"Amazon Chime",   "Amazon Chime",  "ASUS PB287Q",  hs.layout.right25,     nil,  nil},
-  {default_browser,  nil,             "ASUS PB287Q",  hs.layout.mid50,       nil,  nil},
-  {"iTunes",         "Mini Player",   "Color LCD",    hs.layout.iTunesMini,  nil,  nil},
-  {"iTunes",         nil,             "Color LCD",    nil,                   nil,  nil},
-}
+  return music_mini_width / screen_width
+end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "E", function()
-  hs.layout.apply(work)
-end)
+function applyLayout(main_app)
+  local main_screen = hs.screen.primaryScreen()
+
+  if main_app == "terminal" then
+    applications = { "iTerm2", default_browser }
+  elseif main_app == "browser" then
+    applications = { default_browser, "iTerm2" }
+  end
+
+  for k, v in pairs(locations) do
+    if main_screen:name() == locations[k]["centre_monitor"] then
+      location = locations[k]
+    end
+  end
+
+  local music_mini_player_width = getMusicMiniPlayerWidth()
+  hs.layout.main_app    = hs.geometry.rect(music_mini_player_width, 0, 1 - music_mini_player_width, 1)
+  hs.layout.music_mini  = hs.geometry.rect(0, 0, music_mini_player_width, 1)
+
+  layout = {
+    {applications[1],  nil,             location["centre_monitor"],    hs.layout.main_app,    nil,  nil},
+    {applications[2],  nil,             location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
+    {"Music",          nil,             macbook_monitor,               nil,                   nil,  nil},
+    {"Music",          "Mini Player",   location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
+    {"Amazon Chime",   "Amazon Chime",  macbook_monitor,               nil,                   nil,  nil},
+    {"Calendar",       nil,             macbook_monitor,               nil,                   nil,  nil},
+    {"Discord",        nil,             macbook_monitor,               nil,                   nil,  nil},
+    {"Mail",           nil,             macbook_monitor,               nil,                   nil,  nil},
+    {"Signal",         nil,             macbook_monitor,               nil,                   nil,  nil},
+    {"Slack",          nil,             macbook_monitor,               nil,                   nil,  nil},
+  }
+
+  hs.layout.apply(layout)
+end
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
-  hs.layout.apply(work)
+  applyLayout("terminal")
 end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", function()
-  hs.layout.apply(work_browser)
-end)
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", function()
-  hs.layout.apply(home)
+  applyLayout("browser")
 end)
 
 -- Screens
@@ -132,8 +144,8 @@ function windowdetails()
   output = output .. "\n" .. "Top left ratio: " .. string.format("%.2f", (frame.x / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y / screen:frame().h))
   output = output .. "\n" .. "Bottom right:   " .. frame.x2 .. ", " .. frame.y2
   output = output .. "\n" .. "Bottom ratio:   " .. string.format("%.2f", (frame.x2 / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y2 / screen:frame().h))
-  output = output .. "\n" .. "Height:         " .. frame.h
-  output = output .. "\n" .. "Width:          " .. frame.w
+  output = output .. "\n" .. "Window:         " .. frame.h .. ", " .. frame.w
+  output = output .. "\n" .. "Screen          " .. screen:frame().h .. ", " .. screen:frame().w
   return output
 end
 
