@@ -1,10 +1,4 @@
-" configurations added by github.com/Jiggins/dotfiles
 let $VIMHOME=expand('<sfile>:p:h').'/.vim'
-
-source $VIMHOME/plugins.vim
-source $VIMHOME/vim-commands.vim
-source $VIMHOME/vim-keymap.vim
-source $VIMHOME/vim-preferences.vim
 
 " Override vimrc with OS specific options
 if has('mac')
@@ -12,4 +6,5 @@ if has('mac')
 elseif has('linux')
   source $VIMHOME/linux.vim
 endif
+
 
