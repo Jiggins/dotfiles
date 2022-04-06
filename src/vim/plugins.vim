@@ -139,4 +139,9 @@ Plug 'ryanoasis/vim-devicons'              " Adds font icons (glyphs ★♨☢) 
                                            " and web developer filetypes for: NERDTree, powerline, vim-airline,
                                            " ctrlp, unite, lightline.vim, vim-startify, vimfiler, and flagship
 
+" Load any additional plugins from local.vim
+for plugin in g:AdditionalPlugins
+  Plug plugin
+endfor
+
 call plug#end()
