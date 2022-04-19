@@ -4,7 +4,6 @@ setlocal shiftwidth=4
 setlocal nowrap
 setlocal conceallevel=0
 
-setlocal textwidth=120
 setlocal formatoptions=tcq
 
 let g:pandoc#formatting#textwidth = 120
@@ -22,4 +21,4 @@ nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
 
 map K :OnlineThesaurusCurrentWord<CR>
 
-let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<|setlocal textwidth<'
+let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<'

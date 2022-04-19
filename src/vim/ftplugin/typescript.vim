@@ -1,18 +1,3 @@
-" t	Auto-wrap text using textwidth
-" c	Auto-wrap comments using textwidth, inserting the current comment
-" 	leader automatically.
-" r	Automatically insert the current comment leader after hitting
-" 	<Enter> in Insert mode.
-" q	Allow formatting of comments with "gq".
-" 	Note that formatting will not change blank lines or lines containing
-" 	only the comment leader.  A new paragraph starts after such a line,
-" 	or when the comment leader changes.
-" j	Where it makes sense, remove a comment leader when joining lines.  For
-" 	example, joining:
-setlocal formatoptions=tcrqj
-
-setlocal textwidth=120
-
 let g:tsuquyomi_shortest_import_path = 1
 
 " A way to open a target file when navigating with
@@ -51,4 +36,4 @@ let g:ale_completion_enabled = 0
 " Tab completion is omnicomple
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
-let b:undo_ftplugin = 'setlocal formatoptions<|setlocal textwidth<|setlocal completeopt<'
+let b:undo_ftplugin = 'setlocal completeopt<'
