@@ -49,4 +49,10 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 
 " Replace Vim's 'Go to Tag' feature with ALE's go to fucntion
+let g:ale_default_navigation = 'vsplit'
 nnoremap <c-]> :ALEGoToDefinition<cr>
+
+" Look up documentation and linting errors in a floating window
+let g:ale_detail_to_floating_preview = 1
+let g:ale_hover_to_floating_preview = 1
+nnoremap <F6> :ALEHover<cr>
