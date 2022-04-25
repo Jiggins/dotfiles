@@ -79,7 +79,8 @@ Plug 'Twinside/vim-hoogle',               { 'for': 'haskell' } " Vim plugin used
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for Haskell's cabal syntax file
 
 "" Languages - Ruby
-Plug 'danchoi/ri.vim',    { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
+Plug 'danchoi/ri.vim',                 { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " Ruby text objects
 
 "" Languages - Terraform
 Plug 'hashivim/vim-terraform',                { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
