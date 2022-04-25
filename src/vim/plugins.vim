@@ -63,7 +63,6 @@ Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }    " Vim plugin for workin
 Plug 'kana/vim-textobj-user'                            " Vim plugin: Create your own text objects
 Plug 'mityu/vim-applescript'
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
-Plug 'plasticboy/vim-markdown',   { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',         { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 Plug 'tangledhelix/vim-rdist',    { 'for': 'rdist' }     " Vim syntax highlighting for Rdist
 Plug 'tmhedberg/matchit'                                 " extended % matching for HTML, LaTeX, and many other languages
