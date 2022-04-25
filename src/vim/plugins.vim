@@ -61,6 +61,7 @@ Plug 'davidhalter/jedi-vim',      { 'for': 'python' }    " Jedi-vim is a Vim bin
 Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }    " Vim plugin for working with python virtualenvs
 Plug 'kana/vim-textobj-user'                            " Vim plugin: Create your own text objects
+Plug 'mityu/vim-applescript'
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'plasticboy/vim-markdown',   { 'for': 'markdown' }
 Plug 'rhysd/vim-crystal',         { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
