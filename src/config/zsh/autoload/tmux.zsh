@@ -6,9 +6,18 @@ alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
 
 function tn() {
-  [[ "$PWD" = "$HOME" ]] && (tmux attach -t "Local" || tmux new -s "Local") && return 0
-  local dirname=${PWD##*/}
-  local name=${1:-${dirname}}
+  local target_dir="${1:-$PWD}"
+  local session_name
 
-  tmux attach -t "$name" || tmux new -s "$name"
+  if [[ "${target_dir}" = "${HOME}" ]]; then
+    session_name='Local'
+  else
+    session_name=${target_dir##*/}
+  fi
+
+  if [[ -d "${1}" ]]; then
+    cd "${1}"
+  fi
+
+  tmux attach -t "${session_name}" || tmux new -s "${session_name}"
 }
