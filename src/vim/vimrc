@@ -1,7 +1,9 @@
 let $VIMHOME=expand('<sfile>:h')
 
 " Local overrides not tracked in git
-source $VIMHOME/local.vim
+if filereadable($VIMHOME . '/local.vim')
+  source $VIMHOME/local.vim
+endif
 
 " Load plugins first
 source $VIMHOME/plugins.vim
