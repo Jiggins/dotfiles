@@ -4,13 +4,14 @@ setlocal shiftwidth=4
 setlocal nowrap
 setlocal conceallevel=0
 
-setlocal formatoptions=tcq
+setlocal textwidth=120
+setlocal formatoptions=trqjn
 
 let g:pandoc#formatting#textwidth = 120
 let g:pandoc#formatting#equalprg = 'pandoc -t markdown+pipe_tables'
 let g:pandoc#formatting#extra_equalprg = '--markdown-headings=atx --reference-links --columns=120'
 
-let g:pandoc#syntax#codeblocks#embeds#langs = ['bash=sh', 'haskell', 'json', 'ruby', 'python', 'sh', 'typescript']
+let g:pandoc#syntax#codeblocks#embeds#langs = ['bash=sh', 'haskell', 'java', 'json', 'ruby', 'python', 'sh', 'typescript']
 let g:pandoc#syntax#conceal#blacklist = ['atx', 'list', 'quotes']
 let g:pandoc#syntax#conceal#urls = 1
 
@@ -21,4 +22,4 @@ nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
 
 map K :OnlineThesaurusCurrentWord<CR>
 
-let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<'
+let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<|setlocal textwidth<'
