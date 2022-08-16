@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline'                              " lean & mean status
 Plug 'vim-airline/vim-airline-themes'                       " A collection of themes for vim-airline
 " Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'                                   " A Vim Automatic Window Resizing Plugin
+Plug 'wellle/context.vim'                                   " Vim plugin that shows the context of the currently visible buffer contents 
 
 " Colourschemes
 Plug 'altercation/vim-colors-solarized'    " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
