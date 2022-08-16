@@ -8,7 +8,6 @@
 
 let g:ale_linters = {
 \   'pandoc': ['markdownlint', 'proselint'],
-\   'python': ['pyls'],
 \   'typescript': ['eslint', 'tsserver']
 \}
 
