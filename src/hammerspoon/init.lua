@@ -132,6 +132,10 @@ hs.hotkey.bind({}, "F14", function()
   togglechimevideo()
 end)
 
+hs.hotkey.bind({}, "F15", function()
+  sendkeystochime({"cmd", "alt"}, "e")
+end)
+
 function windowdetails()
   local win = hs.window.focusedWindow()
   local frame = win:frame()
