@@ -38,6 +38,12 @@ fi
 
 time=$(timew | ${sed_cmd} -n 's/ *Total *//p')
 
+function stoptask() {
+  if [[ -n "${task_id}" ]]; then
+    task "${task_id}" stop
+  fi
+}
+
 function touchbar() {
   local -a output=( ${task_id} )
 
@@ -70,6 +76,14 @@ function tmuxline() {
 
 while (( $# > 0 )); do
   case "${1}" in
+    --id)
+      echo "${task_id}"
+      ;;
+
+    --stop)
+      stoptask
+      ;;
+
     --touchbar)
       touchbar
       ;;

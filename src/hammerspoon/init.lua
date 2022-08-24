@@ -22,6 +22,8 @@ locations = {
   }
 }
 
+amazon_chime = "Amazon Chime"
+
 function getMusicMiniPlayerWidth()
   local music_mini_width = 288
   local screen_width = hs.screen.primaryScreen():frame().w
@@ -49,16 +51,16 @@ function applyLayout(main_app)
   hs.layout.music_mini  = hs.geometry.rect(0, 0, music_mini_player_width, 1)
 
   layout = {
-    {applications[1],  nil,             location["centre_monitor"],    hs.layout.main_app,    nil,  nil},
-    {applications[2],  nil,             location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
-    {"Music",          nil,             macbook_monitor,               nil,                   nil,  nil},
-    {"Music",          "Mini Player",   location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
-    {"Amazon Chime",   "Amazon Chime",  macbook_monitor,               nil,                   nil,  nil},
-    {"Calendar",       nil,             macbook_monitor,               nil,                   nil,  nil},
-    {"Discord",        nil,             macbook_monitor,               nil,                   nil,  nil},
-    {"Mail",           nil,             macbook_monitor,               nil,                   nil,  nil},
-    {"Signal",         nil,             macbook_monitor,               nil,                   nil,  nil},
-    {"Slack",          nil,             macbook_monitor,               nil,                   nil,  nil},
+    {applications[1],  nil,            location["centre_monitor"],    hs.layout.main_app,    nil,  nil},
+    {applications[2],  nil,            location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
+    {"Music",          nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Music",          "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
+    {amazon_chime,     amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
+    {"Calendar",       nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Discord",        nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Mail",           nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Signal",         nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Slack",          nil,            macbook_monitor,               nil,                   nil,  nil},
   }
 
   hs.layout.apply(layout)
@@ -86,10 +88,7 @@ function table.contains(table, value)
   return false
 end
 
-function sendkeystochime(modifiers, key)
-  local chime = hs.application.find('Amazon Chime')
-  local meeting_window = nil
-
+function isChimeMeetingWindow(window)
   local window_filter = {
     'Amazon Chime',
     'Mute box',
@@ -98,9 +97,16 @@ function sendkeystochime(modifiers, key)
     'Window'
   }
 
+  return not table.contains(window_filter, window:title()) and window:title() ~= ""
+end
+
+function sendkeystochime(modifiers, key)
+  local chime = hs.application.find('Amazon Chime')
+  local meeting_window = nil
+
   for _, window in pairs(chime:allWindows()) do
     -- filter out the main Chime window
-    if not table.contains(window_filter, window:title()) and window:title() ~= "" then
+    if isChimeMeetingWindow(window) then
       meeting_window = window
       break
     end
@@ -136,6 +142,26 @@ hs.hotkey.bind({}, "F15", function()
   sendkeystochime({"cmd", "alt"}, "e")
 end)
 
+function onWindowEvent(window, applicationName, eventType)
+  hs.timer.usleep(2 * 1000000)
+  print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
+
+  if applicationName == amazon_chime then
+    if eventType == hs.window.filter.windowCreated then
+      if isChimeMeetingWindow(window) then
+        local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
+
+        hs.execute("active-task.sh --stop", true)
+        hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
+      end
+    end
+
+    if eventType == hs.window.filter.windowDestroyed then
+      hs.execute("timew stop", true)
+    end
+  end
+end
+
 function windowdetails()
   local win = hs.window.focusedWindow()
   local frame = win:frame()
@@ -159,3 +185,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
   hs.alert.show(s)
   -- hs.notify.new({title="Hammerspoon", informativeText=s}):send()
 end)
+
+windowFilter = hs.window.filter.new(false)
+windowFilter:allowApp(amazon_chime)
+windowFilter:subscribe({hs.window.filter.windowCreated, hs.window.filter.windowDestroyed}, onWindowEvent)
