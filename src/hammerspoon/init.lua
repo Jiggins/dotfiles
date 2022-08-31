@@ -23,6 +23,7 @@ locations = {
 }
 
 amazon_chime = "Amazon Chime"
+last_chime_window = nil
 
 function getMusicMiniPlayerWidth()
   local music_mini_width = 288
@@ -144,20 +145,27 @@ end)
 
 function onWindowEvent(window, applicationName, eventType)
   hs.timer.usleep(2 * 1000000)
-  print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
+  -- print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
 
   if applicationName == amazon_chime then
     if eventType == hs.window.filter.windowCreated then
       if isChimeMeetingWindow(window) then
         local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
 
+        print("Tracking meeting: " .. meeting_name)
         hs.execute("active-task.sh --stop", true)
         hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
+
+        last_chime_window = window
       end
     end
 
     if eventType == hs.window.filter.windowDestroyed then
-      hs.execute("timew stop", true)
+      -- When the meeting window is closed, it's title is an empty string
+      if last_chime_window ~= nil and last_chime_window:title() == "" then
+        print("Meeting ended")
+        hs.execute("timew stop", true)
+      end
     end
   end
 end
