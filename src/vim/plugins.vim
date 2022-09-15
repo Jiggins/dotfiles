@@ -27,20 +27,21 @@ Plug 'romainl/flattened'                   " Solarized, without the bullshit.
 Plug 'widatama/vim-phoenix'                " Monochrome color schemes for Vim
 
 " General
-Plug 'AndrewRadev/splitjoin.vim'           " A vim plugin that simplifies the transition between multiline and single-line code
-Plug 'editorconfig/editorconfig-vim'       " EditorConfig plugin for Vim http://editorconfig.org
-Plug 'farmergreg/vim-lastplace'            " Intelligently reopen files at your last edit position in Vim.
-Plug 'idanarye/vim-vebugger'               " Yes, we do need another debugger plugin
-Plug 'junegunn/vim-slash'                  " Enhancing in-buffer search experience
-Plug 'michaeljsmith/vim-indent-object'     " Vim plugin that defines a new text object representing lines of code at the same indent level
-Plug 'powerman/vim-plugin-AnsiEsc'         " ansi escape sequences concealed, but highlighted as specified (conceal)
-Plug 'tpope/vim-apathy'                    " apathy.vim: Set the 'path' option for miscellaneous file types
-Plug 'tpope/vim-endwise'                   " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
-Plug 'tpope/vim-fugitive'                  " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
-Plug 'tpope/vim-obsession'                 " obsession.vim: continuously updated session files
-Plug 'tpope/vim-rhubarb'                   " GitHub extension for fugitive.vim
-Plug 'tpope/vim-sleuth'                    " sleuth.vim: Heuristically set buffer options
-Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution in Vim.
+Plug 'AndrewRadev/splitjoin.vim'                " A vim plugin that simplifies the transition between multiline and single-line code
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}      " Interactive command execution in Vim.
+Plug 'editorconfig/editorconfig-vim'            " EditorConfig plugin for Vim http://editorconfig.org
+Plug 'farmergreg/vim-lastplace'                 " Intelligently reopen files at your last edit position in Vim.
+Plug 'idanarye/vim-vebugger'                    " Yes, we do need another debugger plugin
+Plug 'junegunn/vim-slash'                       " Enhancing in-buffer search experience
+Plug 'michaeljsmith/vim-indent-object'          " Vim plugin that defines a new text object representing lines of code at the same indent level
+Plug 'ojroques/vim-oscyank', {'branch': 'main'} " A Vim plugin to copy text through SSH with OSC52
+Plug 'powerman/vim-plugin-AnsiEsc'              " ansi escape sequences concealed, but highlighted as specified (conceal)
+Plug 'tpope/vim-apathy'                         " apathy.vim: Set the 'path' option for miscellaneous file types
+Plug 'tpope/vim-endwise'                        " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
+Plug 'tpope/vim-fugitive'                       " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
+Plug 'tpope/vim-obsession'                      " obsession.vim: continuously updated session files
+Plug 'tpope/vim-rhubarb'                        " GitHub extension for fugitive.vim
+Plug 'tpope/vim-sleuth'                         " sleuth.vim: Heuristically set buffer options
 
 " FZF - 🌸 A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -61,7 +62,7 @@ Plug 'dag/vim-fish',              { 'for': 'fish' }
 Plug 'davidhalter/jedi-vim',      { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }    " Vim plugin for working with python virtualenvs
-Plug 'kana/vim-textobj-user'                            " Vim plugin: Create your own text objects
+Plug 'kana/vim-textobj-user'                             " Vim plugin: Create your own text objects
 Plug 'mityu/vim-applescript'
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'rhysd/vim-crystal',         { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/

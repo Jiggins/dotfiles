@@ -27,6 +27,7 @@ local.zsh
 
 # Tmux plugins
 src/tmux/plugins
+src/tmux/resurrect/
 
 # Zsh compiled files
 *.zwc
