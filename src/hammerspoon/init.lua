@@ -29,6 +29,19 @@ last_chime_window = nil
 -- this variable is only used in the HammerSpoon console so I can debug
 last_checked_window = nil
 
+function sendNotification(title, message)
+  local attributes = {
+    title = message,
+    subTitle = message
+  }
+
+  function id(x)
+    return x
+  end
+
+  local notification = hs.notify.new(id, attributes)
+end
+
 function getMusicMiniPlayerWidth()
   local music_mini_width = 288
   local screen_width = hs.screen.primaryScreen():frame().w
@@ -98,6 +111,9 @@ function table.contains(table, value)
   return false
 end
 
+-- This method is used to check if a window is a Chime meeting window, it does this by comparing the window title
+-- against a list of known non-meeting window and some other factors. Chime changes the way it titles meetings so
+-- often, this is likely the part that breaks if meeting tracking starts or ends early.
 function isChimeMeetingWindow(window)
   local window_filter = {
     'Amazon Chime',
@@ -106,6 +122,12 @@ function isChimeMeetingWindow(window)
     'Video',
     'Window'
   }
+
+  -- The Chime meeting window is maximizable, the new meeting popup also has the meeting name as a window title. To
+  -- prevent it from tracking a meeting I haven't joined yet, we exclude any window that is not maximizable
+  if not window:isMaximizable() then
+    return false
+  end
 
   return not table.contains(window_filter, window:title()) and window:title() ~= ""
 end
@@ -152,19 +174,32 @@ hs.hotkey.bind({}, "F15", function()
   sendkeystochime({"cmd", "alt"}, "e")
 end)
 
+function trackMeeting(meeting_name)
+  hs.execute("active-task.sh --stop", true)
+  local stdout = hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
+
+  print("Tracking meeting: " .. meeting_name)
+  hs.notify.show("Timewarrior", "Tracking meeting: " .. meeting_name, stdout)
+end
+
+function timewStop()
+  stdout = hs.execute("timew stop", true)
+
+  print("Meeting ended")
+  print(stdout)
+  hs.notify.show("Timewarrior", "Meeting ended", stdout)
+end
+
 function onWindowEvent(window, applicationName, eventType)
   hs.timer.usleep(2 * 1000000)
-  -- print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
 
   if applicationName == amazon_chime then
     if eventType == hs.window.filter.windowCreated then
       if isChimeMeetingWindow(window) then
+        print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
         local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
 
-        print("Tracking meeting: " .. meeting_name)
-        hs.execute("active-task.sh --stop", true)
-        hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
-
+        trackMeeting()
         last_chime_window = window
       end
     end
@@ -172,8 +207,7 @@ function onWindowEvent(window, applicationName, eventType)
     if eventType == hs.window.filter.windowDestroyed then
       -- When the meeting window is closed, it's title is an empty string
       if last_chime_window ~= nil and last_chime_window:title() == "" then
-        print("Meeting ended")
-        hs.execute("timew stop", true)
+        timewStop()
       end
     end
   end
@@ -209,6 +243,17 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
   print(s)
   hs.alert.show(s)
   -- hs.notify.new({title="Hammerspoon", informativeText=s}):send()
+end)
+
+caffeinateWatcher = hs.caffeinate.watcher.new(function(event)
+  if event == hs.caffeinate.watcher.screensDidLock then
+    print("Caffeinate lock screen event")
+    if os.date("*t", os.time())["hour"] >= 18 then
+      print("It's late, stopping tasks")
+      hs.execute("active-task.sh --stop", true)
+      hs.execute("timew stop", true)
+    end
+  end
 end)
 
 windowFilter = hs.window.filter.new(false)
