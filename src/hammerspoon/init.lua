@@ -25,6 +25,10 @@ locations = {
 amazon_chime = "Amazon Chime"
 last_chime_window = nil
 
+-- This is set to the last window checked with the popup (ctrl+alt+cmd+w)
+-- this variable is only used in the HammerSpoon console so I can debug
+last_checked_window = nil
+
 function getMusicMiniPlayerWidth()
   local music_mini_width = 288
   local screen_width = hs.screen.primaryScreen():frame().w
@@ -179,6 +183,9 @@ function windowdetails()
   local win = hs.window.focusedWindow()
   local frame = win:frame()
   local screen = win:screen()
+  local zoomButtonRect = win:zoomButtonRect()
+
+  last_checked_window = win
 
   local output = "Application:    " .. win:application():name()
   output = output .. "\n" .. "Window Title:   " ..  win:title()
@@ -189,6 +196,11 @@ function windowdetails()
   output = output .. "\n" .. "Bottom ratio:   " .. string.format("%.2f", (frame.x2 / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y2 / screen:frame().h))
   output = output .. "\n" .. "Window:         " .. frame.h .. ", " .. frame.w
   output = output .. "\n" .. "Screen          " .. screen:frame().h .. ", " .. screen:frame().w
+  output = output .. "\n" .. "Is standard?    " .. tostring(win:isStandard())
+  output = output .. "\n" .. "Is maximizable? " .. tostring(win:isMaximizable())
+  output = output .. "\n" .. "Subrole:        " .. win:subrole()
+  output = output .. "\n" .. "Zoom button:    " .. zoomButtonRect.x .. ", " .. zoomButtonRect.y .. ", " .. zoomButtonRect.w .. ", " .. zoomButtonRect.h
+
   return output
 end
 
