@@ -13,7 +13,7 @@ macbook_monitor = "Built-in Retina Display"
 locations = {
   work = {
     ["centre_monitor"] = "DELL U3419W",
-    ["vertical_monitor"] = "DELL U2715H"
+    ["vertical_monitor"] = "DELL U2722DE"
   },
 
   home = {
@@ -45,6 +45,11 @@ function applyLayout(main_app)
     if main_screen:name() == locations[k]["centre_monitor"] then
       location = locations[k]
     end
+  end
+
+  if not location then
+    print("Cannot find layout for main screen: " .. main_screen:name())
+    return
   end
 
   local music_mini_player_width = getMusicMiniPlayerWidth()
