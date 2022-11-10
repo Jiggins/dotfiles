@@ -134,20 +134,19 @@ end
 
 function sendkeystochime(modifiers, key)
   local chime = hs.application.find('Amazon Chime')
-  local meeting_window = nil
 
   for _, window in pairs(chime:allWindows()) do
     -- filter out the main Chime window
     if isChimeMeetingWindow(window) then
-      meeting_window = window
+      last_chime_window = window
       break
     end
   end
 
-  if meeting_window then
-    if chime:focusedWindow():title() ~= meeting_window:title() then
-      print("Focusing window: " .. meeting_window:title())
-      meeting_window:becomeMain()
+  if last_chime_window then
+    if chime:focusedWindow():title() ~= last_chime_window:title() then
+      print("Focusing window: " .. last_chime_window:title())
+      last_chime_window:becomeMain()
     end
 
     hs.eventtap.keyStroke(modifiers, key, 0, chime)
@@ -196,15 +195,16 @@ function onWindowEvent(window, applicationName, eventType)
   if applicationName == amazon_chime then
     if eventType == hs.window.filter.windowCreated then
       if isChimeMeetingWindow(window) then
-        print("Name: " .. applicationName .. " Event: " .. eventType .. " Window: " .. window:title())
+        print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
         local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
 
-        trackMeeting()
+        trackMeeting(meeting_name)
         last_chime_window = window
       end
     end
 
     if eventType == hs.window.filter.windowDestroyed then
+      print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
       -- When the meeting window is closed, it's title is an empty string
       if last_chime_window ~= nil and last_chime_window:title() == "" then
         timewStop()
