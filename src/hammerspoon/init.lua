@@ -7,6 +7,7 @@ hs.application.enableSpotlightForNameSearches(true)
 
 -- default_browser = "Google Chrome"
 default_browser = "Firefox"
+default_terminal = "iTerm2"
 
 macbook_monitor = "Built-in Retina Display"
 
@@ -53,9 +54,9 @@ function applyLayout(main_app)
   local main_screen = hs.screen.primaryScreen()
 
   if main_app == "terminal" then
-    applications = { "iTerm2", default_browser }
+    applications = { default_terminal, default_browser }
   elseif main_app == "browser" then
-    applications = { default_browser, "iTerm2" }
+    applications = { default_browser, default_terminal }
   end
 
   for k, v in pairs(locations) do
@@ -87,6 +88,9 @@ function applyLayout(main_app)
   }
 
   hs.layout.apply(layout)
+
+  -- focus the window on the main screen after applying the layout
+  hs.application.find(applications[1]):mainWindow():focus()
 end
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
