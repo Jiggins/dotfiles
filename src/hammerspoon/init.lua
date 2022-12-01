@@ -157,6 +157,34 @@ function sendkeystochime(modifiers, key)
   end
 end
 
+function resumeTask()
+  local stdout = hs.execute("active-task.sh --resume", true)
+  hs.notify.show("Timewarrior", "Resume task", stdout)
+  print("Timewarrior", stdout)
+end
+
+function stopTask()
+  local stdout = hs.execute("active-task.sh --stop", true)
+  hs.notify.show("Timewarrior", "Stopping task", stdout)
+  print("Timewarrior", stdout)
+end
+
+function trackMeeting(meeting_name)
+  hs.execute("active-task.sh --stop", true)
+  local stdout = hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
+
+  print("Tracking meeting: " .. meeting_name)
+  hs.notify.show("Timewarrior", "Tracking meeting: " .. meeting_name, stdout)
+end
+
+function stopMeeting()
+  stdout = hs.execute("timew stop", true)
+
+  print("Meeting ended")
+  print(stdout)
+  hs.notify.show("Timewarrior", "Meeting ended", stdout)
+end
+
 function mutechime()
   sendkeystochime({"cmd"}, "y")
 end
@@ -177,21 +205,13 @@ hs.hotkey.bind({}, "F15", function()
   sendkeystochime({"cmd", "alt"}, "e")
 end)
 
-function trackMeeting(meeting_name)
-  hs.execute("active-task.sh --stop", true)
-  local stdout = hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
+hs.hotkey.bind({}, "F16", function()
+  resumeTask()
+end)
 
-  print("Tracking meeting: " .. meeting_name)
-  hs.notify.show("Timewarrior", "Tracking meeting: " .. meeting_name, stdout)
-end
-
-function timewStop()
-  stdout = hs.execute("timew stop", true)
-
-  print("Meeting ended")
-  print(stdout)
-  hs.notify.show("Timewarrior", "Meeting ended", stdout)
-end
+hs.hotkey.bind({}, "F17", function()
+  stopTask()
+end)
 
 function onWindowEvent(window, applicationName, eventType)
   hs.timer.usleep(2 * 1000000)

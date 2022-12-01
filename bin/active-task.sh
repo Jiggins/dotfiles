@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eu
 
@@ -44,6 +44,18 @@ function stoptask() {
   fi
 }
 
+function resumetask() {
+  readarray -t previous_tracked_time < <(timew get dom.tracked.1.json | jq -r '.tags[]')
+  readarray -t matching_tasks < <(task "${previous_tracked_time[@]}" export | jq '.[].id')
+
+  if (( ${#matching_tasks[@]} > 0 )); then
+    task ${matching_tasks[@]} start
+    return $?
+  fi
+
+  timew continue
+}
+
 function touchbar() {
   local -a output=( ${task_id} )
 
@@ -78,6 +90,10 @@ while (( $# > 0 )); do
   case "${1}" in
     --id)
       echo "${task_id}"
+      ;;
+
+    --resume)
+      resumetask
       ;;
 
     --stop)
