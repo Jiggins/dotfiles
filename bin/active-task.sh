@@ -31,7 +31,7 @@ function parse_task_from_timew() {
 task_id=$(task +ACTIVE _ids | head -n 1)
 
 if [[ -n "${task_id}" ]]; then
-  task_description=$(task _get ${task_id}.description)
+  task_description=$(task _get "${task_id}.description")
 else
   task_description=$(timew | parse_task_from_timew)
 fi
@@ -41,15 +41,18 @@ time=$(timew | ${sed_cmd} -n 's/ *Total *//p')
 function stoptask() {
   if [[ -n "${task_id}" ]]; then
     task "${task_id}" stop
+    return $?
   fi
+
+  timew stop
 }
 
 function resumetask() {
   readarray -t previous_tracked_time < <(timew get dom.tracked.1.json | jq -r '.tags[]')
-  readarray -t matching_tasks < <(task "${previous_tracked_time[@]}" export | jq '.[].id')
+  readarray -t matching_tasks < <(task status:pending "/${previous_tracked_time[*]}/" export | jq '.[].id')
 
   if (( ${#matching_tasks[@]} > 0 )); then
-    task ${matching_tasks[@]} start
+    task "${matching_tasks[@]}" start
     return $?
   fi
 
@@ -57,7 +60,7 @@ function resumetask() {
 }
 
 function touchbar() {
-  local -a output=( ${task_id} )
+  local -a output=( "${task_id}" )
 
   if [[ -n "${task_description}" ]]; then
     output+=( "${task_description}" )
@@ -76,7 +79,7 @@ function touchbar() {
 
 function tmuxline() {
   if [[ -n "${task_id}" ]]; then
-    echo -n " ${task_id}  "${task_description}"  ⌚️ ${time} "
+    echo -n " ${task_id}  ${task_description}  ⌚️ ${time} "
     return $?
   fi
 
