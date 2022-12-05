@@ -228,10 +228,9 @@ function onWindowEvent(window, applicationName, eventType)
     end
 
     if eventType == hs.window.filter.windowDestroyed then
-      print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
-      -- When the meeting window is closed, it's title is an empty string
-      if last_chime_window ~= nil and last_chime_window:title() == "" then
-        timewStop()
+      -- If the closed window's ID matches the ID of the last Chime window, then end the tracking
+      if last_chime_window ~= nil and last_chime_window:id() == window:id() then
+        stopMeeting()
       end
     end
   end
@@ -247,6 +246,7 @@ function windowdetails()
 
   local output = "Application:    " .. win:application():name()
   output = output .. "\n" .. "Window Title:   " ..  win:title()
+  output = output .. "\n" .. "Window ID:      " .. win:id()
   output = output .. "\n" .. "Screen name:    " .. screen:name()
   output = output .. "\n" .. "Top left:       " .. frame.x .. ", " .. frame.y
   output = output .. "\n" .. "Top left ratio: " .. string.format("%.2f", (frame.x / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y / screen:frame().h))
