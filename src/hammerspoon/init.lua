@@ -30,6 +30,10 @@ last_chime_window = nil
 -- this variable is only used in the HammerSpoon console so I can debug
 last_checked_window = nil
 
+function string:startswith(start)
+  return self:sub(1, #start) == start
+end
+
 function sendNotification(title, message)
   local attributes = {
     title = message,
@@ -133,6 +137,12 @@ function isChimeMeetingWindow(window)
     return false
   end
 
+  -- New feature in Chime where you can pop out a screen share session. This should not start a new timer as it's still
+  -- the same meeting.
+  if window:title():startswith("Amazon Chime Screen Share:") then
+    return false
+  end
+
   return not table.contains(window_filter, window:title()) and window:title() ~= ""
 end
 
@@ -215,6 +225,8 @@ end)
 
 function onWindowEvent(window, applicationName, eventType)
   hs.timer.usleep(2 * 1000000)
+
+  print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
 
   if applicationName == amazon_chime then
     if eventType == hs.window.filter.windowCreated then
