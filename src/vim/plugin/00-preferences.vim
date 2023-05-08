@@ -23,7 +23,6 @@ set nolist
 set spelllang=en_gb
 set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: too much)
 
-" t	Auto-wrap text using textwidth
 " c	Auto-wrap comments using textwidth, inserting the current comment
 " 	leader automatically.
 " r	Automatically insert the current comment leader after hitting
@@ -34,7 +33,7 @@ set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: to
 " 	or when the comment leader changes.
 " j	Where it makes sense, remove a comment leader when joining lines.  For
 " 	example, joining:
-set formatoptions=tcrqj
+set formatoptions=crqj
 set textwidth=120
 
 " Undofile
