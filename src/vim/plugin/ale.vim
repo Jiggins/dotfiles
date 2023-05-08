@@ -54,4 +54,8 @@ nnoremap <c-]> :ALEGoToDefinition<cr>
 " Look up documentation and linting errors in a floating window
 let g:ale_detail_to_floating_preview = 1
 let g:ale_hover_to_floating_preview = 1
+
+" Disable inline errors
+let g:ale_virtualtext_cursor = 0
+
 nnoremap <F6> :ALEHover<cr>
