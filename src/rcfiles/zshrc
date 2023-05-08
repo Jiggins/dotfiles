@@ -134,6 +134,11 @@ zplug load
 [ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
 [ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
 
+# https://asdf-vm.com/guide/getting-started.html
+if command -v brew 2>&1 > /dev/null && [[ -f $(brew --prefix asdf)/libexec/asdf.sh ]]; then
+  .  $(brew --prefix asdf)/libexec/asdf.sh
+fi
+
 export EDITOR=$(which vim)
 export LESS="SR"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
