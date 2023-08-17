@@ -6,6 +6,11 @@ function error() { echo "$(tput setaf 1)ERROR:$(tput sgr0) ${*}"; }
 function running() { echo "$(tput setaf 4)RUNNING:$(tput sgr0) ${*}"; }
 function bold() { echo "$(tput bold)${*}$(tput sgr0)"; }
 
+function run() {
+  running "${@}"
+  ${@}
+}
+
 function die() {
   local return_value=$?
   echo "$(tput setaf 1)FATAL:$(tput sgr0) ${*}"
