@@ -7,7 +7,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " Open FZF in a tmux popup window instead of within Vim
 " See `man fzf-tmux` for available options
 if exists('$TMUX')
-  let g:fzf_layout = { 'tmux': '-p90%,60%' }
+  let g:fzf_layout = { 'tmux': '-p "90%,60%"' }
 else
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 endif
