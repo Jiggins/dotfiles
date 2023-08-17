@@ -120,6 +120,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "RobSis/zsh-completion-generator"
 zplug "lib/completion", from:oh-my-zsh
+zplug "reegnz/jq-zsh-plugin"
 zplug "romkatv/powerlevel10k," as:theme, depth:1
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "trapd00r/LS_COLORS", hook-build:"dircolors -b LS_COLORS > c.zsh"
@@ -133,6 +134,8 @@ zplug load
 [ -f "${HOME}/.fzf.zsh" ]           && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
 [ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
+
+bindkey '^j' jq-complete
 
 # https://asdf-vm.com/guide/getting-started.html
 if command -v brew 2>&1 > /dev/null && [[ -f $(brew --prefix asdf)/libexec/asdf.sh ]]; then
