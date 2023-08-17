@@ -49,8 +49,10 @@ let g:ale_completion_autoimport = 1
 
 " Replace Vim's 'Go to Tag' feature with ALE's go to fucntion,
 " also have it add to the tag stack so we can easily come back
-let g:ale_default_navigation = 'vsplit'
-nnoremap <c-]> :TagImposterAnticipateJump <Bar> ALEGoToDefinition<cr>
+" https://vi.stackexchange.com/a/38866/5952
+execute "set <C-M-]>=\<Esc>\<C-]>"
+nmap <c-]> :TagJump <bar> ALEGoToDefinition<cr>
+nmap <c-m-]> :TagJump <bar> ALEGoToDefinition -vsplit<cr>
 
 " Look up documentation and linting errors in a floating window
 let g:ale_detail_to_floating_preview = 1
