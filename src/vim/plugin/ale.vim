@@ -61,4 +61,7 @@ let g:ale_hover_to_floating_preview = 1
 " Disable inline errors
 let g:ale_virtualtext_cursor = 0
 
+" Use ALEHover for keyword lookup
+nnoremap <buffer> K :ALEHover<CR>
+
 nnoremap <F6> :ALEHover<cr>
