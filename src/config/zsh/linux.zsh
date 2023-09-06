@@ -3,6 +3,11 @@
 alias ls='ls --color=auto'
 
 function open() {
+  if command -v open > /dev/null; then
+    $(which open) "${@}"
+    return $?
+  fi
+
   nohup xdg-open "${@}" > /tmp/open.log &
   disown
 }
