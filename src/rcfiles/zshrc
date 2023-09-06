@@ -67,7 +67,7 @@ bindkey -M vicmd v edit-command-line
 autoload -U select-word-style && select-word-style bash
 
 # 10ms for key sequences
-export KEYTIMEOUT=1
+export KEYTIMEOUT=20
 
 # Disable zsh correction on shell arguments
 # $ which vim
@@ -124,6 +124,7 @@ source "${ZPLUG_HOME}/init.zsh"
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "RobSis/zsh-completion-generator"
+zplug "junegunn/fzf-git.sh", use:"fzf-git.sh"
 zplug "lib/completion", from:oh-my-zsh
 zplug "reegnz/jq-zsh-plugin"
 zplug "romkatv/powerlevel10k," as:theme, depth:1
@@ -140,6 +141,8 @@ zplug load
 [ -f "${HOME}/.fzf.zsh" ]           && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
 [ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
+
+source "${ZSH_CONFIG_DIR}/zplug/repos/junegunn/fzf-git.sh/fzf-git.sh"
 
 bindkey '^j' jq-complete
 
