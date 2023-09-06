@@ -34,7 +34,7 @@ case "${1:-status}" in
     ;;
 
   s*)
-    cmd="{ git -c color.ui=always status && git diff --color=always } | ${truncate_cmd}"
+    cmd="{ git -c color.status=always status && git diff --color=always } | ${truncate_cmd}"
     ;;
 
   *)
