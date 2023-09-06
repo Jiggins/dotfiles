@@ -197,10 +197,6 @@ for file in ${ZSH_CONFIG_DIR}/autoload/*.zsh; do
   source "${file}"
 done
 
-# Completion
-fpath=(~/.config/zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
 # OS specific config
 case "$(uname -s)" in
   Linux*)  source "${ZSH_CONFIG_DIR}/linux.zsh" ;;
@@ -211,6 +207,10 @@ esac
 if [[ -f "${ZSH_CONFIG_DIR}/local.zsh" ]]; then
   source "${ZSH_CONFIG_DIR}/local.zsh"
 fi
+
+# Completion
+fpath+=(~/.config/zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
 
 # Codi
 # Usage: codi [filetype] [filename]
