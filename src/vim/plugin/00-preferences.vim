@@ -66,6 +66,7 @@ set shiftround
 
 " Line numbers
 set number
+set cursorline
 
 " Word wrap
 set nowrap
