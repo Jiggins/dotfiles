@@ -89,19 +89,21 @@ function addpath() {
 # Prevent duplicate entries in $PATH
 typeset -U path
 
-addpath "${HOME}/bin"
-addpath "${HOME}/.local/bin"
-addpath "${HOME}/.cargo/bin"
-addpath "${HOME}/go/bin"
-addpath "${HOME}/.npm-packages/bin"
-addpath "${HOME}/.rvm/bin"
-addpath "/usr/local/opt/ruby/bin"
-addpath "/home/linuxbrew/.linuxbrew/bin"
-addpath "/home/linuxbrew/.linuxbrew/sbin"
-addpath "/usr/local/bin"
-addpath "/usr/local/sbin"
-addpath "/usr/local/opt/python/libexec/bin"
-addpath "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+path+=(
+  "${HOME}/bin"
+  "${HOME}/.local/bin"
+  "${HOME}/.cargo/bin"
+  "${HOME}/go/bin"
+  "${HOME}/.npm-packages/bin"
+  "${HOME}/.rvm/bin"
+  "/usr/local/opt/ruby/bin"
+  "/home/linuxbrew/.linuxbrew/bin"
+  "/home/linuxbrew/.linuxbrew/sbin"
+  "/usr/local/bin"
+  "/usr/local/sbin"
+  "/usr/local/opt/python/libexec/bin"
+  "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+)
 
 command -v gem > /dev/null && addpath "$(gem environment gemdir)/bin"
 command -v python3 > /dev/null && addpath "$(python3 -m site --user-base)/bin"
