@@ -62,6 +62,7 @@ Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'idbrii/vim-tagimposter'                            " Forge tag jumps so tag alternatives can populate the tagstack.
 Plug 'kana/vim-textobj-user'                             " Vim plugin: Create your own text objects
 Plug 'mityu/vim-applescript'
+Plug 'momota/cisco.vim',          { 'for': 'cisco' }     " Vim syntax for cisco configuration files.
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
 Plug 'rhysd/vim-crystal',         { 'for': 'crystal' }   " Vim filetype and tools support for Crystal language. http://crystal-lang.org/
 Plug 'tangledhelix/vim-rdist',    { 'for': 'rdist' }     " Vim syntax highlighting for Rdist
