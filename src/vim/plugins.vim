@@ -52,17 +52,14 @@ Plug 'Absolight/vim-bind',        { 'for': 'bindzone' }  " DNS Bind zone & named
 Plug 'Glench/Vim-Jinja2-Syntax',  { 'for': 'jinja' }     " An 'up-to-date' jinja2 syntax file.
 Plug 'Joorem/vim-haproxy',        { 'for': 'haproxy' }   " HAProxy syntax file
 Plug 'adimit/prolog.vim',         { 'for': 'prolog' }
-Plug 'bps/vim-textobj-python',    { 'for': 'python' }    " Text objects for Python.
 Plug 'cespare/vim-toml',          { 'for': 'toml' }      " Vim syntax for TOML
 Plug 'chikamichi/mediawiki.vim',  { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',            { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
 Plug 'chrisbra/csv.vim',          { 'for': 'csv' }       " A Filetype plugin for csv files
 Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',              { 'for': 'fish' }
-Plug 'davidhalter/jedi-vim',      { 'for': 'python' }    " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
 Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'idbrii/vim-tagimposter'                            " Forge tag jumps so tag alternatives can populate the tagstack.
-Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }    " Vim plugin for working with python virtualenvs
 Plug 'kana/vim-textobj-user'                             " Vim plugin: Create your own text objects
 Plug 'mityu/vim-applescript'
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
@@ -80,6 +77,12 @@ Plug 'hspec/hspec.vim',                   { 'for': 'haskell' } " Vim syntax file
 Plug 'raichoo/haskell-vim',               { 'for': 'haskell' } " Custom Haskell Vimscripts
 Plug 'Twinside/vim-hoogle',               { 'for': 'haskell' } " Vim plugin used to query hoogle, the haskell search engine
 Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for Haskell's cabal syntax file
+
+"" Languages - Python
+Plug 'davidhalter/jedi-vim',      { 'for': 'python' } " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
+Plug 'bps/vim-textobj-python',    { 'for': 'python' } " Text objects for Python.
+Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' } " Vim plugin for working with python virtualenvs
+Plug 'lambdalisue/vim-pyenv',     { 'for': 'python' } " Activate the versions and the virtualenvs of pyenv within a live VIM session
 
 "" Languages - Ruby
 Plug 'danchoi/ri.vim',                 { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
