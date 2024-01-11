@@ -43,6 +43,7 @@ Plug 'tpope/vim-fugitive'                       " a Git wrapper so awesome, it s
 Plug 'tpope/vim-obsession'                      " obsession.vim: continuously updated session files
 Plug 'tpope/vim-rhubarb'                        " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'                         " sleuth.vim: Heuristically set buffer options
+Plug 'vim-test/vim-test'                        " Run your tests at the speed of thought
 
 " Text objects
 Plug 'Julian/vim-textobj-variable-segment'               " iv/av | A text object to turn foo_bar_baz into foo_baz *and* quuxSpamEggs into quuxEggs *and* shine your shoes
