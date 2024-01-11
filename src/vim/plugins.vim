@@ -158,6 +158,10 @@ if has('mac')
   Plug 'vim-scripts/MailApp'               " This plugin allows Mac OS X users to send e-mails from Vim using Mail.app.
 endif
 
+if !has('clipboard')
+  Plug 'kana/vim-fakeclip'                 " Vim plugin: Provide pseudo 'clipboard' registers
+endif
+
 " After
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' } " Align text; like these comments
 Plug 'ryanoasis/vim-devicons'              " Adds font icons (glyphs ★♨☢) to programming languages, libraries,
