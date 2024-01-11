@@ -16,6 +16,10 @@ if command -v fd > /dev/null; then
   git_files+=(
     $(fd)
   )
+else
+  git_files+=(
+    $(find . -type f -not -path '/.git/*')
+  )
 fi
 
 function usage() {
@@ -42,5 +46,6 @@ case "${1:-status}" in
     ;;
 esac
 
-find "${git_files[@]}" \
+echo "${git_files[@]}" \
+  | tr ' ' '\n' \
   | entr -cs "${cmd}"
