@@ -78,6 +78,8 @@ Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',              { 'for': 'fish' }
 Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'idbrii/vim-tagimposter'                            " Forge tag jumps so tag alternatives can populate the tagstack.
+Plug 'kana/vim-gf-diff'                                  " Vim plugin: Go to the changed block under the cursor from diff output
+Plug 'kana/vim-gf-user'                                  " Vim plugin: A framework to open a file by context
 Plug 'mityu/vim-applescript'
 Plug 'momota/cisco.vim',          { 'for': 'cisco' }     " Vim syntax for cisco configuration files.
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
