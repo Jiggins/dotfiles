@@ -25,10 +25,35 @@ locations = {
 
 amazon_chime = "Amazon Chime"
 last_chime_window = nil
+log_level = 1
 
 -- This is set to the last window checked with the popup (ctrl+alt+cmd+w)
 -- this variable is only used in the HammerSpoon console so I can debug
 last_checked_window = nil
+
+function log(msg_log_level, thing)
+  if msg_log_level > log_level then
+    return
+  end
+
+  if type(thing) == "table" then
+    for k, v in pairs(thing) do
+      print(k, v)
+    end
+
+    return
+  end
+
+  print(thing)
+end
+
+function logdebug(thing)
+  return log(0, thing)
+end
+
+function loginfo(thing)
+  return log(1, thing)
+end
 
 function string:startswith(start)
   return self:sub(1, #start) == start
@@ -123,6 +148,8 @@ end
 -- against a list of known non-meeting window and some other factors. Chime changes the way it titles meetings so
 -- often, this is likely the part that breaks if meeting tracking starts or ends early.
 function isChimeMeetingWindow(window)
+  logdebug("isChimeMeetingWindow")
+  logdebug()
   local window_filter = {
     'Amazon Chime',
     'Mute box',
@@ -151,6 +178,7 @@ function sendkeystochime(modifiers, key)
 
   for _, window in pairs(chime:allWindows()) do
     -- filter out the main Chime window
+    logdebug(window)
     if isChimeMeetingWindow(window) then
       last_chime_window = window
       break
@@ -270,6 +298,7 @@ function windowdetails()
   output = output .. "\n" .. "Is maximizable? " .. tostring(win:isMaximizable())
   output = output .. "\n" .. "Subrole:        " .. win:subrole()
   output = output .. "\n" .. "Zoom button:    " .. zoomButtonRect.x .. ", " .. zoomButtonRect.y .. ", " .. zoomButtonRect.w .. ", " .. zoomButtonRect.h
+  output = output .. "\n" .. "Chime meeting:  " .. tostring(isChimeMeetingWindow(win))
 
   return output
 end
