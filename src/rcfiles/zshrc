@@ -312,6 +312,11 @@ function testItalics() {
   echo "$(tput sitm)italics$(tput ritm) $(tput smso)standout$(tput rmso)"
 }
 
+function timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 4); do time $shell -i -c exit; done
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
