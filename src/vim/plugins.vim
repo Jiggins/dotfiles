@@ -36,12 +36,28 @@ Plug 'junegunn/vim-slash'                       " Enhancing in-buffer search exp
 Plug 'michaeljsmith/vim-indent-object'          " Vim plugin that defines a new text object representing lines of code at the same indent level
 Plug 'ojroques/vim-oscyank', {'branch': 'main'} " A Vim plugin to copy text through SSH with OSC52
 Plug 'powerman/vim-plugin-AnsiEsc'              " ansi escape sequences concealed, but highlighted as specified (conceal)
+Plug 'puremourning/vimspector'                  " A multi-language debugging system for Vim
 Plug 'tpope/vim-apathy'                         " apathy.vim: Set the 'path' option for miscellaneous file types
 Plug 'tpope/vim-endwise'                        " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plug 'tpope/vim-fugitive'                       " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plug 'tpope/vim-obsession'                      " obsession.vim: continuously updated session files
 Plug 'tpope/vim-rhubarb'                        " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sleuth'                         " sleuth.vim: Heuristically set buffer options
+
+" Text objects
+Plug 'Julian/vim-textobj-variable-segment'               " iv/av | A text object to turn foo_bar_baz into foo_baz *and* quuxSpamEggs into quuxEggs *and* shine your shoes
+Plug 'adolenc/vim-textobj-toplevel'                      " it/at | Text object for selecting top-level blocks in any programming language
+Plug 'bps/vim-textobj-python', { 'for': 'python' }       "       | Text objects for Python.
+Plug 'glts/vim-textobj-comment'                          " ic/ac | Vim text objects for comments
+Plug 'idbrii/textobj-word-column.vim'                    " iq/aq | Adds text-objects for word-based columns in Vim.
+Plug 'kana/vim-textobj-entire'                           " ie/ae | Text objects for entire buffer
+Plug 'kana/vim-textobj-function'                         " if/af | Text objects for functions
+Plug 'kana/vim-textobj-indent'                           " ii/ai | Text objects for indented blocks of lines
+Plug 'kana/vim-textobj-line'                             " il/al | Text objects for the current line
+Plug 'kana/vim-textobj-syntax'                           " iy/ay | Text objects for syntax highlighted items
+Plug 'kana/vim-textobj-user'                             "       | Create your own text objects
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } "       | Ruby text objects
+Plug 'vimtaku/vim-textobj-keyvalue'                      " iv/ik | Provide text objects to select a string that general key and value of map.
 
 " FZF - 🌸 A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -60,7 +76,6 @@ Plug 'chrisbra/unicode.vim'
 Plug 'dag/vim-fish',              { 'for': 'fish' }
 Plug 'derekwyatt/vim-scala',      { 'for': 'scala' }
 Plug 'idbrii/vim-tagimposter'                            " Forge tag jumps so tag alternatives can populate the tagstack.
-Plug 'kana/vim-textobj-user'                             " Vim plugin: Create your own text objects
 Plug 'mityu/vim-applescript'
 Plug 'momota/cisco.vim',          { 'for': 'cisco' }     " Vim syntax for cisco configuration files.
 Plug 'momota/junos.vim',          { 'for': 'junos' }     " Vim syntax for Junos configuration files
@@ -81,13 +96,11 @@ Plug 'Twinside/vim-syntax-haskell-cabal', { 'for': 'haskell' } " Syntax file for
 
 "" Languages - Python
 Plug 'davidhalter/jedi-vim',      { 'for': 'python' } " Jedi-vim is a Vim binding to the awesome Python autocompletion library `jedi`.
-Plug 'bps/vim-textobj-python',    { 'for': 'python' } " Text objects for Python.
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' } " Vim plugin for working with python virtualenvs
 Plug 'lambdalisue/vim-pyenv',     { 'for': 'python' } " Activate the versions and the virtualenvs of pyenv within a live VIM session
 
 "" Languages - Ruby
 Plug 'danchoi/ri.vim',                 { 'for': 'ruby' } " browse ri documentation from Vim http://github.com/danchoi/ri.vim
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " Ruby text objects
 
 "" Languages - Terraform
 Plug 'hashivim/vim-terraform',                { 'for': 'terraform' } " Basic vim/terraform integration http://hashivim.github.io/vim-terraform
