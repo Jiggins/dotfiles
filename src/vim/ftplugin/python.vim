@@ -6,6 +6,8 @@ let matchBadTabs = matchadd('BadTabs', '^\\t+')
 
 let b:undo_ftplugin = 'setlocal completeopt<'
 
-if !filereadable('setup.cfg')
-    let g:ale_python_flake8_options = '--config ~/.config/flake8'
+if !filereadable('setup.cfg') && !filereadable('pyproject.toml')
+  let g:ale_python_flake8_options = '--config ~/.config/flake8'
 endif
+
+let g:splitjoin_python_brackets_on_separate_lines = 1
