@@ -104,32 +104,13 @@ function installBashCustomisation() {
 }
 
 function installGitCustomisation() {
-  checkDependency git ctags \
+  checkDependency git \
     || return $?
 
   linkfile "${dotfiles}/src/git_template" "${install_dir}/.git_template" \
     || return $?
 
   git config --global init.templatedir "${install_dir}/.git_template" | log -s
-  git config --global alias.ctags '!.git/hooks/ctags' | log -s
-}
-
-function installCtagsCustomisation() {
-  checkDependency ctags \
-    || return $?
-
-  if ctags --version | grep 'Universal Ctags' > /dev/null; then
-    info "using Universal Ctags" | log -s
-    linkfile "${dotfiles}/src/ctags.d" "${install_dir}/.ctags.d"
-    return 0
-  elif ctags --version | grep 'Exuberant Ctags'; then
-    info "Using Exuberent Ctags" | log -s
-    linkfile "${dotfiles}/src/ctags.d/default.ctags" "${install_dir}/.ctags"
-    return 0
-  else
-    warn "Using an unsupported version of ctags; consider installing Universal Ctags" | log -s
-    return 1
-  fi
 }
 
 # GHCi
@@ -264,7 +245,6 @@ while [[ $# -gt 0 ]]; do
 
     all)
       installBashCustomisation
-      installCtagsCustomisation
       installGHCiCustomisation
       installNPMCustomisation
       installReadlineCustomisation
@@ -291,10 +271,6 @@ while [[ $# -gt 0 ]]; do
     --bashdir)
       BASHDIR="$2"
       shift
-      ;;
-
-    ctags)
-      installCtagsCustomisation
       ;;
 
     git)
