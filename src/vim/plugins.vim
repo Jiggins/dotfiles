@@ -46,19 +46,19 @@ Plug 'tpope/vim-sleuth'                         " sleuth.vim: Heuristically set 
 Plug 'vim-test/vim-test'                        " Run your tests at the speed of thought
 
 " Text objects
-Plug 'Julian/vim-textobj-variable-segment'               " iv/av | A text object to turn foo_bar_baz into foo_baz *and* quuxSpamEggs into quuxEggs *and* shine your shoes
-Plug 'adolenc/vim-textobj-toplevel'                      " it/at | Text object for selecting top-level blocks in any programming language
-Plug 'bps/vim-textobj-python', { 'for': 'python' }       "       | Text objects for Python.
-Plug 'glts/vim-textobj-comment'                          " ic/ac | Vim text objects for comments
-Plug 'idbrii/textobj-word-column.vim'                    " iq/aq | Adds text-objects for word-based columns in Vim.
-Plug 'kana/vim-textobj-entire'                           " ie/ae | Text objects for entire buffer
-Plug 'kana/vim-textobj-function'                         " if/af | Text objects for functions
-Plug 'kana/vim-textobj-indent'                           " ii/ai | Text objects for indented blocks of lines
-Plug 'kana/vim-textobj-line'                             " il/al | Text objects for the current line
-Plug 'kana/vim-textobj-syntax'                           " iy/ay | Text objects for syntax highlighted items
-Plug 'kana/vim-textobj-user'                             "       | Create your own text objects
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } "       | Ruby text objects
-Plug 'vimtaku/vim-textobj-keyvalue'                      " iv/ik | Provide text objects to select a string that general key and value of map.
+Plug 'Julian/vim-textobj-variable-segment', { 'branch': 'main' } " iv/av | A text object to turn foo_bar_baz into foo_baz *and* quuxSpamEggs into quuxEggs *and* shine your shoes
+Plug 'adolenc/vim-textobj-toplevel'                              " it/at | Text object for selecting top-level blocks in any programming language
+Plug 'bps/vim-textobj-python', { 'for': 'python' }               " | Text objects for Python.
+Plug 'glts/vim-textobj-comment'                                  " ic/ac | Vim text objects for comments
+Plug 'idbrii/textobj-word-column.vim'                            " iq/aq | Adds text-objects for word-based columns in Vim.
+Plug 'kana/vim-textobj-entire'                                   " ie/ae | Text objects for entire buffer
+Plug 'kana/vim-textobj-function'                                 " if/af | Text objects for functions
+Plug 'kana/vim-textobj-indent'                                   " ii/ai | Text objects for indented blocks of lines
+Plug 'kana/vim-textobj-line'                                     " il/al | Text objects for the current line
+Plug 'kana/vim-textobj-syntax'                                   " iy/ay | Text objects for syntax highlighted items
+Plug 'kana/vim-textobj-user'                                     " | Create your own text objects
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }         " | Ruby text objects
+Plug 'vimtaku/vim-textobj-keyvalue'                              " iv/ik | Provide text objects to select a string that general key and value of map.
 
 " FZF - 🌸 A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
