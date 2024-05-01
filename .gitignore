@@ -5,30 +5,31 @@ log/
 dotfiles.tar.gz
 
 # Vim untracked files
-src/vim/local.vim
+config/vim/local.vim
 
 # Vim generated files
-src/vim/.netrwhist
-src/vim/autoload/plug.vim
-src/vim/bundle
-src/vim/haskellmode.config
-src/vim/spell
-src/vim/tmp/
-src/vim/undo
+config/vim/.netrwhist
+config/vim/autoload/plug.vim
+config/vim/bundle
+config/vim/haskellmode.config
+config/vim/spell
+config/vim/tmp/
+config/vim/undo
 
 # Zsh plugin dir
-src/config/zsh/zplug/
+config/zsh/zplug/
 
 # Zsh completion
-src/config/zsh/completion/_*
+config/zsh/completion/_*
+config/zsh/completion/err_*
 
 # Machine specific zsh config
 local.zsh
 
 # Tmux plugins
-src/tmux/plugins
-src/tmux/resurrect/
-src/tmux/sidebar/directory_widths.txt
+config/tmux/plugins
+config/tmux/resurrect/
+config/tmux/sidebar/directory_widths.txt
 
 # Zsh compiled files
 *.zwc
