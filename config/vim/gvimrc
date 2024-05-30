@@ -1,0 +1,2 @@
+" PATH is not set properly on Mac OS's MacVim
+let $PATH=$PATH . ':/usr/local/bin'
