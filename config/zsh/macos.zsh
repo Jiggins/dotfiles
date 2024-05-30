@@ -2,8 +2,9 @@
 
 alias ls='ls -G'
 
-if find /Applications ~/Applications -maxdepth 1 -mindepth 1 -iname 'yoink.app' > /dev/null; then
+if find /Applications -maxdepth 1 -mindepth 1 -iname 'yoink.app' > /dev/null; then
   alias yoink='open -a yoink'
+  alias latest-screenshot="find ${HOME}/Pictures/Screenshots -type f -exec stat -lt '%Y-%m-%d' {} + | cut -d ' ' -f6- | sort -n | cut -d ' ' -f2- | tail -n 1 | xargs -I {} open -a yoink {}"
 fi
 
 # Use GNU versions of common shell tools if the exist (useful on macOS)
