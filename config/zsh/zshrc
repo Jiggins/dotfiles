@@ -130,6 +130,7 @@ zplug "lib/completion", from:oh-my-zsh
 zplug "reegnz/jq-zsh-plugin"
 zplug "romkatv/powerlevel10k," as:theme, depth:1
 zplug "srijanshetty/zsh-pandoc-completion"
+zplug "supercrabtree/k"
 zplug "svenXY/timewarrior"
 zplug "trapd00r/LS_COLORS", hook-build:"dircolors -b LS_COLORS > c.zsh"
 zplug "zsh-users/zsh-autosuggestions"
