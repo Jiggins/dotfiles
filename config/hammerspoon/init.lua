@@ -81,11 +81,17 @@ end
 
 function applyLayout(main_app)
   local main_screen = hs.screen.primaryScreen()
+  local music_mini_player_width = getMusicMiniPlayerWidth()
+
+  hs.layout.music_mini  = hs.geometry.rect(0, 0, music_mini_player_width, 1)
+  hs.layout.main_app = hs.geometry.rect(music_mini_player_width, 0, 1 - music_mini_player_width, 1)
 
   if main_app == "terminal" then
     applications = { default_terminal, default_browser }
+    main_app_layout = hs.layout.maximized
   elseif main_app == "browser" then
     applications = { default_browser, default_terminal }
+    main_app_layout = hs.layout.maximized
   end
 
   for k, v in pairs(locations) do
@@ -99,21 +105,18 @@ function applyLayout(main_app)
     return
   end
 
-  local music_mini_player_width = getMusicMiniPlayerWidth()
-  hs.layout.main_app    = hs.geometry.rect(music_mini_player_width, 0, 1 - music_mini_player_width, 1)
-  hs.layout.music_mini  = hs.geometry.rect(0, 0, music_mini_player_width, 1)
-
   layout = {
-    {applications[1],  nil,            location["centre_monitor"],    hs.layout.main_app,    nil,  nil},
-    {applications[2],  nil,            location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
-    {"Music",          nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Music",          "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
-    {amazon_chime,     amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
-    {"Calendar",       nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Discord",        nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Mail",           nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Signal",         nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Slack",          nil,            macbook_monitor,               nil,                   nil,  nil},
+    {applications[1],    nil,            location["centre_monitor"],    main_app_layout,       nil,  nil},
+    {applications[2],    nil,            location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
+    {"Music",            nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Music",            "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
+    {amazon_chime,       amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
+    {"Calendar",         nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Discord",          nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Mail",             nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Signal",           nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Slack",            nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"System Settings",  nil,            macbook_monitor,               nil,                   nil,  nil},
   }
 
   hs.layout.apply(layout)
@@ -148,8 +151,6 @@ end
 -- against a list of known non-meeting window and some other factors. Chime changes the way it titles meetings so
 -- often, this is likely the part that breaks if meeting tracking starts or ends early.
 function isChimeMeetingWindow(window)
-  logdebug("isChimeMeetingWindow")
-  logdebug()
   local window_filter = {
     'Amazon Chime',
     'Mute box',
@@ -252,12 +253,11 @@ hs.hotkey.bind({}, "F17", function()
 end)
 
 function onWindowEvent(window, applicationName, eventType)
-  hs.timer.usleep(2 * 1000000)
-
   print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
 
   if applicationName == amazon_chime then
     if eventType == hs.window.filter.windowCreated then
+      hs.timer.usleep(2 * 1000000)
       if isChimeMeetingWindow(window) then
         print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
         local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
