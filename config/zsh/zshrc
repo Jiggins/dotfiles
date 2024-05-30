@@ -96,6 +96,7 @@ path+=(
   "${HOME}/go/bin"
   "${HOME}/.npm-packages/bin"
   "${HOME}/.rvm/bin"
+  "${HOME}/.vim/bundle/fzf/bin"
   "/usr/local/opt/ruby/bin"
   "/home/linuxbrew/.linuxbrew/bin"
   "/home/linuxbrew/.linuxbrew/sbin"
@@ -111,7 +112,7 @@ command -v python3 > /dev/null && addpath "$(python3 -m site --user-base)/bin"
 # Solidify PATH changes for the rest of the shell sessions
 export PATH
 
-# # zplug
+# zplug
 export ZPLUG_HOME="${ZSH_CONFIG_DIR}/zplug"
 
 if ! [[ -d "${ZPLUG_HOME}" ]]; then
@@ -142,8 +143,6 @@ zplug load
 [ -f "${HOME}/.fzf.zsh" ]           && source "${HOME}/.fzf.zsh"
 [ -f "${HOME}/.rvm/scripts/rvm" ]   && source "${HOME}/.rvm/scripts/rvm"
 [ -f "/usr/local/rvm/scripts/rvm" ] && source /usr/local/rvm/scripts/rvm
-
-source "${ZSH_CONFIG_DIR}/zplug/repos/junegunn/fzf-git.sh/fzf-git.sh"
 
 bindkey '^j' jq-complete
 
