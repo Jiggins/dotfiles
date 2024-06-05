@@ -3,7 +3,7 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Colour Scheme
-if filereadable(expand('~/.vim/colors/maui.vim'))
+if filereadable(expand($VIMHOME . '/colors/maui.vim'))
   colorscheme maui
 endif
 

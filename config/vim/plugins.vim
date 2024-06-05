@@ -1,8 +1,8 @@
 scriptencoding utf-8
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let s:vim_plug_script = $VIMHOME . '/autoload/plug.vim'
+if empty(glob(s:vim_plug_script))
+  execute 'silent !curl -fLo ' .  s:vim_plug_script . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source %
 endif
 
@@ -169,8 +169,10 @@ Plug 'ryanoasis/vim-devicons'              " Adds font icons (glyphs ★♨☢) 
                                            " ctrlp, unite, lightline.vim, vim-startify, vimfiler, and flagship
 
 " Load any additional plugins from local.vim
-for plugin in g:AdditionalPlugins
-  Plug plugin
-endfor
+if exists("g:AdditionalPlugins")
+  for plugin in g:AdditionalPlugins
+    Plug plugin
+  endfor
+endif
 
 call plug#end()
