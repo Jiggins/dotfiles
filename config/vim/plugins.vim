@@ -6,7 +6,7 @@ if empty(glob(s:vim_plug_script))
   autocmd VimEnter * PlugInstall --sync | source %
 endif
 
-call plug#begin('~/.vim/bundle')
+call plug#begin($VIMHOME . '/bundle')
 
 " Aesthetics
 Plug 'airblade/vim-gitgutter'                               " Show git diff in gutter
