@@ -17,6 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 HYPHEN_INSENSITIVE="true"
 
+export ZDOTDIR="${HOME}/.config/zsh"
 export ZSH_CONFIG_DIR="${HOME}/.config/zsh"
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -91,12 +92,13 @@ typeset -U path
 
 path+=(
   "${HOME}/bin"
-  "${HOME}/.local/bin"
   "${HOME}/.cargo/bin"
-  "${HOME}/go/bin"
+  "${HOME}/.local/bin"
+  "${HOME}/.local/share/mise/shims"
   "${HOME}/.npm-packages/bin"
   "${HOME}/.rvm/bin"
-  "${HOME}/.vim/bundle/fzf/bin"
+  "${HOME}/.config/vim/bundle/fzf/bin"
+  "${HOME}/go/bin"
   "/usr/local/opt/ruby/bin"
   "/home/linuxbrew/.linuxbrew/bin"
   "/home/linuxbrew/.linuxbrew/sbin"
