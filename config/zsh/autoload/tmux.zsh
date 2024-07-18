@@ -4,23 +4,6 @@ fi
 
 alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
-#
-# function tn() {
-#   local target_dir="${1:-$PWD}"
-#   local session_name
-#
-#   if [[ "${target_dir}" = "${HOME}" ]]; then
-#     session_name='Local'
-#   else
-#     session_name=${target_dir##*/}
-#   fi
-#
-#   if [[ -d "${1}" ]]; then
-#     cd "${1}"
-#   fi
-#
-#   tmux attach -t "${session_name}" || tmux new -s "${session_name}"
-# }
 
 function _choose_tmux_workspace_dir() {
   printf "%s\n" "${TMUX_WORKSPACES[@]}" \
@@ -65,9 +48,15 @@ function tn() {
     session_name=${target_dir##*/}
   fi
 
-  if [[ -d "${target_dir}" ]]; then
-    cd "${target_dir}"
+
+  if [[ -n "${TMUX}" ]]; then
+    if ! tmux list-sessions -F '#S' | grep --silent "${session_name}"; then
+      tmux new-session -d -s "${session_name}" -c "${target_dir}"
+    fi
+
+    tmux switch-client -t "${session_name}"
+    return $?
   fi
 
-  tmux attach -t "${session_name}" || tmux new -s "${session_name}"
+  tmux new-session -A -s "${session_name}" -c "${target_dir}"
 }
