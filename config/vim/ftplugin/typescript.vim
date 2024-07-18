@@ -26,6 +26,7 @@ let g:tsuquyomi_disable_default_mappings = 1
 
 " Import the symbol under the cursor
 nmap <buffer> <F6> :TsuImport<CR>
+nmap <buffer> <F7> :ALEDetail<CR>
 
 map <buffer> <C-^> <Plug>(TsuquyomiReferences)
 
@@ -41,3 +42,5 @@ let g:ale_completion_enabled = 0
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 
 let b:undo_ftplugin = 'setlocal completeopt<'
+
+nmap <buffer> K :ALEHover<CR>
