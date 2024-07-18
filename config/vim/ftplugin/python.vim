@@ -1,3 +1,6 @@
+let s:enabledLinters = ['pyright']
+let s:optionalLinters = ['black', 'flake8', 'mypy', 'pyright', 'ruff']
+
 function s:hasLinterConfig(linter)
   let l:configFiles = ['setup.cfg', 'pyproject.toml']
 
@@ -11,15 +14,13 @@ function s:hasLinterConfig(linter)
 endfunction
 
 function s:enablePythonLinters()
-  let l:linters = ['black', 'flake8', 'mypy', 'pylint', 'pyright', 'ruff']
-
-  return filter(l:linters, 's:hasLinterConfig(v:val)' )
+  return filter(s:optionalLinters, 's:hasLinterConfig(v:val)' )
 endfunction
 
 if !filereadable('setup.cfg') && !filereadable('pyproject.toml')
   let g:ale_python_flake8_options = '--config ~/.config/flake8'
 else
-  let g:ale_linters.python = s:enablePythonLinters()
+  let g:ale_linters.python = s:enabledLinters + s:enablePythonLinters()
 endif
 
 highlight BadWhitespace ctermbg=red guibg=red
