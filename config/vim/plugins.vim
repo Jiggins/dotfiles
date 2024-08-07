@@ -126,6 +126,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
 Plug 'ervandew/supertab'                   " Tab completion with Tab
 Plug 'inkarkat/argtextobj.vim'             " Text-object like motion for arguments http://www.vim.org/scripts/script.php?script_id=2699
 Plug 'junegunn/vim-emoji'                  " Vim support for Emoji
+Plug 'mjbrownie/swapit'                    " vim plugin: Extensible Keyword Swapper
 Plug 'terryma/vim-multiple-cursors'        " Create multiple cursors in Vim
 Plug 'tomtom/tcomment_vim'                 " Comment a line with gcc
 Plug 'tpope/vim-characterize'              " Print the unicode value of the character under the cursor - ga
