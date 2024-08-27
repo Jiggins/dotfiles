@@ -31,6 +31,7 @@ function tn() {
           fi
 
           target_dir=$(_choose_tmux_workspace_dir "${1:-}")
+          break
           ;;
 
         *)
@@ -42,12 +43,16 @@ function tn() {
     done
   fi
 
+  if [[ -z "${target_dir}" ]]; then
+    echo 'No directory selected' >&2
+    return 1
+  fi
+
   if [[ "${target_dir}" = "${HOME}" ]]; then
     session_name='Local'
   else
     session_name=${target_dir##*/}
   fi
-
 
   if [[ -n "${TMUX}" ]]; then
     if ! tmux list-sessions -F '#S' | grep --silent "${session_name}"; then
