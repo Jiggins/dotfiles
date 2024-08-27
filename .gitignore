@@ -9,6 +9,7 @@ config/vim/local.vim
 
 # Vim generated files
 config/vim/.netrwhist
+config/vim/.viminfo
 config/vim/autoload/plug.vim
 config/vim/bundle
 config/vim/haskellmode.config

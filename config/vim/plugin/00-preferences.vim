@@ -1,3 +1,12 @@
+let g:tmp_dir = $VIMHOME . '/tmp/'
+let g:undo_dir = $VIMHOME . '/undo/'
+
+for s:dir in [g:tmp_dir, g:undo_dir]
+  if ! isdirectory(s:dir)
+    let s:stdout = system('mkdir -p ' . s:dir)
+  endif
+endfor
+
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
@@ -8,7 +17,8 @@ if filereadable(expand($VIMHOME . '/colors/maui.vim'))
 endif
 
 " Reload session
-set viminfo='10,\"100,:20,%,n~/.viminfo
+set viminfo='10,<100,:20,%
+set viminfofile=$VIMHOME/.viminfo
 
 " Text editing
 set autoindent
@@ -42,11 +52,7 @@ if exists('+undofile')
   " This, like swap and backup files, uses ~/.vim/undo
   " :help undo-persistence
   " This is only present in 7.3+
-  if ! isdirectory($HOME . '/.vim/undo')
-    silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-
-  set undodir=~/.vim/undo//
+  exe 'set undodir=' . g:undo_dir
   set undofile
 endif
 
@@ -54,10 +60,7 @@ endif
 " This will warn you if you try to open the same file in two vim instances it
 " will also let you recover if vim crashes or an ssh session ends.
 set swapfile
-if ! isdirectory($HOME . '/.vim/tmp')
-  silent !mkdir -p ~/.vim/tmp > /dev/null 2>&1
-endif
-set directory=~/.vim/tmp/
+exe 'set directory=' . g:tmp_dir
 
 " Tabs
 set tabstop=2 shiftwidth=2 expandtab
