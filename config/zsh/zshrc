@@ -159,7 +159,7 @@ export LESS="SR"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 if command -v 'bat' >/dev/null; then
-  alias cat='bat'
+  alias cat='bat --wrap=never'
   export BAT_STYLE="grid,header"
   export HOMEBREW_BAT=1
 fi
