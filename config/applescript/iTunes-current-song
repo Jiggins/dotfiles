@@ -1,4 +1,4 @@
-if application "iTunes" is running then
+if application "Music" is running then
   tell application "iTunes"
     if exists current track then
       set theName to the name of the current track

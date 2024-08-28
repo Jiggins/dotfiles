@@ -1,7 +1,5 @@
 #! /bin/bash
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  osascript ${HOME}/.config/applescript/iTunes-current-song
-  exit 0
+  exec osascript "${HOME}/.config/applescript/iTunes-current-song"
 fi
-
