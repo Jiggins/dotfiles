@@ -61,3 +61,4 @@ let g:ale_virtualtext_cursor = 0
 nnoremap <c-K> :ALEHover<CR>
 
 nnoremap <F6> :ALEHover<cr>
+nnoremap <leader>t :ALEHover<cr>
