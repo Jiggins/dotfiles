@@ -1,1 +1,0 @@
-/home/jackhigg/.profile
