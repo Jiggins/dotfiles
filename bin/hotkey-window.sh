@@ -1,4 +1,4 @@
 #!/bin/sh
 
 PATH="${PATH}:/opt/homebrew/bin:/usr/local/bin"
-tmux attach -t 'Hotkey' || tmux new -s 'Hotkey'
+exec tmux new-session -A -s 'Hotkey' -c "${HOME}"
