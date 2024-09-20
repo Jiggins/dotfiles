@@ -24,9 +24,8 @@ let g:tsuquyomi_semicolon_import = 0
 
 let g:tsuquyomi_disable_default_mappings = 1
 
-" Import the symbol under the cursor
-nmap <buffer> <F6> :TsuImport<CR>
 nmap <buffer> <F7> :ALEDetail<CR>
+nmap <buffer> <F8> :TsuImport<CR>
 
 map <buffer> <C-^> <Plug>(TsuquyomiReferences)
 

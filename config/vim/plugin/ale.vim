@@ -60,5 +60,5 @@ let g:ale_virtualtext_cursor = 0
 " Use ALEHover for keyword lookup
 nnoremap <c-K> :ALEHover<CR>
 
-nnoremap <F6> :ALEHover<cr>
+nnoremap <F6> :ALECodeAction<cr>
 nnoremap <leader>t :ALEHover<cr>
