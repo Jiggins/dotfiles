@@ -1,0 +1,11 @@
+#compdef tn
+
+# zsh completions for 'tn'
+local arguments
+
+arguments=(
+  '-p[select workspace]:::(Local $(tn -l))'
+  '*:local-directories:_directories'
+)
+
+_arguments -s $arguments

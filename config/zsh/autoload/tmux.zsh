@@ -22,6 +22,11 @@ function tn() {
   else
     while (( $# > 0 )); do
       case "${1}" in
+        -l)
+          echo "${TMUX_WORKSPACES[@]##*/}"
+          return 0
+          ;;
+
         -p)
           shift
 
