@@ -84,15 +84,15 @@ command W w
 command Q q
 
 " Splitting Windows
-nnoremap <Leader><Left>  :Vexplore  <CR>
-nnoremap <Leader><Right> :Vexplore! <CR>
+nnoremap <Leader><Left>  :Vexplore! <CR>
+nnoremap <Leader><Right> :Vexplore  <CR>
 nnoremap <Leader><Up>    :Sexplore  <CR>
-nnoremap <Leader><Down>  :Hexplore  <CR>
+nnoremap <Leader><Down>  :Hexplore! <CR>
 
-nnoremap <Leader>h       :Vexplore  <CR>
-nnoremap <Leader>l       :Vexplore! <CR>
+nnoremap <Leader>h       :Vexplore! <CR>
+nnoremap <Leader>l       :Vexplore  <CR>
 nnoremap <Leader>k       :Sexplore  <CR>
-nnoremap <Leader>j       :Hexplore  <CR>
+nnoremap <Leader>j       :Hexplore! <CR>
 
 nnoremap <S-Tab> <C-w><C-w>
 
