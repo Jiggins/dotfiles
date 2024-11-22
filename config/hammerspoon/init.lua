@@ -11,11 +11,7 @@ default_terminal = "iTerm2"
 
 macbook_monitor = "Built-in Retina Display"
 
-locations = {
-  work = {
-    ["centre_monitor"] = "DELL U3419W",
-    ["vertical_monitor"] = "DELL U2722DE"
-  },
+local macbook_monitor = "Built-in Retina Display"
 
   home = {
     ["centre_monitor"] = "LC32G7xT",
@@ -29,7 +25,28 @@ log_level = 1
 
 -- This is set to the last window checked with the popup (ctrl+alt+cmd+w)
 -- this variable is only used in the HammerSpoon console so I can debug
-last_checked_window = nil
+local last_checked_window = nil
+
+local function getMonitorConfig()
+  local main_screen = hs.screen.primaryScreen()
+  local locations = {
+    work = {
+      ["centre_monitor"] = "DELL U3419W",
+      ["vertical_monitor"] = "DELL U2722DE"
+    },
+
+    home = {
+      ["centre_monitor"] = "LC32G7xT",
+      ["vertical_monitor"] = "ASUS PB287Q"
+    }
+  }
+
+  for k, _ in pairs(locations) do
+    if main_screen:name() == locations[k]["centre_monitor"] then
+      return locations[k]
+    end
+  end
+end
 
 function log(msg_log_level, thing)
   if msg_log_level > log_level then
@@ -94,18 +111,14 @@ function applyLayout(main_app)
     main_app_layout = hs.layout.maximized
   end
 
-  for k, v in pairs(locations) do
-    if main_screen:name() == locations[k]["centre_monitor"] then
-      location = locations[k]
-    end
-  end
+  location = getMonitorConfig()
 
   if not location then
     print("Cannot find layout for main screen: " .. main_screen:name())
     return
   end
 
-  layout = {
+  local layout = {
     {applications[1],    nil,            location["centre_monitor"],    main_app_layout,       nil,  nil},
     {applications[2],    nil,            location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
     {"Music",            nil,            macbook_monitor,               nil,                   nil,  nil},
@@ -114,6 +127,7 @@ function applyLayout(main_app)
     {"Calendar",         nil,            macbook_monitor,               nil,                   nil,  nil},
     {"Discord",          nil,            macbook_monitor,               nil,                   nil,  nil},
     {"Mail",             nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Outlook",          nil,            macbook_monitor,               nil,                   nil,  nil},
     {"Signal",           nil,            macbook_monitor,               nil,                   nil,  nil},
     {"Slack",            nil,            macbook_monitor,               nil,                   nil,  nil},
     {"System Settings",  nil,            macbook_monitor,               nil,                   nil,  nil},
@@ -123,6 +137,31 @@ function applyLayout(main_app)
 
   -- focus the window on the main screen after applying the layout
   hs.application.find(applications[1]):mainWindow():focus()
+end
+
+local function splitLayout()
+  local location = getMonitorConfig()
+
+  local gap = 0
+  local leftSplit = hs.geometry.rect(gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
+  local rightSplit = hs.geometry.rect(0.5 + gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
+
+  local layout = {
+    {default_browser,    nil,            location["centre_monitor"],    leftSplit,             nil,  nil},
+    {default_terminal,   nil,            location["centre_monitor"],    rightSplit,            nil,  nil},
+    {"Music",            nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Music",            "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
+    {amazon_chime,       amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
+    {"Calendar",         nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Discord",          nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Mail",             nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Outlook",          nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Signal",           nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"Slack",            nil,            macbook_monitor,               nil,                   nil,  nil},
+    {"System Settings",  nil,            macbook_monitor,               nil,                   nil,  nil},
+  }
+
+  hs.layout.apply(layout)
 end
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
