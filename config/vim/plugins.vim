@@ -38,6 +38,7 @@ Plug 'ojroques/vim-oscyank', {'branch': 'main'} " A Vim plugin to copy text thro
 Plug 'powerman/vim-plugin-AnsiEsc'              " ansi escape sequences concealed, but highlighted as specified (conceal)
 Plug 'puremourning/vimspector'                  " A multi-language debugging system for Vim
 Plug 'tpope/vim-apathy'                         " apathy.vim: Set the 'path' option for miscellaneous file types
+Plug 'tpope/vim-abolish'                        " abolish.vim: Work with several variants of a word at once
 Plug 'tpope/vim-endwise'                        " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
 Plug 'tpope/vim-fugitive'                       " a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 Plug 'tpope/vim-obsession'                      " obsession.vim: continuously updated session files
