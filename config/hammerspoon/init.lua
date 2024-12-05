@@ -256,6 +256,26 @@ function sendkeystochime(modifiers, key)
   end
 end
 
+function mutechime()
+  sendkeystochime({"cmd"}, "y")
+end
+
+function togglechimevideo()
+  sendkeystochime({"cmd", "alt"}, "v")
+end
+
+hotkey.bind({}, "F13", function()
+  mutechime()
+end)
+
+hotkey.bind({}, "F14", function()
+  togglechimevideo()
+end)
+
+hotkey.bind({}, "F15", function()
+  sendkeystochime({"cmd", "alt"}, "e")
+end)
+
 function resumeTask()
   local stdout = hs.execute("active-task.sh --resume", true)
   notify.show("Timewarrior", "Resume task", stdout)
@@ -283,26 +303,6 @@ function stopMeeting()
   print(stdout)
   notify.show("Timewarrior", "Meeting ended", stdout)
 end
-
-function mutechime()
-  sendkeystochime({"cmd"}, "y")
-end
-
-function togglechimevideo()
-  sendkeystochime({"cmd", "alt"}, "v")
-end
-
-hotkey.bind({}, "F13", function()
-  mutechime()
-end)
-
-hotkey.bind({}, "F14", function()
-  togglechimevideo()
-end)
-
-hotkey.bind({}, "F15", function()
-  sendkeystochime({"cmd", "alt"}, "e")
-end)
 
 hotkey.bind({}, "F16", function()
   resumeTask()
