@@ -1,34 +1,54 @@
+local alert = require("hs.alert")
+local application = require("hs.application")
+local caffeinate = require("hs.caffeinate")
+local eventtap = require("hs.eventtap")
+local fnutils = require("hs.fnutils")
+local geometry = require("hs.geometry")
+local hotkey = require("hs.hotkey")
+local layout = require("hs.layout")
+local mouse = require("hs.mouse")
+local notify = require("hs.notify")
+local screen = require("hs.screen")
+local timer = require("hs.timer")
+local window = require("hs.window")
+
 -- Reload config
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", hs.reload)
+hotkey.bind({"cmd", "alt", "ctrl"}, "R", hs.reload)
 
 -- Some applications have alternate names which can also be checked if you
 -- enable Spotlight support with
-hs.application.enableSpotlightForNameSearches(true)
+application.enableSpotlightForNameSearches(true)
 
 -- default_browser = "Google Chrome"
-default_browser = "Firefox"
-default_terminal = "iTerm2"
-
-macbook_monitor = "Built-in Retina Display"
+local default_browser = "Firefox"
+local default_terminal = "iTerm2"
 
 local macbook_monitor = "Built-in Retina Display"
 
-  home = {
-    ["centre_monitor"] = "LC32G7xT",
-    ["vertical_monitor"] = "ASUS PB287Q"
-  }
-}
+local amazon_chime = "Amazon Chime"
+local log_level = 1
 
-amazon_chime = "Amazon Chime"
 last_chime_window = nil
-log_level = 1
 
 -- This is set to the last window checked with the popup (ctrl+alt+cmd+w)
 -- this variable is only used in the HammerSpoon console so I can debug
 local last_checked_window = nil
 
-local function getMonitorConfig()
-  local main_screen = hs.screen.primaryScreen()
+function string:startswith(start)
+  return self:sub(1, #start) == start
+end
+
+function table.contains(table, value)
+  for _, v in pairs(table) do
+    if v == value then
+      return true
+    end
+  end
+  return false
+end
+
+function getMonitorConfig()
+  local main_screen = screen.primaryScreen()
   local locations = {
     work = {
       ["centre_monitor"] = "DELL U3419W",
@@ -68,123 +88,124 @@ function logdebug(thing)
   return log(0, thing)
 end
 
-function loginfo(thing)
-  return log(1, thing)
-end
-
-function string:startswith(start)
-  return self:sub(1, #start) == start
-end
-
 function sendNotification(title, message)
   local attributes = {
     title = message,
     subTitle = message
   }
 
-  function id(x)
+local function id(x)
     return x
   end
 
-  local notification = hs.notify.new(id, attributes)
+  notify.new(id, attributes)
 end
 
 function getMusicMiniPlayerWidth()
   local music_mini_width = 288
-  local screen_width = hs.screen.primaryScreen():frame().w
+  local screen_width = screen.primaryScreen():frame().w
 
   return music_mini_width / screen_width
 end
 
 function applyLayout(main_app)
-  local main_screen = hs.screen.primaryScreen()
+  local applications
+  local main_app_layout
+  local main_screen = screen.primaryScreen()
   local music_mini_player_width = getMusicMiniPlayerWidth()
-
-  hs.layout.music_mini  = hs.geometry.rect(0, 0, music_mini_player_width, 1)
-  hs.layout.main_app = hs.geometry.rect(music_mini_player_width, 0, 1 - music_mini_player_width, 1)
-
-  if main_app == "terminal" then
-    applications = { default_terminal, default_browser }
-    main_app_layout = hs.layout.maximized
-  elseif main_app == "browser" then
-    applications = { default_browser, default_terminal }
-    main_app_layout = hs.layout.maximized
-  end
-
-  location = getMonitorConfig()
+  local location = getMonitorConfig()
 
   if not location then
     print("Cannot find layout for main screen: " .. main_screen:name())
     return
   end
 
-  local layout = {
-    {applications[1],    nil,            location["centre_monitor"],    main_app_layout,       nil,  nil},
-    {applications[2],    nil,            location["vertical_monitor"],  hs.layout.maximized,   nil,  nil},
-    {"Music",            nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Music",            "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
-    {amazon_chime,       amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
-    {"Calendar",         nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Discord",          nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Mail",             nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Outlook",          nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Signal",           nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Slack",            nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"System Settings",  nil,            macbook_monitor,               nil,                   nil,  nil},
+  layout.music_mini  = geometry.rect(0, 0, music_mini_player_width, 1)
+  layout.main_app = geometry.rect(music_mini_player_width, 0, 1 - music_mini_player_width, 1)
+
+  if main_app == "terminal" then
+    applications = { default_terminal, default_browser }
+    main_app_layout = layout.maximized
+  elseif main_app == "browser" then
+    applications = { default_browser, default_terminal }
+    main_app_layout = layout.maximized
+  end
+
+  local window_layout = {
+    {applications[1],    nil,            location["centre_monitor"],    main_app_layout,    nil,  nil},
+    {applications[2],    nil,            location["vertical_monitor"],  layout.maximized,   nil,  nil},
+    {"Music",            nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Music",            "Mini Player",  location["centre_monitor"],    layout.music_mini,  nil,  nil},
+    {amazon_chime,       amazon_chime,   macbook_monitor,               nil,                nil,  nil},
+    {"Calendar",         nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Discord",          nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Mail",             nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Outlook",          nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Signal",           nil,            macbook_monitor,               nil,                nil,  nil},
+    {"Slack",            nil,            macbook_monitor,               nil,                nil,  nil},
+    {"System Settings",  nil,            macbook_monitor,               nil,                nil,  nil},
   }
 
-  hs.layout.apply(layout)
+  layout.apply(window_layout)
 
   -- focus the window on the main screen after applying the layout
-  hs.application.find(applications[1]):mainWindow():focus()
+  application.find(applications[1]):mainWindow():focus()
 end
 
-local function splitLayout()
+function splitLayout()
   local location = getMonitorConfig()
 
   local gap = 0
-  local leftSplit = hs.geometry.rect(gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
-  local rightSplit = hs.geometry.rect(0.5 + gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
+  local leftSplit = geometry.rect(gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
+  local rightSplit = geometry.rect(0.5 + gap, gap, 0.5 - (gap * 2), 1 - (gap * 2))
 
-  local layout = {
-    {default_browser,    nil,            location["centre_monitor"],    leftSplit,             nil,  nil},
-    {default_terminal,   nil,            location["centre_monitor"],    rightSplit,            nil,  nil},
-    {"Music",            nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Music",            "Mini Player",  location["centre_monitor"],    hs.layout.music_mini,  nil,  nil},
-    {amazon_chime,       amazon_chime,   macbook_monitor,               nil,                   nil,  nil},
-    {"Calendar",         nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Discord",          nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Mail",             nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Outlook",          nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Signal",           nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"Slack",            nil,            macbook_monitor,               nil,                   nil,  nil},
-    {"System Settings",  nil,            macbook_monitor,               nil,                   nil,  nil},
+  local window_layout = {
+    {default_browser,    nil,            location["centre_monitor"],  leftSplit,          nil,  nil},
+    {default_terminal,   nil,            location["centre_monitor"],  rightSplit,         nil,  nil},
+    {"Music",            nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Music",            "Mini Player",  location["centre_monitor"],  layout.music_mini,  nil,  nil},
+    {amazon_chime,       amazon_chime,   macbook_monitor,             nil,                nil,  nil},
+    {"Calendar",         nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Discord",          nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Mail",             nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Outlook",          nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Signal",           nil,            macbook_monitor,             nil,                nil,  nil},
+    {"Slack",            nil,            macbook_monitor,             nil,                nil,  nil},
+    {"System Settings",  nil,            macbook_monitor,             nil,                nil,  nil},
   }
 
-  hs.layout.apply(layout)
+  layout.apply(window_layout)
 end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
+hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
   applyLayout("terminal")
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", function()
+hotkey.bind({"cmd", "alt", "ctrl"}, "2", function()
   applyLayout("browser")
 end)
 
+hotkey.bind({"cmd", "alt", "ctrl"}, "3", function()
+  splitLayout()
+end)
+
+function get_window_under_mouse()
+  -- Invoke `application` because `window.orderedWindows()` doesn't do it
+  -- and breaks itself
+  local _ = application
+
+  local pos = geometry.new(mouse.getAbsolutePosition())
+  local current_screen = mouse.getCurrentScreen()
+
+  return fnutils.find(window.orderedWindows(), function(w)
+    return current_screen == w:screen() and pos:inside(w:frame())
+  end)
+end
+
 -- Screens
--- for i, screen in pairs(hs.screen.allScreens()) do
+-- for i, screen in pairs(screen.allScreens()) do
 --   print(screen:name())
 -- end
-
-function table.contains(table, value)
-  for _, v in pairs(table) do
-    if v == value then
-      return true
-    end
-  end
-  return false
-end
 
 -- This method is used to check if a window is a Chime meeting window, it does this by comparing the window title
 -- against a list of known non-meeting window and some other factors. Chime changes the way it titles meetings so
@@ -214,7 +235,7 @@ function isChimeMeetingWindow(window)
 end
 
 function sendkeystochime(modifiers, key)
-  local chime = hs.application.find('Amazon Chime')
+  local chime = application.find('Amazon Chime')
 
   for _, window in pairs(chime:allWindows()) do
     -- filter out the main Chime window
@@ -231,19 +252,19 @@ function sendkeystochime(modifiers, key)
       last_chime_window:becomeMain()
     end
 
-    hs.eventtap.keyStroke(modifiers, key, 0, chime)
+    eventtap.keyStroke(modifiers, key, 0, chime)
   end
 end
 
 function resumeTask()
   local stdout = hs.execute("active-task.sh --resume", true)
-  hs.notify.show("Timewarrior", "Resume task", stdout)
+  notify.show("Timewarrior", "Resume task", stdout)
   print("Timewarrior", stdout)
 end
 
 function stopTask()
   local stdout = hs.execute("active-task.sh --stop", true)
-  hs.notify.show("Timewarrior", "Stopping task", stdout)
+  notify.show("Timewarrior", "Stopping task", stdout)
   print("Timewarrior", stdout)
 end
 
@@ -252,15 +273,15 @@ function trackMeeting(meeting_name)
   local stdout = hs.execute("timew track +meeting '" .. meeting_name .. "'", true)
 
   print("Tracking meeting: " .. meeting_name)
-  hs.notify.show("Timewarrior", "Tracking meeting: " .. meeting_name, stdout)
+  notify.show("Timewarrior", "Tracking meeting: " .. meeting_name, stdout)
 end
 
 function stopMeeting()
-  stdout = hs.execute("timew stop", true)
+  local stdout = hs.execute("timew stop", true)
 
   print("Meeting ended")
   print(stdout)
-  hs.notify.show("Timewarrior", "Meeting ended", stdout)
+  notify.show("Timewarrior", "Meeting ended", stdout)
 end
 
 function mutechime()
@@ -271,44 +292,44 @@ function togglechimevideo()
   sendkeystochime({"cmd", "alt"}, "v")
 end
 
-hs.hotkey.bind({}, "F13", function()
+hotkey.bind({}, "F13", function()
   mutechime()
 end)
 
-hs.hotkey.bind({}, "F14", function()
+hotkey.bind({}, "F14", function()
   togglechimevideo()
 end)
 
-hs.hotkey.bind({}, "F15", function()
+hotkey.bind({}, "F15", function()
   sendkeystochime({"cmd", "alt"}, "e")
 end)
 
-hs.hotkey.bind({}, "F16", function()
+hotkey.bind({}, "F16", function()
   resumeTask()
 end)
 
-hs.hotkey.bind({}, "F17", function()
+hotkey.bind({}, "F17", function()
   stopTask()
 end)
 
-function onWindowEvent(window, applicationName, eventType)
-  print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
+function onWindowEvent(event_window, applicationName, eventType)
+  print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. event_window:title() .. "'")
 
   if applicationName == amazon_chime then
-    if eventType == hs.window.filter.windowCreated then
-      hs.timer.usleep(2 * 1000000)
-      if isChimeMeetingWindow(window) then
-        print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. window:title() .. "'")
-        local meeting_name = string.gsub(window:title(), amazon_chime .. ": ", "")
+    if eventType == window.filter.windowCreated then
+      timer.usleep(2 * 1000000)
+      if isChimeMeetingWindow(event_window) then
+        print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. event_window:title() .. "'")
+        local meeting_name = string.gsub(event_window:title(), amazon_chime .. ": ", "")
 
         trackMeeting(meeting_name)
-        last_chime_window = window
+        last_chime_window = event_window
       end
     end
 
-    if eventType == hs.window.filter.windowDestroyed then
+    if eventType == window.filter.windowDestroyed then
       -- If the closed window's ID matches the ID of the last Chime window, then end the tracking
-      if last_chime_window ~= nil and last_chime_window:id() == window:id() then
+      if last_chime_window ~= nil and last_chime_window:id() == event_window:id() then
         stopMeeting()
       end
     end
@@ -316,41 +337,40 @@ function onWindowEvent(window, applicationName, eventType)
 end
 
 function windowdetails()
-  local win = hs.window.focusedWindow()
-  local frame = win:frame()
-  local screen = win:screen()
-  local zoomButtonRect = win:zoomButtonRect()
+  last_checked_window = window.focusedWindow()
 
-  last_checked_window = win
+  local frame = last_checked_window:frame()
+  local current_screen = last_checked_window:screen()
+  local zoomButtonRect = last_checked_window:zoomButtonRect()
 
-  local output = "Application:    " .. win:application():name()
-  output = output .. "\n" .. "Window Title:   " ..  win:title()
-  output = output .. "\n" .. "Window ID:      " .. win:id()
-  output = output .. "\n" .. "Screen name:    " .. screen:name()
+  local output = "Application:    " .. last_checked_window:application():name()
+  output = output .. "\n" .. "Window Title:   " .. last_checked_window:title()
+  output = output .. "\n" .. "Window ID:      " .. last_checked_window:id()
+  output = output .. "\n" .. "Screen name:    " .. current_screen:name()
   output = output .. "\n" .. "Top left:       " .. frame.x .. ", " .. frame.y
-  output = output .. "\n" .. "Top left ratio: " .. string.format("%.2f", (frame.x / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y / screen:frame().h))
+  output = output .. "\n" .. "Top left ratio: " .. string.format("%.2f", (frame.x / current_screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y / current_screen:frame().h))
   output = output .. "\n" .. "Bottom right:   " .. frame.x2 .. ", " .. frame.y2
-  output = output .. "\n" .. "Bottom ratio:   " .. string.format("%.2f", (frame.x2 / screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y2 / screen:frame().h))
+  output = output .. "\n" .. "Bottom ratio:   " .. string.format("%.2f", (frame.x2 / current_screen:frame().w)) .. ", " .. string.format("%.2f", (frame.y2 / current_screen:frame().h))
   output = output .. "\n" .. "Window:         " .. frame.h .. ", " .. frame.w
-  output = output .. "\n" .. "Screen          " .. screen:frame().h .. ", " .. screen:frame().w
-  output = output .. "\n" .. "Is standard?    " .. tostring(win:isStandard())
-  output = output .. "\n" .. "Is maximizable? " .. tostring(win:isMaximizable())
-  output = output .. "\n" .. "Subrole:        " .. win:subrole()
+  output = output .. "\n" .. "Screen          " .. current_screen:frame().h .. ", " .. current_screen:frame().w
+  output = output .. "\n" .. "Is standard?    " .. tostring(last_checked_window:isStandard())
+  output = output .. "\n" .. "Is maximizable? " .. tostring(last_checked_window:isMaximizable())
+  output = output .. "\n" .. "Subrole:        " .. last_checked_window:subrole()
   output = output .. "\n" .. "Zoom button:    " .. zoomButtonRect.x .. ", " .. zoomButtonRect.y .. ", " .. zoomButtonRect.w .. ", " .. zoomButtonRect.h
-  output = output .. "\n" .. "Chime meeting:  " .. tostring(isChimeMeetingWindow(win))
+  output = output .. "\n" .. "Chime meeting:  " .. tostring(isChimeMeetingWindow(last_checked_window))
 
   return output
 end
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
+hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
   local s = windowdetails()
   print(s)
-  hs.alert.show(s)
-  -- hs.notify.new({title="Hammerspoon", informativeText=s}):send()
+  alert.show(s)
+  -- notify.new({title="Hammerspoon", informativeText=s}):send()
 end)
 
-caffeinateWatcher = hs.caffeinate.watcher.new(function(event)
-  if event == hs.caffeinate.watcher.screensDidLock then
+caffeinate.watcher.new(function(event)
+  if event == caffeinate.watcher.screensDidLock then
     print("Caffeinate lock screen event")
     if os.date("*t", os.time())["hour"] >= 18 then
       print("It's late, stopping tasks")
@@ -360,6 +380,6 @@ caffeinateWatcher = hs.caffeinate.watcher.new(function(event)
   end
 end)
 
-windowFilter = hs.window.filter.new(false)
+local windowFilter = window.filter.new(false)
 windowFilter:allowApp(amazon_chime)
-windowFilter:subscribe({hs.window.filter.windowCreated, hs.window.filter.windowDestroyed}, onWindowEvent)
+windowFilter:subscribe({window.filter.windowCreated, window.filter.windowDestroyed}, onWindowEvent)
