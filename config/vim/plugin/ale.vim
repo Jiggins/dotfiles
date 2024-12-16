@@ -7,7 +7,7 @@
 " https://github.com/dense-analysis/ale#usage-completion
 
 let g:ale_linters = {
-\   'pandoc': ['markdownlint', 'proselint'],
+\   'pandoc': ['cspell', 'markdownlint', 'proselint'],
 \   'typescript': ['eslint', 'tsserver']
 \}
 

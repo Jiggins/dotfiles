@@ -1,0 +1,11 @@
+{
+  "language": "en-gb",
+  "dictionaries": ["vim"],
+  "dictionaryDefinitions": [
+    {
+      "name": "vim",
+      "path": "~/.config/vim/spell/en.utf-8.add",
+      "addWords": true
+    }
+  ]
+}

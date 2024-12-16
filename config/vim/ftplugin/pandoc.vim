@@ -22,4 +22,6 @@ nnoremap <buffer> [[ :call CustomJump('?^#')<cr>
 
 map K :OnlineThesaurusCurrentWord<CR>
 
+let g:ale_linters.pandoc = ['cspell']
+
 let b:undo_ftplugin = 'setlocal formatoptions<|setlocal tabstop<|setlocal shiftwidth<|setlocal textwidth<'
