@@ -1,3 +1,5 @@
+let g:ale_python_pyright_executable = 'basedpyright-langserver'
+
 let s:enabledLinters = ['cspell', 'pyright', 'pyls']
 let s:optionalLinters = ['black', 'flake8', 'mypy', 'pyright', 'ruff']
 
