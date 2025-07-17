@@ -7,8 +7,6 @@ declare truncate_cmd='cut -c "-$(tput cols)" | head -n $(( $(tput lines) - 2 ))'
 
 declare -a git_files=(
   "${0}"
-  '.git/COMMIT_EDITMSG'
-  '.git/HEAD'
   '.git/index'
 )
 
