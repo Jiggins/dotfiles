@@ -34,9 +34,6 @@ set balloonexpr=ale#balloon#Expr()
 " linters that are not installed
 let g:ale_cache_executable_check_failures=1
 
-" Prefix all commands with nice.
-let g:ale_command_wrapper = 'nice -n5'
-
 " Enable ale completion
 let g:ale_completion_enabled = 1
 
