@@ -37,6 +37,7 @@ Plug 'michaeljsmith/vim-indent-object'          " Vim plugin that defines a new 
 Plug 'ojroques/vim-oscyank', {'branch': 'main'} " A Vim plugin to copy text through SSH with OSC52
 Plug 'powerman/vim-plugin-AnsiEsc'              " ansi escape sequences concealed, but highlighted as specified (conceal)
 Plug 'puremourning/vimspector'                  " A multi-language debugging system for Vim
+Plug 'tpope/vim-abolish'                        " abolish.vim: Work with several variants of a word at once
 Plug 'tpope/vim-apathy'                         " apathy.vim: Set the 'path' option for miscellaneous file types
 Plug 'tpope/vim-abolish'                        " abolish.vim: Work with several variants of a word at once
 Plug 'tpope/vim-endwise'                        " endwise.vim: wisely add end in ruby, endfunction/endif/more in vim script, etc http://www.vim.org/scripts/script.php?script_id=2386
