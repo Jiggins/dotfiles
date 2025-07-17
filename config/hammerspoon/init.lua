@@ -25,14 +25,14 @@ local default_terminal = "iTerm2"
 
 local macbook_monitor = "Built-in Retina Display"
 
-local amazon_chime = "Amazon Chime"
-local log_level = 1
+amazon_chime = "Amazon Chime"
+log_level = 1
 
 last_chime_window = nil
 
 -- This is set to the last window checked with the popup (ctrl+alt+cmd+w)
 -- this variable is only used in the HammerSpoon console so I can debug
-local last_checked_window = nil
+last_checked_window = nil
 
 function string:startswith(start)
   return self:sub(1, #start) == start
@@ -213,6 +213,7 @@ end
 function isChimeMeetingWindow(window)
   local window_filter = {
     'Amazon Chime',
+    'Amazon Chime: Meeting Controls',
     'Mute box',
     'Screen share toolbar',
     'Video',
@@ -321,6 +322,7 @@ function onWindowEvent(event_window, applicationName, eventType)
       if isChimeMeetingWindow(event_window) then
         print("Name: '" .. applicationName .. "' Event: '" .. eventType .. "' Window: '" .. event_window:title() .. "'")
         local meeting_name = string.gsub(event_window:title(), amazon_chime .. ": ", "")
+        print("'Window: '" .. event_window:title() .. "' Meeting name: " .. meeting_name)
 
         trackMeeting(meeting_name)
         last_chime_window = event_window
@@ -380,6 +382,6 @@ caffeinate.watcher.new(function(event)
   end
 end)
 
-local windowFilter = window.filter.new(false)
+windowFilter = window.filter.new(false)
 windowFilter:allowApp(amazon_chime)
 windowFilter:subscribe({window.filter.windowCreated, window.filter.windowDestroyed}, onWindowEvent)
