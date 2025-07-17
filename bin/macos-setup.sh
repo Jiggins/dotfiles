@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PS4="$(tput setaf 2)+ $(tput sgr0)"
-set -x
+set -eux
 
 osascript -e 'tell application "System Preferences" to quit'
 
@@ -10,7 +10,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Disable smart quotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
 
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
@@ -26,3 +25,6 @@ defaults write com.apple.screencapture disable-shadow -bool true ; killall Syste
 # i.e. hover over a window and start typing in it without clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool true
 defaults write org.x.X11 wm_ffm -bool true
+
+# Enable cmd+ctrl+click to move window under cursor
+defaults write -g NSWindowShouldDragOnGesture -bool true
