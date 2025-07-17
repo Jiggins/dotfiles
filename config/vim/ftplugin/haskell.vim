@@ -4,8 +4,10 @@ setlocal suffixesadd=hs,lhs,hsc
 
 setlocal keywordprg=hoogle
 
-let g:haddock_browser = g:netrw_browsex_viewer
-let g:haddock_browser_callformat = "%s %s"
+if exists('g:netrw_browsex_viewer')
+  let g:haddock_browser = g:netrw_browsex_viewer
+  let g:haddock_browser_callformat = "%s %s"
+endif
 
 " Disable haskell-vim omnifunc
 let g:haskellmode_completion_ghc = 0
