@@ -23,7 +23,6 @@ set viminfofile=$VIMHOME/.viminfo
 " Text editing
 set autoindent
 set backspace=indent,eol,start
-set completeopt=menu,menuone,noselect,noinsert
 set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8
@@ -45,6 +44,12 @@ set timeoutlen=1000 ttimeoutlen=0 " 1 ms delay after hitting escape (default: to
 " 	example, joining:
 set formatoptions=crqj
 set textwidth=120
+
+set completeopt=menu,menuone,noselect,noinsert
+
+if v:version >= 901
+  set completeopt+=fuzzy
+endif
 
 " Undofile
 if exists('+undofile')
