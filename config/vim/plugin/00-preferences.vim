@@ -163,11 +163,6 @@ let g:tmuxline_preset = {
       \'z'    : '#h',
       \'options' : {'status-justify' : 'left' }}
 
-" vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'badwolf'
-
 " vim-Haskell
 let g:haskell_indent_if = 3
 let g:haskell_indent_case = 2
