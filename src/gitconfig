@@ -1,15 +1,40 @@
-#! /bin/sh
+#! /bin/bash
+
+declare config_dir="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
+set -eux
 
 git config --global core.editor vim
+git config --global core.excludesfile "${config_dir}/git/ignore"
+mkdir -p "${XDG_CONFIG_HOME}/git"
 
 git config --global color.diff always
 git config --global color.grep always
 git config --global color.status always
 git config --global color.ui auto
 
+# Prompt to correct typos
+git config --global help.autocorrect prompt
+
 git config --global pull.rebase true
 git config --global rebase.autostash true
 git config --global commit.verbose true
+
+# Sort branches by most recent commit
+git config --global branch.sort -committerdate
+
+# Slightly better diffs
+git config --global diff.algorithm histogram
+
+# lean up repositories in the background
+git config --global maintenance.auto true
+git config --global maintenance.strategy incremental
+
+# reuse recorded resolution - slightly intelligent conflict resolution
+git config --global rerere.enabled true
+git config --global rerere.autoUpdate true
+
+git config --global diff.prompt never
 
 if command -v vimdiff > /dev/null; then
   git config --global diff.editor vimdiff
@@ -18,7 +43,5 @@ if command -v vimdiff > /dev/null; then
   git config --global mergetool.diffconflicts.trustExitCode true
   git config --global mergetool.diffconflicts.keepBackup false
 fi
-
-git config --global diff.prompt never
 
 exit 0
