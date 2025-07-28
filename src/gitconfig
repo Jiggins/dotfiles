@@ -6,7 +6,7 @@ set -eux
 
 git config --global core.editor vim
 git config --global core.excludesfile "${config_dir}/git/ignore"
-mkdir -p "${XDG_CONFIG_HOME}/git"
+mkdir -p "${config_dir}/git"
 
 git config --global color.diff auto
 git config --global color.grep always
@@ -40,7 +40,7 @@ git config --global diff.prompt never
 if command -v vimdiff > /dev/null; then
   git config --global diff.editor vimdiff
   git config --global merge.tool diffconflicts
-  git config --global mergetool.diffconflicts.cmd "diffconflicts vim $BASE $LOCAL $REMOTE $MERGED"
+  git config --global mergetool.diffconflicts.cmd 'diffconflicts vim $BASE $LOCAL $REMOTE $MERGED'
   git config --global mergetool.diffconflicts.trustExitCode true
   git config --global mergetool.diffconflicts.keepBackup false
 fi
