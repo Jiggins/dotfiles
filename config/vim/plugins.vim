@@ -72,6 +72,7 @@ Plug 'Glench/Vim-Jinja2-Syntax',  { 'for': 'jinja' }     " An 'up-to-date' jinja
 Plug 'Joorem/vim-haproxy',        { 'for': 'haproxy' }   " HAProxy syntax file
 Plug 'adimit/prolog.vim',         { 'for': 'prolog' }
 Plug 'aliou/bats.vim',            { 'for': 'bats' }      " Syntax files for Bats (Bash Automated Testing System).
+Plug 'bfrg/vim-jq',               { 'for': 'jq' }        " Vim runtime files for jq (the command-line JSON processor)
 Plug 'cespare/vim-toml',          { 'for': 'toml' }      " Vim syntax for TOML
 Plug 'chikamichi/mediawiki.vim',  { 'for': 'mediawiki' } " Syntax highlighting for MediaWiki-based projects, such as Wikipedia.
 Plug 'chr4/nginx.vim',            { 'for': 'nginx' }     " Improved nginx vim plugin (incl. syntax highlighting)
