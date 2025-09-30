@@ -5,12 +5,25 @@ fi
 alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
 
+function __preview_tmux_session() {
+  local session_name="$(basename {})"
+
+  if [[ "$(tmux display-message -p "#S")" == "${session_name}" ]] || ! tmux capture-pane -ep -t "${session_name}" 2>/dev/null; then
+    echo -e "{}\n"
+    git -c color.status=always -C {} status
+    printf "\n\n"
+    bat --color always {}/README.md
+  fi
+}
+
 function _choose_tmux_workspace_dir() {
+  local preview_string="$(typeset -f __preview_tmux_session); __preview_tmux_session"
+
   printf "%s\n" "${TMUX_WORKSPACES[@]}" \
     | fzf --query "${1:-}" --exit-0 --select-1 \
       --scheme path \
       --delimiter '/' --with-nth -1 \
-      --preview 'echo -e "{}\n"; git -c color.status=always -C {} status; printf "\n\n"; bat --color always {}/README.md'
+      --preview="zsh -c '${preview_string}'"
 }
 
 function tn() {
