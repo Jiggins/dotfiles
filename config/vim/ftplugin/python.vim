@@ -34,3 +34,4 @@ let matchBadTabs = matchadd('BadTabs', '^\\t+')
 let b:undo_ftplugin = 'setlocal completeopt<'
 
 let g:splitjoin_python_brackets_on_separate_lines = 1
+nmap K :ALEHover<CR>
