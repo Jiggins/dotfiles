@@ -40,17 +40,6 @@ endfunction
 nnoremap <leader>: q:
 nnoremap <leader>; ;
 
-" Alt key bindings
-execute "set <M-c>=\ec"
-execute "set <M-C>=\eC"
-execute "set <M-d>=\ed"
-execute "set <M-D>=\eD"
-execute "set <M-j>=\ej"
-execute "set <M-k>=\ek"
-execute "set <M-p>=\ep"
-execute "set <M-P>=\eP"
-execute "set <M-y>=\ey"
-
 " Use system clipboard
 nnoremap <Leader>c "*
 
@@ -146,6 +135,17 @@ if g:tmux != ''
   nnoremap <silent> <M-Up>    :TmuxNavigateUp<cr>
   nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
   nnoremap <silent> <M-Tab>   :TmuxNavigatePrevious<cr>
+
+  " Alt key bindings
+  execute "set <M-c>=\ec"
+  execute "set <M-C>=\eC"
+  execute "set <M-d>=\ed"
+  execute "set <M-D>=\eD"
+  execute "set <M-j>=\ej"
+  execute "set <M-k>=\ek"
+  execute "set <M-p>=\ep"
+  execute "set <M-P>=\eP"
+  execute "set <M-y>=\ey"
 else
   map <silent> <C-Left>  <C-h>
   map <silent> <C-Down>  <C-j>
