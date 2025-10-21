@@ -8,7 +8,7 @@
 
 let g:ale_linters = {
 \   'pandoc': ['cspell', 'markdownlint', 'proselint'],
-\   'typescript': ['eslint', 'tsserver']
+\   'typescript': ['eslint', 'prettier', 'tsserver']
 \}
 
 let g:ale_fixers = {
@@ -20,9 +20,9 @@ let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'scss': ['prettier'],
 \   'terraform': ['terraform', 'terraform-lsp'],
-\   'typescript': ['eslint'],
+\   'typescript': ['eslint', 'prettier'],
 \   'vue': ['eslint'],
-\   'yaml': ['prettier'],
+\   'yaml': ['prettier', 'yq'],
 \}
 
 " Enable balloon support
@@ -59,3 +59,4 @@ nnoremap <c-K> :ALEHover<CR>
 
 nnoremap <F6> :ALECodeAction<cr>
 nnoremap <leader>t :ALEHover<cr>
+nnoremap <leader>d :ALEDetail<cr>
