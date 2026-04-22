@@ -23,6 +23,7 @@ config/zsh/zplug/
 # Zsh completion
 config/zsh/completion/_*
 config/zsh/completion/err_*
+config/zsh/.zcompdump
 
 # Machine specific zsh config
 local.zsh
@@ -34,3 +35,9 @@ config/tmux/sidebar/directory_widths.txt
 
 # Zsh compiled files
 *.zwc
+
+# Just a symlink, no point tracking
+config/iterm2/
+
+# Generated but I didn't change
+config/thefuck/

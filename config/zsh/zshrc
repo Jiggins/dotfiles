@@ -99,14 +99,16 @@ path+=(
   "${HOME}/.rvm/bin"
   "${HOME}/.config/vim/bundle/fzf/bin"
   "${HOME}/go/bin"
-  "/usr/local/opt/ruby/bin"
-  "/home/linuxbrew/.linuxbrew/bin"
-  "/home/linuxbrew/.linuxbrew/sbin"
-  "/usr/local/bin"
-  "/usr/local/sbin"
-  "/usr/local/opt/python/libexec/bin"
-  "/usr/local/texlive/2016basic/bin/x86_64-darwin"
+  '/home/linuxbrew/.linuxbrew/sbin'
+  '/usr/local/bin'
+  '/usr/local/sbin'
+  '/usr/local/opt/python/libexec/bin'
+  '/usr/local/opt/ruby/bin'
+  '/usr/local/texlive/2016basic/bin/x86_64-darwin'
 )
+
+# Homebrew usually provides newer versions than the base system so it goes first in $path
+path=( '/opt/homebrew/bin' '/home/linuxbrew/.linuxbrew/bin' ${path} )
 
 command -v gem > /dev/null && addpath "$(gem environment gemdir)/bin"
 command -v python3 > /dev/null && addpath "$(python3 -m site --user-base)/bin"
@@ -319,8 +321,8 @@ function timezsh() {
   for i in $(seq 1 4); do time $shell -i -c exit; done
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 mkdir -p "${HOME}/logs/zsh"
 zprof > "${HOME}/logs/zsh/benchmark"
