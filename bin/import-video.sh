@@ -27,7 +27,7 @@ function importVideos() {
       def djiCamera(f): f | if .FileName | startswith("DJI") then "DJI" else empty end;
       map(select(.FileType != "MacOS") | . * {
         "Date": .CreateDate | split(" ")[0] | gsub(":"; "-"),
-        "Camera": ( .Model // cameraByManufacturer(.) // djiCamera(.)) | gsub(" "; "-")
+        "Camera": ( .Model // cameraByManufacturer(.) // djiCamera(.) // "Unkown") | gsub(" "; "-")
       } | {
         SourceFile,
         "Directory": [$videos_dir, .Date, .Camera // "Unkown"] | join("/")
@@ -47,6 +47,10 @@ function moveXmlSidecars() {
   local model
 
   find "${input_dir}" -type f -name '*.XML' | while read xml; do
+    if file --brief --mime "${xml}" | grep --quiet 'charset=binary'; then
+      continue
+    fi
+
     manufacturer=$(xpath -q -e '/NonRealTimeMeta/Device/@manufacturer' "${xml}" | cut -d '"' -f 2)
     model=$(xpath -q -e '/NonRealTimeMeta/Device/@modelName' "${xml}" | cut -d '"' -f 2)
     create_date=$(xpath -q -e '/NonRealTimeMeta/CreationDate/@value' "${xml}" | cut -d '"' -f 2 | cut -d 'T' -f 1)
@@ -62,5 +66,5 @@ function moveXmlSidecars() {
   done
 }
 
-importVideos $(find "${sdcard}" -type f -regex ".*\.\(MP4\|360\)$")
+importVideos $(find "${sdcard[@]}" -type f -regex ".*\.\(MP4\|mp4\|360\)$")
 moveXmlSidecars "${sdcard}"
