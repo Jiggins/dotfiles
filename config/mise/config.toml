@@ -1,0 +1,18 @@
+[tools]
+node = "24.18.0"
+"npm:prettier" = "latest"
+"npm:typescript" = "latest"
+"npm:bash-language-server" = "latest"
+"npm:vim-language-server" = "latest"
+"npm:yaml-language-server" = "latest"
+
+python = "latest"
+pipx = "latest"
+"pipx:ruff" = { version = "latest", depends = ["python", "pipx"] }
+"pipx:mypy" = { version = "latest", depends = ["python", "pipx"] }
+"pipx:ty" = { version = "latest", depends = ["python", "pipx"] }
+
+actionlint = "latest"
+jq = "latest"
+yq = "latest"
+ruff = "latest"
