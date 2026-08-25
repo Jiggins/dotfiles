@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -eu
+
+function upstreamBranch() {
+  git symbolic-ref refs/remotes/origin/HEAD | cut -d '/' -f 3,4
+}
+
+function prTitle() {
+  local title
+
+  title=$({ 
+    echo 'Custom'
+    git log "$(upstreamBranch).." --format='%s' 
+  } | fzf)
+
+  if [[ "${title}" == Custom ]]; then
+    echo "Enter PR title"
+    read -r title
+  fi
+
+  echo "${title}"
+}
+
+function prBody() {
+  git log \
+    --reverse \
+    --format='### %s%n%n%b' \
+    "$(upstreamBranch).." 
+}
+
+gh pr create --title "$(prTitle)" --body-file <(prBody) "${@}"
