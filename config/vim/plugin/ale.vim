@@ -8,21 +8,38 @@
 
 let g:ale_linters = {
 \   'pandoc': ['cspell', 'markdownlint', 'proselint'],
-\   'typescript': ['eslint', 'prettier', 'tsserver']
+\   'javascript': ['biome', 'eslint', 'tsc'],
+\   'typescript': ['biome', 'eslint', 'tsc'],
 \}
 
 let g:ale_fixers = {
 \   'haskell': ['hie'],
 \   'html': ['prettier'],
-\   'javascript': ['eslint'],
+\   'javascript': ['biome', 'eslint', 'tsc'],
 \   'json': ['jq'],
 \   'python': ['autopep8', 'isort', 'add_blank_lines_for_python_control_statements'],
 \   'ruby': ['rubocop'],
 \   'scss': ['prettier'],
 \   'terraform': ['terraform', 'terraform-lsp'],
-\   'typescript': ['eslint', 'prettier'],
+\   'typescript': ['biome', 'eslint', 'tsc'],
 \   'vue': ['eslint'],
 \   'yaml': ['prettier', 'yq'],
+\}
+
+" ALE options for specific file patterns.
+let g:ale_pattern_options_enabled = 1
+let g:ale_pattern_options = {
+\   'site-packages/.*$': {
+\       'ale_enabled': 0,
+\       '&modifiable': 0,
+\   },
+\   '\v\.min\.(js|css)$': {
+\       'ale_linters': [],
+\       'ale_fixers': [],
+\   },
+\   'node_modules': {
+\       'ale_fixers': [],
+\   },
 \}
 
 " Enable balloon support
@@ -60,3 +77,4 @@ nnoremap <c-K> :ALEHover<CR>
 nnoremap <F6> :ALECodeAction<cr>
 nnoremap <leader>t :ALEHover<cr>
 nnoremap <leader>d :ALEDetail<cr>
+nnoremap <leader>s :ALECodeAction<cr>

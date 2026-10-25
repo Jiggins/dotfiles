@@ -1,18 +1,21 @@
 [tools]
 node = "24.18.0"
-"npm:prettier" = "latest"
-"npm:typescript" = "latest"
+npm = "latest"
+"npm:@biomejs/biome" = "latest"
 "npm:bash-language-server" = "latest"
+"npm:htmlhint" = "latest"
+"npm:typescript" = "6"
 "npm:vim-language-server" = "latest"
 "npm:yaml-language-server" = "latest"
 
 python = "latest"
 pipx = "latest"
-"pipx:ruff" = { version = "latest", depends = ["python", "pipx"] }
+"pipx:isort" = { version = "latest", depends = ["python", "pipx"] }
 "pipx:mypy" = { version = "latest", depends = ["python", "pipx"] }
-"pipx:ty" = { version = "latest", depends = ["python", "pipx"] }
 
+act = "latest"
 actionlint = "latest"
 jq = "latest"
-yq = "latest"
 ruff = "latest"
+ty = "latest"
+yq = "latest"
